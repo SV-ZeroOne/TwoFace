@@ -8,12 +8,15 @@ import static org.junit.Assert.*;
  */
 public class AppTest {
 
+    @Before
+    public void print(){
+        System.out.println("=== Two face ===");
+    }
+
     @Test
     public void givenRandValueWhenConvertedToDollarExpectCorrectConversion() {
-        System.out.println("Start test");
         double convertedToDollar = App.convertRandToDollar(7.22);
         assertEquals(convertedToDollar,0.3271409152695967, 0);
-        System.out.println("End test");
     }
 
 }
