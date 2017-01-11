@@ -11,6 +11,7 @@ public class AppTest {
     @Before
     public void print(){
         System.out.println("=== Two face ===");
+        System.out.println("Mpho Mahase!");
     }
 
     @Test
