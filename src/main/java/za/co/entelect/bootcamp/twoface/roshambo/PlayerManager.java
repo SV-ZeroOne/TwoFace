@@ -31,5 +31,8 @@ public class PlayerManager {
         for (Player p : players) {
             p.selectItem(this.items);
         }
+        for (Player p : players) {
+            p.didWin(players);
+        }
     }
 }
