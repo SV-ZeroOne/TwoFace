@@ -41,21 +41,34 @@ public void readXml(String xmlLocation)
             /**
              * Populate each item name here
              */
-            items.add(new Item(itemList.item(nameLoop).toString()));
-
+            Item temp = new Item(itemList.item(nameLoop).toString());
+            items.add(temp);
+            System.out.println(temp.toString());
 
          }
-        for (int itemLoop = 0; itemLoop < itemList.getLength(); itemLoop++)
+
+        NodeList itemList2 = doc.getElementsByTagName("name");
+        for (int nameLoop = 0; nameLoop < itemList2.getLength(); nameLoop++)
         {
             /**
              * Populate how each item beats others here
              */
-            /**
-             * Search for each element over here and then add each element
-             */
-            items.add(new Item(itemList.item(itemLoop).toString()));
+            Item item;
+            Item temp = new Item(itemList2.item(nameLoop).toString());
+            for (int i = 0; i < items.size(); i++)
+            {
+                for (item : i) {
+                    item.addBeats(temp.beats.itemName.tostring());
+                    ///String usr = document.getElementsByTagName("user").item(0).getTextContent();
+                };
+            }
+
+            items.add(new Item(itemList2.item(nameLoop).toString()));
         }
 
 
+    }catch(Exception e)
+    {
+        System.out.println("Errors reading");
     }
 }
