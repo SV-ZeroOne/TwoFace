@@ -8,9 +8,14 @@ import java.util.Random;
  */
 public class BotPlayer extends Player {
 
-    public void selectItem(LinkedList<Item> items){
-        Random selectorOfElement = new Random(1 + items.size());
+    public BotPlayer()
+    {
+        System.out.println("Creating BotPlayer");
+    }
 
-        this.selected = items.get(selectorOfElement.nextInt());
+    public void selectItem(LinkedList<Item> items){
+        Random selectorOfElement = new Random(items.size());
+
+        this.selected = items.get(0);
     }
 }

@@ -13,49 +13,62 @@ import java.util.LinkedList;
  */
 public class console {
 
+    public static void main(String[] args)
+    {
+        LinkedList<Item> i = new LinkedList<Item>();
+        i.add(new Item("Rock"));
+        i.add(new Item("Paper"));
+        i.add(new Item("Scissors"));
+        PlayerManager m = new PlayerManager(i, 1, 1);
+        m.play();
+    }
+
     String xmlFileName = "";
 
 
 
-
-}
-
-public void readXml(String xmlLocation)
-{
-    LinkedList<Item> items = new LinkedList<Item>();
-    try
+    public void readXml(String xmlLocation)
     {
-        File xmlFile = new File(xmlLocation);
-        DocumentBuilderFactory dFactory = new DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder = dFactory.newDocumentBuilder();
-        Document doc = dBuilder.parse(xmlFile);
-
-        doc.getDocumentElement().normalize();
-
-        NodeList itemList = doc.getElementsByTagName("name");
-
-        for (int nameLoop = 0; nameLoop < itemList.getLength(); nameLoop++)
+        LinkedList<Item> items = new LinkedList<Item>();
+        try
         {
+//            File xmlFile = new File(xmlLocation);
+//            DocumentBuilderFactory dFactory = new DocumentBuilderFactory.newInstance();
+//            DocumentBuilder dBuilder = dFactory.newDocumentBuilder();
+//            Document doc = dBuilder.parse(xmlFile);
+//
+//            doc.getDocumentElement().normalize();
+//
+//            NodeList itemList = doc.getElementsByTagName("name");
+//
+//            for (int nameLoop = 0; nameLoop < itemList.getLength(); nameLoop++)
+//            {
+//
+//
+//                /**
+//                 * Populate each item name here
+//                 */
+//                items.add(new Item(itemList.item(nameLoop).toString()));
+//
+//
+//            }
+//            for (int itemLoop = 0; itemLoop < itemList.getLength(); itemLoop++)
+//            {
+//                /**
+//                 * Populate how each item beats others here
+//                 */
+//                /**
+//                 * Search for each element over here and then add each element
+//                 */
+//                items.add(new Item(itemList.item(itemLoop).toString()));
+//            }
 
 
-            /**
-             * Populate each item name here
-             */
-            items.add(new Item(itemList.item(nameLoop).toString()));
-
-
-         }
-        for (int itemLoop = 0; itemLoop < itemList.getLength(); itemLoop++)
-        {
-            /**
-             * Populate how each item beats others here
-             */
-            /**
-             * Search for each element over here and then add each element
-             */
-            items.add(new Item(itemList.item(itemLoop).toString()));
         }
+        catch(Exception ex)
+        {
 
-
+        }
     }
 }
+

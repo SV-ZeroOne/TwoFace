@@ -7,6 +7,11 @@ import java.util.Scanner;
  */
 public class UserPlayer extends Player {
 
+    public UserPlayer()
+    {
+        System.out.println("Creating UserPlayer");
+    }
+
     public void selectItem(LinkedList<Item> items){
 
         for (int i = 0; i < items.size(); i++){
