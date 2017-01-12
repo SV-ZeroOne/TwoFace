@@ -14,8 +14,13 @@ public class BotPlayer extends Player {
     }
 
     public void selectItem(LinkedList<Item> items){
-        Random selectorOfElement = new Random(items.size());
+        Random rand = new Random();
 
-        this.selected = items.get(0);
+        int randomNum = rand.nextInt((items.size() - 1 - 0) + 1) + 0;
+        this.selected = items.get(randomNum);
+
+        System.out.println("BotPlayer selected " + selected.name);
+
+
     }
 }
