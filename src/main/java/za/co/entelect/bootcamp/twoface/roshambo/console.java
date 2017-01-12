@@ -13,41 +13,47 @@ import java.util.LinkedList;
  */
 public class console {
 
-    public static void main(String[] s) {
+
+   public static void main(String[] s){
         String xmlFileName = "config.xml";
         readXml(xmlFileName);
-    }
+   }
 
 
-    public static void readXml(String xmlLocation) {
-        LinkedList<Item> items = new LinkedList<Item>();
 
-        try {
-            File xmlFile = new File(xmlLocation);
-            DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(xmlFile);
 
-            doc.getDocumentElement().normalize();
+public static void readXml(String xmlLocation)
+{
+    LinkedList<Item> items = new LinkedList<Item>();
 
-            NodeList itemList = doc.getElementsByTagName("name");
+    try
+    {
+        File xmlFile = new File(xmlLocation);
+        DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dFactory.newDocumentBuilder();
+        Document doc = dBuilder.parse(xmlFile);
 
-            //NodeList itemList = doc.getElementsByTagName("name");
+        doc.getDocumentElement().normalize();
 
-            for (int nameLoop = 0; nameLoop < itemList.getLength(); nameLoop++) {
-                /**
-                 * Populate each item name here
-                 */
-                Item temp = new Item(itemList.item(nameLoop).getNodeValue());
-                items.add(temp);
-                System.out.println(itemList.item(nameLoop).getTextContent());
+        NodeList itemList = doc.getElementsByTagName("name");
 
-            }
+        //NodeList itemList = doc.getElementsByTagName("name");
+
+        for (int nameLoop = 0; nameLoop < itemList.getLength(); nameLoop++)
+        {
             /**
-             NodeList itemList2 = doc.getElementsByTagName("name");
-             for (int nameLoop = 0; nameLoop < itemList2.getLength(); nameLoop++)
-             {
-             /**
+             * Populate each item name here
+             */
+            Item temp = new Item(itemList.item(nameLoop).getNodeValue());
+            items.add(temp);
+            System.out.println(itemList.item(nameLoop).getTextContent());
+
+         }
+/**
+        NodeList itemList2 = doc.getElementsByTagName("name");
+        for (int nameLoop = 0; nameLoop < itemList2.getLength(); nameLoop++)
+        {
+            /**
              * Populate how each item beats others here
 
              Item item;
@@ -55,19 +61,18 @@ public class console {
              for (int i = 0; i < items.size(); i++)
              {
 
-             for (item i: itemList2) {
-             // i.get(0).addBeats("wkajdshakjhd");
-             ///String usr = document.getElementsByTagName("user").item(0).getTextContent();
-             };
-             }
+                for (item i: itemList2) {
+                   // i.get(0).addBeats("wkajdshakjhd");
+                    ///String usr = document.getElementsByTagName("user").item(0).getTextContent();
+                };
+            }
 
-             items.add(new Item(itemList2.item(nameLoop).toString()));
-             }
-             */
-
-        } catch (Exception e) {
-            System.out.println("Errors reading");
+            items.add(new Item(itemList2.item(nameLoop).toString()));
         }
-    }
-}
+*/
 
+    }catch(Exception e)
+    {
+        System.out.println("Errors reading");
+    }
+}}
