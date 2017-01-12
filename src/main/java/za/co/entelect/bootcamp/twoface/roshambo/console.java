@@ -56,7 +56,7 @@ public static void readXml(String xmlLocation)
             /**
              * Populate how each item beats others here
 
-            Item item;
+            Item items.;
             Item temp = new Item(itemList2.item(nameLoop).toString());
             for (int i = 0; i < items.size(); i++)
             {
