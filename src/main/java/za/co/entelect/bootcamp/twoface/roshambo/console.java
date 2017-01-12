@@ -13,20 +13,23 @@ import java.util.LinkedList;
  */
 public class console {
 
-    String xmlFileName = "";
+
+   public static void main(String[] s){
+        String xmlFileName = "config.xml";
+        readXml(xmlFileName);
+   }
 
 
 
 
-}
-
-public void readXml(String xmlLocation)
+public static void readXml(String xmlLocation)
 {
     LinkedList<Item> items = new LinkedList<Item>();
+
     try
     {
         File xmlFile = new File(xmlLocation);
-        DocumentBuilderFactory dFactory = new DocumentBuilderFactory.newInstance();
+        DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(xmlFile);
 
@@ -34,41 +37,42 @@ public void readXml(String xmlLocation)
 
         NodeList itemList = doc.getElementsByTagName("name");
 
+        //NodeList itemList = doc.getElementsByTagName("name");
+
         for (int nameLoop = 0; nameLoop < itemList.getLength(); nameLoop++)
         {
-
-
             /**
              * Populate each item name here
              */
-            Item temp = new Item(itemList.item(nameLoop).toString());
+            Item temp = new Item(itemList.item(nameLoop).getNodeValue());
             items.add(temp);
-            System.out.println(temp.toString());
+            System.out.println(itemList.item(nameLoop).getTextContent());
 
          }
-
+/**
         NodeList itemList2 = doc.getElementsByTagName("name");
         for (int nameLoop = 0; nameLoop < itemList2.getLength(); nameLoop++)
         {
             /**
              * Populate how each item beats others here
-             */
+
             Item item;
             Item temp = new Item(itemList2.item(nameLoop).toString());
             for (int i = 0; i < items.size(); i++)
             {
-                for (item : i) {
-                    item.addBeats(temp.beats.itemName.tostring());
+
+                for (item i: itemList2) {
+                   // i.get(0).addBeats("wkajdshakjhd");
                     ///String usr = document.getElementsByTagName("user").item(0).getTextContent();
                 };
             }
 
             items.add(new Item(itemList2.item(nameLoop).toString()));
         }
-
+*/
 
     }catch(Exception e)
     {
         System.out.println("Errors reading");
     }
-}
+}}
