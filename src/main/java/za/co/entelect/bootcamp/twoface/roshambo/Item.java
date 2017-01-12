@@ -19,6 +19,7 @@ public class Item {
     {
         this.beats.add(i);
     }
+
     public boolean canBeat(Item other)
     {
         for(int x = 0; x < beats.size(); x++){
