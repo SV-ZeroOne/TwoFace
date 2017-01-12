@@ -3,20 +3,36 @@
     <item>
         <name>Rock</name>
         <beats>
-
+            <itemName>Lizard</itemName>
             <itemName>Scissors</itemName>
         </beats>
     </item>
     <item>
         <name>Paper</name>
         <beats>
+            <itemName>Spock</itemName>
             <itemName>Rock</itemName>
         </beats>
     </item>
     <item>
         <name>Scissors</name>
         <beats>
+            <itemName>Lizard</itemName>
             <itemName>Paper</itemName>
+        </beats>
+    </item>
+    <item>
+        <name>Lizard</name>
+        <beats>
+            <itemName>Paper</itemName>
+            <itemName>Spock</itemName>
+        </beats>
+    </item>
+    <item>
+        <name>Spock</name>
+        <beats>
+            <itemName>Scissors</itemName>
+            <itemName>Rock</itemName>
         </beats>
     </item>
 </items>

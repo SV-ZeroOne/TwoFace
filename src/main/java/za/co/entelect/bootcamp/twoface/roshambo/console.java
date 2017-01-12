@@ -1,7 +1,6 @@
 package za.co.entelect.bootcamp.twoface.roshambo;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -44,16 +43,15 @@ public static void readXml(String xmlLocation)
         {
             /**
              * Populate each item name here
-*/
+             */
             Item temp = new Item(itemList.item(nameLoop).getNodeValue());
             items.add(temp);
             System.out.println(itemList.item(nameLoop).getTextContent());
 
          }
-
+/**
         NodeList itemList2 = doc.getElementsByTagName("name");
-
-        for (int i = 0; i < items.size(); i++)
+        for (int nameLoop = 0; nameLoop < itemList2.getLength(); nameLoop++)
         {
             /**
              * Populate how each item beats others here
@@ -63,33 +61,19 @@ public static void readXml(String xmlLocation)
             NodeList childList = doc.getElementsByTagName("beats");
             for (int j = 0; j < childList.getLength(); j++)
             {
-                Node currentNode = childList.item(i);
 
-                //Item temp = new Item(itemList.item(j).getNodeValue());
-                //items.add(temp);
-                System.out.println("item " + childList.item(j).getTextContent());
-
-
-
-               /* for (NodeList i: itemList2) {
+                for (item i: itemList2) {
                    // i.get(0).addBeats("wkajdshakjhd");
                     ///String usr = document.getElementsByTagName("user").item(0).getTextContent();
-                };*/
+                };
             }
 
-            //items.add(new Item(itemList2.item(nameLoop).toString()));
+            items.add(new Item(itemList2.item(nameLoop).toString()));
         }
-
+*/
 
     }catch(Exception e)
     {
         System.out.println("Errors reading");
     }
-}
-
-
-
-
-
-}
-
+}}
