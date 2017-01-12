@@ -13,6 +13,8 @@ import java.util.LinkedList;
  */
 public class console {
 
+    String xmlFileName = "";
+
     public static void main(String[] args)
     {
         LinkedList<Item> i = new LinkedList<Item>();
@@ -22,10 +24,6 @@ public class console {
         PlayerManager m = new PlayerManager(i, 1, 1);
         m.play();
     }
-
-    String xmlFileName = "";
-
-
 
     public void readXml(String xmlLocation)
     {
