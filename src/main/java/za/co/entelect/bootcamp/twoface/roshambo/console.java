@@ -56,10 +56,10 @@ public static void readXml(String xmlLocation)
             /**
              * Populate how each item beats others here
 
-            Item items.;
-            Item temp = new Item(itemList2.item(nameLoop).toString());
-            for (int i = 0; i < items.size(); i++)
-            {
+             Item item;
+             Item temp = new Item(itemList2.item(nameLoop).toString());
+             for (int i = 0; i < items.size(); i++)
+             {
 
                 for (item i: itemList2) {
                    // i.get(0).addBeats("wkajdshakjhd");
