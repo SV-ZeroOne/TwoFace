@@ -12,14 +12,10 @@ public abstract class Player {
 
     public void didWin(LinkedList<Player> players)
     {
-        System.out.println("Did you win?");
         for (Player p : players) {
             for (Item i : selected.beats) {
                 if(i == p.selected){
-                    System.out.println("Player's " + selected.name + " beats " + p.selected.name);
-                }
-                else{
-                    System.out.println("Player's " + selected.name + " lost against " + p.selected.name);
+                    System.out.println(selected.name + " -- beats --> " + p.selected.name);
                 }
             }
         }

@@ -10,7 +10,7 @@ public class BotPlayer extends Player {
 
     public BotPlayer()
     {
-        System.out.println("Creating BotPlayer");
+        //System.out.println("Creating BotPlayer");
     }
 
     public void selectItem(LinkedList<Item> items){
@@ -18,8 +18,6 @@ public class BotPlayer extends Player {
 
         int randomNum = rand.nextInt((items.size() - 1 - 0) + 1) + 0;
         this.selected = items.get(randomNum);
-
-        System.out.println("BotPlayer selected " + selected.name);
 
 
     }

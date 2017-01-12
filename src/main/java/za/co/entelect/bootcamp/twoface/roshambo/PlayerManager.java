@@ -12,7 +12,6 @@ public class PlayerManager {
 
     public PlayerManager(LinkedList<Item> i, int aiNum, int usrNum)
     {
-        System.out.println("Initialising player manager...");
         this.items = i;
         this.players = new LinkedList<Player>();
         for(int x = 0; x < aiNum; x++)
@@ -27,7 +26,7 @@ public class PlayerManager {
     
     public void play()
     {
-        System.out.println("Stating selection process...");
+        //System.out.println("Stating selection process...");
         for (Player p : players) {
             p.selectItem(this.items);
         }
