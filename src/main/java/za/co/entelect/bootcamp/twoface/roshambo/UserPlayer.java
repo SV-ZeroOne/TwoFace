@@ -20,11 +20,10 @@ public class UserPlayer extends Player {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your value");
-
         int input = scanner.nextInt();
-
-
         this.selected = items.get(input);
+
+        System.out.println("BotPlayer selected " + selected.name);
     }
 
 
