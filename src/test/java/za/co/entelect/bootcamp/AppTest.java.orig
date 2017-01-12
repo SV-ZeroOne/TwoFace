@@ -1,0 +1,30 @@
+package za.co.entelect.bootcamp;
+
+import org.junit.*;
+import static org.junit.Assert.*;
+
+/**
+ * Unit test for simple App.
+ */
+public class AppTest {
+
+    @Before
+    public void print(){
+        System.out.println("=== Two face ===");
+<<<<<<< HEAD
+        System.out.println("Sean Vienings!");
+=======
+        System.out.println("Members");
+	System.out.println("Mpho Mahase!");
+        System.out.println("Quinton Weenink");
+
+>>>>>>> master
+    }
+
+    @Test
+    public void givenRandValueWhenConvertedToDollarExpectCorrectConversion() {
+        double convertedToDollar = App.convertRandToDollar(7.22);
+        assertEquals(convertedToDollar,0.3271409152695967, 0);
+    }
+
+}
