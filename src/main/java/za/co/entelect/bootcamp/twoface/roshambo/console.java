@@ -9,6 +9,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 /**
  * Created by sean.vienings on 2017/01/12.
@@ -49,7 +50,14 @@ public class console {
                 "+------------------------------------------+\n");
         LinkedList<Item> itemList = readXml("config.xml");
         PlayerManager pm = new PlayerManager(itemList, 1, 1);
-        pm.play();
+        while(true){
+            pm.play();
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Would you like to continue? [Y|N]");
+            String input = scanner.nextLine();
+            if(input.contains("n") || input.contains("N"))
+                break;
+        }
     }
 
 
