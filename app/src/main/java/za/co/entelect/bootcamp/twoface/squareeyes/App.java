@@ -1,4 +1,4 @@
-package za.co.entelect.bootcamp.twoface.roshambo;
+package za.co.entelect.bootcamp.twoface.squareeyes;
 
 public class App 
 {

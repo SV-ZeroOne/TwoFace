@@ -1,4 +1,4 @@
-package za.co.entelect.bootcamp.twoface.roshambo;
+package za.co.entelect.bootcamp.twoface.squareeyes;
 
 import org.junit.*;
 import static org.junit.Assert.*;
