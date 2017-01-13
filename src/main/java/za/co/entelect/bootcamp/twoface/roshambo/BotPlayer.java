@@ -9,9 +9,7 @@ import java.util.Random;
 public class BotPlayer extends Player {
 
     public BotPlayer()
-    {
-        //System.out.println("Creating BotPlayer");
-    }
+    {}
 
     public void selectItem(LinkedList<Item> items){
         Random rand = new Random();

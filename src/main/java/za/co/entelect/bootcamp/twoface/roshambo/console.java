@@ -2,7 +2,6 @@ package za.co.entelect.bootcamp.twoface.roshambo;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -17,6 +16,7 @@ import java.util.Scanner;
 public class console {
 
     public static void main(String[] s) {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("  \n" +
                 "                      @    `' ;                  \n" +
                 "                 #@@@;    `..;:' ,               \n" +
@@ -49,12 +49,16 @@ public class console {
                 "|               TEAM TWO FACE              |\n" +
                 "+------------------------------------------+\n");
         LinkedList<Item> itemList = readXml("config.xml");
-        PlayerManager pm = new PlayerManager(itemList, 1, 1);
+        System.out.print("Enter number of AI players: ");
+        int aiPlayers = scanner.nextInt();
+        System.out.print("Enter number of User players: ");
+        int userPlayers = scanner.nextInt();
+        PlayerManager pm = new PlayerManager(itemList, aiPlayers, userPlayers);
         while(true){
             pm.play();
-            Scanner scanner = new Scanner(System.in);
+            Scanner intScanner = new Scanner(System.in);
             System.out.println("Would you like to continue? [Y|N]");
-            String input = scanner.nextLine();
+            String input = intScanner.nextLine();
             if(input.contains("n") || input.contains("N"))
                 break;
         }

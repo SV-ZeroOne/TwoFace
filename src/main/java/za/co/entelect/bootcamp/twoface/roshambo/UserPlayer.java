@@ -8,22 +8,24 @@ import java.util.Scanner;
 public class UserPlayer extends Player {
 
     public UserPlayer()
-    {
-        //System.out.println("Creating UserPlayer");
-    }
+    {}
 
     public void selectItem(LinkedList<Item> items){
-        System.out.println("Items: ");
-        for (int i = 0; i < items.size(); i++){
-            System.out.println("\t" + i + ". " + items.get(i).name);
+        while(true) {
+            System.out.println("Items: ");
+            for (int i = 0; i < items.size(); i++) {
+                System.out.println("\t" + i + ". " + items.get(i).name);
+            }
+
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter your value: ");
+            int input = scanner.nextInt();
+            if(input >= 0 && input < items.size()) {
+                this.selected = items.get(input);
+                break;
+            }
+            System.out.println("Incorrect input");
         }
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter your value: ");
-        int input = scanner.nextInt();
-        this.selected = items.get(input);
-
-        //System.out.println("UserPlayer selected " + selected.name);
     }
 
 
