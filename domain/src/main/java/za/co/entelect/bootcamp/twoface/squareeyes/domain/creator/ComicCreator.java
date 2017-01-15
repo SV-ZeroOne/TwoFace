@@ -1,6 +1,6 @@
-package za.co.entelect.bootcamp.twoface.squareeyes.domain;
+package za.co.entelect.bootcamp.twoface.squareeyes.domain.creator;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.comic.Issue;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.comic.Issue;
 
 /**
  * Created by mpho.mahase on 2017/01/14.
