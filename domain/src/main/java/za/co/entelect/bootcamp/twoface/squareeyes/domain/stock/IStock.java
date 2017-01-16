@@ -1,6 +1,6 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.stock;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.comic.Issue;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.comic.IIssue;
 
 import java.math.BigDecimal;
 
@@ -11,8 +11,8 @@ interface IStock {
     int getStockReferenceID();
     void setStockReferenceID(int stockReferenceID);
 
-    Issue getIssue();
-    void setIssue(Issue issue);
+    IIssue getIssue();
+    void setIssue(IIssue issue);
 
     String getCondition();
     void setCondition(String condition);

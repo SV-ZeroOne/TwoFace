@@ -1,7 +1,7 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.order;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.comic.Issue;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.comic.IIssue;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.ISupplier;
 
 import java.util.Date;
 import java.util.List;
@@ -31,9 +31,9 @@ interface IOrder {
     String getDeliveryStatus();
     void setDeliveryStatus(String deliveryStatus);
 
-    List<Issue> getIssueList();
-    void setIssueList(List<Issue> issueList);
+    List<IIssue> getIssueList();
+    void setIssueList(List<IIssue> issueList);
 
-    Supplier getSupplier();
-    void setSupplier(Supplier supplier);
+    ISupplier getSupplier();
+    void setSupplier(ISupplier supplier);
 }

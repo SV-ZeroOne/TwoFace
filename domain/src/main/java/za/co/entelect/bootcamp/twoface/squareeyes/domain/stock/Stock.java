@@ -1,6 +1,6 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.stock;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.comic.Issue;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.comic.IIssue;
 
 import java.math.BigDecimal;
 
@@ -9,14 +9,14 @@ import java.math.BigDecimal;
  */
 public class Stock implements IStock{
     private int stockReferenceID;
-    private Issue issue;
+    private IIssue issue;
     private String condition;
     private int availableQty;
     private BigDecimal price;
 
     public Stock(){
     }
-    public Stock(int stockReferenceID, Issue issue, String condition, int availableQty, BigDecimal price){
+    public Stock(int stockReferenceID, IIssue issue, String condition, int availableQty, BigDecimal price){
         this.stockReferenceID = stockReferenceID;
         this.issue = issue;
         this.condition = condition;
@@ -31,10 +31,10 @@ public class Stock implements IStock{
         this.stockReferenceID = stockReferenceID;
     }
 
-    public Issue getIssue(){
+    public IIssue getIssue(){
         return this.issue;
     }
-    public void setIssue(Issue issue){
+    public void setIssue(IIssue issue){
         this.issue = issue;
     }
 

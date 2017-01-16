@@ -1,7 +1,7 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.order;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.comic.Issue;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.comic.IIssue;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.ISupplier;
 
 import java.util.Date;
 import java.util.List;
@@ -17,12 +17,12 @@ public class Order implements IOrder{
     private String shipmentRef;
     private Date shipmentDate;
     private String deliveryStatus;
-    private List<Issue> issueList;
-    private Supplier supplier;
+    private List<IIssue> issueList;
+    private ISupplier supplier;
 
     public Order (){
     }
-    public Order (int orderID, Date orderDate, byte qtyOrdered, long total, String shipmentRef, Date shipmentDate, String deliveryStatus, List<Issue> issueList, Supplier supplier){
+    public Order (int orderID, Date orderDate, byte qtyOrdered, long total, String shipmentRef, Date shipmentDate, String deliveryStatus, List<IIssue> issueList, ISupplier supplier){
         this.orderID = orderID;
         this.orderDate = orderDate;
         this.qtyOrdered = qtyOrdered;
@@ -81,17 +81,17 @@ public class Order implements IOrder{
         this.deliveryStatus = deliveryStatus;
     }
 
-    public List<Issue> getIssueList(){
+    public List<IIssue> getIssueList(){
         return this.issueList;
     }
-    public void setIssueList(List<Issue> issueList){
+    public void setIssueList(List<IIssue> issueList){
         this.issueList = issueList;
     }
 
-    public Supplier getSupplier(){
+    public ISupplier getSupplier(){
         return this.supplier;
     }
-    public void setSupplier(Supplier supplier){
+    public void setSupplier(ISupplier supplier){
         this.supplier = supplier;
     }
 }
