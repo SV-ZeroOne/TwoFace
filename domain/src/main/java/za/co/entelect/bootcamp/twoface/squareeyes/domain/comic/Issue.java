@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by sean.vienings on 2017/01/14.
  */
-public class Issue implements IIssue{
+public class Issue{
     private int issueID = 0;
     private Date publicationDate = null;
     private String issueTitle = "";
@@ -17,13 +17,12 @@ public class Issue implements IIssue{
 
     }
 
-    public Issue Issue(Date date, String title, String publisher, Byte seriesNumber, String description){
+    public Issue(Date date, String title, String publisher, Byte seriesNumber, String description){
         this.publicationDate = date;
         this.issueTitle = title;
         this.publisher = publisher;
         this.seriesNumber = seriesNumber;
         this.description = description;
-        return this;
     }
 
     public Date getPublicationDate() {

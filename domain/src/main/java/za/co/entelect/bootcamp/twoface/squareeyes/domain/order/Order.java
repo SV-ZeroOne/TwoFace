@@ -1,7 +1,7 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.order;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.comic.IIssue;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.ISupplier;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.comic.Issue;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier;
 
 import java.util.Date;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by quinton.weenink on 2017/01/15.
  */
-public class Order implements IOrder{
+public class Order{
     private int orderID;
     private Date orderDate;
     private byte qtyOrdered;
@@ -17,12 +17,12 @@ public class Order implements IOrder{
     private String shipmentRef;
     private Date shipmentDate;
     private String deliveryStatus;
-    private List<IIssue> issueList;
-    private ISupplier supplier;
+    private List<Issue> issueList;
+    private Supplier supplier;
 
     public Order (){
     }
-    public Order (int orderID, Date orderDate, byte qtyOrdered, long total, String shipmentRef, Date shipmentDate, String deliveryStatus, List<IIssue> issueList, ISupplier supplier){
+    public Order (int orderID, Date orderDate, byte qtyOrdered, long total, String shipmentRef, Date shipmentDate, String deliveryStatus, List<Issue> issueList, Supplier supplier){
         this.orderID = orderID;
         this.orderDate = orderDate;
         this.qtyOrdered = qtyOrdered;
@@ -81,17 +81,17 @@ public class Order implements IOrder{
         this.deliveryStatus = deliveryStatus;
     }
 
-    public List<IIssue> getIssueList(){
+    public List<Issue> getIssueList(){
         return this.issueList;
     }
-    public void setIssueList(List<IIssue> issueList){
+    public void setIssueList(List<Issue> issueList){
         this.issueList = issueList;
     }
 
-    public ISupplier getSupplier(){
+    public Supplier getSupplier(){
         return this.supplier;
     }
-    public void setSupplier(ISupplier supplier){
+    public void setSupplier(Supplier supplier){
         this.supplier = supplier;
     }
 }

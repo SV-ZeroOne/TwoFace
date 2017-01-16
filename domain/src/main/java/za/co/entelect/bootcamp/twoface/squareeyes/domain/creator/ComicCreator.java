@@ -1,14 +1,14 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.creator;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.comic.IIssue;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.comic.Issue;
 
 /**
  * Created by mpho.mahase on 2017/01/14.
  */
 public class ComicCreator {
 
-    private IIssue issue;
-    private ICreator creator;
+    private Issue issue;
+    private Creator creator;
     private String creatorRole;
 
 
@@ -19,17 +19,17 @@ public class ComicCreator {
         this.creatorRole = referenceNumber;
     }
 
-    public IIssue getIssue(){
+    public Issue getIssue(){
         return this.issue;
     }
-    public void setIssue(IIssue issue){
+    public void setIssue(Issue issue){
         this.issue = issue;
     }
 
-    public ICreator getCreator(){
+    public Creator getCreator(){
         return this.creator;
     }
-    public void setCreator(ICreator creator){
+    public void setCreator(Creator creator){
         this.creator = creator;
     }
 }
