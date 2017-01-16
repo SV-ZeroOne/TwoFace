@@ -1,11 +1,13 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.comic;
 
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.Entity;
+
 import java.util.Date;
 
 /**
  * Created by sean.vienings on 2017/01/14.
  */
-public class Issue{
+public class Issue implements Entity<Integer>{
     private int issueID = 0;
     private Date publicationDate = null;
     private String issueTitle = "";
@@ -45,7 +47,7 @@ public class Issue{
         return description;
     }
 
-    public int getIssueID() {
+    public Integer getID() {
         return issueID;
     }
 

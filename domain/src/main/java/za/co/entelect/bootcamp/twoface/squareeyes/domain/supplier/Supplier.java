@@ -1,9 +1,11 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier;
 
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.Entity;
+
 /**
  * Created by sean.vienings on 2017/01/14.
  */
-public class Supplier{
+public class Supplier implements Entity<Integer>{
     private int supplierID = 0;
     private String supplierName;
     private String supplierCity;
@@ -16,7 +18,7 @@ public class Supplier{
         return this;
     }
 
-    public int getSupplierID() {
+    public Integer getID() {
         return supplierID;
     }
 

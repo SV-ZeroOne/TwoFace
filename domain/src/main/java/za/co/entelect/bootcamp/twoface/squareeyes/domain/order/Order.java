@@ -1,5 +1,6 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.order;
 
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.Entity;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.comic.Issue;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier;
 
@@ -10,7 +11,7 @@ import java.util.Map;
 /**
  * Created by quinton.weenink on 2017/01/15.
  */
-public class Order{
+public class Order implements Entity<Integer> {
     private int orderID;
     private Date orderDate;
     private long total;
@@ -33,7 +34,7 @@ public class Order{
         this.supplier = supplier;
     }
 
-    public int getOrderID(){
+    public Integer getID(){
         return this.orderID;
     }
     public void setOrderID(int orderID){
