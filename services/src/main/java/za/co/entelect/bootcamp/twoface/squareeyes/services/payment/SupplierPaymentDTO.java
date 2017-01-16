@@ -11,8 +11,7 @@ public class SupplierPaymentDTO {
     private String paymentRefNumber;
     private BigDecimal amount;
 
-    public SupplierPaymentDTO() {
-    }
+    public SupplierPaymentDTO(){}
 
     public SupplierPaymentDTO(String supplierRefNumber, String paymentRefNumber, BigDecimal amount) {
         this.supplierRefNumber = supplierRefNumber;

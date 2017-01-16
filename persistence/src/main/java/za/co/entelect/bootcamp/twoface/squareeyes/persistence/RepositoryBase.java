@@ -2,6 +2,7 @@ package za.co.entelect.bootcamp.twoface.squareeyes.persistence;
 
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.Entity;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +11,7 @@ import java.util.Map;
  * Created by sean.vienings on 2017/01/16.
  */
 public abstract class RepositoryBase<T extends Entity<key>, key> implements Repository<T, key>{
-    private Map<key, T> tList = null;
+    private Map<key, T> tList = new HashMap<key, T>();
 
     public RepositoryBase()
     {

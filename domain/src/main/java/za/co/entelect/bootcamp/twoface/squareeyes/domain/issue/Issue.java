@@ -1,4 +1,4 @@
-package za.co.entelect.bootcamp.twoface.squareeyes.domain.comic;
+package za.co.entelect.bootcamp.twoface.squareeyes.domain.issue;
 
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.Entity;
 

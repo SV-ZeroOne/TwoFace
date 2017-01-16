@@ -1,11 +1,10 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.order;
 
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.Entity;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.comic.Issue;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 /**

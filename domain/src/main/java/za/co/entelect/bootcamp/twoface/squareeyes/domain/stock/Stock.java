@@ -1,6 +1,6 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.stock;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.comic.Issue;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 
 import java.math.BigDecimal;
 

@@ -1,14 +1,14 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.services.supplier;
 
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
+
 public class IssueOrderDTO {
 
     private int issueID;
     private String seriesNumber;
     private int quantity;
 
-    public IssueOrderDTO(){
-
-    }
+    public IssueOrderDTO() {}
 
     public IssueOrderDTO(int issueID, String seriesNumber, int quantity) {
         this.issueID = issueID;
