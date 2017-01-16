@@ -3,7 +3,7 @@ package za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier;
 /**
  * Created by sean.vienings on 2017/01/14.
  */
-public class Supplier implements ISupplier {
+public class Supplier{
     private int supplierID = 0;
     private String supplierName;
     private String supplierCity;

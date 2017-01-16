@@ -1,22 +1,22 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.stock;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.comic.IIssue;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.comic.Issue;
 
 import java.math.BigDecimal;
 
 /**
  * Created by quinton.weenink on 2017/01/15.
  */
-public class Stock implements IStock{
+public class Stock{
     private int stockReferenceID;
-    private IIssue issue;
+    private Issue issue;
     private String condition;
     private int availableQty;
     private BigDecimal price;
 
     public Stock(){
     }
-    public Stock(int stockReferenceID, IIssue issue, String condition, int availableQty, BigDecimal price){
+    public Stock(int stockReferenceID, Issue issue, String condition, int availableQty, BigDecimal price){
         this.stockReferenceID = stockReferenceID;
         this.issue = issue;
         this.condition = condition;
@@ -31,10 +31,10 @@ public class Stock implements IStock{
         this.stockReferenceID = stockReferenceID;
     }
 
-    public IIssue getIssue(){
+    public Issue getIssue(){
         return this.issue;
     }
-    public void setIssue(IIssue issue){
+    public void setIssue(Issue issue){
         this.issue = issue;
     }
 
