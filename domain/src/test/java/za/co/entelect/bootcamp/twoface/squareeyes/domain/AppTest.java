@@ -17,6 +17,9 @@ public class AppTest {
 	    System.out.println("- Sean Vienings!");
     }
 
+    Repository repo = new IssueRepository();
+    repo.create(new Issue());
+
     @Test
     public void givenRandValueWhenConvertedToDollarExpectCorrectConversion() {
 

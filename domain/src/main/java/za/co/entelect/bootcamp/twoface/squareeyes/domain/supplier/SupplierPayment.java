@@ -1,20 +1,21 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
  * Created by mpho.mahase on 2017/01/16.
  */
 public class SupplierPayment {
-    private int paymentID;
-    private int orderID;
-    private int total;
+    private Integer paymentID;
+    private Integer orderID;
+    private BigDecimal total;
     private Date processedDate;
 
     public SupplierPayment() {
     }
 
-    public int getPaymentID() {
+    public Integer getPaymentID() {
         return paymentID;
     }
 
@@ -22,7 +23,7 @@ public class SupplierPayment {
         this.paymentID = paymentID;
     }
 
-    public int getOrderID() {
+    public Integer getOrderID() {
         return orderID;
     }
 
@@ -30,11 +31,11 @@ public class SupplierPayment {
         this.orderID = orderID;
     }
 
-    public int getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
     }
 

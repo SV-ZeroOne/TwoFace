@@ -1,4 +1,4 @@
-package za.co.entelect.bootcamp.twoface.squareeyes.services;
+package za.co.entelect.bootcamp.twoface.squareeyes.services.supplier;
 
 /**
  * Created by mpho.mahase on 2017/01/16.

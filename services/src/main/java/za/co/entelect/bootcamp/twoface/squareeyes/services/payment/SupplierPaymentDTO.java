@@ -1,4 +1,4 @@
-package za.co.entelect.bootcamp.twoface.squareeyes.services;
+package za.co.entelect.bootcamp.twoface.squareeyes.services.payment;
 
 import java.math.BigDecimal;
 
@@ -11,30 +11,24 @@ public class SupplierPaymentDTO {
     private String paymentRefNumber;
     private BigDecimal amount;
 
+    public SupplierPaymentDTO() {
+    }
+
     public SupplierPaymentDTO(String supplierRefNumber, String paymentRefNumber, BigDecimal amount) {
+        this.supplierRefNumber = supplierRefNumber;
+        this.paymentRefNumber = paymentRefNumber;
+        this.amount = amount;
     }
 
     public String getSupplierRefNumber() {
         return supplierRefNumber;
     }
 
-    public void setSupplierRefNumber(String supplierRefNumber) {
-        this.supplierRefNumber = supplierRefNumber;
-    }
-
     public String getPaymentRefNumber() {
         return paymentRefNumber;
     }
 
-    public void setPaymentRefNumber(String paymentRefNumber) {
-        this.paymentRefNumber = paymentRefNumber;
-    }
-
     public BigDecimal getAmount() {
         return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
     }
 }

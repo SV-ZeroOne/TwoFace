@@ -12,14 +12,14 @@ public class Issue implements Entity<Integer>{
     private Date publicationDate = null;
     private String issueTitle = "";
     private String publisher = "";
-    private Byte seriesNumber = 0;
+    private Integer seriesNumber = 0;
     private String description = "";
 
     public Issue(){
 
     }
 
-    public Issue(Date date, String title, String publisher, Byte seriesNumber, String description){
+    public Issue(Date date, String title, String publisher, Integer seriesNumber, String description){
         this.publicationDate = date;
         this.issueTitle = title;
         this.publisher = publisher;
@@ -39,7 +39,7 @@ public class Issue implements Entity<Integer>{
         return publisher;
     }
 
-    public Byte getSeriesNumber() {
+    public Integer getSeriesNumber() {
         return seriesNumber;
     }
 
@@ -69,7 +69,7 @@ public class Issue implements Entity<Integer>{
         }else{return false;}
     }
 
-    public boolean setSeriesNumber(Byte seriesNumber) {
+    public boolean setSeriesNumber(Integer seriesNumber) {
         if((this.seriesNumber = seriesNumber)!=null) {
             return true;
         }else{return false;}
