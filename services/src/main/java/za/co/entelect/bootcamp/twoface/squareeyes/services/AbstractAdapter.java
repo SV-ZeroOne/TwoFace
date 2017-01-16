@@ -5,4 +5,6 @@ package za.co.entelect.bootcamp.twoface.squareeyes.services;
  */
 public interface AbstractAdapter {
 
+
+    void doSomething();
 }
