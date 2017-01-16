@@ -9,11 +9,11 @@
     </parent>
 
 
-    <artifactId>app</artifactId>
+    <artifactId>services</artifactId>
 
-    <name>app</name>
+    <name>services</name>
     <url>http://maven.apache.org</url>
-    <groupId>za.co.entelect.bootcamp.twoface.squareeyes.app</groupId>
+    <groupId>za.co.entelect.bootcamp.twoface.squareeyes.services</groupId>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,8 +21,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>za.co.entelect.bootcamp.twoface.squareeyes.domain</groupId>
-            <artifactId>domain</artifactId>
+            <groupId>za.co.entelect.bootcamp.twoface.squareeyes.persistence</groupId>
+            <artifactId>persistence</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
