@@ -5,6 +5,7 @@ import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by quinton.weenink on 2017/01/15.
@@ -12,20 +13,18 @@ import java.util.List;
 public class Order{
     private int orderID;
     private Date orderDate;
-    private byte qtyOrdered;
     private long total;
     private String shipmentRef;
     private Date shipmentDate;
     private String deliveryStatus;
-    private List<Issue> issueList;
+    private Map<Issue, Integer> issueList;
     private Supplier supplier;
 
     public Order (){
     }
-    public Order (int orderID, Date orderDate, byte qtyOrdered, long total, String shipmentRef, Date shipmentDate, String deliveryStatus, List<Issue> issueList, Supplier supplier){
+    public Order (int orderID, Date orderDate, byte qtyOrdered, long total, String shipmentRef, Date shipmentDate, String deliveryStatus, Map<Issue, Integer> issueList, Supplier supplier){
         this.orderID = orderID;
         this.orderDate = orderDate;
-        this.qtyOrdered = qtyOrdered;
         this.total = total;
         this.shipmentRef = shipmentRef;
         this.shipmentDate = shipmentDate;
@@ -48,11 +47,11 @@ public class Order{
         this.orderDate = orderDate;
     }
 
-    public byte getQtyOrdered(){
-        return this.qtyOrdered;
+    public int getQtyOrdered(Issue issue){
+        return issueList.get(issue);
     }
-    public void setQtyOrdered(byte qtyOrdered){
-        this.qtyOrdered = qtyOrdered;
+    public void setQtyOrdered(Issue issue, int qtyOrdered){
+        this.issueList.put(issue, qtyOrdered);
     }
 
     public long getTotal(){
@@ -81,11 +80,14 @@ public class Order{
         this.deliveryStatus = deliveryStatus;
     }
 
-    public List<Issue> getIssueList(){
+    public Map<Issue, Integer> getIssueList(){
         return this.issueList;
     }
-    public void setIssueList(List<Issue> issueList){
+    public void setIssueList(Map<Issue, Integer> issueList){
         this.issueList = issueList;
+    }
+    public void addIssue(Issue issue, int qtyOrdered){
+        issueList.put(issue, qtyOrdered);
     }
 
     public Supplier getSupplier(){
