@@ -1,4 +1,4 @@
-package za.co.entelect.bootcamp.twoface.squareeyes.app;
+package za.co.entelect.bootcamp.twoface.squareeyes.domain;
 
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -19,8 +19,7 @@ public class AppTest {
 
     @Test
     public void givenRandValueWhenConvertedToDollarExpectCorrectConversion() {
-        double convertedToDollar = App.convertRandToDollar(7.22);
-        assertEquals(convertedToDollar,0.3271409152695967, 0);
+
     }
 
 }

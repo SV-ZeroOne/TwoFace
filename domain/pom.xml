@@ -10,6 +10,7 @@
 
     <artifactId>domain</artifactId>
 	<packaging>jar</packaging>
+    <groupId>za.co.entelect.bootcamp.twoface.squareeyes.domain</groupId>
 
     <name>domain</name>
     <url>http://maven.apache.org</url>
