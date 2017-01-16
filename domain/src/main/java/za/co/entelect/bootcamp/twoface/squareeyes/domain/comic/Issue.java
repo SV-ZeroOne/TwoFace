@@ -1,4 +1,4 @@
-package za.co.entelect.bootcamp.twoface.squareeyes.comic;
+package za.co.entelect.bootcamp.twoface.squareeyes.domain.comic;
 
 import java.util.Date;
 

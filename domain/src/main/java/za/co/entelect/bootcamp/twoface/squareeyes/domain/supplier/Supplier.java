@@ -1,4 +1,4 @@
-package za.co.entelect.bootcamp.twoface.squareeyes.supplier;
+package za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier;
 
 /**
  * Created by sean.vienings on 2017/01/14.
