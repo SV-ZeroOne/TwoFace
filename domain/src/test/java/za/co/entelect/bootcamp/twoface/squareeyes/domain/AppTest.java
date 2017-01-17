@@ -10,15 +10,7 @@ public class AppTest {
 
     @Before
     public void print(){
-        System.out.println("=== Two face ===");
-        System.out.println("Members:");
-	    System.out.println("- Mpho Mahase!");
-        System.out.println("- Quinton Weenink!");
-	    System.out.println("- Sean Vienings!");
     }
-
-    Repository repo = new IssueRepository();
-    repo.create(new Issue());
 
     @Test
     public void givenRandValueWhenConvertedToDollarExpectCorrectConversion() {

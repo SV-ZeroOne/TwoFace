@@ -13,7 +13,7 @@ import java.util.Date;
 public class OrderRepositoryIMP extends RepositoryBase implements OrderRepository{
     //public Order (int orderID, Date orderDate, byte qtyOrdered, BigDecimal total, String shipmentRef, Date shipmentDate, String deliveryStatus, Issue issue, Supplier supplier){
     public OrderRepositoryIMP(Issue issue, Supplier supplier) {
-        tList.put(1, new Order(1, new Date(), (byte)10, new BigDecimal(100), "DMX", new Date(), "In transit", issue, supplier));
+        tList.put(1, new Order(1, new Date(), 2, new BigDecimal(100), "DMX", new Date(), "In transit", issue, supplier));
 
     }
 }

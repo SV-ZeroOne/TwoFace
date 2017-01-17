@@ -11,9 +11,9 @@ import java.util.Date;
  */
 public class IssueRepositoryIMP extends RepositoryBase implements IssueRepository{
 
-    public IssueRepositoryIMP()
+    public IssueRepositoryIMP(Issue issue)
     {
-        tList.put(1,new Issue(1, new Date(),"JUSTICE LEAGUE","DC",001,"JUSTICE LEAGUE REBIRTH"));
+        tList.put(1,issue);
         tList.put(2,new Issue(2, new Date(),"SUPERGIRL","DC",20,"SUPERGIRL"));
         tList.put(3, new Issue(3, new Date(),"SUPERMAN","DC",101,"SUPERMAN"));
         tList.put(4,new Issue(4, new Date(),"WONDER WOMAN","DC",001,"WONDER WOMAN"));

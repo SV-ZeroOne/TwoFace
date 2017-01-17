@@ -8,7 +8,7 @@ import za.co.entelect.bootcamp.twoface.squareeyes.services.supplier.SupplierServ
  */
 public class MockSupplierService implements SupplierService{
     public String placeOrder(IssueOrderDTO issueOrder, String supplierRefNumber, int quantity) {
-        System.out.print("Executed suppler service");
+        System.out.println("Executed supplier service");
         return "Success";
     }
 }

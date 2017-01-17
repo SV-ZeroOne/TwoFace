@@ -25,7 +25,7 @@ public class IssueOrderAdapter extends IssueOrderDTO implements AbstractAdapter{
     }
 
     public int getQuantity() {
-        return order.getQtyOrdered(issue);
+        return order.getQty();
     }
 
     public void doSomething() {
