@@ -11,11 +11,15 @@ public class Supplier implements Entity<Integer>{
     private String supplierCity;
     private String supplierReferenceNumber;
 
-    public Supplier Supplier(String supplierName, String supplierCity, String supplierReferenceNumber){
+    public Supplier(String supplierName, String supplierCity, String supplierReferenceNumber){
         this.supplierName = supplierName;
         this.supplierCity = supplierCity;
         this.supplierReferenceNumber = supplierReferenceNumber;
-        return this;
+    }
+
+    public Supplier()
+    {
+
     }
 
     public Integer getID() {
