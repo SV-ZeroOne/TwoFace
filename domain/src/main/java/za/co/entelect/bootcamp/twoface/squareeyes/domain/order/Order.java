@@ -4,6 +4,7 @@ import za.co.entelect.bootcamp.twoface.squareeyes.domain.Entity;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ import java.util.Map;
 public class Order implements Entity<Integer> {
     private int orderID;
     private Date orderDate;
-    private long total;
+    private BigDecimal total;
     private String shipmentRef;
     private Date shipmentDate;
     private String deliveryStatus;
@@ -23,7 +24,7 @@ public class Order implements Entity<Integer> {
 
     public Order (){
     }
-    public Order (int orderID, Date orderDate, byte qtyOrdered, long total, String shipmentRef, Date shipmentDate, String deliveryStatus, Issue issue, Supplier supplier){
+    public Order (int orderID, Date orderDate, byte qtyOrdered, BigDecimal total, String shipmentRef, Date shipmentDate, String deliveryStatus, Issue issue, Supplier supplier){
         this.orderID = orderID;
         this.orderDate = orderDate;
         this.total = total;
@@ -48,7 +49,7 @@ public class Order implements Entity<Integer> {
         this.orderDate = orderDate;
     }
 
-    public long getTotal(){
+    public BigDecimal getTotal(){
         return this.total;
     }
     //setTotal removed

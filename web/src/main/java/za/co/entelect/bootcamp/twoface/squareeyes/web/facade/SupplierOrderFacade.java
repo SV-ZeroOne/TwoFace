@@ -12,6 +12,7 @@ import za.co.entelect.bootcamp.twoface.squareeyes.services.payment.SupplierPayme
 import za.co.entelect.bootcamp.twoface.squareeyes.services.supplier.IssueOrderAdapter;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.supplier.SupplierService;
 
+import java.util.Date;
 import java.util.Map;
 
 public class SupplierOrderFacade
@@ -70,32 +71,19 @@ public class SupplierOrderFacade
 
         orderRepository.update(order);
 
-        spFactory = new ConcreteSupplierPaymentAdapterFactory(supplier, supplierPayment);
-
         SupplierPayment sp = new SupplierPayment();
+        sp.setOrderID(order.getID());
+        sp.setProcessedDate(new Date());
+        sp.setTotal(order.getTotal());
+
+        spFactory = new ConcreteSupplierPaymentAdapterFactory(supplier, sp);
 
         SupplierPaymentAdapter SPAdapter = (SupplierPaymentAdapter) spFactory.createAdapter();
         paymentService.makePayment(SPAdapter);
 
 
-
+        //Save the payment
 
 
     }
-
-    public boolean validateIssue(Issue issueOrder, Map<Integer, Order> orderMap)
-    {
-        return true;
-    }
-    public boolean validateSupplier(){
-        return true;
-    }
-    public boolean validateQuote(){
-        return true;
-    }
-
-    public boolean validatePayment(){
-        return true;
-    }
-
 }
