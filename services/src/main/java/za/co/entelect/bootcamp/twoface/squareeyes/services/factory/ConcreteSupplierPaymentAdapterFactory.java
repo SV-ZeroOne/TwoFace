@@ -9,7 +9,16 @@ import za.co.entelect.bootcamp.twoface.squareeyes.services.payment.SupplierPayme
  * Created by quinton.weenink on 2017/01/16.
  */
 public class ConcreteSupplierPaymentAdapterFactory {
-    AbstractAdapter abstractAdapter(Supplier supplier, SupplierPayment supplierPayment)
+    Supplier supplier;
+    SupplierPayment supplierPayment;
+
+    public ConcreteSupplierPaymentAdapterFactory(Supplier supplier, SupplierPayment supplierPayment)
+    {
+        this.supplier = supplier;
+        this.supplierPayment = supplierPayment;
+    }
+
+    public AbstractAdapter createAdapter()
     {
         return new SupplierPaymentAdapter(supplier, supplierPayment);
     }

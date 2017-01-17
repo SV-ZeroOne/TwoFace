@@ -9,7 +9,16 @@ import za.co.entelect.bootcamp.twoface.squareeyes.services.supplier.IssueOrderAd
  * Created by quinton.weenink on 2017/01/16.
  */
 public class ConcreteIssueOrderAdapterFactory {
-    AbstractAdapter abstractAdapter(Issue issue, Order order)
+    Issue issue;
+    Order order;
+
+    public ConcreteIssueOrderAdapterFactory(Issue issue, Order order)
+    {
+        this.issue = issue;
+        this.order = order;
+    }
+
+    public AbstractAdapter createAdapter()
     {
         return new IssueOrderAdapter(issue, order);
     }

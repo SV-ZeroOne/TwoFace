@@ -17,19 +17,20 @@ public class Order implements Entity<Integer> {
     private String shipmentRef;
     private Date shipmentDate;
     private String deliveryStatus;
-    private Map<Issue, Integer> issueList;
+    private Issue issue;
+    private Integer qty;
     private Supplier supplier;
 
     public Order (){
     }
-    public Order (int orderID, Date orderDate, byte qtyOrdered, long total, String shipmentRef, Date shipmentDate, String deliveryStatus, Map<Issue, Integer> issueList, Supplier supplier){
+    public Order (int orderID, Date orderDate, byte qtyOrdered, long total, String shipmentRef, Date shipmentDate, String deliveryStatus, Issue issue, Supplier supplier){
         this.orderID = orderID;
         this.orderDate = orderDate;
         this.total = total;
         this.shipmentRef = shipmentRef;
         this.shipmentDate = shipmentDate;
         this.deliveryStatus = deliveryStatus;
-        this.issueList = issueList;
+        this.issue = issue;
         this.supplier = supplier;
     }
 
@@ -45,13 +46,6 @@ public class Order implements Entity<Integer> {
     }
     public void setOrderDate(Date orderDate){
         this.orderDate = orderDate;
-    }
-
-    public int getQtyOrdered(Issue issue){
-        return issueList.get(issue);
-    }
-    public void setQtyOrdered(Issue issue, int qtyOrdered){
-        this.issueList.put(issue, qtyOrdered);
     }
 
     public long getTotal(){
@@ -80,14 +74,18 @@ public class Order implements Entity<Integer> {
         this.deliveryStatus = deliveryStatus;
     }
 
-    public Map<Issue, Integer> getIssueList(){
-        return this.issueList;
+    public Issue getIssue(){
+        return this.issue;
     }
-    public void setIssueList(Map<Issue, Integer> issueList){
-        this.issueList = issueList;
+    public void setIssue(Issue issue){
+        this.issue = issue;
     }
-    public void addIssue(Issue issue, int qtyOrdered){
-        issueList.put(issue, qtyOrdered);
+
+    public Integer getQty(){
+        return this.qty;
+    }
+    public void setQty(Integer qty){
+        this.qty = qty;
     }
 
     public Supplier getSupplier(){
