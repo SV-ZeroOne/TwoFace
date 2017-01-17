@@ -28,7 +28,7 @@ public class SupplierOrderFacade
     private ConcreteSupplierPaymentAdapterFactory spFactory;
 
 
-    void SupplierOrderFacade(PaymentService paymentService, SupplierService supplierService,
+    public SupplierOrderFacade(PaymentService paymentService, SupplierService supplierService,
                              IssueRepository issueRepository, OrderRepository orderRepository,
                              SupplierRepository supplierRepository)
     {

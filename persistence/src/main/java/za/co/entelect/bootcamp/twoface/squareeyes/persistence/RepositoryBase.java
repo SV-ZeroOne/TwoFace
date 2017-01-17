@@ -11,7 +11,7 @@ import java.util.Map;
  * Created by sean.vienings on 2017/01/16.
  */
 public abstract class RepositoryBase<T extends Entity<key>, key> implements Repository<T, key>{
-    private Map<key, T> tList = new HashMap<key, T>();
+    protected Map<key, T> tList = new HashMap<key, T>();
 
     public RepositoryBase()
     {
