@@ -1,5 +1,7 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier;
 
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.order.Order;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -8,7 +10,7 @@ import java.util.Date;
  */
 public class SupplierPayment {
     private Integer paymentID;
-    private Integer orderID;
+    private Order order;
     private BigDecimal total;
     private Date processedDate;
 
@@ -23,12 +25,12 @@ public class SupplierPayment {
         this.paymentID = paymentID;
     }
 
-    public Integer getOrderID() {
-        return orderID;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setOrderID(int orderID) {
-        this.orderID = orderID;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public BigDecimal getTotal() {

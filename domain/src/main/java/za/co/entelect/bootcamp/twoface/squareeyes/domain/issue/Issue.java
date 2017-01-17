@@ -2,25 +2,39 @@ package za.co.entelect.bootcamp.twoface.squareeyes.domain.issue;
 
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.Entity;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by sean.vienings on 2017/01/14.
  */
-public class Issue implements Entity<Integer>{
-    private int issueID = 0;
-    private Date publicationDate = null;
-    private String issueTitle = "";
-    private String publisher = "";
-    private Integer seriesNumber = 0;
-    private String description = "";
+@javax.persistence.Entity
+@Table
+public class Issue{
+    @Id
+    @GeneratedValue
+    private int issueID;
+
+    @Temporal(value = TemporalType.DATE)
+    private Date publicationDate;
+
+    @Column
+    private String issueTitle;
+
+    @Column
+    private String publisher;
+
+    @Column
+    private Integer seriesNumber;
+
+    @Column
+    private String description;
 
     public Issue(){
 
     }
 
-    public Issue(int id, Date date, String title, String publisher, Integer seriesNumber, String description){
-        this.issueID = id;
+    public Issue(Date date, String title, String publisher, Integer seriesNumber, String description){
         this.publicationDate = date;
         this.issueTitle = title;
         this.publisher = publisher;

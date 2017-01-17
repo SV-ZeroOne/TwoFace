@@ -5,8 +5,8 @@ import za.co.entelect.bootcamp.twoface.squareeyes.domain.Entity;
 /**
  * Created by sean.vienings on 2017/01/14.
  */
-public class Supplier implements Entity<Integer>{
-    private Integer supplierID = 0;
+public class Supplier{
+    private Integer supplierID;
     private String supplierName;
     private String supplierCity;
     private String supplierReferenceNumber;

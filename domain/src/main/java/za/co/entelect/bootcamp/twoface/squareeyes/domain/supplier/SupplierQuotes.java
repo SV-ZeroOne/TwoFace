@@ -1,5 +1,7 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier;
 
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
+
 import java.util.Date;
 
 /**
@@ -8,13 +10,13 @@ import java.util.Date;
 public class SupplierQuotes {
 
     private int QuoteID;
-    private int issueID;
+    private Issue issue;
     private Double price;
     private Date effectiveDate;
 
-    public SupplierQuotes(int QuoteID, int issueID, Double price, Date effectiveDate){
+    public SupplierQuotes(int QuoteID, Issue issue, Double price, Date effectiveDate){
         this.QuoteID = QuoteID;
-        this.issueID = issueID;
+        this.issue = issue;
         this.price = price;
         this.effectiveDate = effectiveDate;
     }
@@ -28,12 +30,12 @@ public class SupplierQuotes {
         QuoteID = quoteID;
     }
 
-    public int getIssueID() {
-        return issueID;
+    public Issue getIssue() {
+        return issue;
     }
 
-    public void setIssueID(int issueID) {
-        this.issueID = issueID;
+    public void setIssue(Issue issue) {
+        this.issue = issue;
     }
 
     public Double getPrice() {

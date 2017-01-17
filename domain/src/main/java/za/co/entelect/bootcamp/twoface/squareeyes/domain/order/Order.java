@@ -4,6 +4,7 @@ import za.co.entelect.bootcamp.twoface.squareeyes.domain.Entity;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
@@ -11,21 +12,42 @@ import java.util.Map;
 /**
  * Created by quinton.weenink on 2017/01/15.
  */
-public class Order implements Entity<Integer> {
+@javax.persistence.Entity
+@Table
+public class Order{
+
+    @Id
+    @GeneratedValue
     private int orderID;
+
+    @Temporal(value = TemporalType.DATE)
     private Date orderDate;
+
+    @Column
     private BigDecimal total;
+
+    @Column
     private String shipmentRef;
+
+    @Temporal(value = TemporalType.DATE)
     private Date shipmentDate;
+
+    @Column
     private String deliveryStatus;
+
+    @OneToOne
     private Issue issue;
+
+    @Column
     private Integer qty;
+
+    @OneToOne
     private Supplier supplier;
 
     public Order (){
     }
-    public Order (int orderID, Date orderDate, Integer qty, BigDecimal total, String shipmentRef, Date shipmentDate, String deliveryStatus, Issue issue, Supplier supplier){
-        this.orderID = orderID;
+
+    public Order (Date orderDate, Integer qty, BigDecimal total, String shipmentRef, Date shipmentDate, String deliveryStatus, Issue issue, Supplier supplier){
         this.orderDate = orderDate;
         this.qty = qty;
         this.total = total;
@@ -53,7 +75,9 @@ public class Order implements Entity<Integer> {
     public BigDecimal getTotal(){
         return this.total;
     }
-    //setTotal removed
+    public void setTotal(BigDecimal total){
+        this.total = total;
+    }
 
     public String getShipmentRef(){
         return this.shipmentRef;
