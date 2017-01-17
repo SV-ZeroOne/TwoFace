@@ -1,14 +1,28 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.creator;
 
+import com.sun.istack.internal.Nullable;
+
+import javax.persistence.*;
+
 /**
  * Created by mpho.mahase on 2017/01/14.
  */
+@Entity
+@Table
 public class Creator {
 
+    @Id
+    @GeneratedValue
+    @Column(unique=true, nullable = false)
     private int creatorID;
+
+    @Column(nullable = true)
     private String name;
+    @Column
     private String countryOfResidence;
+    @Column
     private String taxReference;
+    @Column
     private String emailAddress;
 
     public Creator(){
@@ -22,6 +36,7 @@ public class Creator {
         this.taxReference = taxReference;
         this.emailAddress = emailAddress;
     }
+
 
     public int getCreatorID() {
         return creatorID;
