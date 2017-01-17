@@ -2,16 +2,28 @@ package za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier;
 
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by mpho.mahase on 2017/01/16.
  */
+
+@javax.persistence.Entity
+@Table
 public class SupplierQuotes {
 
+    @Id
+    @GeneratedValue
     private int QuoteID;
+
+    @OneToOne
     private Issue issue;
+
+    @Column
     private Double price;
+
+    @Temporal(value = TemporalType.DATE)
     private Date effectiveDate;
 
     public SupplierQuotes(int QuoteID, Issue issue, Double price, Date effectiveDate){

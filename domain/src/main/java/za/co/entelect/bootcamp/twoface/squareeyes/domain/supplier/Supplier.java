@@ -2,13 +2,29 @@ package za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier;
 
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.Entity;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  * Created by sean.vienings on 2017/01/14.
  */
+
+@javax.persistence.Entity
+@Table
 public class Supplier{
+
+    @Id
+    @Column(nullable = false)
     private Integer supplierID;
+
+    @Column
     private String supplierName;
+
+    @Column
     private String supplierCity;
+
+    @Column
     private String supplierReferenceNumber;
 
     public Supplier(String supplierName, String supplierCity, String supplierReferenceNumber){

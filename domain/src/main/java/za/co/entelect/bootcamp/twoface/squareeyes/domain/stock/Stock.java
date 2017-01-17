@@ -2,16 +2,31 @@ package za.co.entelect.bootcamp.twoface.squareeyes.domain.stock;
 
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 /**
  * Created by quinton.weenink on 2017/01/15.
  */
+
+@javax.persistence.Entity
+@Table
 public class Stock{
+
+    @Id
+    @GeneratedValue
     private int stockReferenceID;
+
+    @OneToOne
     private Issue issue;
+
+    @Column
     private String condition;
+
+    @Column
     private int availableQty;
+
+    @Column
     private BigDecimal price;
 
     public Stock(){

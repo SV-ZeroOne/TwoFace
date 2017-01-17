@@ -2,16 +2,28 @@ package za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier;
 
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.order.Order;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
 /**
  * Created by mpho.mahase on 2017/01/16.
  */
+
+@javax.persistence.Entity
+@Table
 public class SupplierPayment {
+
+    @Id
     private Integer paymentID;
+
+    @OneToOne
     private Order order;
+
+    @Column
     private BigDecimal total;
+
+    @Temporal(value = TemporalType.DATE)
     private Date processedDate;
 
     public SupplierPayment() {
