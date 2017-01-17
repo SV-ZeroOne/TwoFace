@@ -25,6 +25,7 @@ public class AppTest {
         SupplierRepository sr = new SupplierRepositoryIMP();
 
         SupplierOrderFacade sof = new SupplierOrderFacade(new MockPaymentService(), new MockSupplierService(), ir, or, sr);
+        sof.placeOrder(123, 2);
     }
 
 }
