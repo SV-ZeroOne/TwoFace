@@ -19,7 +19,8 @@ public class Issue implements Entity<Integer>{
 
     }
 
-    public Issue(Date date, String title, String publisher, Integer seriesNumber, String description){
+    public Issue(int id, Date date, String title, String publisher, Integer seriesNumber, String description){
+        this.issueID = id;
         this.publicationDate = date;
         this.issueTitle = title;
         this.publisher = publisher;
