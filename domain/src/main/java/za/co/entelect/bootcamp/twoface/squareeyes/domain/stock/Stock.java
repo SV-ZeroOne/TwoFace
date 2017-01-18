@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  * Created by quinton.weenink on 2017/01/15.
  */
 
-@javax.persistence.Entity
+@Entity
 @Table
 public class Stock{
 

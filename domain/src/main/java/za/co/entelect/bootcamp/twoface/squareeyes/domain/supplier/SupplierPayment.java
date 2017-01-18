@@ -10,7 +10,7 @@ import java.util.Date;
  * Created by mpho.mahase on 2017/01/16.
  */
 
-@javax.persistence.Entity
+@Entity
 @Table
 public class SupplierPayment {
 

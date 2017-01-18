@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="IronmanTestUnit" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.Creator</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.ComicCreator</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.SupplierPayment</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.SupplierQuotes</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.stock.Stock</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.order.Order</class>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"></property>
+            <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=SquareEyes"></property>
+            <property name="javax.persistence.jdbc.user" value="sa"></property>
+            <property name="javax.persistence.jdbc.password" value=""></property>
+        </properties>
+    </persistence-unit>
+
+</persistence>

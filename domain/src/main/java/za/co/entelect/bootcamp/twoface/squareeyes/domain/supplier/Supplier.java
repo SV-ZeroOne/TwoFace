@@ -1,8 +1,8 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.Entity;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,7 +10,7 @@ import javax.persistence.Table;
  * Created by sean.vienings on 2017/01/14.
  */
 
-@javax.persistence.Entity
+@Entity
 @Table
 public class Supplier{
 

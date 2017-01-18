@@ -2,17 +2,12 @@ package za.co.entelect.bootcamp.twoface.squareeyes.persistence;
 
 
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier;
+import za.co.entelect.bootcamp.twoface.squareeyes.persistence.generic.RelationalRepository;
+
+import javax.management.relation.Relation;
 
 /**
  * Created by sean.vienings on 2017/01/16.
  */
-public class SupplierRepositoryIMP extends RepositoryBase implements SupplierRepository{
-
-    public SupplierRepositoryIMP(Supplier supplier)
-    {
-        tList.put(1, supplier);
-        tList.put(124, new Supplier("Hp", "Cape Town", "RefNumber124"));
-        tList.put(125, new Supplier("Shark", "JHB", "RefNumber125"));
-        tList.put(126, new Supplier("Logitech", "Tokyo", "RefNumber126"));
-    }
+public class SupplierRepositoryIMP extends RelationalRepository<Supplier> implements SupplierRepository{
 }
