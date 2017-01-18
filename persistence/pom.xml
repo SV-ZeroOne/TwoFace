@@ -20,6 +20,19 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>4.3.5.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>6.1.0.jre8</version>
+        </dependency>
+
         <dependency>
             <groupId>za.co.entelect.bootcamp.twoface.squareeyes.domain</groupId>
             <artifactId>domain</artifactId>
@@ -29,7 +42,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.2.1.Final</version>
+            <version>5.2.6.Final</version>
         </dependency>
 
         <dependency>
@@ -37,6 +50,7 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>3.6.10.Final</version>
         </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
