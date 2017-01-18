@@ -11,13 +11,13 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
         <property name="show_sql">true</property>
-        <mapping class="za.co.entelect.square_eyes.comic_creator.ComicCreator"></mapping>
-        <mapping class="za.co.entelect.square_eyes.creator.Creator"></mapping>
-        <mapping class="za.co.entelect.square_eyes.issue.Issue"></mapping>
-        <mapping class="za.co.entelect.square_eyes.order.Order"></mapping>
-        <mapping class="za.co.entelect.square_eyes.stock.Stock"></mapping>
-        <mapping class="za.co.entelect.square_eyes.supplier.Supplier"></mapping>
-        <mapping class="za.co.entelect.square_eyes.supplier_payment.SupplierPayment"></mapping>
-        <mapping class="za.co.entelect.square_eyes.supplier_quote.SupplierQuote"></mapping>
+        <mapping class="za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.ComicCreator"></mapping>
+        <mapping class="za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.Creator"></mapping>
+        <mapping class="za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue"></mapping>
+        <mapping class="za.co.entelect.bootcamp.twoface.squareeyes.domain.order.Order"></mapping>
+        <mapping class="za.co.entelect.bootcamp.twoface.squareeyes.domain.stock.Stock"></mapping>
+        <mapping class="za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier"></mapping>
+        <mapping class="za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.SupplierPayment"></mapping>
+        <mapping class="za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.SupplierQuote"></mapping>
     </session-factory>
 </hibernate-configuration>

@@ -29,8 +29,4 @@ public class SupplierPaymentAdapter extends SupplierPaymentDTO implements Abstra
     public BigDecimal getAmount() {
         return supplierPayment.getTotal();
     }
-
-    public void doSomething() {
-        System.out.println("supplier payment adapter");
-    }
 }

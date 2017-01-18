@@ -24,15 +24,13 @@ public class AppTest {
     @Test
     public void test() {
 
-        Issue issue = new Issue(1, new Date(),"JUSTICE LEAGUE","DC",001,"JUSTICE LEAGUE REBIRTH");
-        Supplier supplier = new Supplier("Dell", "New York", "RefNumber123");
-        IssueRepository ir = new IssueRepositoryIMP(issue);
-        SupplierRepository sr = new SupplierRepositoryIMP(supplier);
-        OrderRepository or = new OrderRepositoryIMP(issue, supplier);
+        IssueRepository ir = new IssueRepositoryIMP();
+        SupplierRepository sr = new SupplierRepositoryIMP();
+        OrderRepository or = new OrderRepositoryIMP();
 
 
         SupplierOrderFacade sof = new SupplierOrderFacade(new MockPaymentService(), new MockSupplierService(), ir, or, sr);
-        sof.placeOrder(1, 2);
+        sof.placeOrder(30, 2);
     }
 
     @After

@@ -13,6 +13,7 @@ import za.co.entelect.bootcamp.twoface.squareeyes.services.supplier.IssueOrderAd
 import za.co.entelect.bootcamp.twoface.squareeyes.services.supplier.SupplierService;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 public class SupplierOrderFacade
@@ -41,24 +42,24 @@ public class SupplierOrderFacade
     }
 
     public void placeOrder(Integer issueID, Integer qty){
-        Issue issueOrder = (Issue) issueRepository.read(issueID);
+        Issue issueOrder = (Issue) issueRepository.find(issueID);
         if(issueOrder == null)
             return;
 
-        Map<Integer, Order> orderMap = orderRepository.read();
+        List<Order> orderList = orderRepository.findAll();
         Order order = null;
-        for(Map.Entry e: orderMap.entrySet()){
-            order = (Order)e.getValue();
-            if(order.getIssue() == issueOrder){
+        for(Order o: orderList){
+            if(o.getIssue() == issueOrder){
+                order = o;
                 break;
             }
         }
 
-        Map<Integer, Supplier> supplierMap = supplierRepository.read();
+        List<Supplier> supplierList = supplierRepository.findAll();
         Supplier supplier = null;
-        for(Map.Entry e: supplierMap.entrySet()){
-            supplier = (Supplier)e.getValue();
+        for(Supplier s: supplierList){
             if(order.getSupplier() == supplier){
+                supplier = s;
                 break;
             }
         }
@@ -72,7 +73,7 @@ public class SupplierOrderFacade
         orderRepository.update(order);
 
         SupplierPayment sp = new SupplierPayment();
-        sp.setOrderID(order.getID());
+        sp.setOrder(order);
         sp.setProcessedDate(new Date());
         sp.setTotal(order.getTotal());
 

@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Entity
 @Table
-public class SupplierQuotes {
+public class SupplierQuote {
 
     @Id
     @GeneratedValue
@@ -29,7 +29,7 @@ public class SupplierQuotes {
     @Temporal(value = TemporalType.DATE)
     private Date effectiveDate;
 
-    public SupplierQuotes(int QuoteID, Issue issue, Supplier supplier, Double price, Date effectiveDate){
+    public SupplierQuote(int QuoteID, Issue issue, Supplier supplier, Double price, Date effectiveDate){
         this.QuoteID = QuoteID;
         this.issue = issue;
         this.price = price;
