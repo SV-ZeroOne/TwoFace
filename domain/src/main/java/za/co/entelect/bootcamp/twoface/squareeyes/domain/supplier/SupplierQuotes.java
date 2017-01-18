@@ -17,8 +17,11 @@ public class SupplierQuotes {
     @GeneratedValue
     private int QuoteID;
 
-    @OneToOne
+    @ManyToOne
     private Issue issue;
+
+    @ManyToOne
+    private Supplier supplier;
 
     @Column
     private Double price;
@@ -26,10 +29,11 @@ public class SupplierQuotes {
     @Temporal(value = TemporalType.DATE)
     private Date effectiveDate;
 
-    public SupplierQuotes(int QuoteID, Issue issue, Double price, Date effectiveDate){
+    public SupplierQuotes(int QuoteID, Issue issue, Supplier supplier, Double price, Date effectiveDate){
         this.QuoteID = QuoteID;
         this.issue = issue;
         this.price = price;
+        this.supplier = supplier;
         this.effectiveDate = effectiveDate;
     }
 
@@ -49,6 +53,10 @@ public class SupplierQuotes {
     public void setIssue(Issue issue) {
         this.issue = issue;
     }
+
+    public Supplier getSupplier() {return supplier;}
+
+    public void setSupplier(Supplier supplier) {this.supplier = supplier;}
 
     public Double getPrice() {
         return price;

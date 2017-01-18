@@ -2,20 +2,20 @@ package za.co.entelect.bootcamp.twoface.squareeyes.domain.creator;
 
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 /**
  * Created by mpho.mahase on 2017/01/14.
  */
+@Table
+@Entity
 public class ComicCreator {
 
     @Id
-    @OneToOne
+    @ManyToOne
     private Issue issue;
     @Id
-    @OneToOne
+    @ManyToOne
     private Creator creator;
     @Column
     private String creatorRole;

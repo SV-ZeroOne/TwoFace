@@ -1,13 +1,11 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.order;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.Entity;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Map;
 
 /**
  * Created by quinton.weenink on 2017/01/15.
@@ -30,18 +28,19 @@ public class Order{
     private String shipmentRef;
 
     @Temporal(value = TemporalType.DATE)
+    @Column
     private Date shipmentDate;
 
     @Column
     private String deliveryStatus;
 
-    @OneToOne
+    @ManyToOne
     private Issue issue;
 
     @Column
     private Integer qty;
 
-    @OneToOne
+    @ManyToOne
     private Supplier supplier;
 
     public Order (){

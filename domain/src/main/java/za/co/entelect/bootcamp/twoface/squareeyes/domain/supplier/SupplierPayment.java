@@ -17,7 +17,7 @@ public class SupplierPayment {
     @Id
     private Integer paymentID;
 
-    @OneToOne
+    @ManyToOne
     private Order order;
 
     @Column

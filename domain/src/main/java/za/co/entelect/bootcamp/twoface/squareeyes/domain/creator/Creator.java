@@ -16,7 +16,7 @@ public class Creator {
     @Column(unique=true, nullable = false)
     private int creatorID;
 
-    @Column(nullable = true)
+    @Column
     private String name;
     @Column
     private String countryOfResidence;

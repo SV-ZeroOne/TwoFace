@@ -7,10 +7,14 @@ import java.util.Map;
 
 public interface Repository<T>
 {
-    void create(T item);
+    T create(T item);
     List<T> read();
     T read(Object id);
     void delete(Object id);
-    void update(T item);
+    T   update(T item);
+    List<T> findAll();
+    List<T> findAll(int pageSize, int pageNumber);
+    List<T> search(String property, String criteria);
+    List<T> search(String property, String criteria, int pageSize, int pageNumber);
 
 }

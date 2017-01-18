@@ -17,7 +17,7 @@ public class Stock{
     @GeneratedValue
     private int stockReferenceID;
 
-    @OneToOne
+    @ManyToOne
     private Issue issue;
 
     @Column

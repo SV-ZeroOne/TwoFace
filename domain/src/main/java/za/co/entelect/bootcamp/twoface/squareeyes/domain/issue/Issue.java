@@ -24,6 +24,7 @@ public class Issue{
     @Column
     private String publisher;
 
+
     @Column
     private Integer seriesNumber;
 
