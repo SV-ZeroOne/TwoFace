@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * Created by quinton.weenink on 2017/01/15.
  */
-@javax.persistence.Entity
+@Entity
 @Table
 public class Order{
 

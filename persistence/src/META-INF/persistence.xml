@@ -17,7 +17,7 @@
             <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"></property>
             <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=SquareEyes"></property>
             <property name="javax.persistence.jdbc.user" value="sa"></property>
-            <property name="javax.persistence.jdbc.password" value="Ironman123"></property>
+            <property name="javax.persistence.jdbc.password" value=""></property>
         </properties>
     </persistence-unit>
 

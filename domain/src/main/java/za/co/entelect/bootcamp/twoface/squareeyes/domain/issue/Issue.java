@@ -1,14 +1,12 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.issue;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.Entity;
-
 import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Created by sean.vienings on 2017/01/14.
  */
-@javax.persistence.Entity
+@Entity
 @Table
 public class Issue{
     @Id

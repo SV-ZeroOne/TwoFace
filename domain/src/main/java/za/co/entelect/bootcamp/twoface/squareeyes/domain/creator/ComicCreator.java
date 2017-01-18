@@ -7,8 +7,8 @@ import javax.persistence.*;
 /**
  * Created by mpho.mahase on 2017/01/14.
  */
-@Table
 @Entity
+@Table
 public class ComicCreator {
 
     @Id

@@ -1,4 +1,4 @@
-package za.co.entelect.bootcamp.twoface.squareeyes.persistence;
+package za.co.entelect.bootcamp.twoface.squareeyes.persistence.generic;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
