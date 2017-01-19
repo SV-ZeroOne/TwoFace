@@ -8,15 +8,17 @@ import java.util.Date;
  */
 @Entity
 @Table
-public class Issue{
+public class Issues{
     @Id
     @GeneratedValue
+    @Column(name="IssueID")
     private int issueID;
 
     @Temporal(value = TemporalType.DATE)
+    @Column(name="PublicationDate")
     private Date publicationDate;
 
-    @Column
+    @Column(name="Title")
     private String issueTitle;
 
     @Column

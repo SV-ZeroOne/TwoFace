@@ -29,6 +29,10 @@ public class SupplierQuote {
     @Temporal(value = TemporalType.DATE)
     private Date effectiveDate;
 
+    public SupplierQuote(){
+
+    }
+
     public SupplierQuote(int QuoteID, Issue issue, Supplier supplier, Double price, Date effectiveDate){
         this.QuoteID = QuoteID;
         this.issue = issue;

@@ -1,10 +1,7 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by sean.vienings on 2017/01/14.
@@ -15,7 +12,7 @@ import javax.persistence.Table;
 public class Supplier{
 
     @Id
-    @Column(nullable = false)
+    @GeneratedValue
     private Integer supplierID;
 
     @Column

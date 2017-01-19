@@ -1,8 +1,8 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.persistence.generic;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.Entity;
+
+import javax.persistence.*;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -10,11 +10,10 @@ import java.util.List;
 /**
  * Created by sean.vienings on 2017/01/16.
  */
-//@Repository
 public abstract class RelationalRepository<T> implements Repository<T>{
 
-    @PersistenceContext
     protected EntityManager entityManager;
+    protected EntityManagerFactory entityManagerFactory;
 
     private Class<T> type;
 
@@ -22,9 +21,13 @@ public abstract class RelationalRepository<T> implements Repository<T>{
         Type t = getClass().getGenericSuperclass();
         ParameterizedType pt = (ParameterizedType) t;
         type = (Class) pt.getActualTypeArguments()[0];
+
+        entityManagerFactory = Persistence.createEntityManagerFactory("Ironman");
+        entityManager = entityManagerFactory.createEntityManager();
     }
 
     public T find(Object id) {
+        System.out.println(id);
         return this.entityManager.find(type, id);
     }
 

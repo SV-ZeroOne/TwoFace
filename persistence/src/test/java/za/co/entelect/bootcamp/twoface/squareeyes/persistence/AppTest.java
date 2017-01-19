@@ -14,6 +14,12 @@ public class AppTest {
 
     @Test
     public void givenRandValueWhenConvertedToDollarExpectCorrectConversion() {
+        System.out.print("Test");
+    }
+
+    @Test
+    public void givenRandValueWhenConvertedToDollarExpectCorrec() {
+        System.out.print("Test");
     }
 
 }

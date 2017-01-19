@@ -12,13 +12,20 @@ import javax.persistence.*;
 public class ComicCreator {
 
     @Id
+    @GeneratedValue
+    private int comicCreatorID;
+
     @ManyToOne
     private Issue issue;
-    @Id
+
     @ManyToOne
     private Creator creator;
     @Column
     private String creatorRole;
+
+    public ComicCreator(){
+
+    }
 
 
     public String getCreatorRole() {

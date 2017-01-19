@@ -15,6 +15,7 @@ import java.util.Date;
 public class SupplierPayment {
 
     @Id
+    @GeneratedValue
     private Integer paymentID;
 
     @ManyToOne

@@ -1,6 +1,5 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.creator;
 
-import com.sun.istack.internal.Nullable;
 
 import javax.persistence.*;
 
@@ -13,7 +12,6 @@ public class Creator {
 
     @Id
     @GeneratedValue
-    @Column(unique=true, nullable = false)
     private int creatorID;
 
     @Column
