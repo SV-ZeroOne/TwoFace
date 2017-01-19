@@ -19,6 +19,7 @@ public class Stock{
     private int stockReferenceID;
 
     @ManyToOne
+    @JoinColumn(name = "IssueID")
     private Issues issue;
 
     @Column(name="Condition")

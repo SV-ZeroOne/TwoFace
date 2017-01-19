@@ -20,6 +20,7 @@ public class SupplierPayments {
     private Integer paymentID;
 
     @ManyToOne
+    @JoinColumn(name = "OrderID")
     private Orders orders;
 
     @Column(name="Total")

@@ -19,6 +19,7 @@
             <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=SquareEyes"></property>
             <property name="javax.persistence.jdbc.user" value="comic"></property>
             <property name="javax.persistence.jdbc.password" value="root"></property>
+            <property name="hibernate.hbm2ddl.auto" value="validate"/>
         </properties>
     </persistence-unit>
 </persistence>
