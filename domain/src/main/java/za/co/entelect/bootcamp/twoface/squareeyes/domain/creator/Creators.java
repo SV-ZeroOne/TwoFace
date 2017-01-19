@@ -32,15 +32,15 @@ public class Creators {
     private String emailAddress;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.creators")
-    List<ComicCreators> issues = new ArrayList<ComicCreators>();
+    List<ComicCreators> comicCreators = new ArrayList<ComicCreators>();
 
 
-    public List<ComicCreators> getIssues() {
-        return issues;
+    public List<ComicCreators> getComicCreators() {
+        return comicCreators;
     }
 
-    public void setIssues(List<ComicCreators> issues) {
-        this.issues = issues;
+    public void setComicCreators(List<ComicCreators> comicCreators) {
+        this.comicCreators = comicCreators;
     }
 
 
