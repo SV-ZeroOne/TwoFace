@@ -11,7 +11,7 @@ public class Log {
     private static final Logger logger = LoggerFactory.getLogger(Log.class);
 
     public static void main(String[] args){
-        logger.info("Here is some working that I'm testing");
+        logger.info("Here is some working ");
 
     }
 
