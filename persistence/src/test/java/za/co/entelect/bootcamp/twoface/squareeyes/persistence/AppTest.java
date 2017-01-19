@@ -21,6 +21,7 @@ public class AppTest {
         OrdersRepository or = new OrdersRepositoryIMP();
 
         Issues issue = ir.find(30);
+        System.out.println(issue.getPublicationDate());
 
     }
 

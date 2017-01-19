@@ -21,7 +21,7 @@ public class SupplierQuotes {
     @ManyToOne
     private Issues issue;
 
-    @Column(name="SupplierID")
+    @ManyToOne
     private Suppliers suppliers;
 
     @Column(name="Price")

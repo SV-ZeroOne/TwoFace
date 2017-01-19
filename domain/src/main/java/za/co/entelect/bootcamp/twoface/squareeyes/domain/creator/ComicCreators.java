@@ -9,18 +9,27 @@ import javax.persistence.*;
  */
 @Entity
 @Table
+@IdClass(ComicCreatorsId.class)
 public class ComicCreators {
 
     @Id
-    @ManyToOne
-    private Issues issue;
+    @Column(name="CreatorID")
+    private long creatorID;
 
     @Id
-    @ManyToOne
-    private Creators creators;
+    @Column(name="IssueID")
+    private long issueID;
 
     @Column(name="CreatorRole")
     private String creatorRole;
+
+    @ManyToOne
+    @PrimaryKeyJoinColumn(name="CreatorID", referencedColumnName="CreatorID")
+    private Creators creator;
+
+    @ManyToOne
+    @PrimaryKeyJoinColumn(name="IssueID", referencedColumnName="IssueID")
+    private Issues issue;
 
     public ComicCreators(){
 
@@ -30,8 +39,8 @@ public class ComicCreators {
     public String getCreatorRole() {
         return this.creatorRole;
     }
-    public void setCreatorRole(String referenceNumber) {
-        this.creatorRole = referenceNumber;
+    public void setCreatorRole(String creatorRole) {
+        this.creatorRole = creatorRole;
     }
 
     public Issues getIssue(){
@@ -42,9 +51,9 @@ public class ComicCreators {
     }
 
     public Creators getCreators(){
-        return this.creators;
+        return this.creator;
     }
-    public void setCreators(Creators creators){
-        this.creators = creators;
+    public void setCreators(Creators creator){
+        this.creator = creator;
     }
 }
