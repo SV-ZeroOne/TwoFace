@@ -1,6 +1,6 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issues;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,56 +11,59 @@ import java.util.Date;
 
 @Entity
 @Table
-public class SupplierQuote {
+public class SupplierQuotes {
 
     @Id
     @GeneratedValue
-    private int QuoteID;
+    @Column(name="QuoteID")
+    private int quoteID;
 
     @ManyToOne
-    private Issue issue;
+    @Column(name="IssueID")
+    private Issues issue;
 
-    @ManyToOne
-    private Supplier supplier;
+    @Column(name="SupplierID")
+    private Suppliers suppliers;
 
-    @Column
+    @Column(name="Price")
     private Double price;
 
     @Temporal(value = TemporalType.DATE)
+    @Column(name="EffectiveDate")
     private Date effectiveDate;
 
-    public SupplierQuote(){
+    public SupplierQuotes(){
 
     }
 
-    public SupplierQuote(int QuoteID, Issue issue, Supplier supplier, Double price, Date effectiveDate){
-        this.QuoteID = QuoteID;
+    public SupplierQuotes(int QuoteID, Issues issue, Suppliers suppliers, Double price, Date effectiveDate){
+        this.quoteID = QuoteID;
         this.issue = issue;
         this.price = price;
-        this.supplier = supplier;
+        this.suppliers = suppliers;
         this.effectiveDate = effectiveDate;
     }
 
 
     public int getQuoteID() {
-        return QuoteID;
+        return quoteID;
     }
 
     public void setQuoteID(int quoteID) {
-        QuoteID = quoteID;
+        quoteID = quoteID;
     }
 
-    public Issue getIssue() {
+    public Issues getIssue() {
         return issue;
     }
 
-    public void setIssue(Issue issue) {
+    public void setIssue(Issues issue) {
         this.issue = issue;
     }
 
-    public Supplier getSupplier() {return supplier;}
+    public Suppliers getSuppliers() {return suppliers;}
 
-    public void setSupplier(Supplier supplier) {this.supplier = supplier;}
+    public void setSuppliers(Suppliers suppliers) {this.suppliers = suppliers;}
 
     public Double getPrice() {
         return price;

@@ -1,16 +1,9 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.web;
 
 import org.junit.*;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.Entity;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issues;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.*;
 import za.co.entelect.bootcamp.twoface.squareeyes.web.facade.SupplierOrderFacade;
-
-import java.util.Date;
-import java.util.Map;
-
-import static org.junit.Assert.*;
 
 /**
  * Unit test for simple Repository.
@@ -24,9 +17,9 @@ public class AppTest {
     @Test
     public void test() {
 
-        IssueRepository ir = new IssueRepositoryIMP();
-        SupplierRepository sr = new SupplierRepositoryIMP();
-        OrderRepository or = new OrderRepositoryIMP();
+        IssuesRepository ir = new IssuesRepositoryIMP();
+        SuppliersRepository sr = new SuppliersRepositoryIMP();
+        OrdersRepository or = new OrdersRepositoryIMP();
 
 
         SupplierOrderFacade sof = new SupplierOrderFacade(new MockPaymentService(), new MockSupplierService(), ir, or, sr);

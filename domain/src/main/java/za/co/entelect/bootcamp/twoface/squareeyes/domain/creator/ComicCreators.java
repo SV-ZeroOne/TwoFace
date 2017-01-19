@@ -1,6 +1,6 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.creator;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issues;
 
 import javax.persistence.*;
 
@@ -9,21 +9,22 @@ import javax.persistence.*;
  */
 @Entity
 @Table
-public class ComicCreator {
+public class ComicCreators {
 
     @Id
-    @GeneratedValue
-    private int comicCreatorID;
-
     @ManyToOne
-    private Issue issue;
+    @Column(name="IssueID")
+    private Issues issue;
 
+    @Id
     @ManyToOne
-    private Creator creator;
-    @Column
+    @Column(name="CreatorID")
+    private Creators creators;
+
+    @Column(name="CreatorRole")
     private String creatorRole;
 
-    public ComicCreator(){
+    public ComicCreators(){
 
     }
 
@@ -35,17 +36,17 @@ public class ComicCreator {
         this.creatorRole = referenceNumber;
     }
 
-    public Issue getIssue(){
+    public Issues getIssue(){
         return this.issue;
     }
-    public void setIssue(Issue issue){
+    public void setIssue(Issues issue){
         this.issue = issue;
     }
 
-    public Creator getCreator(){
-        return this.creator;
+    public Creators getCreators(){
+        return this.creators;
     }
-    public void setCreator(Creator creator){
-        this.creator = creator;
+    public void setCreators(Creators creators){
+        this.creators = creators;
     }
 }

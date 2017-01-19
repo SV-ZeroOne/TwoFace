@@ -1,7 +1,7 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.order;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issues;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Suppliers;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -12,41 +12,45 @@ import java.util.Date;
  */
 @Entity
 @Table
-public class Order{
+public class Orders {
 
     @Id
     @GeneratedValue
+    @Column(name="OrderID")
     private int orderID;
 
     @Temporal(value = TemporalType.DATE)
+    @Column(name="OrderDate")
     private Date orderDate;
 
-    @Column
+    @Column(name="Total")
     private BigDecimal total;
 
-    @Column
+    @Column(name="ShipmentRef")
     private String shipmentRef;
 
     @Temporal(value = TemporalType.DATE)
-    @Column
+    @Column(name="ShipmentDate")
     private Date shipmentDate;
 
-    @Column
+    @Column(name="DeliveryStatus")
     private String deliveryStatus;
 
     @ManyToOne
-    private Issue issue;
+    @Column(name="IssueID")
+    private Issues issue;
 
-    @Column
+    @Column(name="QtyOrdered")
     private Integer qty;
 
     @ManyToOne
-    private Supplier supplier;
+    @Column(name="SupplierID")
+    private Suppliers suppliers;
 
-    public Order (){
+    public Orders(){
     }
 
-    public Order (Date orderDate, Integer qty, BigDecimal total, String shipmentRef, Date shipmentDate, String deliveryStatus, Issue issue, Supplier supplier){
+    public Orders(Date orderDate, Integer qty, BigDecimal total, String shipmentRef, Date shipmentDate, String deliveryStatus, Issues issue, Suppliers suppliers){
         this.orderDate = orderDate;
         this.qty = qty;
         this.total = total;
@@ -54,7 +58,7 @@ public class Order{
         this.shipmentDate = shipmentDate;
         this.deliveryStatus = deliveryStatus;
         this.issue = issue;
-        this.supplier = supplier;
+        this.suppliers = suppliers;
     }
 
     public Integer getID(){
@@ -99,10 +103,10 @@ public class Order{
         this.deliveryStatus = deliveryStatus;
     }
 
-    public Issue getIssue(){
+    public Issues getIssue(){
         return this.issue;
     }
-    public void setIssue(Issue issue){
+    public void setIssue(Issues issue){
         this.issue = issue;
     }
 
@@ -113,10 +117,10 @@ public class Order{
         this.qty = qty;
     }
 
-    public Supplier getSupplier(){
-        return this.supplier;
+    public Suppliers getSuppliers(){
+        return this.suppliers;
     }
-    public void setSupplier(Supplier supplier){
-        this.supplier = supplier;
+    public void setSuppliers(Suppliers suppliers){
+        this.suppliers = suppliers;
     }
 }

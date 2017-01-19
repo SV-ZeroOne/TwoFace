@@ -1,6 +1,6 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.order.Order;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.order.Orders;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -12,22 +12,25 @@ import java.util.Date;
 
 @Entity
 @Table
-public class SupplierPayment {
+public class SupplierPayments {
 
     @Id
     @GeneratedValue
+    @Column(name="PaymentID")
     private Integer paymentID;
 
     @ManyToOne
-    private Order order;
+    @Column(name="OrderID")
+    private Orders orders;
 
-    @Column
+    @Column(name="Total")
     private BigDecimal total;
 
     @Temporal(value = TemporalType.DATE)
+    @Column(name="ProcessedDate")
     private Date processedDate;
 
-    public SupplierPayment() {
+    public SupplierPayments() {
     }
 
     public Integer getPaymentID() {
@@ -38,12 +41,12 @@ public class SupplierPayment {
         this.paymentID = paymentID;
     }
 
-    public Order getOrder() {
-        return order;
+    public Orders getOrders() {
+        return orders;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrders(Orders orders) {
+        this.orders = orders;
     }
 
     public BigDecimal getTotal() {

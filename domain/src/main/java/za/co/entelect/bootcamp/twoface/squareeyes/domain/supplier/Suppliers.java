@@ -9,28 +9,29 @@ import javax.persistence.*;
 
 @Entity
 @Table
-public class Supplier{
+public class Suppliers {
 
     @Id
     @GeneratedValue
+    @Column(name="SupplierID")
     private Integer supplierID;
 
-    @Column
+    @Column(name="Name")
     private String supplierName;
 
-    @Column
+    @Column(name="City")
     private String supplierCity;
 
-    @Column
+    @Column(name="ReferenceNumber")
     private String supplierReferenceNumber;
 
-    public Supplier(String supplierName, String supplierCity, String supplierReferenceNumber){
+    public Suppliers(String supplierName, String supplierCity, String supplierReferenceNumber){
         this.supplierName = supplierName;
         this.supplierCity = supplierCity;
         this.supplierReferenceNumber = supplierReferenceNumber;
     }
 
-    public Supplier()
+    public Suppliers()
     {
 
     }
