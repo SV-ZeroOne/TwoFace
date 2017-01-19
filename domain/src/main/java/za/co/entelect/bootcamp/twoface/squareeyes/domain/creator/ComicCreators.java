@@ -13,12 +13,10 @@ public class ComicCreators {
 
     @Id
     @ManyToOne
-    @Column(name="IssueID")
     private Issues issue;
 
     @Id
     @ManyToOne
-    @Column(name="CreatorID")
     private Creators creators;
 
     @Column(name="CreatorRole")

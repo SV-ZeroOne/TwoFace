@@ -19,7 +19,6 @@ public class SupplierQuotes {
     private int quoteID;
 
     @ManyToOne
-    @Column(name="IssueID")
     private Issues issue;
 
     @Column(name="SupplierID")

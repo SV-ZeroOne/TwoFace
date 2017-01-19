@@ -19,7 +19,6 @@ public class Stock{
     private int stockReferenceID;
 
     @ManyToOne
-    @Column(name="IssueID")
     private Issues issue;
 
     @Column(name="Condition")

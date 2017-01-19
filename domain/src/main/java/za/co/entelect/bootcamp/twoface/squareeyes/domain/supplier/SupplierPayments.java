@@ -20,7 +20,6 @@ public class SupplierPayments {
     private Integer paymentID;
 
     @ManyToOne
-    @Column(name="OrderID")
     private Orders orders;
 
     @Column(name="Total")

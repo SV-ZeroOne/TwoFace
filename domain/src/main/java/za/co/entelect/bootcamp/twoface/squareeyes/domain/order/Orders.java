@@ -37,14 +37,12 @@ public class Orders {
     private String deliveryStatus;
 
     @ManyToOne
-    @Column(name="IssueID")
     private Issues issue;
 
     @Column(name="QtyOrdered")
     private Integer qty;
 
     @ManyToOne
-    @Column(name="SupplierID")
     private Suppliers suppliers;
 
     public Orders(){

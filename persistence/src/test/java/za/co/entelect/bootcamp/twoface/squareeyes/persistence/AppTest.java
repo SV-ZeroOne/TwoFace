@@ -1,6 +1,8 @@
-package za.co.entelect.bootcamp.twoface.squareeyes.app;
+package za.co.entelect.bootcamp.twoface.squareeyes.persistence;
 
 import org.junit.*;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issues;
+
 import static org.junit.Assert.*;
 
 /**
@@ -14,12 +16,12 @@ public class AppTest {
 
     @Test
     public void givenRandValueWhenConvertedToDollarExpectCorrectConversion() {
-        System.out.print("Test");
-    }
+        IssuesRepository ir = new IssuesRepositoryIMP();
+        SuppliersRepository sr = new SuppliersRepositoryIMP();
+        OrdersRepository or = new OrdersRepositoryIMP();
 
-    @Test
-    public void givenRandValueWhenConvertedToDollarExpectCorrec() {
-        System.out.print("Test");
+        Issues issue = ir.find(30);
+
     }
 
 }
