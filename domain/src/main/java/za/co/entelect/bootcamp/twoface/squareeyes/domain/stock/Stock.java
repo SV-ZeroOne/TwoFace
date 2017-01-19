@@ -1,6 +1,6 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.stock;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issues;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -15,23 +15,24 @@ public class Stock{
 
     @Id
     @GeneratedValue
+    @Column(name="StockReferenceID")
     private int stockReferenceID;
 
     @ManyToOne
-    private Issue issue;
+    private Issues issue;
 
-    @Column
+    @Column(name="Condition")
     private String condition;
 
-    @Column
+    @Column(name="AvailableQty")
     private int availableQty;
 
-    @Column
+    @Column(name="Price")
     private BigDecimal price;
 
     public Stock(){
     }
-    public Stock(int stockReferenceID, Issue issue, String condition, int availableQty, BigDecimal price){
+    public Stock(int stockReferenceID, Issues issue, String condition, int availableQty, BigDecimal price){
         this.stockReferenceID = stockReferenceID;
         this.issue = issue;
         this.condition = condition;
@@ -46,10 +47,10 @@ public class Stock{
         this.stockReferenceID = stockReferenceID;
     }
 
-    public Issue getIssue(){
+    public Issues getIssue(){
         return this.issue;
     }
-    public void setIssue(Issue issue){
+    public void setIssue(Issues issue){
         this.issue = issue;
     }
 

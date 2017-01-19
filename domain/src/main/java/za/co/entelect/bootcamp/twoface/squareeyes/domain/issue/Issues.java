@@ -8,32 +8,33 @@ import java.util.Date;
  */
 @Entity
 @Table
-public class Issue{
+public class Issues{
     @Id
     @GeneratedValue
+    @Column(name="IssueID")
     private int issueID;
 
     @Temporal(value = TemporalType.DATE)
+    @Column(name="PublicationDate")
     private Date publicationDate;
 
-    @Column
+    @Column(name="Title")
     private String issueTitle;
 
-    @Column
+    @Column(name="Publisher")
     private String publisher;
 
-
-    @Column
+    @Column(name="SeriesNumber")
     private Integer seriesNumber;
 
-    @Column
+    @Column(name="Description")
     private String description;
 
-    public Issue(){
+    public Issues(){
 
     }
 
-    public Issue(Date date, String title, String publisher, Integer seriesNumber, String description){
+    public Issues(Date date, String title, String publisher, Integer seriesNumber, String description){
         this.publicationDate = date;
         this.issueTitle = title;
         this.publisher = publisher;

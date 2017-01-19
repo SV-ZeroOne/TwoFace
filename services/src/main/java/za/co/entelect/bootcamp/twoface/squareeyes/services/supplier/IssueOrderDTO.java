@@ -1,6 +1,5 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.services.supplier;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 
 public class IssueOrderDTO {
 

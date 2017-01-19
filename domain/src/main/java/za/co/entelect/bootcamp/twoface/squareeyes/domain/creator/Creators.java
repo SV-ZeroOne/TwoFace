@@ -1,6 +1,5 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.creator;
 
-import com.sun.istack.internal.Nullable;
 
 import javax.persistence.*;
 
@@ -9,27 +8,30 @@ import javax.persistence.*;
  */
 @Entity
 @Table
-public class Creator {
+public class Creators {
 
     @Id
     @GeneratedValue
-    @Column(unique=true, nullable = false)
+    @Column(name="CreatorID")
     private int creatorID;
 
-    @Column
+    @Column(name="Name")
     private String name;
-    @Column
+
+    @Column(name="CountryOfResidence")
     private String countryOfResidence;
-    @Column
+
+    @Column(name="TaxReferenceNumber")
     private String taxReference;
-    @Column
+
+    @Column(name="EmailAddress")
     private String emailAddress;
 
-    public Creator(){
+    public Creators(){
 
     }
 
-    public Creator(int creatorID, String name, String countryOfResidence, String taxReference, String emailAddress){
+    public Creators(int creatorID, String name, String countryOfResidence, String taxReference, String emailAddress){
         this.creatorID = creatorID;
         this.name = name;
         this.countryOfResidence = countryOfResidence;

@@ -1,10 +1,7 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by sean.vienings on 2017/01/14.
@@ -12,28 +9,29 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class Supplier{
+public class Suppliers {
 
     @Id
-    @Column(nullable = false)
-    private Integer supplierID;
+    @GeneratedValue
+    @Column(name="SupplierID")
+    private int supplierID;
 
-    @Column
+    @Column(name="Name")
     private String supplierName;
 
-    @Column
+    @Column(name="City")
     private String supplierCity;
 
-    @Column
+    @Column(name="ReferenceNumber")
     private String supplierReferenceNumber;
 
-    public Supplier(String supplierName, String supplierCity, String supplierReferenceNumber){
+    public Suppliers(String supplierName, String supplierCity, String supplierReferenceNumber){
         this.supplierName = supplierName;
         this.supplierCity = supplierCity;
         this.supplierReferenceNumber = supplierReferenceNumber;
     }
 
-    public Supplier()
+    public Suppliers()
     {
 
     }
