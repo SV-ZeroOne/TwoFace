@@ -22,18 +22,18 @@ public class Stock{
     @JoinColumn(name = "IssueID")
     private Issues issue;
 
-    @Column(name="Condition")
+    @Column(name="Condition", columnDefinition = "varchar(10)")
     private String condition;
 
     @Column(name="AvailableQty")
-    private int availableQty;
+    private short availableQty;
 
     @Column(name="Price")
     private BigDecimal price;
 
     public Stock(){
     }
-    public Stock(int stockReferenceID, Issues issue, String condition, int availableQty, BigDecimal price){
+    public Stock(int stockReferenceID, Issues issue, String condition, short availableQty, BigDecimal price){
         this.stockReferenceID = stockReferenceID;
         this.issue = issue;
         this.condition = condition;
@@ -62,10 +62,10 @@ public class Stock{
         this.condition = condition;
     }
 
-    public int getAvailableQty(){
+    public short getAvailableQty(){
         return this.availableQty;
     }
-    public void setAvailableQty(int availableQty){
+    public void setAvailableQty(short availableQty){
         this.availableQty = availableQty;
     }
 

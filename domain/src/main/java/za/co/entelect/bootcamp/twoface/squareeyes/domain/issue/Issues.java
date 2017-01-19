@@ -30,7 +30,7 @@ public class Issues{
     private String publisher;
 
     @Column(name="SeriesNumber")
-    private Integer seriesNumber;
+    private short seriesNumber;
 
     @Column(name="Description")
     private String description;
@@ -51,7 +51,7 @@ public class Issues{
 
     }
 
-    public Issues(Date date, String title, String publisher, Integer seriesNumber, String description){
+    public Issues(Date date, String title, String publisher, short seriesNumber, String description){
         this.publicationDate = date;
         this.issueTitle = title;
         this.publisher = publisher;
@@ -71,7 +71,7 @@ public class Issues{
         return publisher;
     }
 
-    public Integer getSeriesNumber() {
+    public short getSeriesNumber() {
         return seriesNumber;
     }
 
@@ -101,10 +101,8 @@ public class Issues{
         }else{return false;}
     }
 
-    public boolean setSeriesNumber(Integer seriesNumber) {
-        if((this.seriesNumber = seriesNumber)!=null) {
-            return true;
-        }else{return false;}
+    public void setSeriesNumber(short seriesNumber) {
+        this.seriesNumber = seriesNumber;
     }
 
     public boolean setDescription(String description) {

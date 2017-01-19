@@ -19,14 +19,14 @@ public class Orders {
     @Column(name="OrderID")
     private int orderID;
 
-    @Temporal(value = TemporalType.DATE)
+    @Temporal(value = TemporalType.TIMESTAMP)
     @Column(name="OrderDate")
     private Date orderDate;
 
     @Column(name="Total")
     private BigDecimal total;
 
-    @Column(name="ShipmentRef")
+    @Column(name="ShipmentRef", columnDefinition="char(10)")
     private String shipmentRef;
 
     @Temporal(value = TemporalType.DATE)
@@ -41,7 +41,7 @@ public class Orders {
     private Issues issue;
 
     @Column(name="QtyOrdered")
-    private Integer qty;
+    private short qty;
 
     @ManyToOne
     @JoinColumn(name = "SupplierID")
@@ -50,7 +50,7 @@ public class Orders {
     public Orders(){
     }
 
-    public Orders(Date orderDate, Integer qty, BigDecimal total, String shipmentRef, Date shipmentDate, String deliveryStatus, Issues issue, Suppliers suppliers){
+    public Orders(Date orderDate, short qty, BigDecimal total, String shipmentRef, Date shipmentDate, String deliveryStatus, Issues issue, Suppliers suppliers){
         this.orderDate = orderDate;
         this.qty = qty;
         this.total = total;
@@ -110,10 +110,10 @@ public class Orders {
         this.issue = issue;
     }
 
-    public Integer getQty(){
+    public short getQty(){
         return this.qty;
     }
-    public void setQty(Integer qty){
+    public void setQty(short qty){
         this.qty = qty;
     }
 

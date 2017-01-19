@@ -3,6 +3,7 @@ package za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issues;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -19,6 +20,7 @@ public class SupplierQuotes {
     private int quoteID;
 
     @ManyToOne
+    @JoinColumn(name = "IssueID")
     private Issues issue;
 
     @ManyToOne
@@ -26,7 +28,7 @@ public class SupplierQuotes {
     private Suppliers suppliers;
 
     @Column(name="Price")
-    private Double price;
+    private BigDecimal price;
 
     @Temporal(value = TemporalType.DATE)
     @Column(name="EffectiveDate")
@@ -36,7 +38,7 @@ public class SupplierQuotes {
 
     }
 
-    public SupplierQuotes(int QuoteID, Issues issue, Suppliers suppliers, Double price, Date effectiveDate){
+    public SupplierQuotes(int QuoteID, Issues issue, Suppliers suppliers, BigDecimal price, Date effectiveDate){
         this.quoteID = QuoteID;
         this.issue = issue;
         this.price = price;
@@ -65,11 +67,11 @@ public class SupplierQuotes {
 
     public void setSuppliers(Suppliers suppliers) {this.suppliers = suppliers;}
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

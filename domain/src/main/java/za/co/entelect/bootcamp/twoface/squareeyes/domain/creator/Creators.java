@@ -25,7 +25,7 @@ public class Creators {
     @Column(name="CountryOfResidence")
     private String countryOfResidence;
 
-    @Column(name="TaxReferenceNumber")
+    @Column(name="TaxReferenceNumber", columnDefinition="varbinary(512)")
     private String taxReference;
 
     @Column(name="EmailAddress")
