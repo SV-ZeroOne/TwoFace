@@ -40,7 +40,7 @@ public class TwoFaceTests {
     @Test
     public void creatorExists() {
         System.out.print(": Creator Exists...");
-        Creators cutCreator = new Creators(001, "name", "countryOfResidence", "taxReference", "emailAddress");
+        Creators cutCreator = new Creators("name", "countryOfResidence", "taxReference", "emailAddress");
         Assert.assertEquals("name",cutCreator.getName());
         System.out.print(" : test passed." + "\n");
     }
@@ -48,7 +48,7 @@ public class TwoFaceTests {
     @Test
     public void stockExists() {
         System.out.print(": Stock Exists...");
-        Stock cutStock = new Stock(01, new Issues(), "condition", (short)10, BigDecimal.ONE);
+        Stock cutStock = new Stock(new Issues(), "condition", (short)10, BigDecimal.ONE);
         Assert.assertEquals("condition",cutStock.getCondition());
         System.out.print(" : test passed." + "\n");
     }

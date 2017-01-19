@@ -31,7 +31,7 @@ public class Creators {
     @Column(name="EmailAddress")
     private String emailAddress;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.creators")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.creators", cascade=CascadeType.ALL)
     List<ComicCreators> comicCreators = new ArrayList<ComicCreators>();
 
 
@@ -48,7 +48,7 @@ public class Creators {
 
     }
 
-    public Creators(int creatorID, String name, String countryOfResidence, String taxReference, String emailAddress){
+    public Creators(String name, String countryOfResidence, String taxReference, String emailAddress){
         this.creatorID = creatorID;
         this.name = name;
         this.countryOfResidence = countryOfResidence;

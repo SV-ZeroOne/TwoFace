@@ -4,6 +4,7 @@ import za.co.entelect.bootcamp.twoface.squareeyes.domain.Entity;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.generic.Repository;
 
 import javax.persistence.*;
+import javax.transaction.Transaction;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -92,8 +93,10 @@ public abstract class RelationalRepository<T> implements Repository<T> {
     }
 
     public T create(T t) {
+        entityManager.getTransaction().begin();
         this.entityManager.persist(t);
         this.entityManager.flush();
+        entityManager.getTransaction().commit();
         return t;
     }
 

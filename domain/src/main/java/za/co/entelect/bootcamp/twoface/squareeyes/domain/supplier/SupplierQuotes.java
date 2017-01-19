@@ -19,11 +19,11 @@ public class SupplierQuotes {
     @Column(name="QuoteID")
     private int quoteID;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "IssueID")
     private Issues issue;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "SupplierID")
     private Suppliers suppliers;
 
@@ -38,8 +38,7 @@ public class SupplierQuotes {
 
     }
 
-    public SupplierQuotes(int QuoteID, Issues issue, Suppliers suppliers, BigDecimal price, Date effectiveDate){
-        this.quoteID = QuoteID;
+    public SupplierQuotes(Issues issue, Suppliers suppliers, BigDecimal price, Date effectiveDate){
         this.issue = issue;
         this.price = price;
         this.suppliers = suppliers;

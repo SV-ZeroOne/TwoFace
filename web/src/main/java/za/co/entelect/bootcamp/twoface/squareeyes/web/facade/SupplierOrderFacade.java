@@ -71,7 +71,7 @@ public class SupplierOrderFacade
         IssueOrderAdapter IOAdapter = (IssueOrderAdapter) ioFactory.createAdapter();
         supplierService.placeOrder(IOAdapter, suppliers.getSupplerReference(), orders.getQty());
 
-        ordersRepository.update(orders);
+        //ordersRepository.update(orders);
 
         SupplierPayments sp = new SupplierPayments();
         sp.setOrders(orders);

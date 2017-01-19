@@ -19,7 +19,7 @@ public class SupplierPayments {
     @Column(name="PaymentID")
     private Integer paymentID;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "OrderID")
     private Orders orders;
 

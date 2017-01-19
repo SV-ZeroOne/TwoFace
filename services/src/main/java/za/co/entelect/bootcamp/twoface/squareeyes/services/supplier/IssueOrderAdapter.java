@@ -21,7 +21,7 @@ public class IssueOrderAdapter extends IssueOrderDTO implements AbstractAdapter{
     }
 
     public String getSeriesNumber() {
-        return issue.getSeriesNumber().toString();
+        return String.valueOf(issue.getSeriesNumber());
     }
 
     public int getQuantity() {

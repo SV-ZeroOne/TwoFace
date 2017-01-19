@@ -46,6 +46,10 @@ public class Issues{
         this.issues = issues;
     }
 
+    public void addIssue(ComicCreators comicCreators){
+        issues.add(comicCreators);
+    }
+
 
     public Issues(){
 

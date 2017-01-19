@@ -18,8 +18,8 @@ public class Stock{
     @Column(name="StockReferenceID")
     private int stockReferenceID;
 
-    @ManyToOne
-    @JoinColumn(name = "IssueID")
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "IssueID", referencedColumnName = "IssueID")
     private Issues issue;
 
     @Column(name="Condition", columnDefinition = "varchar(10)")
@@ -33,7 +33,7 @@ public class Stock{
 
     public Stock(){
     }
-    public Stock(int stockReferenceID, Issues issue, String condition, short availableQty, BigDecimal price){
+    public Stock(Issues issue, String condition, short availableQty, BigDecimal price){
         this.stockReferenceID = stockReferenceID;
         this.issue = issue;
         this.condition = condition;

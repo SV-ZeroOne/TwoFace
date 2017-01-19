@@ -36,14 +36,14 @@ public class Orders {
     @Column(name="DeliveryStatus")
     private String deliveryStatus;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "IssueID")
     private Issues issue;
 
     @Column(name="QtyOrdered")
     private short qty;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "SupplierID")
     private Suppliers suppliers;
 
