@@ -1,7 +1,11 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.creator;
 
 
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issues;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mpho.mahase on 2017/01/14.
@@ -26,6 +30,19 @@ public class Creators {
 
     @Column(name="EmailAddress")
     private String emailAddress;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.creators")
+    List<ComicCreators> issues = new ArrayList<ComicCreators>();
+
+
+    public List<ComicCreators> getIssues() {
+        return issues;
+    }
+
+    public void setIssues(List<ComicCreators> issues) {
+        this.issues = issues;
+    }
+
 
     public Creators(){
 

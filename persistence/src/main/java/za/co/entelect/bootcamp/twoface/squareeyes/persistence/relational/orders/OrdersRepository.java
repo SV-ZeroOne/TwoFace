@@ -1,4 +1,4 @@
-package za.co.entelect.bootcamp.twoface.squareeyes.persistence;
+package za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.orders;
 
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.order.Orders;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.generic.Repository;

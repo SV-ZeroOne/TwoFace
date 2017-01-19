@@ -1,6 +1,7 @@
-package za.co.entelect.bootcamp.twoface.squareeyes.persistence.generic;
+package za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational;
 
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.Entity;
+import za.co.entelect.bootcamp.twoface.squareeyes.persistence.generic.Repository;
 
 import javax.persistence.*;
 import java.lang.reflect.ParameterizedType;
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * Created by sean.vienings on 2017/01/16.
  */
-public abstract class RelationalRepository<T> implements Repository<T>{
+public abstract class RelationalRepository<T> implements Repository<T> {
 
     protected EntityManager entityManager;
     protected EntityManagerFactory entityManagerFactory;

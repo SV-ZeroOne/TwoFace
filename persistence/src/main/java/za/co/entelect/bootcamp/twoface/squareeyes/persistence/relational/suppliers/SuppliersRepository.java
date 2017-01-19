@@ -1,4 +1,4 @@
-package za.co.entelect.bootcamp.twoface.squareeyes.persistence;
+package za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers;
 
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Suppliers;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.generic.Repository;

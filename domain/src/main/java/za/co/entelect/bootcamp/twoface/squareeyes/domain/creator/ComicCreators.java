@@ -9,51 +9,70 @@ import javax.persistence.*;
  */
 @Entity
 @Table
-@IdClass(ComicCreatorsId.class)
+@AssociationOverrides({
+        @AssociationOverride(name = "pk.issues",
+                joinColumns = @JoinColumn(name = "IssueID")),
+        @AssociationOverride(name = "pk.creators",
+                joinColumns = @JoinColumn(name = "CreatorID")) })
 public class ComicCreators {
-
-    @Id
-    @Column(name="CreatorID")
-    private long creatorID;
-
-    @Id
-    @Column(name="IssueID")
-    private long issueID;
-
-    @Column(name="CreatorRole")
+    private ComicCreatorsId pk = new ComicCreatorsId();
     private String creatorRole;
 
-    @ManyToOne
-    @PrimaryKeyJoinColumn(name="CreatorID", referencedColumnName="CreatorID")
-    private Creators creator;
-
-    @ManyToOne
-    @PrimaryKeyJoinColumn(name="IssueID", referencedColumnName="IssueID")
-    private Issues issue;
-
-    public ComicCreators(){
-
+    public ComicCreators() {
     }
 
+    @EmbeddedId
+    public ComicCreatorsId getPk() {
+        return pk;
+    }
 
+    public void setPk(ComicCreatorsId pk) {
+        this.pk = pk;
+    }
+
+    @Transient
+    public Issues getIssues() {
+        return getPk().getIssues();
+    }
+
+    public void setIssues(Issues issue) {
+        getPk().setIssues(issue);
+    }
+
+    @Transient
+    public Creators getCreators() {
+        return getPk().getCreators();
+    }
+
+    public void setCreators(Creators category) {
+        getPk().setCreators(category);
+    }
+
+    @Column(name = "CreatorRole", nullable = false, length = 10)
     public String getCreatorRole() {
         return this.creatorRole;
     }
+
     public void setCreatorRole(String creatorRole) {
         this.creatorRole = creatorRole;
     }
 
-    public Issues getIssue(){
-        return this.issue;
-    }
-    public void setIssue(Issues issue){
-        this.issue = issue;
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        ComicCreators that = (ComicCreators) o;
+
+        if (getPk() != null ? !getPk().equals(that.getPk())
+                : that.getPk() != null)
+            return false;
+
+        return true;
     }
 
-    public Creators getCreators(){
-        return this.creator;
-    }
-    public void setCreators(Creators creator){
-        this.creator = creator;
+    public int hashCode() {
+        return (getPk() != null ? getPk().hashCode() : 0);
     }
 }

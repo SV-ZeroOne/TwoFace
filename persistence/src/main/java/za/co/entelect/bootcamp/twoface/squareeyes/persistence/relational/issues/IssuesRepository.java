@@ -1,4 +1,4 @@
-package za.co.entelect.bootcamp.twoface.squareeyes.persistence;
+package za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues;
 
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issues;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.generic.Repository;

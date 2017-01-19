@@ -6,6 +6,7 @@
 
         <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.Creators</class>
         <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.ComicCreators</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.ComicCreatorsId</class>
         <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issues</class>
         <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.order.Orders</class>
         <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.stock.Stock</class>
