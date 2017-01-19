@@ -1,10 +1,11 @@
+
 package za.co.entelect.bootcamp.twoface.squareeyes.domain;
 
 import org.junit.*;
 import static org.junit.Assert.*;
 
 /**
- * Unit test for simple App.
+ * Unit test for simple Repository.
  */
 public class AppTest {
 
@@ -14,7 +15,12 @@ public class AppTest {
 
     @Test
     public void givenRandValueWhenConvertedToDollarExpectCorrectConversion() {
+        System.out.print("Test");
+    }
 
+    @Test
+    public void givenRandValueWhenConvertedToDollarExpectCorrec() {
+        System.out.print("Test");
     }
 
 }
