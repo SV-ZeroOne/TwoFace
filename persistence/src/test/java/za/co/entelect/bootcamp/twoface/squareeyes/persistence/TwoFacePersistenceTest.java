@@ -2,6 +2,7 @@ package za.co.entelect.bootcamp.twoface.squareeyes.persistence;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.order.Order;
@@ -47,6 +48,26 @@ public class TwoFacePersistenceTest {
         Supplier tempSuppliers = singleSupplierRepository.find(2);
         Order tempOrder = singleOrderRepository.find(16);
         Assert.assertEquals(tempSuppliers.getSupplierID(),tempOrder.getSupplier().getSupplierID());
+        System.out.print(" : test passed." + "\n");
+    }
+
+    @Ignore
+    @Test
+    public void addingIssueElement() {
+        System.out.println(": Adding issue");
+        Issue tempIssue = new Issue(new Date(),"title", "publisher", (short) 7, "description");
+        Issue testIssue = singleIssueRepository.create(tempIssue);
+        System.out.print(testIssue.getIssueID());
+        Assert.assertEquals(tempIssue.getDescription(),testIssue.getDescription());
+        System.out.print(" : test passed." + "\n");
+    }
+
+    @Test
+    public void removingIssueElement() {
+        System.out.println(": Removing issue");
+        Issue tempIssue = singleIssueRepository.find(24705);
+        System.out.print(tempIssue.getIssueID());
+        singleIssueRepository.delete(tempIssue);
         System.out.print(" : test passed." + "\n");
     }
 

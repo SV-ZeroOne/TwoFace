@@ -40,7 +40,7 @@ public class TwoFaceTests {
     @Test
     public void creatorExists() {
         System.out.print(": Creator Exists...");
-        Creator cutCreator = new Creator("name", "countryOfResidence", "taxReference", "emailAddress");
+        Creator cutCreator = new Creator( "name", "countryOfResidence", "taxReference", "emailAddress");
         Assert.assertEquals("name",cutCreator.getName());
         System.out.print(" : test passed." + "\n");
     }
@@ -56,8 +56,8 @@ public class TwoFaceTests {
     @Test
     public void supplierExists() {
         System.out.print(": Supplier Exists...");
-        Supplier cutSupplier = new Supplier("supplierName", "supplierCity", "supplierReferenceNumber");
-        Assert.assertEquals("supplierReferenceNumber", cutSupplier.getSupplierReferenceNumber());
+        Supplier cutSuppliers = new Supplier("supplierName", "supplierCity", "supplierReferenceNumber");
+        Assert.assertEquals("supplierReferenceNumber",cutSuppliers.getSupplierReferenceNumber());
         System.out.print(" : test passed." + "\n");
     }
 
@@ -82,8 +82,8 @@ public class TwoFaceTests {
     public void ordersIssuesRelationshipMapping() {
         System.out.print(": Issue & Order mapping");
         Issue tempIssue =  new Issue(new Date(), "title","publisher",(short)001,"description");
-        Supplier tempSupplier = new Supplier("supplierName", "supplierCity", "supplierReferenceNumber");
-        Order cutOrder = new Order(new Date(), (short)5, BigDecimal.valueOf(10), "shipmentRef",new Date(), "deliveryStatus",tempIssue, tempSupplier);
+        Supplier tempSuppliers = new Supplier("supplierName", "supplierCity", "supplierReferenceNumber");
+        Order cutOrder = new Order(new Date(), (short)5, BigDecimal.valueOf(10), "shipmentRef",new Date(), "deliveryStatus",tempIssue,tempSuppliers);
         Assert.assertEquals(tempIssue.getIssueID(),cutOrder.getIssue().getIssueID());
         System.out.print(" : test passed." + "\n");
     }
@@ -92,9 +92,9 @@ public class TwoFaceTests {
     public void ordersSuppliersRelationshipMapping() {
         System.out.print(": Supplier & Order mapping");
         Issue tempIssue =  new Issue(new Date(), "title","publisher",(short)001,"description");
-        Supplier tempSupplier = new Supplier("supplierName", "supplierCity", "supplierReferenceNumber");
-        Order cutOrder = new Order(new Date(), (short)5, BigDecimal.valueOf(10), "shipmentRef",new Date(), "deliveryStatus",tempIssue, tempSupplier);
-        Assert.assertEquals(tempSupplier.getSupplierID(),cutOrder.getSupplier().getSupplierID());
+        Supplier tempSuppliers = new Supplier("supplierName", "supplierCity", "supplierReferenceNumber");
+        Order cutOrder = new Order(new Date(), (short)5, BigDecimal.valueOf(10), "shipmentRef",new Date(), "deliveryStatus",tempIssue,tempSuppliers);
+        Assert.assertEquals(tempSuppliers.getSupplierID(),cutOrder.getSupplier().getSupplierID());
         System.out.print(" : test passed." + "\n");
     }
 
