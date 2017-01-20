@@ -1,6 +1,8 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.persistence;
 
 import org.junit.*;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.ComicCreator;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.Creator;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.stock.Stock;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.creators.CreatorsRepository;
@@ -27,6 +29,7 @@ public class AppTest {
     }
 
     @Test
+    @Ignore
     public void persistNewStockWithItem() {
         StockRepository str = new StockRepositoryIMP();
 
@@ -37,6 +40,29 @@ public class AppTest {
         stock.setIssue(issue);
 
         str.create(stock);
+
+    }
+
+    @Test
+    @Ignore
+    public void persistNewCreatorThroughIssue() {
+        IssuesRepository ir = new IssuesRepositoryIMP();
+
+        Issue issue = new Issue(new Date(), "New 2",
+                "Quinton", (short)22, "The descripition");
+        Creator creator = new Creator("Quinton Weenink",
+                "South Africa",
+                "123",
+                "quinton@mail.com");
+
+        ComicCreator comicCreator = new ComicCreator();
+        comicCreator.setCreator(creator);
+        comicCreator.setIssue(issue);
+        comicCreator.setCreatorRole("Eats");
+
+        issue.addComicCreator(comicCreator);
+
+        ir.create(issue);
 
     }
 

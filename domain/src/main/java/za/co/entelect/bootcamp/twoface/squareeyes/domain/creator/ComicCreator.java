@@ -30,18 +30,18 @@ public class ComicCreator {
     }
 
     @Transient
-    public Issue getIssues() {
+    public Issue getIssue() {
         return getPk().getIssues();
     }
-    public void setIssues(Issue issue) {
+    public void setIssue(Issue issue) {
         getPk().setIssues(issue);
     }
 
     @Transient
-    public Creator getCreators() {
+    public Creator getCreator() {
         return getPk().getCreators();
     }
-    public void setCreators(Creator category) {
+    public void setCreator(Creator category) {
         getPk().setCreators(category);
     }
 
