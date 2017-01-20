@@ -33,16 +33,5 @@ public class AppTest {
 
     }
 
-    @Test
-    public void testSchedule()
-    {
-        try {
-            new OrderScheduler();
-            System.out.println("Schedule working");
-        } catch (SchedulerException e) {
-            System.out.println("Schedule not working");
-            e.printStackTrace();
-        }
-    }
 
 }

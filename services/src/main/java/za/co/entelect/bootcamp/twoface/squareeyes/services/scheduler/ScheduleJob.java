@@ -18,14 +18,14 @@ public class ScheduleJob implements Job{
 
 
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        System.out.println("SchedulJob executing");
+        //System.out.println("SchedulJob executing");
         OrdersRepository scheduleOrderRepository = new OrdersRepositoryIMP();
         StockRepository scheduleStockRepository = new StockRepositoryIMP();
 
         List<Order> orderList;
         orderList = scheduleOrderRepository.findAll();
         for(Order order : orderList){
-            if(order.getDeliveryStatus() == "Pending")
+            if(order.getDeliveryStatus().equals("Pending"))
             {
                 System.out.println("Found pending order");
                 System.out.println(order.getIssue().getIssueTitle());

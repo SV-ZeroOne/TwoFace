@@ -8,24 +8,27 @@ import org.quartz.impl.StdSchedulerFactory;
  */
 public class OrderScheduler {
 
-   public OrderScheduler() throws SchedulerException
-   {
-       JobDetail scheduleJob = JobBuilder.newJob(ScheduleJob.class)
-               .withIdentity("Order Schedule", "group1").build();
+  public static void main(String[] args) throws Exception
+  {
+
+          JobDetail scheduleJob = JobBuilder.newJob(ScheduleJob.class)
+                  .withIdentity("Order Schedule", "group1").build();
 
 
-       Trigger trigger = TriggerBuilder
-               .newTrigger()
-               .withIdentity("Trigger","trigger")
-               .withSchedule(CronScheduleBuilder.cronSchedule("* * * * * ?"))
-               .build();
+          Trigger trigger = TriggerBuilder
+                  .newTrigger()
+                  .withIdentity("Trigger", "trigger")
+                  .withSchedule(CronScheduleBuilder.cronSchedule("0 * * * * ?"))
+                  .build();
 
-       Scheduler scheduler = new StdSchedulerFactory().getScheduler();
-       System.out.println("schedule starting");
-       scheduler.start();
+         // Thread.sleep(90L * 1000L);
 
-       scheduler.scheduleJob(scheduleJob,trigger);
-       System.out.println("schedule ending");
-   }
+          Scheduler scheduler = new StdSchedulerFactory().getScheduler();
+          System.out.println("schedule starting");
+          scheduler.start();
+
+          scheduler.scheduleJob(scheduleJob, trigger);
+
+  }
 
 }
