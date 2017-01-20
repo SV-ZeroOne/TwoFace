@@ -1,4 +1,4 @@
-package za.co.entelect.bootcamp.twoface.squareeyes.web.facade;
+package za.co.entelect.bootcamp.twoface.squareeyes.logging;
 
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.order.Order;
@@ -15,7 +15,6 @@ import za.co.entelect.bootcamp.twoface.squareeyes.services.supplier.IssueOrderAd
 import za.co.entelect.bootcamp.twoface.squareeyes.services.supplier.SupplierService;
 
 import java.util.Date;
-import java.util.List;
 
 public class SupplierOrderFacade
 {
@@ -43,7 +42,7 @@ public class SupplierOrderFacade
     }
 
     public void placeOrder(Integer issueID, Integer qty){
-        Issue issueOrder = (Issue) issuesRepository.find(issueID);
+        Issue issueOrder = issuesRepository.find(issueID);
         if(issueOrder == null)
             return;
 

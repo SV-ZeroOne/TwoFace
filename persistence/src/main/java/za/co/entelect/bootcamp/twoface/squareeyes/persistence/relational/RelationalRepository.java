@@ -1,5 +1,7 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.generic.Repository;
 
 import javax.persistence.*;
@@ -11,6 +13,8 @@ import java.util.List;
  * Created by sean.vienings on 2017/01/16.
  */
 public abstract class RelationalRepository<T> implements Repository<T> {
+
+    private static final Logger logger = LoggerFactory.getLogger(RelationalRepository.class);
 
     protected EntityManager entityManager;
     protected EntityManagerFactory entityManagerFactory;

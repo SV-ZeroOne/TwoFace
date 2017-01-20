@@ -1,4 +1,4 @@
-package za.co.entelect.bootcamp.twoface.squareeyes.web;
+package za.co.entelect.bootcamp.twoface.squareeyes.logging;
 
 import org.junit.*;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.IssuesRepository;
@@ -7,7 +7,6 @@ import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.orders.
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.orders.OrdersRepositoryIMP;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.SuppliersRepository;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.SuppliersRepositoryIMP;
-import za.co.entelect.bootcamp.twoface.squareeyes.web.facade.SupplierOrderFacade;
 
 /**
  * Unit test for simple Repository.
@@ -27,7 +26,7 @@ public class AppTest {
 
 
         SupplierOrderFacade sof = new SupplierOrderFacade(new MockPaymentService(), new MockSupplierService(), ir, or, sr);
-        sof.placeOrder(30, 2);
+        //sof.placeOrder(30, 2);
     }
 
     @After
