@@ -23,7 +23,6 @@ public class Creator {
     public Creator(){}
 
     public Creator(String name, String countryOfResidence, String taxReference, String emailAddress){
-        this.comicCreators = comicCreators;
         this.name = name;
         this.countryOfResidence = countryOfResidence;
         this.taxReference = taxReference;

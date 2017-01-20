@@ -27,15 +27,13 @@ public class Order {
 
     public Order(){}
 
-    public Order(Date orderDate, short qty, BigDecimal total, String shipmentRef, Date shipmentDate, String deliveryStatus, Issue issue, Supplier supplier){
+    public Order(Date orderDate, short qty, BigDecimal total, String shipmentRef, Date shipmentDate, String deliveryStatus){
         this.orderDate = orderDate;
         this.qty = qty;
         this.total = total;
         this.shipmentRef = shipmentRef;
         this.shipmentDate = shipmentDate;
         this.deliveryStatus = deliveryStatus;
-        this.issue = issue;
-        this.supplier = supplier;
     }
 
     @ManyToOne(cascade=CascadeType.ALL)

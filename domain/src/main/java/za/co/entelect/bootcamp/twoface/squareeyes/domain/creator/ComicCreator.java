@@ -21,6 +21,10 @@ public class ComicCreator {
 
     public ComicCreator() {}
 
+    public ComicCreator(String creatorRole) {
+        this.creatorRole = creatorRole;
+    }
+
     @EmbeddedId
     public ComicCreatorsId getPk() {
         return pk;
