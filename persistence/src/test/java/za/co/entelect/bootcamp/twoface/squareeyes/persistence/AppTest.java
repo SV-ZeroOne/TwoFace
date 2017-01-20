@@ -1,6 +1,5 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.persistence;
 
-import jdk.management.resource.SimpleMeter;
 import org.junit.*;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.ComicCreator;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.Creator;
@@ -10,12 +9,8 @@ import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.creator
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.creators.CreatorsRepositoryIMP;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.IssuesRepository;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.IssuesRepositoryIMP;
-import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.orders.OrdersRepository;
-import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.orders.OrdersRepositoryIMP;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.stock.StockRepository;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.stock.StockRepositoryIMP;
-import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.SuppliersRepository;
-import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.SuppliersRepositoryIMP;
 
 import java.math.BigDecimal;
 import java.util.Date;
