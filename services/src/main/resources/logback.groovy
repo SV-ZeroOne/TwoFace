@@ -17,4 +17,4 @@ appender("FILE", FileAppender){
         pattern = "%level %logger - %msg%n"
     }
 }
-root(INFO, ["FILE"])
+root(INFO, ["FILE", "STDOUT"])
