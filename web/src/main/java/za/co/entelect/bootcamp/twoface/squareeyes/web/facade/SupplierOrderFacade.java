@@ -1,9 +1,9 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.web.facade;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issues;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.order.Orders;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Suppliers;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.SupplierPayments;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.order.Order;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.SupplierPayment;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.IssuesRepository;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.orders.OrdersRepository;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.SuppliersRepository;
@@ -43,42 +43,42 @@ public class SupplierOrderFacade
     }
 
     public void placeOrder(Integer issueID, Integer qty){
-        Issues issueOrder = (Issues) issuesRepository.find(issueID);
+        Issue issueOrder = (Issue) issuesRepository.find(issueID);
         if(issueOrder == null)
             return;
 
-        List<Orders> ordersList = ordersRepository.findAll();
-        Orders orders = null;
-        for(Orders o: ordersList){
+        List<Order> orderList = ordersRepository.findAll();
+        Order order = null;
+        for(Order o: orderList){
             if(o.getIssue() == issueOrder){
-                orders = o;
+                order = o;
                 break;
             }
         }
 
-        List<Suppliers> suppliersList = suppliersRepository.findAll();
-        Suppliers suppliers = null;
-        for(Suppliers s: suppliersList){
-            if(orders.getSuppliers() == suppliers){
-                suppliers = s;
+        List<Supplier> supplierList = suppliersRepository.findAll();
+        Supplier supplier = null;
+        for(Supplier s: supplierList){
+            if(order.getSupplier() == supplier){
+                supplier = s;
                 break;
             }
         }
 
         //move this
-        ioFactory = new ConcreteIssueOrderAdapterFactory(issueOrder, orders);
+        ioFactory = new ConcreteIssueOrderAdapterFactory(issueOrder, order);
 
         IssueOrderAdapter IOAdapter = (IssueOrderAdapter) ioFactory.createAdapter();
-        supplierService.placeOrder(IOAdapter, suppliers.getSupplerReference(), orders.getQty());
+        supplierService.placeOrder(IOAdapter, supplier.getSupplerReference(), order.getQty());
 
-        //ordersRepository.update(orders);
+        //ordersRepository.update(order);
 
-        SupplierPayments sp = new SupplierPayments();
-        sp.setOrders(orders);
+        SupplierPayment sp = new SupplierPayment();
+        sp.setOrder(order);
         sp.setProcessedDate(new Date());
-        sp.setTotal(orders.getTotal());
+        sp.setTotal(order.getTotal());
 
-        spFactory = new ConcreteSupplierPaymentAdapterFactory(suppliers, sp);
+        spFactory = new ConcreteSupplierPaymentAdapterFactory(supplier, sp);
 
         SupplierPaymentAdapter SPAdapter = (SupplierPaymentAdapter) spFactory.createAdapter();
         paymentService.makePayment(SPAdapter);

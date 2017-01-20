@@ -1,7 +1,7 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.services.factory;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Suppliers;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.SupplierPayments;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.SupplierPayment;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.AbstractAdapter;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.payment.SupplierPaymentAdapter;
 
@@ -9,17 +9,17 @@ import za.co.entelect.bootcamp.twoface.squareeyes.services.payment.SupplierPayme
  * Created by quinton.weenink on 2017/01/16.
  */
 public class ConcreteSupplierPaymentAdapterFactory {
-    Suppliers suppliers;
-    SupplierPayments supplierPayments;
+    Supplier supplier;
+    SupplierPayment supplierPayment;
 
-    public ConcreteSupplierPaymentAdapterFactory(Suppliers suppliers, SupplierPayments supplierPayments)
+    public ConcreteSupplierPaymentAdapterFactory(Supplier supplier, SupplierPayment supplierPayment)
     {
-        this.suppliers = suppliers;
-        this.supplierPayments = supplierPayments;
+        this.supplier = supplier;
+        this.supplierPayment = supplierPayment;
     }
 
     public AbstractAdapter createAdapter()
     {
-        return new SupplierPaymentAdapter(suppliers, supplierPayments);
+        return new SupplierPaymentAdapter(supplier, supplierPayment);
     }
 }

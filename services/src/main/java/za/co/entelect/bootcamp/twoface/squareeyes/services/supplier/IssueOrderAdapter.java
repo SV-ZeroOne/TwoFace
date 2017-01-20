@@ -1,23 +1,23 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.services.supplier;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issues;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.order.Orders;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.order.Order;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.AbstractAdapter;
 
 /**
  * Created by mpho.mahase on 2017/01/16.
  */
 public class IssueOrderAdapter extends IssueOrderDTO implements AbstractAdapter{
-    private Issues issue;
-    private Orders orders;
+    private Issue issue;
+    private Order order;
 
-    public IssueOrderAdapter(Issues issue, Orders orders){
+    public IssueOrderAdapter(Issue issue, Order order){
         this.issue = issue;
-        this.orders = orders;
+        this.order = order;
     }
 
     public int getIssueID() {
-        return issue.getID();
+        return issue.getIssueID();
     }
 
     public String getSeriesNumber() {
@@ -25,6 +25,6 @@ public class IssueOrderAdapter extends IssueOrderDTO implements AbstractAdapter{
     }
 
     public int getQuantity() {
-        return orders.getQty();
+        return order.getQty();
     }
 }

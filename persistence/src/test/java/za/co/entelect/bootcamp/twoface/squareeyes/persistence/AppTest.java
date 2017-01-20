@@ -1,10 +1,7 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.persistence;
 
 import org.junit.*;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.ComicCreators;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.Creators;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issues;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.order.Orders;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.stock.Stock;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.creators.CreatorsRepository;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.creators.CreatorsRepositoryIMP;
@@ -19,7 +16,6 @@ import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.supplie
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Unit test for simple Repository.
@@ -31,33 +27,17 @@ public class AppTest {
     }
 
     @Test
-    public void persistNewItemWithNewCustomer() {
-        IssuesRepository ir = new IssuesRepositoryIMP();
-        SuppliersRepository sr = new SuppliersRepositoryIMP();
-        OrdersRepository or = new OrdersRepositoryIMP();
-        CreatorsRepository cr = new CreatorsRepositoryIMP();
+    public void persistNewStockWithItem() {
         StockRepository str = new StockRepositoryIMP();
 
-        Issues issue = new Issues(new Date(), "This is new",
-                "Yo Mama", (short)22, "The descripition");
-        ir.create(issue);
+        Issue issue = new Issue(new Date(), "New 2",
+                "Quinton", (short)22, "The descripition");
 
-        Stock stock = new Stock(issue, "Good", (short)2, new BigDecimal(3.00));
-
-        //ComicCreators comicCreators = new ComicCreators();
-        //comicCreators.setCreatorRole("The best");
-        //comicCreators.setIssues(issue);
-        //comicCreators.setCreators(new Creators("Quinton", "South Africa", "112233", "quinton@mail.com"));
-
+        Stock stock = new Stock("Good", (short)2, new BigDecimal(3.00));
+        stock.setIssue(issue);
 
         str.create(stock);
 
-        //issue.addIssue(comicCreators);
-
-
-
-
-        ir.create(issue);
     }
 
 }

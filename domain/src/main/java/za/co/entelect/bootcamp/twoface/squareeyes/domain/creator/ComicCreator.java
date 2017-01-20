@@ -1,6 +1,6 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.creator;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issues;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 
 import javax.persistence.*;
 
@@ -8,43 +8,40 @@ import javax.persistence.*;
  * Created by mpho.mahase on 2017/01/14.
  */
 @Entity
-@Table
+@Table(name="ComicCreators")
 @AssociationOverrides({
         @AssociationOverride(name = "pk.issues",
                 joinColumns = @JoinColumn(name = "IssueID")),
         @AssociationOverride(name = "pk.creators",
                 joinColumns = @JoinColumn(name = "CreatorID")) })
-public class ComicCreators {
+public class ComicCreator {
+
     private ComicCreatorsId pk = new ComicCreatorsId();
     private String creatorRole;
 
-    public ComicCreators() {
-    }
+    public ComicCreator() {}
 
     @EmbeddedId
     public ComicCreatorsId getPk() {
         return pk;
     }
-
     public void setPk(ComicCreatorsId pk) {
         this.pk = pk;
     }
 
     @Transient
-    public Issues getIssues() {
+    public Issue getIssues() {
         return getPk().getIssues();
     }
-
-    public void setIssues(Issues issue) {
+    public void setIssues(Issue issue) {
         getPk().setIssues(issue);
     }
 
     @Transient
-    public Creators getCreators() {
+    public Creator getCreators() {
         return getPk().getCreators();
     }
-
-    public void setCreators(Creators category) {
+    public void setCreators(Creator category) {
         getPk().setCreators(category);
     }
 
@@ -52,7 +49,6 @@ public class ComicCreators {
     public String getCreatorRole() {
         return this.creatorRole;
     }
-
     public void setCreatorRole(String creatorRole) {
         this.creatorRole = creatorRole;
     }
@@ -63,7 +59,7 @@ public class ComicCreators {
         if (o == null || getClass() != o.getClass())
             return false;
 
-        ComicCreators that = (ComicCreators) o;
+        ComicCreator that = (ComicCreator) o;
 
         if (getPk() != null ? !getPk().equals(that.getPk())
                 : that.getPk() != null)
@@ -71,7 +67,6 @@ public class ComicCreators {
 
         return true;
     }
-
     public int hashCode() {
         return (getPk() != null ? getPk().hashCode() : 0);
     }

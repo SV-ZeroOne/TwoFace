@@ -4,15 +4,15 @@
     <persistence-unit name="Ironman" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
-        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.Creators</class>
-        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.ComicCreators</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.Creator</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.ComicCreator</class>
         <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.ComicCreatorsId</class>
-        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issues</class>
-        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.order.Orders</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.order.Order</class>
         <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.stock.Stock</class>
-        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Suppliers</class>
-        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.SupplierPayments</class>
-        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.SupplierQuotes</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.SupplierPayment</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.SupplierQuote</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"></property>

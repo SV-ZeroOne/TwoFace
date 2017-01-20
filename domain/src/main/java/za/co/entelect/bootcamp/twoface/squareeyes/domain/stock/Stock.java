@@ -1,6 +1,6 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.stock;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issues;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -10,37 +10,36 @@ import java.math.BigDecimal;
  */
 
 @Entity
-@Table
+@Table(name="Stock")
 public class Stock{
 
-    @Id
-    @GeneratedValue
-    @Column(name="StockReferenceID")
+    private Issue issue;
+
     private int stockReferenceID;
-
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "IssueID", referencedColumnName = "IssueID")
-    private Issues issue;
-
-    @Column(name="Condition", columnDefinition = "varchar(10)")
     private String condition;
-
-    @Column(name="AvailableQty")
     private short availableQty;
-
-    @Column(name="Price")
     private BigDecimal price;
 
-    public Stock(){
-    }
-    public Stock(Issues issue, String condition, short availableQty, BigDecimal price){
-        this.stockReferenceID = stockReferenceID;
-        this.issue = issue;
+    public Stock(){}
+
+    public Stock(String condition, short availableQty, BigDecimal price){
         this.condition = condition;
         this.availableQty = availableQty;
         this.price = price;
     }
 
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "IssueID", referencedColumnName = "IssueID")
+    public Issue getIssue(){
+        return this.issue;
+    }
+    public void setIssue(Issue issue){
+        this.issue = issue;
+    }
+
+    @Id
+    @GeneratedValue
+    @Column(name="StockReferenceID")
     public int getStockReferenceID(){
         return this.stockReferenceID;
     }
@@ -48,13 +47,7 @@ public class Stock{
         this.stockReferenceID = stockReferenceID;
     }
 
-    public Issues getIssue(){
-        return this.issue;
-    }
-    public void setIssue(Issues issue){
-        this.issue = issue;
-    }
-
+    @Column(name="Condition", columnDefinition = "varchar(10)")
     public String getCondition(){
         return this.condition;
     }
@@ -62,6 +55,7 @@ public class Stock{
         this.condition = condition;
     }
 
+    @Column(name="AvailableQty")
     public short getAvailableQty(){
         return this.availableQty;
     }
@@ -69,6 +63,7 @@ public class Stock{
         this.availableQty = availableQty;
     }
 
+    @Column(name="Price")
     public BigDecimal getPrice(){
         return this.price;
     }

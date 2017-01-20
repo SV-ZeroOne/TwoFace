@@ -1,7 +1,7 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.order;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issues;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Suppliers;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -11,46 +11,23 @@ import java.util.Date;
  * Created by quinton.weenink on 2017/01/15.
  */
 @Entity
-@Table
-public class Orders {
+@Table(name="Orders")
+public class Order {
 
-    @Id
-    @GeneratedValue
-    @Column(name="OrderID")
+    private Issue issue;
+    private Supplier supplier;
+
     private int orderID;
-
-    @Temporal(value = TemporalType.TIMESTAMP)
-    @Column(name="OrderDate")
     private Date orderDate;
-
-    @Column(name="Total")
     private BigDecimal total;
-
-    @Column(name="ShipmentRef", columnDefinition="char(10)")
     private String shipmentRef;
-
-    @Temporal(value = TemporalType.DATE)
-    @Column(name="ShipmentDate")
     private Date shipmentDate;
-
-    @Column(name="DeliveryStatus")
     private String deliveryStatus;
-
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "IssueID")
-    private Issues issue;
-
-    @Column(name="QtyOrdered")
     private short qty;
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "SupplierID")
-    private Suppliers suppliers;
+    public Order(){}
 
-    public Orders(){
-    }
-
-    public Orders(Date orderDate, short qty, BigDecimal total, String shipmentRef, Date shipmentDate, String deliveryStatus, Issues issue, Suppliers suppliers){
+    public Order(Date orderDate, short qty, BigDecimal total, String shipmentRef, Date shipmentDate, String deliveryStatus, Issue issue, Supplier supplier){
         this.orderDate = orderDate;
         this.qty = qty;
         this.total = total;
@@ -58,16 +35,39 @@ public class Orders {
         this.shipmentDate = shipmentDate;
         this.deliveryStatus = deliveryStatus;
         this.issue = issue;
-        this.suppliers = suppliers;
+        this.supplier = supplier;
     }
 
-    public Integer getID(){
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "IssueID")
+    public Issue getIssue(){
+        return this.issue;
+    }
+    public void setIssue(Issue issue){
+        this.issue = issue;
+    }
+
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name = "SupplierID")
+    public Supplier getSupplier(){
+        return this.supplier;
+    }
+    public void setSupplier(Supplier supplier){
+        this.supplier = supplier;
+    }
+
+    @Id
+    @GeneratedValue
+    @Column(name="OrderID")
+    public int getOrderID(){
         return this.orderID;
     }
     public void setOrderID(int orderID){
         this.orderID = orderID;
     }
 
+    @Temporal(value = TemporalType.TIMESTAMP)
+    @Column(name="OrderDate")
     public Date getOrderDate(){
         return this.orderDate;
     }
@@ -75,6 +75,7 @@ public class Orders {
         this.orderDate = orderDate;
     }
 
+    @Column(name="Total")
     public BigDecimal getTotal(){
         return this.total;
     }
@@ -82,6 +83,7 @@ public class Orders {
         this.total = total;
     }
 
+    @Column(name="ShipmentRef", columnDefinition="char(10)")
     public String getShipmentRef(){
         return this.shipmentRef;
     }
@@ -89,6 +91,8 @@ public class Orders {
         this.shipmentRef = shipmentRef;
     }
 
+    @Temporal(value = TemporalType.DATE)
+    @Column(name="ShipmentDate")
     public Date getShipmentDate(){
         return this.shipmentDate;
     }
@@ -96,6 +100,7 @@ public class Orders {
         this.shipmentDate = shipmentDate;
     }
 
+    @Column(name="DeliveryStatus")
     public String getDeliveryStatus(){
         return this.deliveryStatus;
     }
@@ -103,24 +108,11 @@ public class Orders {
         this.deliveryStatus = deliveryStatus;
     }
 
-    public Issues getIssue(){
-        return this.issue;
-    }
-    public void setIssue(Issues issue){
-        this.issue = issue;
-    }
-
+    @Column(name="QtyOrdered")
     public short getQty(){
         return this.qty;
     }
     public void setQty(short qty){
         this.qty = qty;
-    }
-
-    public Suppliers getSuppliers(){
-        return this.suppliers;
-    }
-    public void setSuppliers(Suppliers suppliers){
-        this.suppliers = suppliers;
     }
 }

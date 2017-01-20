@@ -1,6 +1,6 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.creator;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issues;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
@@ -12,24 +12,24 @@ import java.io.Serializable;
 @Embeddable
 public class ComicCreatorsId implements Serializable {
 
-    private Issues issue;
-    private Creators creator;
+    private Issue issue;
+    private Creator creator;
 
     @ManyToOne
-    public Issues getIssues() {
+    public Issue getIssues() {
         return issue;
     }
 
-    public void setIssues(Issues issue) {
+    public void setIssues(Issue issue) {
         this.issue = issue;
     }
 
     @ManyToOne
-    public Creators getCreators() {
+    public Creator getCreators() {
         return creator;
     }
 
-    public void setCreators(Creators creator) {
+    public void setCreators(Creator creator) {
         this.creator = creator;
     }
 

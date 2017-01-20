@@ -1,7 +1,7 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.services;
 
 import org.junit.*;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issues;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.IssuesRepository;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.IssuesRepositoryIMP;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.orders.OrdersRepository;
@@ -24,7 +24,7 @@ public class AppTest {
         SuppliersRepository sr = new SuppliersRepositoryIMP();
         OrdersRepository or = new OrdersRepositoryIMP();
 
-        Issues issue = ir.find(30);
+        Issue issue = ir.find(30);
 
     }
 
