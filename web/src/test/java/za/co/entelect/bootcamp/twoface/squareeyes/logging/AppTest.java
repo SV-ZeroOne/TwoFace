@@ -26,7 +26,7 @@ public class AppTest {
 
 
         SupplierOrderFacade sof = new SupplierOrderFacade(new MockPaymentService(), new MockSupplierService(), ir, or, sr);
-        sof.placeOrder(30, 2);
+        //sof.placeOrder(30, 2);
     }
 
     @After
