@@ -42,7 +42,7 @@ public class SupplierOrderFacade
     }
 
     public void placeOrder(Integer issueID, Integer qty){
-        Issue issueOrder = (Issue) issuesRepository.find(issueID);
+        Issue issueOrder = issuesRepository.find(issueID);
         if(issueOrder == null)
             return;
 

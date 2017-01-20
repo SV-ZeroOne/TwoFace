@@ -13,7 +13,6 @@
         <module>web</module>
         <module>persistence</module>
         <module>services</module>
-        <module>logging</module>
     </modules>
 
     <url>http://maven.apache.org</url>
@@ -23,11 +22,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.12</version>
-        </dependency>
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
