@@ -15,6 +15,7 @@ public interface Repository<T>
     List<T> search(String property, String criteria, int pageSize, int pageNumber);
     long count();
     void delete(Object id);
+
     T create(T t);
     T update(T t);
 }

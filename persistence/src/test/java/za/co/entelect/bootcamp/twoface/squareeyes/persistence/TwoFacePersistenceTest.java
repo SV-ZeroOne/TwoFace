@@ -50,4 +50,23 @@ public class TwoFacePersistenceTest {
         System.out.print(" : test passed." + "\n");
     }
 
+    @Test
+    public void addingIssueElement() {
+        System.out.println(": Adding issue");
+        Issues tempIssue = new Issues(new Date(),"title", "publisher", (short) 7, "description");
+        Issues testIssue = singleIssueRepository.create(tempIssue);
+        System.out.print(testIssue.getID());
+        Assert.assertEquals(tempIssue.getDescription(),testIssue.getDescription());
+        System.out.print(" : test passed." + "\n");
+    }
+
+    @Test
+    public void removingIssueElement() {
+        System.out.println(": Removing issue");
+        Issues tempIssue = singleIssueRepository.find(24705);
+        System.out.print(tempIssue.getID());
+        singleIssueRepository.delete(tempIssue);
+        System.out.print(" : test passed." + "\n");
+    }
+
 }

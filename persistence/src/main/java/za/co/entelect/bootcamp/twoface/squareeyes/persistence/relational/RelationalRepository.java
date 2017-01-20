@@ -1,10 +1,8 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.Entity;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.generic.Repository;
 
 import javax.persistence.*;
-import javax.transaction.Transaction;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -88,15 +86,21 @@ public abstract class RelationalRepository<T> implements Repository<T> {
         return (Long)query.getSingleResult();
     }
 
+    @PersistenceContext
     public void delete(Object id) {
-        this.entityManager.remove(this.entityManager.getReference(type, id));
+        entityManager.getTransaction().begin();
+        entityManager.remove(this.entityManager.getReference(type, id));
+        entityManager.getTransaction().commit();
     }
 
+    @PersistenceContext
     public T create(T t) {
         entityManager.getTransaction().begin();
-        this.entityManager.persist(t);
-        this.entityManager.flush();
+        entityManager.persist(t);
         entityManager.getTransaction().commit();
+        //this.entityManager.flush();
+        entityManager.close();
+        System.out.println("Issue added");
         return t;
     }
 
