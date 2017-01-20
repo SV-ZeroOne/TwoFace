@@ -47,29 +47,15 @@ public class SupplierOrderFacade
         if(issueOrder == null)
             return;
 
-        List<Order> orderList = ordersRepository.findAll();
-        Order order = null;
-        for(Order o: orderList){
-            if(o.getIssue() == issueOrder){
-                order = o;
-                break;
-            }
-        }
+        Order order = ordersRepository.search("IssueID", issueID).get(0);
 
-        List<Supplier> supplierList = suppliersRepository.findAll();
-        Supplier supplier = null;
-        for(Supplier s: supplierList){
-            if(order.getSupplier() == supplier){
-                supplier = s;
-                break;
-            }
-        }
+        Supplier supplier = order.getSupplier();
 
         //move this
         ioFactory = new ConcreteIssueOrderAdapterFactory(issueOrder, order);
 
         IssueOrderAdapter IOAdapter = (IssueOrderAdapter) ioFactory.createAdapter();
-        supplierService.placeOrder(IOAdapter, supplier.getSupplerReference(), order.getQty());
+        supplierService.placeOrder(IOAdapter, supplier.getSupplierReferenceNumber(), order.getQty());
 
         //ordersRepository.update(order);
 

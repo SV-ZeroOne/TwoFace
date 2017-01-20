@@ -40,7 +40,7 @@ public class TwoFaceTests {
     @Test
     public void creatorExists() {
         System.out.print(": Creator Exists...");
-        Creator cutCreator = new Creator( "name", "countryOfResidence", "taxReference", "emailAddress");
+        Creator cutCreator = new Creator( "name", "countryOfResidence", "taxReference".getBytes(), "emailAddress");
         Assert.assertEquals("name",cutCreator.getName());
         System.out.print(" : test passed." + "\n");
     }
@@ -64,7 +64,7 @@ public class TwoFaceTests {
     @Test
     public void orderExists() {
         System.out.print(": Order Exists...");
-        Order cutOrder = new Order(new Date(), (short)5, BigDecimal.valueOf(10), "shipmentRef",new Date(), "deliveryStatus",new Issue(),new Supplier());
+        Order cutOrder = new Order(new Date(), (short)5, BigDecimal.valueOf(10), "shipmentRef",new Date(), "deliveryStatus");
         Assert.assertEquals("shipmentRef",cutOrder.getShipmentRef());
         System.out.print(" : test passed." + "\n");
     }
@@ -83,7 +83,9 @@ public class TwoFaceTests {
         System.out.print(": Issue & Order mapping");
         Issue tempIssue =  new Issue(new Date(), "title","publisher",(short)001,"description");
         Supplier tempSuppliers = new Supplier("supplierName", "supplierCity", "supplierReferenceNumber");
-        Order cutOrder = new Order(new Date(), (short)5, BigDecimal.valueOf(10), "shipmentRef",new Date(), "deliveryStatus",tempIssue,tempSuppliers);
+        Order cutOrder = new Order(new Date(), (short)5, BigDecimal.valueOf(10), "shipmentRef",new Date(), "deliveryStatus");
+        cutOrder.setIssue(tempIssue);
+        cutOrder.setSupplier(tempSuppliers);
         Assert.assertEquals(tempIssue.getIssueID(),cutOrder.getIssue().getIssueID());
         System.out.print(" : test passed." + "\n");
     }
@@ -93,7 +95,9 @@ public class TwoFaceTests {
         System.out.print(": Supplier & Order mapping");
         Issue tempIssue =  new Issue(new Date(), "title","publisher",(short)001,"description");
         Supplier tempSuppliers = new Supplier("supplierName", "supplierCity", "supplierReferenceNumber");
-        Order cutOrder = new Order(new Date(), (short)5, BigDecimal.valueOf(10), "shipmentRef",new Date(), "deliveryStatus",tempIssue,tempSuppliers);
+        Order cutOrder = new Order(new Date(), (short)5, BigDecimal.valueOf(10), "shipmentRef",new Date(), "deliveryStatus");
+        cutOrder.setIssue(tempIssue);
+        cutOrder.setSupplier(tempSuppliers);
         Assert.assertEquals(tempSuppliers.getSupplierID(),cutOrder.getSupplier().getSupplierID());
         System.out.print(" : test passed." + "\n");
     }

@@ -1,5 +1,6 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.persistence;
 
+import jdk.management.resource.SimpleMeter;
 import org.junit.*;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.ComicCreator;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.Creator;
@@ -52,8 +53,10 @@ public class AppTest {
                 "Quinton", (short)22, "The descripition");
         Creator creator = new Creator("Quinton Weenink",
                 "South Africa",
-                "123",
+                "123".getBytes(),
                 "quinton@mail.com");
+        CreatorsRepository cr = new CreatorsRepositoryIMP();
+        cr.create(creator);
 
         ComicCreator comicCreator = new ComicCreator();
         comicCreator.setCreator(creator);

@@ -1,6 +1,8 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.creator;
 
 
+import sun.nio.cs.StandardCharsets;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,12 +19,12 @@ public class Creator {
     private int creatorID;
     private String name;
     private String countryOfResidence;
-    private String taxReference;
+    private byte[] taxReference;
     private String emailAddress;
 
     public Creator(){}
 
-    public Creator(String name, String countryOfResidence, String taxReference, String emailAddress){
+    public Creator(String name, String countryOfResidence, byte[] taxReference, String emailAddress){
         this.name = name;
         this.countryOfResidence = countryOfResidence;
         this.taxReference = taxReference;
@@ -66,10 +68,10 @@ public class Creator {
     }
 
     @Column(name="TaxReferenceNumber", columnDefinition="varbinary(512)")
-    public String getTaxReference() {
+    public byte[] getTaxReference() {
         return taxReference;
     }
-    public void setTaxReference(String taxReference) {
+    public void setTaxReference(byte[] taxReference) {
         this.taxReference = taxReference;
     }
 

@@ -63,6 +63,7 @@ public class TwoFacePersistenceTest {
     }
 
     @Test
+    @Ignore
     public void removingIssueElement() {
         System.out.println(": Removing issue");
         Issue tempIssue = singleIssueRepository.find(24705);

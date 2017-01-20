@@ -12,6 +12,7 @@ public interface Repository<T>
     List<T> findAll();
     List<T> findAll(int pageSize, int pageNumber);
     List<T> search(String property, String criteria);
+    List<T> search(String property, Integer criteria);
     List<T> search(String property, String criteria, int pageSize, int pageNumber);
     long count();
     void delete(Object id);

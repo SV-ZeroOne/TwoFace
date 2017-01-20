@@ -63,6 +63,18 @@ public abstract class RelationalRepository<T> implements Repository<T> {
         return query.getResultList();
     }
 
+    public List<T> search(String property, Integer criteria) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("select x from ");
+        sb.append(type.getSimpleName());
+        sb.append(" x where x.");
+        sb.append(property);
+        sb.append(" = ");
+        sb.append(criteria.toString());
+        Query query = this.entityManager.createQuery(sb.toString());
+        return query.getResultList();
+    }
+
     public List<T> search(String property, String criteria, int pageSize, int pageNumber) {
         StringBuilder sb = new StringBuilder();
         sb.append("select x from ");
@@ -97,10 +109,8 @@ public abstract class RelationalRepository<T> implements Repository<T> {
     public T create(T t) {
         entityManager.getTransaction().begin();
         entityManager.persist(t);
+        entityManager.flush();
         entityManager.getTransaction().commit();
-        //this.entityManager.flush();
-        entityManager.close();
-        System.out.println("Issue added");
         return t;
     }
 
