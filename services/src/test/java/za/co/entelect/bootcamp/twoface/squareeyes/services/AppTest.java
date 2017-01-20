@@ -1,6 +1,7 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.services;
 
 import org.junit.*;
+import org.quartz.SchedulerException;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.IssuesRepository;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.IssuesRepositoryIMP;
@@ -8,12 +9,16 @@ import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.orders.
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.orders.OrdersRepositoryIMP;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.SuppliersRepository;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.SuppliersRepositoryIMP;
+import za.co.entelect.bootcamp.twoface.squareeyes.services.scheduler.OrderScheduler;
 
 /**
  * Unit test for simple Repository.
  */
 public class AppTest {
 
+    public AppTest(){
+
+    }
     @Before
     public void print(){
     }
@@ -26,6 +31,18 @@ public class AppTest {
 
         Issue issue = ir.find(30);
 
+    }
+
+    @Test
+    public void testSchedule()
+    {
+        try {
+            new OrderScheduler();
+            System.out.println("Schedule working");
+        } catch (SchedulerException e) {
+            System.out.println("Schedule not working");
+            e.printStackTrace();
+        }
     }
 
 }
