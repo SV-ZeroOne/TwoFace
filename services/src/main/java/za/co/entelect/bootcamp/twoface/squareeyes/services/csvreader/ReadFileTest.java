@@ -24,13 +24,9 @@ public class ReadFileTest {
         stringArray = readFile.fileOpener();
         readFile.outputFileContents(stringArray);
 
-        Order orders = readFile.assignReleventDataToIssueObject();
-
+        Order orders = readFile.assignRelevantDataToIssueObject();
+        orders.getDeliveryStatus();
         System.out.print(orders.getDeliveryStatus());
-        /*try {
-            readFile.assignReleventDataToIssueObject();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
+
     }
 }
