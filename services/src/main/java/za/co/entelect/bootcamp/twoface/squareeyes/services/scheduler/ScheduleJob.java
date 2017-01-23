@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * Created by sean.vienings on 2017/01/20.
+ *
  */
 public class ScheduleJob implements Job{
 
@@ -24,6 +25,7 @@ public class ScheduleJob implements Job{
 
         List<Order> orderList;
         orderList = scheduleOrderRepository.findAll();
+        //orderList = scheduleOrderRepository.search("DeliveryStatus","Delivered");
         for(Order order : orderList){
             if(order.getDeliveryStatus().equals("Pending"))
             {
