@@ -1,4 +1,4 @@
-[{
+var issues = [{
 	"Id": 2,
 	"Title": "1st Issue Special",
 	"Description": null,
@@ -14617,10 +14617,10 @@
 }, {
 	"Id": 506,
 	"Title": "Action Comics (Vol. 1)",
-	"Description": null,
+	"Description": "This is an awesome comic with amazing characters from the DC universe. You should read this comic.",
 	"SeriesNumber": 413,
 	"PublicationDate": "1946-04-24T00:00:00",
-	"Publisher": 0,
+	"Publisher": "DC",
 	"Creators": [],
 	"Stock": [{
 		"Id": 505,
