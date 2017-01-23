@@ -14,6 +14,7 @@ import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.stock.S
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Unit test for simple Repository.
@@ -61,6 +62,15 @@ public class AppTest {
         issue.addComicCreator(comicCreator);
 
         ir.create(issue);
+
+    }
+
+    @Test
+    @Ignore
+    public void searchPropertyTest() {
+        IssuesRepository ir = new IssuesRepositoryIMP();
+
+        List<Issue> issues = ir.search("title","Star Wars: The Clone Wars");
 
     }
 
