@@ -1,13 +1,24 @@
 document.getElementById('remove-me').className = "hide"
 
-var parameters = location.search.split('&')
-var issueId = parameters[0].split('issue=')[1]
-var stockId = parameters[1].split('stock=')[1]
+var issueId
+var stockId
+var issue
+var stock
 
-var issue = getIssue(issueId)
-console.log(issue)
-var stock = getStock(issue, stockId)
-console.log(stock)
+if(location.search.includes('&')){
+	var parameters = location.search.split('&')
+	issueId = parameters[0].split('issue=')[1]
+	stockId = parameters[1].split('stock=')[1]
+	issue = getIssue(issueId)
+	stock = getStock(issue, stockId)
+}
+else{
+	issueId = location.search.split('issue=')[1]
+	issue = getIssue(issueId)
+	stock = getStock(issue, 0)
+	console.log("single")
+}
+
 populateIssue(issue, stock)
 
 
@@ -40,7 +51,7 @@ function getIssue(issueId){
 }
 
 function getStock(issue, stockId){
-	if(!stockId) return
+	//if(!stockId) return
 	for (var i = 0; i < issue.Stock.length; i++) {
 		if(issue.Stock[i].Id == stockId)
 		{
