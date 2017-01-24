@@ -1,0 +1,92 @@
+.hide{
+	display: none;
+}
+
+.expand{
+	width: 100%;
+}
+
+header{
+}
+
+nav{
+}
+
+aside{
+	width: 20%;
+	float: left;
+}
+
+section{
+	width: 80%;
+	float: right;
+}
+
+article{
+}
+
+footer{
+}
+
+/* my code for css*/
+
+
+.centerText {
+	text-align: center;
+}
+
+footer {
+	text-align: center;
+}
+
+.jumbotron {
+	background: #000 url("SlideShow/sp4.jpg") center center;
+	background-repeat: no-repeat;
+	background-size: 100% 90%;
+}
+
+/*.navbar-left {
+	width: auto;
+	height: auto;
+}*/
+
+/* Carasouel */
+/*.slide1, .slide2, .slide3 {
+    min-height: 400px;
+    background-size: cover;
+    background-position: center center;
+}
+.slide1 {
+    background-image: url("SlideShow/dc1.jpg");
+}
+.slide2 {
+    background-image: url("SlideShow/dc2.jpg");
+}
+.slide3 {
+    background-image: url("SlideShow/dc3.jpg");
+}*/
+/* Carousel Fade Effect */
+/*.carousel.carousel-fade .item {
+    -webkit-transition: opacity 1s linear;
+    -moz-transition: opacity 1s linear;
+    -ms-transition: opacity 1s linear;
+    -o-transition: opacity 1s linear;
+    transition: opacity 1s linear;
+    opacity: .5;
+}
+.carousel.carousel-fade .active.item {
+    opacity: 1;
+}
+.carousel.carousel-fade .active.left,
+.carousel.carousel-fade .active.right {
+    left: 0;
+    z-index: 2;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+.carousel-overlay {
+    position: absolute;
+    bottom: 100px;
+    right: 0;
+    left: 0;
+}*/

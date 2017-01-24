@@ -1,4 +1,4 @@
-package za.co.entelect.bootcamp.twoface.squareeyes.web;
+package za.co.entelect.bootcamp.twoface.squareeyes.logging;
 
 import za.co.entelect.bootcamp.twoface.squareeyes.services.payment.PaymentService;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.payment.SupplierPaymentDTO;

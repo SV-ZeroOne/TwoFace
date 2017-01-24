@@ -1,4 +1,4 @@
-package za.co.entelect.bootcamp.twoface.squareeyes.web;
+package za.co.entelect.bootcamp.twoface.squareeyes.logging;
 
 import za.co.entelect.bootcamp.twoface.squareeyes.services.supplier.IssueOrderDTO;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.supplier.SupplierService;
