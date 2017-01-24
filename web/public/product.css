@@ -16,6 +16,14 @@
 #comicdetails{
 }
 
+#addToCartButton{
+	float: right;
+}
+
+#condtionDropdown{
+	float: left;
+}
+
 header{
 }
 

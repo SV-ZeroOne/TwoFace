@@ -14630,7 +14630,7 @@ var issues = [{
 	}, {
 		"Id": 25207,
 		"Condition": 6,
-		"AvailableQuantity": 6,
+		"AvailableQuantity": 0,
 		"Price": 9.93
 	}, {
 		"Id": 49909,
