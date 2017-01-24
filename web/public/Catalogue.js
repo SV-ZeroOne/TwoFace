@@ -1,5 +1,13 @@
 //document.getElementById('remove-me').className = "hide"
-populateCatalogue();
+var page = 0;
+var itemsOnPage = 8;
+
+if(location.search.includes('page=')){
+	page = location.search.split('page=')[1]
+}
+
+
+populateCatalogue(page, itemsOnPage);
 
 function hideThis(){
 	if(document.getElementById('sidebar').className == "")
@@ -13,14 +21,14 @@ function hideThis(){
 	}
 }
 
-function populateCatalogue(){
+function populateCatalogue(page, itemsOnPage){
     var table = document.getElementById("catalogue")
 
-    for (var i = 0; i < issues.length / 10; i++) {
+    for (var i = page*itemsOnPage; i < issues.length && i < (page*itemsOnPage)+itemsOnPage; i++) {
 		if(i%4 == 0)
 			table.innerHTML += "<div class='container'>"
 			var date = new Date(issues[i].PublicationDate)
-			table.innerHTML += "<div class='col-xs-12 col-sm-3 col-md-3' style='padding:2px;'><h2>" + issues[i].Title + "</h2><a href='product.html?issue=" + issues[i].Id + "'><img id='imagecomic' src='https://s-media-cache-ak0.pinimg.com/originals/b8/d8/cb/b8d8cb19503b644127da29e5b287e124.jpg' alt='Loading..' class='img-responsive'/></a>"
+			table.innerHTML += "<div class='col-xs-12 col-sm-3 col-md-3' style='padding:2px;'><h4>" + issues[i].Title + "</h4><a href='product.html?issue=" + issues[i].Id + "'><img id='imagecomic' src='https://s-media-cache-ak0.pinimg.com/originals/b8/d8/cb/b8d8cb19503b644127da29e5b287e124.jpg' alt='Loading..' class='img-responsive'/></a>"
 	            + "<h4>" + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDay() + "</h4>"
 				+ "<h4>#" + issues[i].SeriesNumber + "</h4>"
 	            + "<h4>" + issues[i].Publisher + "</h4>"
