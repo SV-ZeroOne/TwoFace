@@ -47,7 +47,7 @@ function getIssue(issueId){
 			return issues[i]
 		}
 	}
-	window.location.href = "index.html"
+	window.location.href = "catalogue.html"
 }
 
 function getStock(issue, stockId){
