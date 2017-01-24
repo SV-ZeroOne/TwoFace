@@ -1,5 +1,5 @@
 //document.getElementById('remove-me').className = "hide"
-var page = 0;
+var page = 1;
 var itemsOnPage = 8;
 
 if(location.search.includes('page=')){
@@ -7,7 +7,19 @@ if(location.search.includes('page=')){
 }
 
 
-populateCatalogue(page, itemsOnPage);
+populateCatalogue(page, itemsOnPage)
+
+populatePaging(page);
+
+function populatePaging(page){
+	var table = document.getElementById("paging")
+
+	if(page > 1)
+		table.innerHTML += "<a class='btn btn-primary' style='float:left' href='Catalogue.html?page=" + (page - 1) + "' role='button'>Page " + (page - 1) + " &raquo;</a>"
+
+	table.innerHTML += "<a class='btn btn-primary' style='float:right' href='Catalogue.html?page=" + (page*1 + 1) + "' role='button'>Page " + (page*1 + 1) + " &raquo;</a>"
+
+}
 
 function hideThis(){
 	if(document.getElementById('sidebar').className == "")
@@ -24,7 +36,7 @@ function hideThis(){
 function populateCatalogue(page, itemsOnPage){
     var table = document.getElementById("catalogue")
 
-    for (var i = page*itemsOnPage; i < issues.length && i < (page*itemsOnPage)+itemsOnPage; i++) {
+    for (var i = (page-1)*itemsOnPage; i < issues.length && i < ((page-1)*itemsOnPage)+itemsOnPage; i++) {
 		if(i%4 == 0)
 			table.innerHTML += "<div class='container'>"
 			var date = new Date(issues[i].PublicationDate)
