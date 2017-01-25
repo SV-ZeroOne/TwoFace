@@ -1,0 +1,3 @@
+var shoppingCart
+
+populateShoppingCart(shoppingCart)

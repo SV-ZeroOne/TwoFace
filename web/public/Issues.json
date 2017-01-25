@@ -8,22 +8,22 @@ var issues = [{
 	"Creators": [],
 	"Stock": [{
 		"Id": 1,
-		"Condition": 4,
+		"Condition": "Fine",
 		"AvailableQuantity": 6,
 		"Price": 188.03
 	}, {
 		"Id": 24703,
-		"Condition": 6,
+		"Condition": "Ok",
 		"AvailableQuantity": 34,
 		"Price": 175.35
 	}, {
 		"Id": 49405,
-		"Condition": 10,
+		"Condition": "Good",
 		"AvailableQuantity": 11,
 		"Price": 249.52
 	}, {
 		"Id": 74107,
-		"Condition": 13,
+		"Condition": "Bad",
 		"AvailableQuantity": 9,
 		"Price": 226.46
 	}]

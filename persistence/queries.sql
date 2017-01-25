@@ -34,7 +34,7 @@ WITH ordI AS (
 	WHERE i.Title like '%star wars%'
 	ORDER BY i.PublicationDate DESC
 	)
-SELECT TOP(5) i.IssueID, i.Title, SUM(s.AvailableQty) AS StockOnHand
+SELECT i.Title, SUM(s.AvailableQty) AS StockOnHand
 FROM ordI AS i
 	INNER JOIN dbo.Stock AS s
 	ON i.IssueID = s.IssueID

@@ -9,6 +9,11 @@
 header{
 }
 
+body{
+	padding-top: 65px;
+	height:100%;
+}
+
 nav{
 }
 
