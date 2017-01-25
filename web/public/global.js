@@ -40,10 +40,8 @@ function populateCatalogue(page, itemsOnPage){
 		if(issues[i].Publisher != 0)
 			publisher = " - " + issues[i].Publisher
 
-		table.innerHTML += "<div class='col-xs-12 col-sm-3 col-md-3'><div style='margin:5px; box-shadow: 10px 10px 8px #aaa;'><a href='product.html?issue=" + issues[i].Id + "'><img id='imagecomic' src='https://s-media-cache-ak0.pinimg.com/originals/b8/d8/cb/b8d8cb19503b644127da29e5b287e124.jpg' alt='Loading..' class='img-responsive'/><div style='margin:8px; margin-bottom:12px'></a><h4>" + issues[i].Title + "</h4>"
-		+ "<h4>" + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDay() +
-		" - #" + issues[i].SeriesNumber + publisher + "</h4>"
-		+ "<p>" + description + "</p></div></div></div>";
+		table.innerHTML += "<div class='col-xs-12 col-sm-3 col-md-3'><div class='issue' style='margin:5px; box-shadow: 10px 10px 8px #aaa;'><a href='product.html?issue=" + issues[i].Id + "'><img id='imagecomic' src='https://s-media-cache-ak0.pinimg.com/originals/b8/d8/cb/b8d8cb19503b644127da29e5b287e124.jpg' alt='Loading..' class='img-responsive'/></a><div class='issueNo'><button type='button' class='btn flat-butt flat-butt'><strong>#" + issues[i].SeriesNumber + "</strong></button></div><div style='margin:8px; margin-bottom:12px'><h4>" + issues[i].Title + "</h4>"
+		+ "<h4>" + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDay() + publisher + "</h4>" + "<p>" + description + "</p></div></div></div>";
 
 		if(i%4)
 			table.innerHTML += "</div>"
