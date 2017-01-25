@@ -4,6 +4,7 @@ var issueId
 var stockId
 var issue
 var stock
+var shoppingCart
 
 if(location.search.includes('&')){
 	var parameters = location.search.split('&')
@@ -21,6 +22,10 @@ else{
 
 populateIssue(issue, stock)
 
+function hideOrShowShoppingCart(){
+	
+}
+
 
 function populateIssue(issue, stock){
 	document.getElementById('title').innerHTML = issue.Publisher + " - " + issue.Title + " - #" + issue.SeriesNumber
@@ -35,9 +40,18 @@ function populateIssue(issue, stock){
 	document.getElementById('addToCartButton').innerHTML += (stock.AvailableQuantity > 0) ? (stock.AvailableQuantity + " Left") : "Out of Stock"
 }
 
-function addToCart()
+function addToCart(shoppingCart)
 {
-	console.log("Adding item to cart")
+	if(localStorage.getItem("shoppingCart") == null){
+		shoppingCart = []
+		shoppingCart.push(issue);
+		localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart))
+	}
+	else{
+		shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
+		shoppingCart.push(issue);
+		localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart))
+	}
 }
 
 function getIssue(issueId){

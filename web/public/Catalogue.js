@@ -1,15 +1,43 @@
 //document.getElementById('remove-me').className = "hide"
-var page = 1;
-var itemsOnPage = 8;
+var page = 1
+var itemsOnPage = 8
+var shoppingCart
 
 if(location.search.includes('page=')){
 	page = location.search.split('page=')[1]
 }
 
+populateShoppingCart(shoppingCart)
 
 populateCatalogue(page, itemsOnPage)
 
-populatePaging(page);
+populatePaging(page)
+
+function populateShoppingCart(shoppingCart){
+	var shoppingItems = document.getElementById("shoppingItems")
+
+	if(localStorage.getItem("shoppingCart") != null){
+		shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"))
+		console.log(shoppingCart);
+		shoppingItems.innerHTML = ""
+		for(var x = 0; x < shoppingCart.length; x++){
+			shoppingItems.innerHTML += "<h4 class='col-xs-12'>" + shoppingCart[x].Title + " - R255</h4><hr>"
+		}
+	}
+	else{
+		shoppingItems.innerHTML = "<h4>no items in shopping cart</h4>"
+	}
+}
+
+function hideOrShowShoppingCart(){
+	if(document.getElementById('shoppingCart').className == "")
+	{
+		document.getElementById('shoppingCart').className = "hide"
+	}
+	else {
+		document.getElementById('shoppingCart').className = ""
+	}
+}
 
 function populatePaging(page){
 	var table = document.getElementById("paging")
@@ -40,10 +68,9 @@ function populateCatalogue(page, itemsOnPage){
 		if(i%4 == 0)
 			table.innerHTML += "<div class='container'>"
 			var date = new Date(issues[i].PublicationDate)
-			table.innerHTML += "<div class='col-xs-12 col-sm-3 col-md-3' style='padding:2px;'><h4>" + issues[i].Title + "</h4><a href='product.html?issue=" + issues[i].Id + "'><img id='imagecomic' src='https://s-media-cache-ak0.pinimg.com/originals/b8/d8/cb/b8d8cb19503b644127da29e5b287e124.jpg' alt='Loading..' class='img-responsive'/></a>"
-	            + "<h4>" + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDay() + "</h4>"
-				+ "<h4>#" + issues[i].SeriesNumber + "</h4>"
-	            + "<h4>" + issues[i].Publisher + "</h4>"
+			table.innerHTML += "<div class='col-xs-12 col-sm-3 col-md-3' style='padding:5px;'><h4>" + issues[i].Title + "</h4><a href='product.html?issue=" + issues[i].Id + "'><img id='imagecomic' src='https://s-media-cache-ak0.pinimg.com/originals/b8/d8/cb/b8d8cb19503b644127da29e5b287e124.jpg' alt='Loading..' class='img-responsive'/></a>"
+	            + "<h4>" + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDay() +
+				" - #" + issues[i].SeriesNumber + " - " + issues[i].Publisher + "</h4>"
 	            + "<p>" + issues[i].Description + "</p>"
 	            + "</div>";
 		if(i%4)
