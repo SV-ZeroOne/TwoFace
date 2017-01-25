@@ -78,11 +78,11 @@ function populateCatalogue(page, itemsOnPage){
 		if(i%4 == 0)
 			table.innerHTML += "<div class='container'>"
 			var date = new Date(issues[i].PublicationDate)
-			table.innerHTML += "<div class='col-xs-12 col-sm-3 col-md-3' style='padding:5px;'><h4>" + issues[i].Title + "</h4><a href='product.html?issue=" + issues[i].Id + "'><img id='imagecomic' src='https://s-media-cache-ak0.pinimg.com/originals/b8/d8/cb/b8d8cb19503b644127da29e5b287e124.jpg' alt='Loading..' class='img-responsive'/></a>"
+			table.innerHTML += "<div class='col-xs-12 col-sm-3 col-md-3'><div style='margin:5px; box-shadow: 10px 10px 8px #aaa; border-radius: 5px;'><a href='product.html?issue=" + issues[i].Id + "'><img id='imagecomic' src='https://s-media-cache-ak0.pinimg.com/originals/b8/d8/cb/b8d8cb19503b644127da29e5b287e124.jpg' alt='Loading..' class='img-responsive'/><div style='margin:5px;'></a><h4>" + issues[i].Title + "</h4>"
 	            + "<h4>" + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDay() +
 				" - #" + issues[i].SeriesNumber + " - " + issues[i].Publisher + "</h4>"
 	            + "<p>" + issues[i].Description + "</p>"
-	            + "</div>";
+	            + "</div></div></div>";
 		if(i%4)
 			table.innerHTML += "</div>"
     }
