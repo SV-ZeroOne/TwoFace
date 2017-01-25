@@ -113,4 +113,15 @@ public class Order {
     public void setQty(short qty){
         this.qty = qty;
     }
+
+    //testing
+    @Override
+    public String toString(){
+        return  String.format("orderDate: " + orderDate + "\n" +
+                         "qty: " + qty + "\n" +
+                         "total: " + total + "\n" +
+                         "shipmentRef: " + shipmentRef + "\n" +
+                         "shipmentDate: " + shipmentDate + "\n" +
+                         "deliveryStatus: " + deliveryStatus + "\n");
+    }
 }
