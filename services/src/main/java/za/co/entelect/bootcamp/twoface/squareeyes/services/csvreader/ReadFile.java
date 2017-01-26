@@ -24,6 +24,7 @@ public class ReadFile {
     }
 
     public String[] fileOpener() throws IOException {
+
         FileReader fileReader = new FileReader(filePath);
         BufferedReader textReader = new BufferedReader(fileReader);
 
@@ -34,16 +35,16 @@ public class ReadFile {
         textLine = textReader.readLine().split(csvSplit);
 
         return textLine;
-
     }
 
-    public void outputFileContents(String[] stringArray){
-        int counter = 0;
+    public void outputFileContents(String[] stringArray) throws IOException {
         for (String iterator : stringArray){
-            System.out.println(++counter + " " + iterator);
+            System.out.println("column: " + iterator);
         }
-        System.out.println();
+
     }
+
+
 
 
 

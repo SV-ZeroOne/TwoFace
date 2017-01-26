@@ -21,6 +21,7 @@ public class ReadFileTest {
         System.out.println(baseFilePath);
 
         ReadFile readFile = new ReadFile(baseFilePath);
+        //readFile.outputFileContents(stringArray);
         stringArray = readFile.fileOpener();
         readFile.outputFileContents(stringArray);
 
