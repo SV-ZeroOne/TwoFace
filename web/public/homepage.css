@@ -12,6 +12,10 @@ header{
 body{
 	padding-top: 65px;
 	height:100%;
+    background:url("SlideShow/sp4.jpg") center center;
+	background-repeat: no-repeat;
+	background-size: auto;
+    background-attachment: fixed;
 }
 
 nav{
@@ -42,61 +46,29 @@ footer{
 
 footer {
 	text-align: center;
-}
-
-.jumbotron {
-	background: #000 url("SlideShow/sp4.jpg") center center;
-	background-repeat: no-repeat;
-	background-size: 100% 90%;
+    font-family: 'Kumar One', cursive;
 }
 
 .carousel-inner > .item > img,
   .carousel-inner > .item > a > img {
     margin: auto;
+    width: 30%;
 }
 
-/*.navbar-left {
-	width: auto;
-	height: auto;
-}*/
+.TextFont {
+    font-family: 'Kumar One', cursive;
+}
 
-/* Carasouel */
-/*.slide1, .slide2, .slide3 {
-    min-height: 400px;
-    background-size: cover;
-    background-position: center center;
+.TextFontHeading {
+    font-family: 'Kumar One', cursive;
+    text-align: center;
+    color: black;
+    font-size: 500%;
 }
-.slide1 {
-    background-image: url("SlideShow/dc1.jpg");
+
+.TextFontHeadingForComic{
+    font-family: 'Kumar One', cursive;
+    text-align: center;
+    color: black;
+    font-size: 200%;
 }
-.slide2 {
-    background-image: url("SlideShow/dc2.jpg");
-}
-.slide3 {
-    background-image: url("SlideShow/dc3.jpg");
-}*/
-/* Carousel Fade Effect */
-/*.carousel.carousel-fade .item {
-    -webkit-transition: opacity 1s linear;
-    -moz-transition: opacity 1s linear;
-    -ms-transition: opacity 1s linear;
-    -o-transition: opacity 1s linear;
-    transition: opacity 1s linear;
-    opacity: .5;
-}
-.carousel.carousel-fade .active.item {
-    opacity: 1;
-}
-.carousel.carousel-fade .active.left,
-.carousel.carousel-fade .active.right {
-    left: 0;
-    z-index: 2;
-    opacity: 0;
-    filter: alpha(opacity=0);
-}
-.carousel-overlay {
-    position: absolute;
-    bottom: 100px;
-    right: 0;
-    left: 0;
-}*/
