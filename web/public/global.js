@@ -162,11 +162,15 @@ function populateShoppingCart(shoppingCart){
 			shoppingItems.innerHTML = string
 		}
 		else{
-			shoppingItems.innerHTML = "<h4>no items in shopping cart</h4>"
+			shoppingItems.innerHTML = "<h4>no items in shopping cart</h4><button type='button' class='btn' onclick='removeCart()' id='checkout' style='float:left'>" +
+			"<span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Trash" +
+			"</button>"
 		}
 	}
 	else{
-		shoppingItems.innerHTML = "<h4>no items in shopping cart</h4>"
+		shoppingItems.innerHTML = "<h4>no items in shopping cart</h4><button type='button' class='btn' onclick='removeCart()' id='checkout' style='float:left'>" +
+		"<span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Trash" +
+		"</button>"
 	}
 }
 
