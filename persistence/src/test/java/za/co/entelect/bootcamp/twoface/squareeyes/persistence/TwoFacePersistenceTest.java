@@ -19,12 +19,14 @@ import java.util.Date;
 /**
  * Created by sean.vienings on 2017/01/19.
  */
+@Ignore
 public class TwoFacePersistenceTest {
     static IssuesRepository singleIssueRepository;
     static OrdersRepository singleOrderRepository;
     static SuppliersRepository singleSupplierRepository;
 
     @BeforeClass
+    @Ignore
     public static void testRepositoryConnections()
     {
         System.out.print("Creating Repo");
@@ -34,6 +36,7 @@ public class TwoFacePersistenceTest {
     }
 
     @Test
+    @Ignore
     public void ordersIssuesRelationshipMapping() {
         System.out.println(": Issue & Order mapping");
         Order tempOrder = singleOrderRepository.find(16);
@@ -43,6 +46,7 @@ public class TwoFacePersistenceTest {
     }
 
     @Test
+    @Ignore
     public void ordersSuppliersRelationshipMapping() {
         System.out.println(": Supplier & Order mapping");
         Supplier tempSuppliers = singleSupplierRepository.find(2);

@@ -11,6 +11,7 @@ import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.supplie
 /**
  * Unit test for simple Repository.
  */
+@Ignore
 public class AppTest {
     @Before
     public void print(){
