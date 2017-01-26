@@ -2,6 +2,8 @@
 var page = 1;
 var itemsOnPage = 8;
 var shoppingCart
+var issue
+var stock
 
 if(location.search.includes('cart-display')){
 	page = location.search('cart-display');
@@ -23,8 +25,9 @@ function populateCheckoutCart(shoppingCart){
         var string = "<table class='table table-condensed col-xs-12'><thead><tr><th>Title</th><th>Condition</th><th>Price</th></tr></thead><tbody>"
 
         for(var x = 0; x < shoppingCart.length; x++){
-
-            string += "<tr><td>" + shoppingCart[x].Title + "</td><td>" + "Very Fine" + "</td><td>R" + 255 + "</td></tr>"
+            stock = shoppingCart[x].selectedStock
+            issue = shoppingCart[x]
+            string += "<tr><td>" + issue.Title + "</td><td>" + stock.Condition + "</td><td>R" + stock.Price + "</td></tr>"
 
         }
       /*  string += "</tbody></table><button type='button' class='btn btn-success' onclick='checkout()' id='checkout' style='float:right'>" +
@@ -35,4 +38,16 @@ function populateCheckoutCart(shoppingCart){
     else{
         shoppingItems.innerHTML = "<h4>no items in shopping cart</h4>"
     }
+}
+function populateIssue(issue, stock){
+    document.getElementById('title').innerHTML = issue.Publisher + " - " + issue.Title + " - #" + issue.SeriesNumber
+    document.getElementById('price').innerHTML += stock.Price
+    document.getElementById('description').innerHTML = issue.Description
+    document.getElementById('currentCondition').innerHTML += "Condition: " + stock.Condition
+    for (var i = 0; i < issue.Stock.length; i++) {
+        document.getElementById('condition').innerHTML += "<li><a href='product.html?issue=" + issue.Id + "&stock=" + issue.Stock[i].Id + "'>" + issue.Stock[i].Condition + "</a></li>"
+    }
+    var date = new Date(issue.PublicationDate)
+    document.getElementById('publicationDate').innerHTML = date.getFullYear() + "/" + date.getMonth() + "/" + date.getDay()
+    document.getElementById('addToCartButton').innerHTML += (stock.AvailableQuantity > 0) ? (stock.AvailableQuantity + " Left") : "Out of Stock"
 }
