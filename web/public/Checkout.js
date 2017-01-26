@@ -2,6 +2,8 @@
 var page = 1;
 var itemsOnPage = 8;
 var shoppingCart
+var issue
+var stock
 
 if(location.search.includes('cart-display')){
 	page = location.search('cart-display');
@@ -24,7 +26,7 @@ function populateCheckoutCart(shoppingCart){
 
         for(var x = 0; x < shoppingCart.length; x++){
 
-            string += "<tr><td>" + shoppingCart[x].Title + "</td><td>" + "Very Fine" + "</td><td>R" + 255 + "</td></tr>"
+            string += "<tr><td>" + shoppingCart[x].Title + "</td><td>" + "Very Fine" + "</td><td>R" + shoppingCart[x].selectedStock + "</td></tr>"
 
         }
       /*  string += "</tbody></table><button type='button' class='btn btn-success' onclick='checkout()' id='checkout' style='float:right'>" +

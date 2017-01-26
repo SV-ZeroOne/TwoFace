@@ -5,6 +5,10 @@
 .expand{
 	width: 100%;
 }
+.panel-info{
+    background-color: transparent;
+    opacity: 0.8;
+}
 
 header{
 }

@@ -5,15 +5,10 @@
 .expand{
 	width: 100%;
 }
-.panel-body{
-	background-color: transparent;
-    opacity: 10;
-    background:rgba(255,255,255,0)
-}
+
 .panel-info{
     background-color: transparent;
     opacity: 0.8;
-
 }
 .body{
 	padding-top: 65px;
