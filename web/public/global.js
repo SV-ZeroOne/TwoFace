@@ -78,19 +78,24 @@ function populateIssue(issue, stock){
 
 function addToCart(shoppingCart)
 {
-	if(localStorage.getItem("shoppingCart") == null){
-		shoppingCart = []
-		issue.selectedStock = stock
-		shoppingCart.push(issue)
-		localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart))
+	if(stock.Quantity > 0) {
+        if (localStorage.getItem("shoppingCart") == null) {
+            shoppingCart = []
+            issue.selectedStock = stock
+            shoppingCart.push(issue)
+            localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart))
+        }
+        else {
+            shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"))
+            issue.selectedStock = stock
+            shoppingCart.push(issue)
+            localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart))
+        }
+        populateShoppingCart(shoppingCart);
+    }else
+	{
+		alert("No items in stock")
 	}
-	else{
-		shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"))
-		issue.selectedStock = stock
-		shoppingCart.push(issue)
-		localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart))
-	}
-	populateShoppingCart(shoppingCart);
 }
 
 function removeFromCart(issueID, stockID)
