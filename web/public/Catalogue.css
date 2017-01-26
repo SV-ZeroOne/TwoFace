@@ -13,7 +13,7 @@ body{
 	padding-top: 65px;
 	display:table;
     width:100%;
-    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("background/18.jpg");
+    background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url("background/18.jpg");
     background-position:center top;
     height:350px;
 }
@@ -45,6 +45,26 @@ body{
 }
 .flat-butt {
 	background-color:#ffa700;
+}
+#imagecomic{
+	width:100%;
+}
+
+#comicdetails{
+	color: white
+}
+
+body{
+	padding-top: 65px;
+	height:100%;
+}
+
+#addToCartButton{
+	float: right;
+}
+
+#condtionDropdown{
+	float: left;
 }
 .well{
 	border:0;
@@ -88,22 +108,17 @@ body{
 }
 header{
 }
-
 nav{
 }
-
 aside{
 	width: 20%;
 	float: left;
 }
-
 section{
 	width: 80%;
 	float: right;
 }
-
 article{
 }
-
 footer{
 }
