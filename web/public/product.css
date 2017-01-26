@@ -6,14 +6,7 @@
 	width: 100%;
 }
 
-#imagecomic{
-	width:100%;
-}
 
-body{
-	padding-top: 65px;
-	height:100%;
-}
 
 #imagedetails{
 }
@@ -21,13 +14,7 @@ body{
 #comicdetails{
 }
 
-#addToCartButton{
-	float: right;
-}
 
-#condtionDropdown{
-	float: left;
-}
 
 header{
 }
