@@ -12,6 +12,14 @@ body{
 .table-catalogue{
 
 }
+.issue > .issueNo{
+    position: absolute;
+    top: -2px;
+	left: 10px;
+}
+.flat-butt {
+	background-color:#ffa700
+}
 .well{
 	border:0;
 	padding:0;
