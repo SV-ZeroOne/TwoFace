@@ -31,12 +31,12 @@ function populateCatalogue(page, itemsOnPage){
 	var images = []
 	images.push("https://s-media-cache-ak0.pinimg.com/originals/12/55/76/125576e29feaded7181edbe006d23b5a.jpg")
 	images.push("https://s-media-cache-ak0.pinimg.com/originals/b8/d8/cb/b8d8cb19503b644127da29e5b287e124.jpg")
-	images.push("http://cache.coverbrowser.com/image/daredevil/43-1.jpg")
+	images.push("http://pre10.deviantart.net/23f7/th/pre/i/2015/327/0/d/star_wars_vintage_tfa_comic_cover_issue1_by_daztibbles-d9hq35o.png")
 	images.push("http://2.bp.blogspot.com/-tTzzl84Ws5Q/UTUs9CDTcoI/AAAAAAAAgd8/iza6iW_ccmI/s1600/Dead+of+Night+11+-+00+-+FC.JPG")
 	images.push("http://static3.wikia.nocookie.net/__cb20130903005637/mlp/images/0/01/Comic_Issue_10_Cover_B.jpg")
 	images.push("https://s-media-cache-ak0.pinimg.com/originals/12/55/76/125576e29feaded7181edbe006d23b5a.jpg")
 	images.push("https://s-media-cache-ak0.pinimg.com/originals/b8/d8/cb/b8d8cb19503b644127da29e5b287e124.jpg")
-	images.push("http://cache.coverbrowser.com/image/daredevil/43-1.jpg")
+	images.push("http://pre10.deviantart.net/23f7/th/pre/i/2015/327/0/d/star_wars_vintage_tfa_comic_cover_issue1_by_daztibbles-d9hq35o.png")
 
 	for (var i = (page-1)*itemsOnPage; i < issues.length && i < ((page-1)*itemsOnPage)+itemsOnPage; i++) {
 		if(i%4 == 0)
@@ -47,10 +47,16 @@ function populateCatalogue(page, itemsOnPage){
 		//if(issues[i].Description != null)
 		//	description = issues[i].Description
 		var publisher = "-"
-		if(issues[i].Publisher != 0)
+		var pubColor = "#34495E"
+		if(issues[i].Publisher != 0){
 			publisher = issues[i].Publisher
+			if(publisher == "Marvel")
+				pubColor = "#b71c1c"
+			if(publisher == "DC")
+				pubColor = "#1565C0"
+		}
 
-		table.innerHTML += "<div class='col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-4 col-md-3'><div class='issue' style='margin:5px; box-shadow: 10px 10px 8px #aaa;'><a class='image-container' href='product.html?issue=" + issues[i].Id + "'><img src='" + images.pop() + "' alt='Loading..' class='img-responsive'/></a><div class='issueNo'><button type='button' class='btn flat-butt'><strong>#" + issues[i].SeriesNumber + "</strong></button></div><div class='publisher'><button type='button' style='background-color:#34495E;color: white;' class='btn flat-butt'><strong>" + publisher + "</strong></button></div><div class='details' style='padding:5px;'><div class='date'><button type='button' style='background-color:#666;color: white;' class='btn flat-butt'><strong>" + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDay() + "</strong></button></div><h4><strong>" + issues[i].Title + "</strong></h4>" + "</div></div></div>";
+		table.innerHTML += "<div class='col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-3 col-md-3'><div class='issue' style='margin:5px; box-shadow: 10px 10px 8px #aaa;'><a class='image-container' href='product.html?issue=" + issues[i].Id + "'><img src='" + images.pop() + "' alt='Loading..' class='img-responsive'/></a><div class='issueNo'><button type='button' class='btn flat-butt'><strong>#" + issues[i].SeriesNumber + "</strong></button></div><div class='publisher'><button type='button' style='background-color:"+pubColor+";color: white;' class='btn flat-butt'><strong>" + publisher + "</strong></button></div><div class='details' style='padding:5px;'><div class='date'><button type='button' style='background-color:#666;color: white;' class='btn flat-butt'><strong>" + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDay() + "</strong></button></div><h4><strong>" + issues[i].Title + "</strong></h4>" + "</div></div></div>";
 
 		if(i%4)
 			table.innerHTML += "</div>"
@@ -148,6 +154,8 @@ function populateShoppingCart(shoppingCart){
 			}
 			string += "</tbody></table><button type='button' class='btn' onclick='hideOrShowShoppingCart()' id='checkout' style='float:left'>" +
 			"<span class='glyphicon glyphicon-remove' aria-hidden='true'></span> Close" +
+			"</button><button type='button' class='btn' onclick='removeCart()' id='checkout' style='float:left'>" +
+			"<span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Trash" +
 			"</button><button type='button' class='btn btn-success' onclick='checkout()' id='checkout' style='float:right'>" +
 			"<span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Checkout" +
 			"</button>"
@@ -160,6 +168,11 @@ function populateShoppingCart(shoppingCart){
 	else{
 		shoppingItems.innerHTML = "<h4>no items in shopping cart</h4>"
 	}
+}
+
+function removeCart(){
+	localStorage.removeItem("shoppingCart");
+	populateShoppingCart()
 }
 
 function populatePaging(page){
