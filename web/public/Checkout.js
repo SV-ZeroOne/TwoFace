@@ -9,11 +9,7 @@ if(location.search.includes('cart-display')){
 	page = location.search('cart-display');
 }
 
-//populateShoppingCart(shoppingCart)
 populateCheckoutCart(shoppingCart)
-populateCatalogue(page, itemsOnPage)
-
-populatePaging(page);
 
 
 function populateCheckoutCart(shoppingCart){

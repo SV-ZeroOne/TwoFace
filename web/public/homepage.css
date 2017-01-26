@@ -16,7 +16,7 @@ header{
 body{
 	padding-top: 65px;
 	height:100%;
-    background:linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) ),url("SlideShow/sp4.jpg") center center;
+    background:linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6) ),url("SlideShow/sp4.jpg") center center;
 	background-repeat: no-repeat;
 	background-size: 130% 100%;
     background-attachment: fixed;
@@ -64,11 +64,9 @@ footer {
 }
 
 .TextFontHeading {
-    font-family: 'Kumar One', cursive;
     text-align: center;
     color: black;
-    font-size: 3px;
-    font-size:6.5vh;
+    font-size:1.5vh;
 }
 
 .TextFontHeadingForComic{

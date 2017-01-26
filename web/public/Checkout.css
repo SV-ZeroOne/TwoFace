@@ -6,13 +6,10 @@
 	width: 100%;
 }
 
-.panel-info{
-    background-color: rgba(0, 0, 0, 0.6);
-}
-.body{
+body{
 	padding-top: 65px;
 	height:100%;
-	background:linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6) ), url("background/9.jpg") center center;
+	background:linear-gradient( rgba(255, 255, 255, 0.5), rgba(255,225, 255, 0.5) ), url("background/9.jpg") center center;
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
     background-attachment: fixed;
@@ -22,7 +19,6 @@
 }
 
 .container{
-	background: none;
 }
 .well{
 	border:0;
