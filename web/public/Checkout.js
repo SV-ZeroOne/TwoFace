@@ -51,3 +51,8 @@ function populateIssue(issue, stock){
     document.getElementById('publicationDate').innerHTML = date.getFullYear() + "/" + date.getMonth() + "/" + date.getDay()
     document.getElementById('addToCartButton').innerHTML += (stock.AvailableQuantity > 0) ? (stock.AvailableQuantity + " Left") : "Out of Stock"
 }
+
+function removeCartAfterPurchase(){
+    removeCart()
+    window.location="Catalogue.html"
+}
