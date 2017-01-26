@@ -40,7 +40,7 @@ function populateCatalogue(page, itemsOnPage){
 		if(issues[i].Publisher != 0)
 			publisher = issues[i].Publisher
 
-		table.innerHTML += "<div class='col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-3 col-md-3'><div class='issue' style='margin:5px; box-shadow: 10px 10px 8px #aaa;'><a href='product.html?issue=" + issues[i].Id + "'><img id='imagecomic' src='https://s-media-cache-ak0.pinimg.com/originals/b8/d8/cb/b8d8cb19503b644127da29e5b287e124.jpg' alt='Loading..' class='img-responsive'/><div class='date'><button type='button' style='background-color:#666;color: white;' class='btn flat-butt'><strong>" + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDay() + "</strong></button></div></a><div class='issueNo'><button type='button' class='btn flat-butt'><strong>#" + issues[i].SeriesNumber + "</strong></button></div><div class='publisher'><button type='button' style='background-color:#34495E;color: white;' class='btn flat-butt'><strong>" + publisher + "</strong></button></div><div style='padding:5px;'><h4><strong>" + issues[i].Title + "</strong></h4>" + "</div></div></div>";
+		table.innerHTML += "<div class='col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-4 col-md-3'><div class='issue' style='margin:5px; box-shadow: 10px 10px 8px #aaa;'><a href='product.html?issue=" + issues[i].Id + "'><img id='imagecomic' src='https://s-media-cache-ak0.pinimg.com/originals/b8/d8/cb/b8d8cb19503b644127da29e5b287e124.jpg' alt='Loading..' class='img-responsive'/></a><div class='issueNo'><button type='button' class='btn flat-butt'><strong>#" + issues[i].SeriesNumber + "</strong></button></div><div class='publisher'><button type='button' style='background-color:#34495E;color: white;' class='btn flat-butt'><strong>" + publisher + "</strong></button></div><div class='details' style='padding:5px;'><div class='date'><button type='button' style='background-color:#666;color: white;' class='btn flat-butt'><strong>" + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDay() + "</strong></button></div><h4><strong>" + issues[i].Title + "</strong></h4>" + "</div></div></div>";
 
 		if(i%4)
 			table.innerHTML += "</div>"
@@ -135,9 +135,9 @@ function populatePaging(page){
 	var table = document.getElementById("paging")
 
 	if(page > 1)
-	table.innerHTML += "<a class='btn btn-primary' style='float:left' href='Catalogue.html?page=" + (page - 1) + "' role='button'>Page " + (page - 1) + " &raquo;</a>"
+	table.innerHTML += "<a class='btn flat-butt' style='float:left; background-color:#666; color:white;' href='Catalogue.html?page=" + (page - 1) + "' role='button'>Page " + (page - 1) + " &raquo;</a>"
 
-	table.innerHTML += "<a class='btn btn-primary' style='float:right' href='Catalogue.html?page=" + (page*1 + 1) + "' role='button'>Page " + (page*1 + 1) + " &raquo;</a>"
+	table.innerHTML += "<a class='btn flat-butt' style='float:right; background-color:#666; color:white;' href='Catalogue.html?page=" + (page*1 + 1) + "' role='button'>Page " + (page*1 + 1) + " &raquo;</a>"
 
 }
 
