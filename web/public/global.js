@@ -78,7 +78,7 @@ function populateIssue(issue, stock){
 
 function addToCart(shoppingCart)
 {
-	if(stock.Quantity > 0) {
+	if(stock.AvailableQuantity > 0) {
         if (localStorage.getItem("shoppingCart") == null) {
             shoppingCart = []
             issue.selectedStock = stock
