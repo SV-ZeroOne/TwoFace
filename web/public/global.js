@@ -152,7 +152,7 @@ function populateShoppingCart(shoppingCart){
 
 				string += "<tr><td>" + shoppingCart[x].Title + "</td><td>" + shoppingCart[x].selectedStock.Condition  + "</td><td>R" + shoppingCart[x].selectedStock.Price + "</td><td><button type='button' class='btn btn-warning' onclick='removeFromCart("+ shoppingCart[x].Id +","+ shoppingCart[x].selectedStock.Id +")' id='checkout' style=''><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td></tr>"
 			}
-			string += "</tbody></table><button type='button' class='btn' onclick='hideOrShowShoppingCart()' id='checkout' style='float:left'>" +
+			string += "</tbody></table><button type='button' class='btn' onclick='hideOrShowShoppingCart()' id='checkout' style='float:left; margin-right:5px'>" +
 			"<span class='glyphicon glyphicon-remove' aria-hidden='true'></span> Close" +
 			"</button><button type='button' class='btn' onclick='removeCart()' id='checkout' style='float:left'>" +
 			"<span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Trash" +
@@ -162,15 +162,11 @@ function populateShoppingCart(shoppingCart){
 			shoppingItems.innerHTML = string
 		}
 		else{
-			shoppingItems.innerHTML = "<h4>no items in shopping cart</h4><button type='button' class='btn' onclick='removeCart()' id='checkout' style='float:left'>" +
-			"<span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Trash" +
-			"</button>"
+			shoppingItems.innerHTML = "<h4>no items in shopping cart</h4><button type='button' class='btn' onclick='removeCart()' id='checkout' style='float:left; margin:5px;'>" +"<span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Trash" +"</button>"
 		}
 	}
 	else{
-		shoppingItems.innerHTML = "<h4>no items in shopping cart</h4><button type='button' class='btn' onclick='removeCart()' id='checkout' style='float:left'>" +
-		"<span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Trash" +
-		"</button>"
+		shoppingItems.innerHTML = "<h4>no items in shopping cart</h4><button type='button' class='btn' onclick='removeCart()' id='checkout' style='float:left; margin:5px;'>" + "<span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Trash" +	"</button>"
 	}
 }
 
@@ -183,9 +179,9 @@ function populatePaging(page){
 	var table = document.getElementById("paging")
 
 	if(page > 1)
-	table.innerHTML += "<a class='btn flat-butt' style='float:left; background-color:#fff; color:black; margin:10px; box-shadow: 10px 10px 8px #222;' href='Catalogue.html?page=" + (page - 1) + "' role='button'>Page " + (page - 1) + " &raquo;</a>"
+	table.innerHTML += "<a class='btn flat-butt' style='float:left; background-color:#fff; color:black; margin:5px; box-shadow: 10px 10px 8px #222;' href='Catalogue.html?page=" + (page - 1) + "' role='button'>Page " + (page - 1) + " &raquo;</a>"
 
-	table.innerHTML += "<a class='btn flat-butt' style='float:right; background-color:#fff; color:black; margin:10px; box-shadow: 10px 10px 8px #222;' href='Catalogue.html?page=" + (page*1 + 1) + "' role='button'>Page " + (page*1 + 1) + " &raquo;</a>"
+	table.innerHTML += "<a class='btn flat-butt' style='float:right; background-color:#fff; color:black; margin:5px; box-shadow: 10px 10px 8px #222;' href='Catalogue.html?page=" + (page*1 + 1) + "' role='button'>Page " + (page*1 + 1) + " &raquo;</a>"
 
 }
 
