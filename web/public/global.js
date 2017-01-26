@@ -33,15 +33,14 @@ function populateCatalogue(page, itemsOnPage){
 			table.innerHTML += "<div class='container'>"
 
 		var date = new Date(issues[i].PublicationDate)
-		var description = " "
-		if(issues[i].Description != null)
-			description = issues[i].Description
-		var publisher = " "
+		var description = ""
+		//if(issues[i].Description != null)
+		//	description = issues[i].Description
+		var publisher = "-"
 		if(issues[i].Publisher != 0)
-			publisher = " - " + issues[i].Publisher
+			publisher = issues[i].Publisher
 
-		table.innerHTML += "<div class='col-xs-12 col-sm-3 col-md-3'><div class='issue' style='margin:5px; box-shadow: 10px 10px 8px #aaa;'><a href='product.html?issue=" + issues[i].Id + "'><img id='imagecomic' src='https://s-media-cache-ak0.pinimg.com/originals/b8/d8/cb/b8d8cb19503b644127da29e5b287e124.jpg' alt='Loading..' class='img-responsive'/></a><div class='issueNo'><button type='button' class='btn flat-butt flat-butt'><strong>#" + issues[i].SeriesNumber + "</strong></button></div><div style='margin:8px; margin-bottom:12px'><h4>" + issues[i].Title + "</h4>"
-		+ "<h4>" + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDay() + publisher + "</h4>" + "<p>" + description + "</p></div></div></div>";
+		table.innerHTML += "<div class='col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-3 col-md-3'><div class='issue' style='margin:5px; box-shadow: 10px 10px 8px #aaa;'><a href='product.html?issue=" + issues[i].Id + "'><img id='imagecomic' src='https://s-media-cache-ak0.pinimg.com/originals/b8/d8/cb/b8d8cb19503b644127da29e5b287e124.jpg' alt='Loading..' class='img-responsive'/><div class='date'><button type='button' style='background-color:#666;color: white;' class='btn flat-butt'><strong>" + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDay() + "</strong></button></div></a><div class='issueNo'><button type='button' class='btn flat-butt'><strong>#" + issues[i].SeriesNumber + "</strong></button></div><div class='publisher'><button type='button' style='background-color:#34495E;color: white;' class='btn flat-butt'><strong>" + publisher + "</strong></button></div><div style='padding:5px;'><h4><strong>" + issues[i].Title + "</strong></h4>" + "</div></div></div>";
 
 		if(i%4)
 			table.innerHTML += "</div>"
@@ -65,12 +64,14 @@ function addToCart(shoppingCart)
 {
 	if(localStorage.getItem("shoppingCart") == null){
 		shoppingCart = []
-		shoppingCart.push(issue);
+		issue.selectedStock = stock
+		shoppingCart.push(issue)
 		localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart))
 	}
 	else{
-		shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
-		shoppingCart.push(issue);
+		shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"))
+		issue.selectedStock = stock
+		shoppingCart.push(issue)
 		localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart))
 	}
 	populateShoppingCart(shoppingCart);
@@ -111,7 +112,7 @@ function checkout(){
 function populateShoppingCart(shoppingCart){
 	var shoppingItems = document.getElementById("shoppingItems")
 
-	if(localStorage.getItem("shoppingCart") != null){
+	if(shoppingItems != null){
 		shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"))
 		console.log(shoppingCart);
 		var string = "<table class='table table-condensed col-xs-12'><thead><tr><th>Title</th><th>Condition</th><th>Price</th></tr></thead><tbody>"

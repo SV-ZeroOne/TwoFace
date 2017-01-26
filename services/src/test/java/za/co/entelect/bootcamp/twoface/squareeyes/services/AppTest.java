@@ -14,6 +14,7 @@ import za.co.entelect.bootcamp.twoface.squareeyes.services.scheduler.OrderSchedu
 /**
  * Unit test for simple Repository.
  */
+@Ignore
 public class AppTest {
 
     public AppTest(){

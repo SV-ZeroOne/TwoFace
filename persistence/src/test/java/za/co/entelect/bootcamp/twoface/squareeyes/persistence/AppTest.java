@@ -19,9 +19,11 @@ import java.util.List;
 /**
  * Unit test for simple Repository.
  */
+@Ignore
 public class AppTest {
 
     @Before
+    @Ignore
     public void print(){
     }
 

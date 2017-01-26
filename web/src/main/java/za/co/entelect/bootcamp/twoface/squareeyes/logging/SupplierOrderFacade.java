@@ -57,13 +57,13 @@ public class SupplierOrderFacade
         logger.debug("issuesRepository holds the following: {}" + issuesRepository.getClass().getSimpleName());
         logger.debug("ordersRepository holds the following: {}" + ordersRepository.getClass().getSimpleName());
         logger.debug("suppliersRepository holds the following value: {}" + suppliersRepository.getClass().getSimpleName());
-	logger.debug("supplierQuotesRepository holds the following value: {}" + supplierQuotesRepository.getClass().getSimpleName());
+	    //logger.debug("supplierQuotesRepository holds the following value: {}" + supplierQuotesRepository.getClass().getSimpleName());
     }
 
     
     public void placeOrder(Integer issueID, Integer qty) throws IssueNotFoundException {
         Issue issue = issuesRepository.find(issueID);
-	logger.warn("issue could hold a null reference if a specific issue was not found with the given issueID: {}", issueID.getClass().getSimpleName());
+	    logger.warn("issue could hold a null reference if a specific issue was not found with the given issueID: {}", issueID.getClass().getSimpleName());
         if(issue == null){
 	    logger.info("issue is null throw an exception");
             throw new IssueNotFoundException();

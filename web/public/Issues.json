@@ -29,7 +29,7 @@ var issues = [{
 	}]
 }, {
 	"Id": 3,
-	"Title": "1st Issue Special",
+	"Title": "1st Issue Special of the 2nd",
 	"Description": "This is an awesome comic with amazing characters from the DC universe. You should read this comic.",
 	"SeriesNumber": 2,
 	"PublicationDate": "1975-04-08T00:00:00",
