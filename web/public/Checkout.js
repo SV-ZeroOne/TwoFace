@@ -19,7 +19,9 @@ populatePaging(page);
 function populateCheckoutCart(shoppingCart){
     var shoppingItems = document.getElementById("shoppingItems")
     var subTotal = document.getElementById("Subtotal")
-
+    var shippingRate = 0.00
+    var tax = 14
+    var Total
     if(localStorage.getItem("shoppingCart") != null){
         shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"))
         console.log(shoppingCart);
@@ -34,7 +36,10 @@ function populateCheckoutCart(shoppingCart){
       /*  string += "</tbody></table><button type='button' class='btn btn-success' onclick='checkout()' id='checkout' style='float:right'>" +
             "<span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Checkout" +
             "</button>" */
-            string += "<tr><td>SubTotal:</td><td></td><td>R " + counter + "</td></tr>"
+        string += "<tr><td>SubTotal:</td><td></td><td>R " + counter + "</td></tr>"
+        string += "<tr><td>Shipping:</td><td></td><td>R " + shippingRate + "</td></tr>"
+        string += "<tr><td>Tax:</td><td></td><td> " + tax + "%</td></tr>"
+        string += "<tr><td>Total:</td><td></td><td>R " + (counter + ((counter/100) * tax)+shippingRate).toFixed(2)  + "</td></tr>"
        shoppingItems.innerHTML = string
            // subTotal.innerHTML = counter
     }
