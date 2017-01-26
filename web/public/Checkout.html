@@ -49,10 +49,10 @@
                                 <!--Here we pull our product items into cart details-->
                                 <div class="form-group" id="checkout-cart-items"></div>
                                 <div class="form-group">
-                                    <div class="col-xs-12">
+
                                         <strong>Subtotal</strong>
                                         <div class="pull-right" id="Subtotal"><span>$</span><span>0.00</span></div>
-                                    </div>
+
                                 </div>
                                 <div class="form-group"><hr /></div>
                                 <div class="form-group">
@@ -159,7 +159,9 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <button type="submit" data-toggle="modal" data-target="#modal" class="btn btn-primary btn-submit-fix">Purchase</button>
+                                        <button type="button" class="btn checkout-accept btn-lg" data-toggle="modal" data-target="#Confirmation">
+                                            Purchase
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -171,6 +173,24 @@
         </div>
     </div>
 
+    <div class="modal confirm" id="Confirmation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Success</h4>
+                </div>
+                <div class="modal-body">
+                    Order Completed Successfully
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="removeCartAfterPurchase()">Completed</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer-middle">
+        <p>&copy; 2017 - Entelect - Team Two Face</p>
+    </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script type="text/javascript" src="Issues.json"></script>
