@@ -62,7 +62,7 @@ var issues = [{
 	"Description": "This is an awesome comic with amazing characters from the DC universe. You should read this comic.",
 	"SeriesNumber": 3,
 	"PublicationDate": "1975-04-15T00:00:00",
-	"Publisher": "Mavel",
+	"Publisher": "Marvel",
 	"Creators": [],
 	"Stock": [{
 		"Id": 3,
@@ -149,7 +149,7 @@ var issues = [{
 	"Description": null,
 	"SeriesNumber": 6,
 	"PublicationDate": "1975-05-06T00:00:00",
-	"Publisher": 0,
+	"Publisher": "Darkhorse",
 	"Creators": [],
 	"Stock": [{
 		"Id": 6,
@@ -178,7 +178,7 @@ var issues = [{
 	"Description": null,
 	"SeriesNumber": 7,
 	"PublicationDate": "1975-05-13T00:00:00",
-	"Publisher": 0,
+	"Publisher": "Darkhorse",
 	"Creators": [],
 	"Stock": [{
 		"Id": 7,
@@ -207,7 +207,7 @@ var issues = [{
 	"Description": null,
 	"SeriesNumber": 8,
 	"PublicationDate": "1975-05-20T00:00:00",
-	"Publisher": 0,
+	"Publisher": "Marvel",
 	"Creators": [],
 	"Stock": [{
 		"Id": 8,
