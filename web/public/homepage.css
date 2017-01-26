@@ -10,11 +10,26 @@
     opacity: 0.8;
 }
 
+.item{
+	position: relative;
+}
+
+.item > .title{
+
+}
+
+.item > .price{
+
+}
+
+
+
+
 header{
 }
 
 body{
-	padding-top: 65px;
+	padding-top: 30px;
 	height:100%;
     background:linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6) ),url("SlideShow/sp4.jpg") center center;
 	background-repeat: no-repeat;
@@ -42,7 +57,10 @@ footer{
 }
 
 /* my code for css*/
-
+#myCarousel{
+	position: absolute;
+	top:-50px;
+}
 
 .centerText {
 	text-align: center;
@@ -51,12 +69,14 @@ footer{
 footer {
 	text-align: center;
     font-family: 'Kumar One', cursive;
+	position: absolute;
+	bottom:0px;
 }
 
 .carousel-inner > .item > img,
   .carousel-inner > .item > a > img {
     margin: auto;
-    width: 30%;
+    width: 50%;
 }
 
 .TextFont {
