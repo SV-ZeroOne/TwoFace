@@ -28,6 +28,16 @@ function search(){
 function populateCatalogue(page, itemsOnPage){
 	var table = document.getElementById("catalogue")
 
+	var images = []
+	images.push("https://s-media-cache-ak0.pinimg.com/originals/12/55/76/125576e29feaded7181edbe006d23b5a.jpg")
+	images.push("https://s-media-cache-ak0.pinimg.com/originals/b8/d8/cb/b8d8cb19503b644127da29e5b287e124.jpg")
+	images.push("http://cache.coverbrowser.com/image/daredevil/43-1.jpg")
+	images.push("http://2.bp.blogspot.com/-tTzzl84Ws5Q/UTUs9CDTcoI/AAAAAAAAgd8/iza6iW_ccmI/s1600/Dead+of+Night+11+-+00+-+FC.JPG")
+	images.push("http://static3.wikia.nocookie.net/__cb20130903005637/mlp/images/0/01/Comic_Issue_10_Cover_B.jpg")
+	images.push("https://s-media-cache-ak0.pinimg.com/originals/12/55/76/125576e29feaded7181edbe006d23b5a.jpg")
+	images.push("https://s-media-cache-ak0.pinimg.com/originals/b8/d8/cb/b8d8cb19503b644127da29e5b287e124.jpg")
+	images.push("http://cache.coverbrowser.com/image/daredevil/43-1.jpg")
+
 	for (var i = (page-1)*itemsOnPage; i < issues.length && i < ((page-1)*itemsOnPage)+itemsOnPage; i++) {
 		if(i%4 == 0)
 			table.innerHTML += "<div class='container'>"
@@ -40,7 +50,7 @@ function populateCatalogue(page, itemsOnPage){
 		if(issues[i].Publisher != 0)
 			publisher = issues[i].Publisher
 
-		table.innerHTML += "<div class='col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-4 col-md-3'><div class='issue' style='margin:5px; box-shadow: 10px 10px 8px #aaa;'><a href='product.html?issue=" + issues[i].Id + "'><img id='imagecomic' src='https://s-media-cache-ak0.pinimg.com/originals/b8/d8/cb/b8d8cb19503b644127da29e5b287e124.jpg' alt='Loading..' class='img-responsive'/></a><div class='issueNo'><button type='button' class='btn flat-butt'><strong>#" + issues[i].SeriesNumber + "</strong></button></div><div class='publisher'><button type='button' style='background-color:#34495E;color: white;' class='btn flat-butt'><strong>" + publisher + "</strong></button></div><div class='details' style='padding:5px;'><div class='date'><button type='button' style='background-color:#666;color: white;' class='btn flat-butt'><strong>" + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDay() + "</strong></button></div><h4><strong>" + issues[i].Title + "</strong></h4>" + "</div></div></div>";
+		table.innerHTML += "<div class='col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-4 col-md-3'><div class='issue' style='margin:5px; box-shadow: 10px 10px 8px #aaa;'><a class='image-container' href='product.html?issue=" + issues[i].Id + "'><img src='" + images.pop() + "' alt='Loading..' class='img-responsive'/></a><div class='issueNo'><button type='button' class='btn flat-butt'><strong>#" + issues[i].SeriesNumber + "</strong></button></div><div class='publisher'><button type='button' style='background-color:#34495E;color: white;' class='btn flat-butt'><strong>" + publisher + "</strong></button></div><div class='details' style='padding:5px;'><div class='date'><button type='button' style='background-color:#666;color: white;' class='btn flat-butt'><strong>" + date.getFullYear() + "/" + date.getMonth() + "/" + date.getDay() + "</strong></button></div><h4><strong>" + issues[i].Title + "</strong></h4>" + "</div></div></div>";
 
 		if(i%4)
 			table.innerHTML += "</div>"
@@ -77,6 +87,20 @@ function addToCart(shoppingCart)
 	populateShoppingCart(shoppingCart);
 }
 
+function removeFromCart(issueID, stockID)
+{
+	var shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"))
+
+	for (var i = 0; i < shoppingCart.length; i++) {
+		if(shoppingCart[i].Id == issueID && shoppingCart[i].selectedStock.Id == stockID)
+			shoppingCart.splice(i, 1);
+	}
+
+	localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart))
+
+	populateShoppingCart(shoppingCart);
+}
+
 
 function getIssue(issueId){
 	for (var i = 0; i < issues.length; i++) {
@@ -110,21 +134,28 @@ function checkout(){
 }
 
 function populateShoppingCart(shoppingCart){
+	//localStorage.setItem("shoppingCart") = null;
 	var shoppingItems = document.getElementById("shoppingItems")
 
-	if(shoppingItems != null){
+	if(localStorage.getItem("shoppingCart") != null){
 		shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"))
-		console.log(shoppingCart);
-		var string = "<table class='table table-condensed col-xs-12'><thead><tr><th>Title</th><th>Condition</th><th>Price</th></tr></thead><tbody>"
+		if(shoppingCart.length > 0){
+			var string = "<table class='table table-condensed col-xs-12'><thead><tr><th>Title</th><th>Condition</th><th>Price</th><th>Actions</th></tr></thead><tbody>"
 
-		for(var x = 0; x < shoppingCart.length; x++){
+			for(var x = 0; x < shoppingCart.length; x++){
 
-			string += "<tr><td>" + shoppingCart[x].Title + "</td><td>" + "Very Fine" + "</td><td>R" + 255 + "</td></tr>"
+				string += "<tr><td>" + shoppingCart[x].Title + "</td><td>" + shoppingCart[x].selectedStock.Condition  + "</td><td>R" + shoppingCart[x].selectedStock.Price + "</td><td><button type='button' class='btn btn-warning' onclick='removeFromCart("+ shoppingCart[x].Id +","+ shoppingCart[x].selectedStock.Id +")' id='checkout' style=''><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td></tr>"
+			}
+			string += "</tbody></table><button type='button' class='btn' onclick='hideOrShowShoppingCart()' id='checkout' style='float:left'>" +
+			"<span class='glyphicon glyphicon-remove' aria-hidden='true'></span> Close" +
+			"</button><button type='button' class='btn btn-success' onclick='checkout()' id='checkout' style='float:right'>" +
+			"<span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Checkout" +
+			"</button>"
+			shoppingItems.innerHTML = string
 		}
-		string += "</tbody></table><button type='button' class='btn btn-success' onclick='checkout()' id='checkout' style='float:right'>" +
-		"<span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Checkout" +
-		"</button>"
-		shoppingItems.innerHTML = string
+		else{
+			shoppingItems.innerHTML = "<h4>no items in shopping cart</h4>"
+		}
 	}
 	else{
 		shoppingItems.innerHTML = "<h4>no items in shopping cart</h4>"
