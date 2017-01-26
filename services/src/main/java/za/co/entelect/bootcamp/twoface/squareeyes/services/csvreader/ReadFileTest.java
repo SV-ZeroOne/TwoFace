@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.List;
 
 /**
  * Created by mpho.mahase on 2017/01/21.
@@ -22,12 +23,17 @@ public class ReadFileTest {
 
         ReadFile readFile = new ReadFile(baseFilePath);
         //readFile.outputFileContents(stringArray);
-        stringArray = readFile.fileOpener();
-        readFile.outputFileContents(stringArray);
+        //stringArray = readFile.fileOpener();
+        List<Order> list = readFile.fileOpener();
+        System.out.println(list.get(0).toString());
+        /*readFile.outputFileContents(stringArray);*/
 
-        Order orders = readFile.assignRelevantDataToIssueObject();
+        /*System.out.println(stringArray.length);*/
+        /*Order orders = readFile.assignRelevantDataToIssueObject();
         orders.getDeliveryStatus();
         System.out.print(orders.getDeliveryStatus());
+        System.out.println();*/
+
 
     }
 }
