@@ -17,6 +17,18 @@ body{
     top: -2px;
 	left: 10px;
 }
+.issue > .publisher{
+    position: absolute;
+    top: -2px;
+	right: 10px;
+}
+a > .date{
+	opacity: .9;
+	position: absolute;
+    left: 50%;
+	top: 80%;
+    transform: translate(-50%, 0);
+}
 .flat-butt {
 	background-color:#ffa700
 }
