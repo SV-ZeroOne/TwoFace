@@ -50,6 +50,11 @@ footer {
 	background-size: 100% 90%;
 }
 
+.carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+    margin: auto;
+}
+
 /*.navbar-left {
 	width: auto;
 	height: auto;
