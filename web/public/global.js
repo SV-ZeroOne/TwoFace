@@ -93,7 +93,8 @@ function addToCart(shoppingCart)
             shoppingCart.push(issue)
             localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart))
         }
-        populateShoppingCart(shoppingCart);
+        populateShoppingCart(shoppingCart)
+		hideOrShowShoppingCart()
     }else
 	{
 		alert("No items in stock")
