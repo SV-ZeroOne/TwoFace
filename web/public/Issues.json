@@ -1,43 +1,43 @@
 var issues = [{
 	"Id": 2,
 	"Title": "1st Issue Special",
-	"Description": "This is an awesome comic with amazing characters from the DC universe. You should read this comic.",
+	"Description": null,
 	"SeriesNumber": 1,
 	"PublicationDate": "1975-04-01T00:00:00",
 	"Publisher": "DC",
 	"Creators": [],
 	"Stock": [{
 		"Id": 1,
-		"Condition": 4,
+		"Condition": "Bad",
 		"AvailableQuantity": 6,
 		"Price": 188.03
 	}, {
 		"Id": 24703,
-		"Condition": 5,
+		"Condition": "Okay",
 		"AvailableQuantity": 34,
 		"Price": 175.35
 	}, {
 		"Id": 49405,
-		"Condition": 14,
+		"Condition": "Good",
 		"AvailableQuantity": 11,
 		"Price": 249.52
 	}, {
 		"Id": 74107,
-		"Condition": 10,
+		"Condition": "Fine",
 		"AvailableQuantity": 9,
 		"Price": 226.46
 	}]
 }, {
 	"Id": 3,
 	"Title": "1st Issue Special",
-	"Description": "This is an awesome comic with amazing characters from the DC universe. You should read this comic.",
+	"Description": null,
 	"SeriesNumber": 2,
 	"PublicationDate": "1975-04-08T00:00:00",
 	"Publisher": "Marvel",
 	"Creators": [],
 	"Stock": [{
 		"Id": 2,
-		"Condition": 4,
+		"Condition":"Bad",
 		"AvailableQuantity": 0,
 		"Price": 99.14
 	}, {
@@ -59,14 +59,10 @@ var issues = [{
 }, {
 	"Id": 4,
 	"Title": "1st Issue Special",
-	"Description": "This is an awesome comic with amazing characters from the DC universe. You should read this comic.",
+	"Description": null,
 	"SeriesNumber": 3,
 	"PublicationDate": "1975-04-15T00:00:00",
-<<<<<<< Updated upstream
-	"Publisher": "Marvel",
-=======
-	"Publisher": "Mavel",
->>>>>>> Stashed changes
+	"Publisher": "DC",
 	"Creators": [],
 	"Stock": [{
 		"Id": 3,
@@ -92,10 +88,10 @@ var issues = [{
 }, {
 	"Id": 5,
 	"Title": "1st Issue Special",
-	"Description": "This is an awesome comic with amazing characters from the DC universe. You should read this comic.",
+	"Description": null,
 	"SeriesNumber": 4,
 	"PublicationDate": "1975-04-22T00:00:00",
-	"Publisher": "DC",
+	"Publisher": "Darkhorse",
 	"Creators": [],
 	"Stock": [{
 		"Id": 4,
@@ -121,10 +117,10 @@ var issues = [{
 }, {
 	"Id": 6,
 	"Title": "1st Issue Special",
-	"Description": "This is an awesome comic with amazing characters from the DC universe. You should read this comic.",
+	"Description": null,
 	"SeriesNumber": 5,
 	"PublicationDate": "1975-04-29T00:00:00",
-	"Publisher": "DC",
+	"Publisher": "Image comics",
 	"Creators": [],
 	"Stock": [{
 		"Id": 5,
@@ -153,11 +149,7 @@ var issues = [{
 	"Description": null,
 	"SeriesNumber": 6,
 	"PublicationDate": "1975-05-06T00:00:00",
-<<<<<<< Updated upstream
-	"Publisher": "Darkhorse",
-=======
-	"Publisher": 0,
->>>>>>> Stashed changes
+	"Publisher": "Marvel",
 	"Creators": [],
 	"Stock": [{
 		"Id": 6,
@@ -186,11 +178,7 @@ var issues = [{
 	"Description": null,
 	"SeriesNumber": 7,
 	"PublicationDate": "1975-05-13T00:00:00",
-<<<<<<< Updated upstream
-	"Publisher": "Darkhorse",
-=======
-	"Publisher": 0,
->>>>>>> Stashed changes
+	"Publisher": "Marvel",
 	"Creators": [],
 	"Stock": [{
 		"Id": 7,
@@ -219,11 +207,7 @@ var issues = [{
 	"Description": null,
 	"SeriesNumber": 8,
 	"PublicationDate": "1975-05-20T00:00:00",
-<<<<<<< Updated upstream
-	"Publisher": "Marvel",
-=======
-	"Publisher": 0,
->>>>>>> Stashed changes
+	"Publisher": "DC",
 	"Creators": [],
 	"Stock": [{
 		"Id": 8,
@@ -14633,10 +14617,10 @@ var issues = [{
 }, {
 	"Id": 506,
 	"Title": "Action Comics (Vol. 1)",
-	"Description": "This is an awesome comic with amazing characters from the DC universe. You should read this comic.",
+	"Description": null,
 	"SeriesNumber": 413,
 	"PublicationDate": "1946-04-24T00:00:00",
-	"Publisher": "DC",
+	"Publisher": 0,
 	"Creators": [],
 	"Stock": [{
 		"Id": 505,
@@ -14646,7 +14630,7 @@ var issues = [{
 	}, {
 		"Id": 25207,
 		"Condition": 6,
-		"AvailableQuantity": 0,
+		"AvailableQuantity": 6,
 		"Price": 9.93
 	}, {
 		"Id": 49909,
