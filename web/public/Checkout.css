@@ -9,7 +9,7 @@
 body{
 	padding-top: 65px;
 	height:100%;
-	background:linear-gradient( rgba(255, 255, 255, 0.5), rgba(255,225, 255, 0.5) ), url("background/9.jpg") center center;
+	background:linear-gradient( rgba(255, 255, 255, 0.7), rgba(0,0, 0, 0.5) ), url("background/9.jpg") center center;
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
     background-attachment: fixed;
@@ -19,6 +19,7 @@ body{
 }
 
 .container{
+    opacity: 0.9;
 }
 .well{
 	border:0;
