@@ -33,12 +33,13 @@ WITH ordI AS (
 		i.IssueID 
 	FROM dbo.Issues AS i
 	WHERE i.Title like '%star wars%'
+	GROUP BY i.Title
 	ORDER BY i.PublicationDate DESC
 	)
 SELECT i.Title, SUM(s.AvailableQty) AS StockOnHand
 FROM ordI AS i
 	INNER JOIN dbo.Stock AS s
 	ON i.IssueID = s.IssueID
-GROUP BY i.IssueID, i.Title;
+GROUP BY i.Title;
 
 -- 9.	Which Star Wars comics have been ordered but not delivered? How many of each have been ordered? How many of each remain in stock? - Mpho
