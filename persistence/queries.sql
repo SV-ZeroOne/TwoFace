@@ -26,6 +26,7 @@ WHERE s.Condition = 'Very Fine';
 -- 7.	What title has the largest number of comics? Specify per publisher. In light of the recent increase in interest due to the new movie, the co-owner intends to do some Star Wars specific advertising - Sean
 
 -- 8.	What are the 5 most recently published Star Wars titles, and how much stock is on hand for each one? - Quinton
+
 WITH ordI AS (
 	SELECT TOP(5) i.Title, 
 		i.PublicationDate,
