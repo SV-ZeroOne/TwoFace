@@ -1,6 +1,10 @@
 .hide{
-	display: none;
+	/*display: none;*/
+	position: absolute;
+	transition: opacity 1s ease-out;
+    opacity: 0; 
 }
+
 footer {
 	text-align: center;
     font-family: 'Kumar One', cursive;
@@ -70,6 +74,9 @@ body{
 	border:0;
 	padding:0;
 	margin:0;
+	animation-name: example;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
 }
 .footer{
 	position: absolute;

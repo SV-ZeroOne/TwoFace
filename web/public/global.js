@@ -107,7 +107,11 @@ function increaseQty(issueID, stockID)
 
 	for (var i = 0; i < shoppingCart.length; i++) {
 		if(shoppingCart[i].Id == issueID && shoppingCart[i].selectedStock.Id == stockID){
-			shoppingCart[i].qty = shoppingCart[i].qty + 1
+			if(shoppingCart[i].selectedStock.AvailableQuantity >= (shoppingCart[i].qty + 1))
+				shoppingCart[i].qty = shoppingCart[i].qty + 1
+			else{
+				alert("There is more stock for this item");
+			}
 			break
 		}
 	}
@@ -123,7 +127,11 @@ function decreaseQty(issueID, stockID)
 
 	for (var i = 0; i < shoppingCart.length; i++) {
 		if(shoppingCart[i].Id == issueID && shoppingCart[i].selectedStock.Id == stockID){
-			shoppingCart[i].qty = shoppingCart[i].qty - 1
+			if(shoppingCart[i].qty > 1)
+				shoppingCart[i].qty = shoppingCart[i].qty - 1
+			else{
+				alert("You can't have a negative stock Quantity");
+			}
 			break
 		}
 	}
@@ -190,7 +198,7 @@ function populateShoppingCart(shoppingCart){
 
 			for(var x = 0; x < shoppingCart.length; x++){
 
-				string += "<tr><td>" + shoppingCart[x].Title + "</td><td>" + shoppingCart[x].selectedStock.Condition  + "</td><td>R" + shoppingCart[x].selectedStock.Price + "</td><td><button type='button' class='btn btn-default' onclick='decreaseQty("+ shoppingCart[x].Id +","+ shoppingCart[x].selectedStock.Id +")' id='checkout' style=''><span class='glyphicon glyphicon-minus' aria-hidden='true'></span></button>"+ shoppingCart[x].qty +"<button type='button' class='btn btn-default' onclick='increaseQty("+ shoppingCart[x].Id +","+ shoppingCart[x].selectedStock.Id +")' id='checkout' style=''><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></button></td><td><button type='button' class='btn btn-warning' onclick='removeFromCart("+ shoppingCart[x].Id +","+ shoppingCart[x].selectedStock.Id +")' id='checkout' style=''><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td></tr>"
+				string += "<tr><td>" + shoppingCart[x].Title + "</td><td>" + shoppingCart[x].selectedStock.Condition  + "</td><td>R" + shoppingCart[x].selectedStock.Price*shoppingCart[x].qty + "</td><td><button type='button' class='btn btn-default' onclick='decreaseQty("+ shoppingCart[x].Id +","+ shoppingCart[x].selectedStock.Id +")' id='checkout' style=''><span class='glyphicon glyphicon-minus' aria-hidden='true'></span></button>"+ shoppingCart[x].qty +"<button type='button' class='btn btn-default' onclick='increaseQty("+ shoppingCart[x].Id +","+ shoppingCart[x].selectedStock.Id +")' id='checkout' style=''><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></button></td><td><button type='button' class='btn btn-warning' onclick='removeFromCart("+ shoppingCart[x].Id +","+ shoppingCart[x].selectedStock.Id +")' id='checkout' style=''><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td></tr>"
 			}
 			string += "</tbody></table><button type='button' class='btn' onclick='hideOrShowShoppingCart()' id='checkout' style='float:left; margin-right:5px'>" +
 			"<span class='glyphicon glyphicon-remove' aria-hidden='true'></span> Close" +
