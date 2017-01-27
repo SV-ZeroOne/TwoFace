@@ -18,25 +18,34 @@ GROUP BY s.Name;
 --			the co-owner would like some information about the comics, for some advertising he’s planning - Quinton
 
 -- per item
-SELECT (20 - s.AvailableQty) * s.Price AS PriceToStock,
-	s.Condition,
-	s.IssueID,
-	s.Price,
-	s.StockReferenceID,
-	s.AvailableQty
-FROM dbo.SupplierQuotes AS sq
-FULL OUTER JOIN dbo.Stock AS s
-ON s.IssueID = sq.IssueID
-WHERE s.Condition = 'Very Fine' AND s.AvailableQty < 20
-ORDER BY s.IssueID
+
+	SELECT (20 - s.AvailableQty) * sq.Price AS PriceToStock,
+		(20 - s.AvailableQty) AS NeededQty,
+		s.Condition,
+		s.IssueID,
+		sq.Price,
+		s.StockReferenceID,
+		s.AvailableQty,
+		sq.QuoteID
+	FROM dbo.SupplierQuotes AS sq
+	LEFT JOIN (SELECT * 
+				FROM dbo.Stock AS s 
+				WHERE s.Condition = 'Very Fine' AND s.AvailableQty < 20
+				) AS s
+	ON s.IssueID = sq.IssueID
+	ORDER BY sq.QuoteID
+
+SELECT * FROM Stock WHERE IssueID = 2327
 
 -- total
 WITH totalStock AS (
-	SELECT SUM((20 - s.AvailableQty) * s.Price) AS PriceToStock
+	SELECT SUM((20 - s.AvailableQty) * sq.Price) AS PriceToStock
 	FROM dbo.SupplierQuotes AS sq
-	FULL OUTER JOIN dbo.Stock AS s
+	LEFT JOIN (SELECT * 
+				FROM dbo.Stock AS s 
+				WHERE s.Condition = 'Very Fine' AND s.AvailableQty < 20
+				) AS s
 	ON s.IssueID = sq.IssueID
-	WHERE s.Condition = 'Very Fine' AND s.AvailableQty < 20
 )
 SELECT totalStock.PriceToStock 
 FROM totalStock

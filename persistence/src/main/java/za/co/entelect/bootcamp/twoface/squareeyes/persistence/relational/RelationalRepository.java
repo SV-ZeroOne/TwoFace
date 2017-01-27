@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * Created by sean.vienings on 2017/01/16.
  */
+@org.springframework.stereotype.Repository
 public abstract class RelationalRepository<T> implements Repository<T> {
 
     private static final Logger logger = LoggerFactory.getLogger(RelationalRepository.class);
