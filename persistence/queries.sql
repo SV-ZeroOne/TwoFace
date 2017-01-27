@@ -13,13 +13,35 @@ GROUP BY s.Name;
 
 -- 4.	What title has been ordered most frequently from suppliers (number of distinct orders, not total quantity ordered), and how many of that title have been ordered? Break the results down by the series number and include the total cost of all the orders. - Sean
 
--- 5.	If we consider only stock in the ‘Very Fine’ condition, and only stock for which we have a quote from a supplier, how much would it cost to bring all comic stock to at least 20 units? In addition, the co-owner would like some information about the comics, for some advertising he’s planning - Quinton
+-- 5.	If we consider only stock in the ‘Very Fine’ condition, and only stock for which we have a quote from a supplier, 
+--			how much would it cost to bring all comic stock to at least 20 units? In addition, 
+--			the co-owner would like some information about the comics, for some advertising he’s planning - Quinton
 
-SELECT SUM(sq.Price)
-FROM dbo.Stock AS s
-	INNER JOIN dbo.SupplierQuotes AS sq
+-- per item
+SELECT (20 - s.AvailableQty) * s.Price AS PriceToStock,
+	s.Condition,
+	s.IssueID,
+	s.Price,
+	s.StockReferenceID,
+	s.AvailableQty
+FROM dbo.SupplierQuotes AS sq
+FULL OUTER JOIN dbo.Stock AS s
+ON s.IssueID = sq.IssueID
+WHERE s.Condition = 'Very Fine' AND s.AvailableQty < 20
+ORDER BY s.IssueID
+
+-- total
+WITH totalStock AS (
+	SELECT SUM((20 - s.AvailableQty) * s.Price) AS PriceToStock
+	FROM dbo.SupplierQuotes AS sq
+	FULL OUTER JOIN dbo.Stock AS s
 	ON s.IssueID = sq.IssueID
-WHERE s.Condition = 'Very Fine';
+	WHERE s.Condition = 'Very Fine' AND s.AvailableQty < 20
+)
+SELECT totalStock.PriceToStock 
+FROM totalStock
+GROUP BY totalStock.PriceToStock;
+
 
 -- 6.	Identify the writer/artist who has contributed to the most comic books. What is the person’s name, what are the 10 most recent comics he’s contributed to and what was his role on each? - Mpho
 
@@ -33,7 +55,6 @@ WITH ordI AS (
 		i.IssueID 
 	FROM dbo.Issues AS i
 	WHERE i.Title like '%star wars%'
-	GROUP BY i.Title
 	ORDER BY i.PublicationDate DESC
 	)
 SELECT i.Title, SUM(s.AvailableQty) AS StockOnHand
