@@ -82,12 +82,14 @@ function addToCart(shoppingCart)
         if (localStorage.getItem("shoppingCart") == null) {
             shoppingCart = []
             issue.selectedStock = stock
+			issue.qty = 1
             shoppingCart.push(issue)
             localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart))
         }
         else {
             shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"))
             issue.selectedStock = stock
+			issue.qty = 1
             shoppingCart.push(issue)
             localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart))
         }
@@ -96,6 +98,38 @@ function addToCart(shoppingCart)
 	{
 		alert("No items in stock")
 	}
+}
+
+function increaseQty(issueID, stockID)
+{
+	var shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"))
+
+	for (var i = 0; i < shoppingCart.length; i++) {
+		if(shoppingCart[i].Id == issueID && shoppingCart[i].selectedStock.Id == stockID){
+			shoppingCart[i].qty = shoppingCart[i].qty + 1
+			break
+		}
+	}
+
+	localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart))
+
+	populateShoppingCart(shoppingCart);
+}
+
+function decreaseQty(issueID, stockID)
+{
+	var shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"))
+
+	for (var i = 0; i < shoppingCart.length; i++) {
+		if(shoppingCart[i].Id == issueID && shoppingCart[i].selectedStock.Id == stockID){
+			shoppingCart[i].qty = shoppingCart[i].qty - 1
+			break
+		}
+	}
+
+	localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart))
+
+	populateShoppingCart(shoppingCart);
 }
 
 function removeFromCart(issueID, stockID)
@@ -151,11 +185,11 @@ function populateShoppingCart(shoppingCart){
 	if(localStorage.getItem("shoppingCart") != null){
 		shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"))
 		if(shoppingCart.length > 0){
-			var string = "<table class='table table-condensed col-xs-12'><thead><tr><th>Title</th><th>Condition</th><th>Price</th><th>Actions</th></tr></thead><tbody>"
+			var string = "<table class='table table-condensed col-xs-12'><thead><tr><th>Title</th><th>Condition</th><th>Price</th><th>Qty</th><th>Actions</th></tr></thead><tbody>"
 
 			for(var x = 0; x < shoppingCart.length; x++){
 
-				string += "<tr><td>" + shoppingCart[x].Title + "</td><td>" + shoppingCart[x].selectedStock.Condition  + "</td><td>R" + shoppingCart[x].selectedStock.Price + "</td><td><button type='button' class='btn btn-warning' onclick='removeFromCart("+ shoppingCart[x].Id +","+ shoppingCart[x].selectedStock.Id +")' id='checkout' style=''><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td></tr>"
+				string += "<tr><td>" + shoppingCart[x].Title + "</td><td>" + shoppingCart[x].selectedStock.Condition  + "</td><td>R" + shoppingCart[x].selectedStock.Price + "</td><td><button type='button' class='btn btn-default' onclick='decreaseQty("+ shoppingCart[x].Id +","+ shoppingCart[x].selectedStock.Id +")' id='checkout' style=''><span class='glyphicon glyphicon-minus' aria-hidden='true'></span></button>"+ shoppingCart[x].qty +"<button type='button' class='btn btn-default' onclick='increaseQty("+ shoppingCart[x].Id +","+ shoppingCart[x].selectedStock.Id +")' id='checkout' style=''><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></button></td><td><button type='button' class='btn btn-warning' onclick='removeFromCart("+ shoppingCart[x].Id +","+ shoppingCart[x].selectedStock.Id +")' id='checkout' style=''><span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></td></tr>"
 			}
 			string += "</tbody></table><button type='button' class='btn' onclick='hideOrShowShoppingCart()' id='checkout' style='float:left; margin-right:5px'>" +
 			"<span class='glyphicon glyphicon-remove' aria-hidden='true'></span> Close" +
