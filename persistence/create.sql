@@ -57,7 +57,6 @@ CREATE TABLE Vouchers
 	VoucherValue NUMERIC(8,2) NOT NULL,
 );
 
--- Should there be a primary key for this table. Doesn't seem usefull
 CREATE TABLE Payments
 (
 	PaymentID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
