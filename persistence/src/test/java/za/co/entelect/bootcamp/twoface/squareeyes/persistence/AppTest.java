@@ -44,6 +44,16 @@ public class AppTest {
 
     @Test
     @Ignore
+    public void getStockByID() {
+        StockRepository str = new StockRepositoryIMP();
+
+        Stock stock = str.find(30);
+        stock.toString();
+
+    }
+
+    @Test
+    @Ignore
     public void persistNewCreatorThroughIssue() {
         IssuesRepository ir = new IssuesRepositoryIMP();
 
