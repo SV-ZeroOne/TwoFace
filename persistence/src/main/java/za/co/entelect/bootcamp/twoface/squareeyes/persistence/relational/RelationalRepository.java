@@ -12,12 +12,13 @@ import java.util.List;
 /**
  * Created by sean.vienings on 2017/01/16.
  */
+@org.springframework.stereotype.Repository
 public abstract class RelationalRepository<T> implements Repository<T> {
 
     private static final Logger logger = LoggerFactory.getLogger(RelationalRepository.class);
 
+    @PersistenceContext
     protected EntityManager entityManager;
-    protected EntityManagerFactory entityManagerFactory;
 
     private Class<T> type;
 
@@ -25,9 +26,6 @@ public abstract class RelationalRepository<T> implements Repository<T> {
         Type t = getClass().getGenericSuperclass();
         ParameterizedType pt = (ParameterizedType) t;
         type = (Class) pt.getActualTypeArguments()[0];
-
-        entityManagerFactory = Persistence.createEntityManagerFactory("Ironman");
-        entityManager = entityManagerFactory.createEntityManager();
     }
 
     public T find(Object id) {
@@ -111,10 +109,8 @@ public abstract class RelationalRepository<T> implements Repository<T> {
 
     @PersistenceContext
     public T create(T t) {
-        entityManager.getTransaction().begin();
         entityManager.persist(t);
         entityManager.flush();
-        entityManager.getTransaction().commit();
         return t;
     }
 

@@ -33,11 +33,45 @@ GROUP BY i.Title, i.SeriesNumber, i.IssueID
 ORDER BY i.SeriesNumber;
 -- 5.	If we consider only stock in the ‘Very Fine’ condition, and only stock for which we have a quote from a supplier, how much would it cost to bring all comic stock to at least 20 units? In addition, the co-owner would like some information about the comics, for some advertising he’s planning - Quinton
 
-SELECT SUM(sq.Price)
-FROM dbo.Stock AS s
-	INNER JOIN dbo.SupplierQuotes AS sq
+-- 5.	If we consider only stock in the ‘Very Fine’ condition, and only stock for which we have a quote from a supplier, 
+--			how much would it cost to bring all comic stock to at least 20 units? In addition, 
+--			the co-owner would like some information about the comics, for some advertising he’s planning - Quinton
+
+
+-- per item
+
+	SELECT (20 - s.AvailableQty) * sq.Price AS PriceToStock,
+		(20 - s.AvailableQty) AS NeededQty,
+		s.Condition,
+		s.IssueID,
+		sq.Price,
+		s.StockReferenceID,
+		s.AvailableQty,
+		sq.QuoteID
+	FROM dbo.SupplierQuotes AS sq
+	LEFT JOIN (SELECT * 
+				FROM dbo.Stock AS s 
+				WHERE s.Condition = 'Very Fine' AND s.AvailableQty < 20
+				) AS s
 	ON s.IssueID = sq.IssueID
-WHERE s.Condition = 'Very Fine';
+	ORDER BY sq.QuoteID
+
+SELECT * FROM Stock WHERE IssueID = 2327
+
+-- total
+WITH totalStock AS (
+	SELECT SUM((20 - s.AvailableQty) * sq.Price) AS PriceToStock
+	FROM dbo.SupplierQuotes AS sq
+	LEFT JOIN (SELECT * 
+				FROM dbo.Stock AS s 
+				WHERE s.Condition = 'Very Fine' AND s.AvailableQty < 20
+				) AS s
+	ON s.IssueID = sq.IssueID
+)
+SELECT totalStock.PriceToStock 
+FROM totalStock
+GROUP BY totalStock.PriceToStock;
+
 
 -- 6.	Identify the writer/artist who has contributed to the most comic books. What is the person’s name, what are the 10 most recent comics he’s contributed to and what was his role on each? - Mpho
 
@@ -48,6 +82,7 @@ FROM dbo.Issues as i
 GROUP BY i.Publisher;
 -- In light of the recent increase in interest due to the new movie, the co-owner intends to do some Star Wars specific advertising - Sean
 -- 8.	What are the 5 most recently published Star Wars titles, and how much stock is on hand for each one? - Quinton
+
 WITH ordI AS (
 	SELECT TOP(5) i.Title, 
 		i.PublicationDate,
@@ -60,6 +95,6 @@ SELECT i.Title, SUM(s.AvailableQty) AS StockOnHand
 FROM ordI AS i
 	INNER JOIN dbo.Stock AS s
 	ON i.IssueID = s.IssueID
-GROUP BY i.IssueID, i.Title;
+GROUP BY i.Title;
 
 -- 9.	Which Star Wars comics have been ordered but not delivered? How many of each have been ordered? How many of each remain in stock? - Mpho
