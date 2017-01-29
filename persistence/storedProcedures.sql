@@ -30,9 +30,11 @@ BEGIN TRANSACTION
 
 DECLARE @PaymentAmount NUMERIC(8,2);
 DECLARE @StockLeft varchar(15);
+DECLARE @OrderTbl TABLE (ID INT)
+DECLARE @OrderID int;
 
 SET @CustomerID = (SELECT c.CustomerID FROM dbo.Customers as c
-	WHERE c.CustomerID = @CustomerID)
+	WHERE c.CustomerID = @CustomerID);
 
 IF @CustomerID IS NULL
 	RAISERROR ('No such customer with that ID exists', -- Message text.
@@ -41,7 +43,7 @@ IF @CustomerID IS NULL
                );
 
 SET @CustomerAddressID = (SELECT ca.CustomerAddressID FROM dbo.CustomerAddress as ca
-	WHERE ca.CustomerID = @CustomerID AND ca.CustomerAddressID = @CustomerAddressID)
+	WHERE ca.CustomerID = @CustomerID AND ca.CustomerAddressID = @CustomerAddressID);
 
 IF @CustomerAddressID IS NULL
 	RAISERROR ('Customer Address is not associated with the Customer ID or No such customer address with that ID exists', -- Message text.
@@ -54,7 +56,7 @@ SET @PaymentAmount = (SELECT SUM(s.Price * sc.Quantity) AS TotalCostOfOrder
 	INNER JOIN dbo.ShoppingCarts as sc
 	ON s.StockReferenceID = sc.StockID
 	GROUP BY sc.CustomerID
-	HAVING sc.CustomerID = @CustomerID)
+	HAVING sc.CustomerID = @CustomerID);
 
 IF @PaymentAmount IS NULL OR @PaymentAmount < 0
 	RAISERROR ('There is no items in cart or the payment amount is null', -- Message text.
@@ -63,24 +65,42 @@ IF @PaymentAmount IS NULL OR @PaymentAmount < 0
                );
 
 
-SET @StockLeft = (
-	SELECT 'No stock left'
-	FROM dbo.Stock as s
-	INNER JOIN dbo.ShoppingCarts as sc
-	ON s.StockReferenceID = sc.StockID
-	WHERE (s.AvailableQty - sc.Quantity) < 0
-	GROUP BY sc.CustomerID
-)
 
-IF @StockLeft IS NOT NULL
-	RAISERROR ('There is not enough stock for one of the items in the shopping cart', -- Message text.
+
+
+INSERT INTO dbo.CustomerOrders (CustomerID, CustomerAddressID, DeliveryOption, SpecialInstructions, PaymentAmount, PaymentStatus) 
+OUTPUT INSERTED.CustomerOrdersID INTO @OrderTbl(ID)
+VALUES (@CustomerID, @CustomerAddressID, @DeliveryOption, @SpecialInstructions, @PaymentAmount, 'Pending Payment');
+
+SET @OrderID = (
+	SELECT ot.ID FROM @OrderTbl AS ot
+);
+
+IF @OrderID IS NULL
+	RAISERROR ('Problem processing order', -- Message text.
                16, -- Severity.
                1 -- State.
                );
 
+INSERT INTO dbo.Invoices (OrderID, StockID, Quantity, Price)
+SELECT @OrderID, s.StockReferenceID, sc.Quantity, s.Price
+FROM dbo.ShoppingCarts AS sc
+INNER JOIN dbo.Stock AS s
+ON sc.StockID = s.StockReferenceID
+	
+UPDATE
+    s
+SET
+    s.AvailableQty = s.AvailableQty - sc.Quantity
+FROM
+    dbo.Stock AS s
+    INNER JOIN dbo.ShoppingCarts AS sc
+        ON s.StockReferenceID = sc.StockID AND sc.CustomerID = @CustomerID
+WHERE
+    s.StockReferenceID = sc.StockID
 
-INSERT INTO dbo.CustomerOrders (CustomerID, CustomerAddressID, DeliveryOption, SpecialInstructions, PaymentAmount, PaymentStatus)  
-SELECT @CustomerID, @CustomerAddressID, @DeliveryOption, @SpecialInstructions, @PaymentAmount, 'pending'
+DELETE FROM dbo.ShoppingCarts
+WHERE dbo.ShoppingCarts.CustomerID = @CustomerID;
 
 COMMIT
 
@@ -90,7 +110,6 @@ BEGIN CATCH
     ROLLBACK TRANSACTION
 END CATCH
 
-GO
 
 EXEC dbo.ProcessCustomerOrder @CustomerID = 1, @CustomerAddressID = 1, @DeliveryOption = 'Pickup', @SpecialInstructions = 'Leave it on the desk';
 
@@ -109,6 +128,24 @@ EXEC dbo.ProcessCustomerOrder @CustomerID = 2, @CustomerAddressID = 1, @Delivery
 
 -- No stock left for issue customer id
 EXEC dbo.ProcessCustomerOrder @CustomerID = 3, @CustomerAddressID = 3, @DeliveryOption = 'Pickup', @SpecialInstructions = 'Leave it on the desk';
+
+-- Customer order
+EXEC dbo.ProcessCustomerOrder @CustomerID = 1, @CustomerAddressID = 1, @DeliveryOption = 'Pickup', @SpecialInstructions = 'Leave it on the desk';
+
+
+SET @StockLeft = (
+	SELECT 'No stock left'
+	FROM dbo.Stock as s
+	INNER JOIN dbo.ShoppingCarts as sc
+	ON s.StockReferenceID = sc.StockID
+	WHERE (s.AvailableQty - sc.Quantity) < 0
+);
+
+IF @StockLeft IS NOT NULL
+	RAISERROR ('There is not enough stock for one of the items in the shopping cart', -- Message text.
+               16, -- Severity.
+               1 -- State.
+               );
 
 -- Write a table-valued function that takes a customer, 
 --		start date and end date as parameters and returns the list of items they purchased in that period. 
