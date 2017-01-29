@@ -23,7 +23,45 @@
 --		returns the sales totals for that period per title. 
 --		There should also be a total per publisher and a grand total. 
 
+	--for TotalPerIssue
+CREATE PROCEDURE TotalSales
+	@startdate SMALLDATETIME,
+	@enddate SMALLDATETIME
+AS
+SELECT iss.Title,
+	   SUM(co.PaymentAmount) AS TotalPerIssue
+FROM dbo.CustomerOrders AS co 
+INNER JOIN dbo.Invoices AS inv
+ON inv.orderID = co.customerOrdersID
+INNER JOIN dbo.Stock AS s
+ON s.StockReferenceID = inv.StockID
+INNER JOIN dbo.Issues AS iss
+ON iss.IssueID = s.IssueID
+INNER JOIN dbo.Orders AS o
+ON o.IssueID = iss.IssueID
+WHERE o.ShipmentDate BETWEEN @startdate AND @enddate
+GROUP BY iss.Title
+ORDER BY TotalPerIssue DESC;
 
+	--for TotalPerPublisher
+CREATE PROCEDURE TotalSales
+	@startdate SMALLDATETIME,
+	@enddate SMALLDATETIME
+AS
+SELECT iss.Publisher,
+	   SUM(co.PaymentAmount) AS TotalPerPublisher
+FROM dbo.CustomerOrders AS co 
+INNER JOIN dbo.Invoices AS inv
+ON inv.orderID = co.customerOrdersID
+INNER JOIN dbo.Stock AS s
+ON s.StockReferenceID = inv.StockID
+INNER JOIN dbo.Issues AS iss
+ON iss.IssueID = s.IssueID
+INNER JOIN dbo.Orders AS o
+ON o.IssueID = iss.IssueID
+WHERE o.ShipmentDate BETWEEN @startdate AND @enddate
+GROUP BY iss.Publisher
+ORDER BY TotalPerPublisher DESC;
 
 -- Take one of the procedures you have written and do the following: ( WE SHOULD MAYBE DO THIS IN WORD I DON'T KNOW )
 --		1.	Recommend an index which will improve performance of that procedure.
