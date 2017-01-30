@@ -1,6 +1,8 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.persistence;
 
 import org.junit.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.ComicCreator;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.Creator;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
@@ -22,9 +24,12 @@ import java.util.List;
 @Ignore
 public class AppTest {
 
+    StockRepository sr;
+
     @Before
-    @Ignore
     public void print(){
+        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:za/co/entelect/bootcamp/twoface/squareeyes/persistence/root-context.xml");
+        sr = context.getBean(StockRepositoryIMP.class);
     }
 
     @Test
@@ -43,12 +48,10 @@ public class AppTest {
     }
 
     @Test
-    @Ignore
     public void getStockByID() {
-        StockRepository str = new StockRepositoryIMP();
 
-        Stock stock = str.find(30);
-        stock.toString();
+        Stock stock = sr.find(30);
+        System.out.println("R " + stock.getPrice());
     }
 
     @Test

@@ -16,20 +16,17 @@ import java.util.List;
  * Created by sean.vienings on 2017/01/16.
  */
 @org.springframework.stereotype.Repository
-public class RelationalRepository<T> implements Repository<T> {
+public abstract class RelationalRepository<T> implements Repository<T> {
 
     private static final Logger logger = LoggerFactory.getLogger(RelationalRepository.class);
 
     @PersistenceContext
     protected EntityManager entityManager;
-    protected EntityManagerFactory entityManagerFactory;
 
     private Class<T> type;
 
     public RelationalRepository() {
-        ApplicationContext context = new ClassPathXmlApplicationContext("root-context.xml");
-        entityManagerFactory = (EntityManagerFactory) context.getBean("entityManagerFactory");
-        entityManager = entityManagerFactory.createEntityManager();
+
         Type t = getClass().getGenericSuperclass();
         ParameterizedType pt = (ParameterizedType) t;
         type = (Class) pt.getActualTypeArguments()[0];
@@ -127,4 +124,11 @@ public class RelationalRepository<T> implements Repository<T> {
         return t;
     }
 
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
 }
