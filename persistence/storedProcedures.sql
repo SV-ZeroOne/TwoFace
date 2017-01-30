@@ -29,8 +29,8 @@ BEGIN TRY
 BEGIN TRANSACTION
 
 DECLARE @PaymentAmount NUMERIC(8,2);
-DECLARE @StockLeft varchar(15);
-DECLARE @OrderTbl TABLE (ID INT)
+DECLARE @StockLeft SMALLINT;
+DECLARE @OrderTbl TABLE (ID INT);
 DECLARE @OrderID int;
 
 SET @CustomerID = (SELECT c.CustomerID FROM dbo.Customers as c
@@ -65,7 +65,21 @@ IF @PaymentAmount IS NULL OR @PaymentAmount < 0
                );
 
 
+SET @StockLeft = (
+	SELECT TOP(1) (s.AvailableQty - sc.Quantity) AS QuanitityLeft
+	FROM dbo.Stock as s
+	INNER JOIN dbo.ShoppingCarts as sc
+	ON s.StockReferenceID = sc.StockID AND sc.CustomerID = @CustomerID
+	WHERE (s.AvailableQty - sc.Quantity) < 0
+);
 
+PRINT @StockLeft;
+
+IF @StockLeft IS NOT NULL
+	RAISERROR ('There is not enough stock for one of the items in the shopping cart', -- Message text.
+               16, -- Severity.
+               1 -- State.
+               );
 
 
 INSERT INTO dbo.CustomerOrders (CustomerID, CustomerAddressID, DeliveryOption, SpecialInstructions, PaymentAmount, PaymentStatus) 
@@ -126,43 +140,46 @@ EXEC dbo.ProcessCustomerOrder @CustomerID = 1, @CustomerAddressID = 2, @Delivery
 EXEC dbo.ProcessCustomerOrder @CustomerID = 2, @CustomerAddressID = 1, @DeliveryOption = 'Pickup', @SpecialInstructions = 'Leave it on the desk';
 
 
--- No stock left for issue customer id
-EXEC dbo.ProcessCustomerOrder @CustomerID = 3, @CustomerAddressID = 3, @DeliveryOption = 'Pickup', @SpecialInstructions = 'Leave it on the desk';
+-- No stock left for stock id
+EXEC dbo.ProcessCustomerOrder @CustomerID = 2, @CustomerAddressID = 2, @DeliveryOption = 'Pickup', @SpecialInstructions = 'Leave it on the desk';
 
 -- Customer order
 EXEC dbo.ProcessCustomerOrder @CustomerID = 1, @CustomerAddressID = 1, @DeliveryOption = 'Pickup', @SpecialInstructions = 'Leave it on the desk';
 
 
-SET @StockLeft = (
-	SELECT 'No stock left'
-	FROM dbo.Stock as s
-	INNER JOIN dbo.ShoppingCarts as sc
-	ON s.StockReferenceID = sc.StockID
-	WHERE (s.AvailableQty - sc.Quantity) < 0
-);
-
-IF @StockLeft IS NOT NULL
-	RAISERROR ('There is not enough stock for one of the items in the shopping cart', -- Message text.
-               16, -- Severity.
-               1 -- State.
-               );
-
 -- Write a table-valued function that takes a customer, 
 --		start date and end date as parameters and returns the list of items they purchased in that period. 
 --		An item should only appear once, with a total of how many were purchased.
 
+GO
+
+CREATE FUNCTION GetPurchaceHistory (@CustomerID int, @StartDate DATE, @EndDate DATE)
+RETURNS TABLE 
+AS 
+RETURN (
+SELECT iss.Title, s.Condition, i.Quantity FROM Customers as c
+INNER JOIN CustomerOrders as co
+ON c.CustomerID = co.CustomerID
+INNER JOIN Invoices as i
+ON co.CustomerOrdersID = i.OrderID
+INNER JOIN Stock as s
+ON i.StockID = s.StockReferenceID
+INNER JOIN Issues as iss
+ON iss.IssueID = s.IssueID
+WHERE c.CustomerID = @CustomerID
+);
+
+GO
 
 
 -- Write a stored procedure which returns a list of stock items 
-<<<<<<< HEAD
 --		for which the current in-stock quantity is less than the total quantity in all current customers’
 --		shopping carts combined.Error "Subquery returned more than 1 value. This is not permitted when the subquery follows =, !=, <, <= , >, >= or when the subquery is used as an expression." occurred on line 42
-=======
+
 --		for which the current in-stock quantity is less than the total quantity in all current customersï¿½
 --		shopping carts combined.
 USE SquareEyes
 GO
->>>>>>> e671f08f345166e99b8756ad6d8ad7151b20bd99
 
 ALTER PROCEDURE CheckStockAvailability (@IssueStock VARCHAR(50))
 AS
