@@ -49,7 +49,6 @@ public class AppTest {
 
         Stock stock = str.find(30);
         stock.toString();
-
     }
 
     @Test

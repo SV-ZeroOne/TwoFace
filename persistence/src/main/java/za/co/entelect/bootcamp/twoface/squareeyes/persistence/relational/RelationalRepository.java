@@ -1,7 +1,10 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational;
 
+import org.hibernate.ejb.EntityManagerFactoryImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.generic.Repository;
 
 import javax.persistence.*;
@@ -13,16 +16,20 @@ import java.util.List;
  * Created by sean.vienings on 2017/01/16.
  */
 @org.springframework.stereotype.Repository
-public abstract class RelationalRepository<T> implements Repository<T> {
+public class RelationalRepository<T> implements Repository<T> {
 
     private static final Logger logger = LoggerFactory.getLogger(RelationalRepository.class);
 
     @PersistenceContext
     protected EntityManager entityManager;
+    protected EntityManagerFactory entityManagerFactory;
 
     private Class<T> type;
 
     public RelationalRepository() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("root-context.xml");
+        entityManagerFactory = (EntityManagerFactory) context.getBean("entityManagerFactory");
+        entityManager = entityManagerFactory.createEntityManager();
         Type t = getClass().getGenericSuperclass();
         ParameterizedType pt = (ParameterizedType) t;
         type = (Class) pt.getActualTypeArguments()[0];
