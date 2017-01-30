@@ -17,6 +17,15 @@ GROUP BY s.Name;
 
 -- 3.	Which comic book title represents the largest portion of the total stock value? - Mpho
 
+SELECT TOP(1)
+	i.Title,
+	SUM(s.Price) AS TotalPrice
+FROM dbo.Issues AS i 
+INNER JOIN dbo.Stock AS s 
+ON s.IssueID = i.IssueID
+GROUP BY i.Title 
+ORDER BY MAX(s.Price) DESC
+
 -- 4.	What title has been ordered most frequently from suppliers (number of distinct orders, not total quantity ordered), and how many of that title have been ordered? Break the results down by the series number and include the total cost of all the orders. - Sean
 WITH temp AS
 	(SELECT    TOP(1) i.Title,
@@ -75,6 +84,28 @@ GROUP BY totalStock.PriceToStock;
 
 -- 6.	Identify the writer/artist who has contributed to the most comic books. What is the person’s name, what are the 10 most recent comics he’s contributed to and what was his role on each? - Mpho
 
+WITH topCre AS(
+SELECT TOP(1)
+	c.CreatorID,
+	COUNT(cc.IssueID) AS Comics
+FROM dbo.Creators AS c
+INNER JOIN dbo.ComicCreators AS cc
+ON c.CreatorID = cc.CreatorID 
+GROUP BY c.CreatorID
+ORDER BY Comics DESC
+),
+rolesTab AS (
+SELECT cc.CreatorRole, cc.CreatorID, cc.IssueID, topCre.Comics
+FROM topCre INNER JOIN ComicCreators as cc
+ON topCre.CreatorID = cc.CreatorID
+)
+SELECT TOP(10) rolesTab.CreatorRole, rolesTab.CreatorID, i.PublicationDate, c.Name, rolesTab.Comics
+FROM Issues as i INNER JOIN rolesTab 
+ON rolesTab.IssueID = i.IssueID 
+INNER JOIN dbo.Creators as c
+ON rolesTab.CreatorID = c.CreatorID
+ORDER BY i.PublicationDate DESC;
+
 -- 7.	What title has the largest number of comics? Specify per publisher.
 SELECT i.Publisher,
 	count(DISTINCT i.SeriesNumber) AS NumberOfComics
@@ -98,3 +129,20 @@ FROM ordI AS i
 GROUP BY i.Title;
 
 -- 9.	Which Star Wars comics have been ordered but not delivered? How many of each have been ordered? How many of each remain in stock? - Mpho
+
+SELECT 
+	i.IssueID,
+	i.Title,
+	o.DeliveryStatus, 
+	o.OrderDate,
+	o.ShipmentDate,
+	o.QtyOrdered,
+	s.AvailableQty
+FROM Issues AS i
+INNER JOIN Orders AS o
+ON i.IssueID = o.IssueID
+INNER JOIN dbo.Stock AS s
+ON s.IssueID = o.IssueID
+WHERE Title LIKE ('%Star Wars%') 
+AND o.DeliveryStatus != 'Delivered' 
+ORDER BY o.OrderDate DESC; 
