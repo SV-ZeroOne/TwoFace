@@ -107,10 +107,15 @@ ON rolesTab.CreatorID = c.CreatorID
 ORDER BY i.PublicationDate DESC;
 
 -- 7.	What title has the largest number of comics? Specify per publisher.
-SELECT i.Publisher,
-	count(DISTINCT i.SeriesNumber) AS NumberOfComics
-FROM dbo.Issues as i
-GROUP BY i.Publisher;
+SELECT DISTINCT issue.Publisher, temp.Number, temp.Title
+FROM Issues AS issue
+CROSS APPLY (
+    SELECT TOP 1 i.Title, i.Publisher, COUNT(*) AS Number
+    FROM Issues AS i
+    WHERE i.Publisher = issue.Publisher
+    GROUP BY i.Title, i.Publisher
+    ORDER BY Number DESC
+) AS temp
 -- In light of the recent increase in interest due to the new movie, the co-owner intends to do some Star Wars specific advertising - Sean
 -- 8.	What are the 5 most recently published Star Wars titles, and how much stock is on hand for each one? - Quinton
 
