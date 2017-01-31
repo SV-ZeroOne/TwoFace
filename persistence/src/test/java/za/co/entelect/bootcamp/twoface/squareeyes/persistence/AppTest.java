@@ -28,8 +28,7 @@ public class AppTest {
 
     @Before
     public void print(){
-        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:za/co/entelect/bootcamp/twoface/squareeyes/persistence/root-context.xml");
-        sr = context.getBean(RelationalStockRepository.class);
+
     }
 
     @Test
@@ -49,7 +48,8 @@ public class AppTest {
 
     @Test
     public void getStockByID() {
-
+        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:za/co/entelect/bootcamp/twoface/squareeyes/persistence/root-context.xml");
+        sr = context.getBean(RelationalStockRepository.class);
         Stock stock = sr.find(30);
         System.out.println("R " + stock.getPrice());
     }
