@@ -26,13 +26,13 @@ public abstract class RelationalRepository<T> implements Repository<T> {
     private Class<T> type;
 
     public RelationalRepository() {
-
         Type t = getClass().getGenericSuperclass();
         ParameterizedType pt = (ParameterizedType) t;
         type = (Class) pt.getActualTypeArguments()[0];
     }
 
     public T find(Object id) {
+        logger.info("name holds {}", type.getSimpleName());
         System.out.println(id);
         return this.entityManager.find(type, id);
     }
