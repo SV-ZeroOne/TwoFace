@@ -28,7 +28,7 @@ public class Invoice {
     }
 
     @ManyToOne(cascade= CascadeType.ALL)
-    @JoinColumn(name = "OrderID", referencedColumnName = "CustomerOrderID")
+    @JoinColumn(name = "CustomerOrderID", referencedColumnName = "CustomerOrderID")
     public CustomerOrder getOrder() {
         return order;
     }

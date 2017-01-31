@@ -95,6 +95,6 @@ CREATE TABLE CardPayments
 	PaymentID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	CustomerOrderID INT FOREIGN KEY REFERENCES CustomerOrders(CustomerOrdersID) NOT NULL,
 	ReferenceID VARCHAR(50) UNIQUE NOT NULL,
-	VoucherAmount NUMERIC(8,2) NULL
+	CardAmount NUMERIC(8,2) NULL
 );
 
