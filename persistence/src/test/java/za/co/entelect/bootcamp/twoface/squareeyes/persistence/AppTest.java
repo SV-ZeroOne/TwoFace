@@ -8,11 +8,11 @@ import za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.Creator;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.stock.Stock;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.creators.CreatorsRepository;
-import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.creators.CreatorsRepositoryIMP;
+import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.creators.RelationalCreatorsRepository;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.IssuesRepository;
-import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.IssuesRepositoryIMP;
+import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.RelationalIssuesRepository;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.stock.StockRepository;
-import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.stock.StockRepositoryIMP;
+import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.stock.RelationalStockRepository;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -29,13 +29,13 @@ public class AppTest {
     @Before
     public void print(){
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath:za/co/entelect/bootcamp/twoface/squareeyes/persistence/root-context.xml");
-        sr = context.getBean(StockRepositoryIMP.class);
+        sr = context.getBean(RelationalStockRepository.class);
     }
 
     @Test
     @Ignore
     public void persistNewStockWithItem() {
-        StockRepository str = new StockRepositoryIMP();
+        StockRepository str = new RelationalStockRepository();
 
         Issue issue = new Issue(new Date(), "New 2",
                 "Quinton", (short)22, "The descripition");
@@ -57,7 +57,7 @@ public class AppTest {
     @Test
     @Ignore
     public void persistNewCreatorThroughIssue() {
-        IssuesRepository ir = new IssuesRepositoryIMP();
+        IssuesRepository ir = new RelationalIssuesRepository();
 
         Issue issue = new Issue(new Date(), "New 2",
                 "Quinton", (short)22, "The descripition");
@@ -65,7 +65,7 @@ public class AppTest {
                 "South Africa",
                 "123".getBytes(),
                 "quinton@mail.com");
-        CreatorsRepository cr = new CreatorsRepositoryIMP();
+        CreatorsRepository cr = new RelationalCreatorsRepository();
         cr.create(creator);
 
         ComicCreator comicCreator = new ComicCreator();
@@ -82,7 +82,7 @@ public class AppTest {
     @Test
     @Ignore
     public void searchPropertyTest() {
-        IssuesRepository ir = new IssuesRepositoryIMP();
+        IssuesRepository ir = new RelationalIssuesRepository();
 
         List<Issue> issues = ir.search("title","Star Wars: The Clone Wars");
 

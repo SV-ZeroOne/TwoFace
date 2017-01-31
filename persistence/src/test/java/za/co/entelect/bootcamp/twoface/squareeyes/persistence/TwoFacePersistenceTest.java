@@ -5,14 +5,14 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.order.Order;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Order;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.IssuesRepository;
-import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.IssuesRepositoryIMP;
-import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.orders.OrdersRepository;
-import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.orders.OrdersRepositoryIMP;
+import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.RelationalIssuesRepository;
+import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.OrdersRepository;
+import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.RelationalOrdersRepository;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.SuppliersRepository;
-import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.SuppliersRepositoryIMP;
+import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.RelationalSuppliersRepository;
 
 import java.util.Date;
 
@@ -30,9 +30,9 @@ public class TwoFacePersistenceTest {
     public static void testRepositoryConnections()
     {
         System.out.print("Creating Repo");
-        singleIssueRepository = new IssuesRepositoryIMP();
-        singleOrderRepository = new OrdersRepositoryIMP();
-        singleSupplierRepository = new SuppliersRepositoryIMP();
+        singleIssueRepository = new RelationalIssuesRepository();
+        singleOrderRepository = new RelationalOrdersRepository();
+        singleSupplierRepository = new RelationalSuppliersRepository();
     }
 
     @Test

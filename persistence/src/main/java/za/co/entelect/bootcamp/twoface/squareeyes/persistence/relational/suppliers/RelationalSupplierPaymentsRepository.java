@@ -8,5 +8,5 @@ import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.Relatio
  * Created by quinton.weenink on 2017/01/19.
  */
 @Repository
-public class SupplierPaymentsRepositoryIMP extends RelationalRepository<SupplierPayment> implements SupplierPaymentsRepository{
+public class RelationalSupplierPaymentsRepository extends RelationalRepository<SupplierPayment> implements SupplierPaymentsRepository{
 }

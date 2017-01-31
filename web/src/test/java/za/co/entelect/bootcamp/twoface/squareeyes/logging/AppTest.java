@@ -2,11 +2,11 @@ package za.co.entelect.bootcamp.twoface.squareeyes.logging;
 
 import org.junit.*;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.IssuesRepository;
-import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.IssuesRepositoryIMP;
-import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.orders.OrdersRepository;
-import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.orders.OrdersRepositoryIMP;
+import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.RelationalIssuesRepository;
+import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.OrdersRepository;
+import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.RelationalOrdersRepository;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.SuppliersRepository;
-import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.SuppliersRepositoryIMP;
+import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.RelationalSuppliersRepository;
 
 /**
  * Unit test for simple Repository.
@@ -21,9 +21,9 @@ public class AppTest {
     @Test
     public void test() {
 
-        IssuesRepository ir = new IssuesRepositoryIMP();
-        SuppliersRepository sr = new SuppliersRepositoryIMP();
-        OrdersRepository or = new OrdersRepositoryIMP();
+        IssuesRepository ir = new RelationalIssuesRepository();
+        SuppliersRepository sr = new RelationalSuppliersRepository();
+        OrdersRepository or = new RelationalOrdersRepository();
 
     }
 
