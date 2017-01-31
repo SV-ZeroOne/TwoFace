@@ -47,7 +47,7 @@
 
 
 
-    <bean id="StockRepository" class="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.stock.StockRepositoryIMP">
+    <bean id="StockRepository" class="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.stock.RelationalStockRepository">
         <property name="entityManager" ref="entityManager"></property>
     </bean>
 </beans>

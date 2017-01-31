@@ -8,7 +8,7 @@
         <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.ComicCreator</class>
         <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.ComicCreatorsId</class>
         <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue</class>
-        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.order.Order</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Order</class>
         <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.stock.Stock</class>
         <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier</class>
         <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.SupplierPayment</class>

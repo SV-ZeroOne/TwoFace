@@ -1,4 +1,4 @@
-package za.co.entelect.bootcamp.twoface.squareeyes.domain.order;
+package za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier;
 
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier;

@@ -5,12 +5,9 @@ import org.slf4j.LoggerFactory;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.IssuesRepository;
-import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.orders.OrdersRepository;
+import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.OrdersRepository;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.SupplierQuotesRepository;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.SuppliersRepository;
-
-import java.io.FileNotFoundException;
-import java.util.Date;
 
 public class SupplierOrderFacade
 {

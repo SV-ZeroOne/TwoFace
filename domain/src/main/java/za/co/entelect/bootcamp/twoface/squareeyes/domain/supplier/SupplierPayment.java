@@ -1,7 +1,5 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier;
 
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.order.Order;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;

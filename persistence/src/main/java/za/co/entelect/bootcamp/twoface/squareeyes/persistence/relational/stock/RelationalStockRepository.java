@@ -12,5 +12,5 @@ import java.lang.reflect.Type;
  * Created by quinton.weenink on 2017/01/19.
  */
 @Repository
-public class StockRepositoryIMP extends RelationalRepository<Stock> implements StockRepository{
+public class RelationalStockRepository extends RelationalRepository<Stock> implements StockRepository{
 }

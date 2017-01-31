@@ -8,6 +8,6 @@ import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.Relatio
  * Created by quinton.weenink on 2017/01/19.
  */
 @Repository
-public class ComicCreatorsRepositoryIMP extends RelationalRepository<ComicCreator> implements ComicCreatorsRepository{
+public class RelationalComicCreatorsRepository extends RelationalRepository<ComicCreator> implements ComicCreatorsRepository{
 
 }

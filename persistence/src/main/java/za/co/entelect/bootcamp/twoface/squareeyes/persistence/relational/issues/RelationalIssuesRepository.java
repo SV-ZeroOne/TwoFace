@@ -9,5 +9,5 @@ import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.Relatio
  * Created by sean.vienings on 2017/01/16.
  */
 @Repository
-public class IssuesRepositoryIMP extends RelationalRepository<Issue> implements IssuesRepository {
+public class RelationalIssuesRepository extends RelationalRepository<Issue> implements IssuesRepository {
 }

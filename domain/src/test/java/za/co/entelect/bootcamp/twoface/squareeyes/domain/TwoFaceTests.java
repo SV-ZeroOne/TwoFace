@@ -5,7 +5,7 @@ import za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.Creator;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 import org.junit.Before;
 import org.junit.Test;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.order.Order;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Order;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.stock.Stock;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier;
 
