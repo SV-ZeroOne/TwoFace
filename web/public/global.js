@@ -163,7 +163,7 @@ function getIssue(issueId){
 			return issues[i]
 		}
 	}
-	if(location.search.includes('homepage.html'))
+	if(location.search.includes('homepage.jsp'))
 	return
 
 	window.location.href = "catalogue.html"
@@ -177,7 +177,7 @@ function getStock(issue, stockId){
 			return issue.Stock[i]
 		}
 	}
-	if(location.search.includes('homepage.html'))
+	if(location.search.includes('homepage.jsp'))
 	return
 
 	return window.location.href = "product.html?issue=" + issue.Id + "&stock=" + issue.Stock[0].Id

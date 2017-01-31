@@ -4,10 +4,12 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Individual Issue</title>
+    <title>Catalogue</title>
 </head>
 <body>
-issueTitle : ${issueTitle}
-publisher : ${publisher}
+<h1>Issues : ${Issues}</h1>
+<h2>Issues : ${Issues}</h2>
+<h3>Issues : ${Issues}</h3>
+<p>Issues : ${Issues}</p>
 </body>
 </html>

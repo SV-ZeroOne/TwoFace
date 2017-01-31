@@ -11,6 +11,7 @@ import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.stock.R
  */
 public class Main
 {
+
     public static void main(String[] args)
     {
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath:za/co/entelect/bootcamp/twoface/squareeyes/services/root-context.xml");
@@ -18,5 +19,4 @@ public class Main
         Stock stock = sr.find(30);
         System.out.println("Available qty: " + stock.getAvailableQty());
     }
-
 }
