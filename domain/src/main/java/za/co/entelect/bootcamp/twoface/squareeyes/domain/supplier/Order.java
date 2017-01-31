@@ -60,6 +60,9 @@ public class Order {
     public int getOrderID(){
         return this.orderID;
     }
+    public void setOrderID(int orderID){
+        this.orderID = orderID;
+    }
 
     @Temporal(value = TemporalType.TIMESTAMP)
     @Column(name="OrderDate")

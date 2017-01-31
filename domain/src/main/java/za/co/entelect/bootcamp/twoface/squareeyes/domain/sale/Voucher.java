@@ -1,7 +1,6 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.domain.sale;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -27,10 +26,15 @@ public class Voucher {
         this.voucherNumber = voucherNumber;
     }
 
+    @Id
+    @GeneratedValue
+    @Column(name="VoucherID")
     public int getVoucherID() {
         return voucherID;
     }
+    public void setVoucherID(int voucherID) { this.voucherID = voucherID; }
 
+    @Column(name="VoucherNumber")
     public String getVoucherNumber() {
         return voucherNumber;
     }
@@ -38,6 +42,8 @@ public class Voucher {
         this.voucherNumber = voucherNumber;
     }
 
+    @Temporal(value = TemporalType.TIMESTAMP)
+    @Column(name="DateIssued")
     public Date getDateIssued() {
         return dateIssued;
     }
@@ -45,6 +51,8 @@ public class Voucher {
         this.dateIssued = dateIssued;
     }
 
+    @Temporal(value = TemporalType.TIMESTAMP)
+    @Column(name="DateRedeemed")
     public Date getDateRedeemed() {
         return dateRedeemed;
     }
@@ -52,6 +60,7 @@ public class Voucher {
         this.dateRedeemed = dateRedeemed;
     }
 
+    @Column(name="VoucherValue")
     public BigDecimal getVoucherValue() {
         return voucherValue;
     }

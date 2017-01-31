@@ -79,7 +79,7 @@ CREATE TABLE Vouchers
 	VoucherNumber VARCHAR(10) UNIQUE NOT NULL,
 	DateIssued DATETIME NOT NULL,
 	DateRedeemed DATETIME NULL,
-	VoucherValue NUMERIC(8,2) NOT NULL,
+	VoucherValue NUMERIC(8,2) NOT NULL
 );
 
 CREATE TABLE VoucherPayments
@@ -87,7 +87,7 @@ CREATE TABLE VoucherPayments
 	PaymentID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	CustomerOrderID INT FOREIGN KEY REFERENCES CustomerOrders(CustomerOrdersID) NOT NULL,
 	VoucherID INT FOREIGN KEY REFERENCES Vouchers(VoucherID) NOT NULL,
-	VoucherAmount NUMERIC(8,2) NULL,
+	VoucherAmount NUMERIC(8,2) NULL
 );
 
 CREATE TABLE CardPayments
@@ -95,6 +95,6 @@ CREATE TABLE CardPayments
 	PaymentID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	CustomerOrderID INT FOREIGN KEY REFERENCES CustomerOrders(CustomerOrdersID) NOT NULL,
 	ReferenceID VARCHAR(50) UNIQUE NOT NULL,
-	VoucherAmount NUMERIC(8,2) NULL,
+	VoucherAmount NUMERIC(8,2) NULL
 );
 
