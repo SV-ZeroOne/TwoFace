@@ -45,6 +45,8 @@ public class Invoice {
         this.stock = stock;
     }
 
+    @Id
+    @GeneratedValue
     @Column(name="InvoiceID")
     public int getInvoiceID() {
         return invoiceID;

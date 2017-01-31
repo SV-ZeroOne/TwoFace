@@ -1,5 +1,27 @@
 -- Create Statements
 
+
+DROP TABLE SquareEyes.dbo.Payments;
+GO
+DROP TABLE SquareEyes.dbo.VoucherPayments;
+GO
+DROP TABLE SquareEyes.dbo.CardPayments;
+GO
+DROP TABLE SquareEyes.dbo.Vouchers;
+GO
+DROP TABLE SquareEyes.dbo.ShoppingCarts;
+GO
+DROP TABLE SquareEyes.dbo.Invoices;
+GO
+DROP TABLE SquareEyes.dbo.CustomerOrders;
+GO
+DROP TABLE SquareEyes.dbo.CustomerAddress;
+GO
+DROP TABLE SquareEyes.dbo.Customers;
+
+
+
+
 CREATE TABLE Customers
 (
 	CustomerID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
@@ -7,6 +29,8 @@ CREATE TABLE Customers
     Title VARCHAR(5) NOT NULL,
 	FirstName VARCHAR(30) NOT NULL,
 	Surname VARCHAR(30) NOT NULL,
+	Salt VARCHAR(15) NOT NULL,
+	PasswordHash BINARY(64) NOT NULL
 );
 
 CREATE TABLE CustomerAddress
@@ -28,13 +52,14 @@ CREATE TABLE CustomerOrders
 	DeliveryOption VARCHAR(15) NOT NULL,
 	SpecialInstructions VARCHAR(50),
 	PaymentAmount NUMERIC(8, 2) NOT NULL,
-	PaymentStatus VARCHAR(15) NOT NULL
+	PaymentStatus VARCHAR(15) NOT NULL,
+	OrderDate DATETIME NOT NULL
 );
 
 CREATE TABLE Invoices
 (
 	InvoiceID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	OrderID INT FOREIGN KEY REFERENCES CustomerOrders(CustomerOrdersID) NOT NULL,
+	CustomerOrderID INT FOREIGN KEY REFERENCES CustomerOrders(CustomerOrdersID) NOT NULL,
 	StockID INT FOREIGN KEY REFERENCES Stock(StockReferenceID) NOT NULL,
 	Quantity SMALLINT NOT NULL,
 	Price NUMERIC(8,2) NOT NULL
@@ -57,10 +82,19 @@ CREATE TABLE Vouchers
 	VoucherValue NUMERIC(8,2) NOT NULL,
 );
 
-CREATE TABLE Payments
+CREATE TABLE VoucherPayments
 (
 	PaymentID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	OrderID INT FOREIGN KEY REFERENCES CustomerOrders(CustomerOrdersID) NOT NULL,
+	CustomerOrderID INT FOREIGN KEY REFERENCES CustomerOrders(CustomerOrdersID) NOT NULL,
 	VoucherID INT FOREIGN KEY REFERENCES Vouchers(VoucherID) NOT NULL,
 	VoucherAmount NUMERIC(8,2) NULL,
 );
+
+CREATE TABLE CardPayments
+(
+	PaymentID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	CustomerOrderID INT FOREIGN KEY REFERENCES CustomerOrders(CustomerOrdersID) NOT NULL,
+	ReferenceID VARCHAR(50) UNIQUE NOT NULL,
+	VoucherAmount NUMERIC(8,2) NULL,
+);
+
