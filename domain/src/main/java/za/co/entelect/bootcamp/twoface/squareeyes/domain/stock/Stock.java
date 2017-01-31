@@ -43,9 +43,6 @@ public class Stock{
     public int getStockReferenceID(){
         return this.stockReferenceID;
     }
-    public void setStockReferenceID(int stockReferenceID){
-        this.stockReferenceID = stockReferenceID;
-    }
 
     @Column(name="Condition", columnDefinition = "varchar(10)")
     public String getCondition(){
