@@ -5,11 +5,16 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
+
 /**
  * Created by sean.vienings on 2017/01/30.
  *
  */
-public class WebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer  implements WebApplicationInitializer {
+public class WebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer  //implements WebApplicationInitializer
+{
 
     //Root context:
     @Override protected Class<?>[] getRootConfigClasses() {
@@ -25,10 +30,11 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
         return new String[0];
     }
 
+
     public void onStartup(ServletContext container) throws ServletException {
 
             AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-            ctx.register(HelloWorldConfiguration.class);
+            ctx.register(WebConfig.class);
             ctx.setServletContext(container);
 
             ServletRegistration.Dynamic servlet = container.addServlet("dispatcher", new DispatcherServlet(ctx));
