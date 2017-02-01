@@ -20,7 +20,14 @@ public class CatalogueController {
     public CatalogueController(CatalogueService catalogueService) {
         this.catalogueService = catalogueService;
     }
-/*
+
+    @RequestMapping(value = "/catalogue", method = RequestMethod.GET)
+    public String SayHello(ModelMap modelMap){
+        List<Issue> list = catalogueService.getCataloguePage(1);
+        modelMap.addAttribute("list", list);
+        return "catalogue";
+    }
+    /*
     @RequestMapping(value = "/Catalogue", method = RequestMethod.GET)
     public String PopulateCatalogue(ModelMap modelMap){
         List<Issue> list = catalogueService.getCataloguePage(1);
@@ -37,10 +44,11 @@ public class CatalogueController {
         modelMap.addAttribute("list", list);
         return "homepage";
     }
-    */
+
     @RequestMapping(value = "/Catalogue", method = RequestMethod.GET)
     public String SayHello(ModelMap modelMap){
         modelMap.addAttribute("greeting", "Hello World Again, from Spring 4 MVC");
         return "Catalogue";
     }
+     */
 }

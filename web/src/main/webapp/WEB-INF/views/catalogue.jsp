@@ -9,7 +9,8 @@
 </head>
 <body>
 <c:forEach items="${list}" var="issue">
-        <h1>Employee ID: ${issue.issueTitle}</h1>
+    <h1>Title: ${issue.getIssueTitle()}</h1>
+
 </c:forEach>
 </body>
 </html>

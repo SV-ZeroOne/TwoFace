@@ -28,15 +28,6 @@ public class WebController {
     String getHelloWorldRest() {
         return "Hello, world!";
     }
-/*
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String SayHello(ModelMap modelMap){
-        List<Issue> list = catalogueService.getCataloguePage(1);
-        modelMap.addAttribute("list",list);
-        return "homepage";
-    }
-*/
-
 
     public CatalogueService getCatalogueService() {
         return catalogueService;
