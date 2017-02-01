@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.CatalogueService;
 
@@ -23,10 +24,14 @@ public class CatalogueController {
     }
 
     @RequestMapping(value = "/catalogue", method = RequestMethod.GET)
-    public String SayHello(ModelMap modelMap){
-        List<Issue> list = catalogueService.getCataloguePage(1);
+    public String SayHello(@RequestParam(value = "search", required = false, defaultValue = "") String search,
+                           @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                           ModelMap modelMap){
+        List<Issue> list = catalogueService.getCataloguePage(page);
         modelMap.addAttribute("list", list);
+        modelMap.addAttribute("page", page);
         return "catalogue";
     }
+
 
 }

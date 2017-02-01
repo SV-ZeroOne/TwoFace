@@ -55,10 +55,10 @@
                                 <img src='http://pre10.deviantart.net/23f7/th/pre/i/2015/327/0/d/star_wars_vintage_tfa_comic_cover_issue1_by_daztibbles-d9hq35o.png' alt='Loading..' class='img-responsive'/>
                             </a>
                             <div class='issueNo'><button type='button' class='btn flat-butt'>
-                                <strong>${issue.seriesNumber}</strong>
+                                <strong>#${issue.seriesNumber}</strong>
                             </button></div>
                             <div class='publisher'>
-                                <button type='button' style='background-color:"${issue.publisher == "Marvel" ? "#b71c1c" : "#1565C0"}";color: white;' class='btn flat-butt'>
+                                <button type='button' style='background-color:${issue.publisher == "Marvel" ? "#b71c1c" : "#1565C0"};color: white;' class='btn flat-butt'>
                                     <strong>${issue.publisher}</strong>
                                 </button>
                             </div>
