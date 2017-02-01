@@ -7,5 +7,8 @@
 	<bean id="CatalogueService" class="za.co.entelect.bootcamp.twoface.squareeyes.services.CatalogueService">
 		<!--<property name="issuesRepository" ref="IssuesRepository"></property>-->
 	</bean>
+	<bean id="SearchService" class="za.co.entelect.bootcamp.twoface.squareeyes.services.SearchService">
+		<!--<property name="issuesRepository" ref="IssuesRepository"></property>-->
+	</bean>
 
 </beans>
