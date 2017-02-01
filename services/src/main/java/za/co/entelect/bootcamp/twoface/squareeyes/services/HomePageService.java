@@ -7,8 +7,7 @@ import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.
 import java.util.List;
 
 /**
- * Created by sean.vienings on 2017/01/31.
- *
+ * Created by quinton.weenink on 2017/02/01.
  */
 public class HomePageService {
     static IssuesRepository singleIssueRepository;
@@ -17,7 +16,7 @@ public class HomePageService {
         //
     }
 
-    public List<Issue> HomePage()
+    public List<Issue> getCa()
     {
         singleIssueRepository = new RelationalIssuesRepository();
 
@@ -31,13 +30,4 @@ public class HomePageService {
         list.add(issue);
         return list;
     }
-    /*
-    public
-        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:za/co/entelect/bootcamp/twoface/squareeyes/services/root-context.xml");
-
-        Issue issue = singleIssueRepository.find(32);
-        return issue.getIssueTitle();
-*/
-
-
 }
