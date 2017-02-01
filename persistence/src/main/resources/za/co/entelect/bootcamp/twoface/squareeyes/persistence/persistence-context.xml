@@ -6,7 +6,10 @@
 		http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-<bean id="entityManager"
+    <context:annotation-config />
+    <context:component-scan base-package="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational"/>
+
+    <bean id="entityManager"
       factory-bean="entityManagerFactory"
       factory-method="createEntityManager" />
 
@@ -61,9 +64,9 @@
 <bean id="ShoppingCartsRepository" class="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.customers.RelationalShoppingCartsRepository">
     <property name="entityManager" ref="entityManager"></property>
 </bean>
-<bean id="IssuesRepository" class="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.RelationalIssuesRepository">
-    <property name="entityManager" ref="entityManager"></property>
-</bean>
+<!--<bean id="IssuesRepository" class="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.RelationalIssuesRepository">-->
+    <!--<property name="entityManager" ref="entityManager"></property>-->
+<!--</bean>-->
 <bean id="CardPaymentsRepository" class="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.sales.RelationalCardPaymentsRepository">
     <property name="entityManager" ref="entityManager"></property>
 </bean>

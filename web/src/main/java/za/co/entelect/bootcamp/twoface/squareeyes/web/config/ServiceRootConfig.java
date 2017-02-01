@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  *
  */
 @Configuration
-//@ImportResource("classpath:services-root-context.xml")
+@ImportResource("classpath:za/co/entelect/bootcamp/twoface/squareeyes/services/root-context.xml")
 public class ServiceRootConfig {
 
     @RequestMapping(value = "/test/rest", method = RequestMethod.GET)

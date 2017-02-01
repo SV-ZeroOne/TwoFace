@@ -12,7 +12,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "za.co.entelect.bootcamp.twoface.squareeyes.web.controller")
+@ComponentScan(basePackages = "za.co.entelect.bootcamp.twoface.squareeyes.web")
 public class WebConfig {
 
     @Bean
@@ -22,4 +22,6 @@ public class WebConfig {
         internalResourceViewResolver.setSuffix(".jsp");
         return internalResourceViewResolver;
     }
+
+
 }

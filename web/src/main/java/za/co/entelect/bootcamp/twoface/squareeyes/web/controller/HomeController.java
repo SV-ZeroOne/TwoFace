@@ -12,15 +12,7 @@ import java.util.List;
  */
 public class HomeController {
 
-    private CatalogueService catalogueService;
-
-    @Autowired
     public String HomeController(CatalogueService catalogueService) {
-        this.catalogueService = catalogueService;
-        List<Issue> list;
-        list = catalogueService.HomePage();
-        ModelMap modelMap = new ModelMap();
-        modelMap.addAttribute("list",list);
         return "homepage";
     }
 }
