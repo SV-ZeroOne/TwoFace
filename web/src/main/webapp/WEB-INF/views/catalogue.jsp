@@ -22,12 +22,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="homepage.html"><strong>Square Eyes</strong></a>
+            <a class="navbar-brand" href="/homepage"><strong>Square Eyes</strong></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="homepage.html">Home</a></li>
-                <li class="active"><a href="Catalogue.html">Catalogue</a></li>
+                <li class="active"><a href="/catalogue">Catalogue</a></li>
             </ul>
             <form class="navbar-form navbar-right">
                 <input type="text" class="form-control" id="search" placeholder="Search" name="q"></input>
@@ -51,7 +51,7 @@
                 <c:forEach items="${list}" var="issue">
                     <div class='col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-3 col-md-3'>
                         <div class='issue' style='margin:5px; box-shadow: 10px 10px 8px #222; margin-top: 15px;'>
-                            <a class='image-container' href='product.html?issue=${issue.issueID}'>
+                            <a class='image-container' href='product?issue=${issue.issueID}'>
                                 <img src='http://pre10.deviantart.net/23f7/th/pre/i/2015/327/0/d/star_wars_vintage_tfa_comic_cover_issue1_by_daztibbles-d9hq35o.png' alt='Loading..' class='img-responsive'/>
                             </a>
                             <div class='issueNo'><button type='button' class='btn flat-butt'>
@@ -75,6 +75,7 @@
             </div>
 
             <div id="paging" class="col-xs-offset-2 col-xs-8">
+                <a class='btn flat-butt' style='float:left; background-color:#fff; color:black; margin:5px; box-shadow: 10px 10px 8px #222;' href='/catalogue?page=${page - 1}' role='button'>Page ${page - 1} &raquo;</a>
             </div>
 
             <div id="footer" class="col-xs-12" style="margin-top: 30px;">
