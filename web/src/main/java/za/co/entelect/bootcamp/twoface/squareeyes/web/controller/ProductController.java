@@ -11,14 +11,14 @@ import za.co.entelect.bootcamp.twoface.squareeyes.services.CatalogueService;
 import java.util.List;
 
 /**
- * Created by sean.vienings on 2017/01/31.
+ * Created by quinton.weenink on 2017/02/01.
  */
 @Controller
-public class CatalogueController {
+public class ProductController {
 
     private CatalogueService catalogueService;
 
-    public CatalogueController(CatalogueService catalogueService) {
+    public ProductController(CatalogueService catalogueService) {
         this.catalogueService = catalogueService;
     }
 

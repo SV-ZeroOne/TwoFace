@@ -75,7 +75,15 @@
             </div>
 
             <div id="paging" class="col-xs-offset-2 col-xs-8">
-                <a class='btn flat-butt' style='float:left; background-color:#fff; color:black; margin:5px; box-shadow: 10px 10px 8px #222;' href='/catalogue?page=${page - 1}' role='button'>Page ${page - 1} &raquo;</a>
+                <c:choose>
+                    <c:when test="${page > 1}"><a class='btn flat-butt' style='float:left; background-color:#fff;
+                        color:black; margin:5px; box-shadow: 10px 10px 8px #222;' href='/catalogue?page=${page - 1}'
+                                                   role='button'>Page ${page - 1}&raquo;</a>
+                    </c:when>
+                </c:choose>
+                <a class='btn flat-butt' style='float:right; background-color:#fff;
+                color:black; margin:5px; box-shadow: 10px 10px 8px #222;' href='/catalogue?page=${page + 1}'
+                   role='button'>Page ${page + 1} &raquo;</a>
             </div>
 
             <div id="footer" class="col-xs-12" style="margin-top: 30px;">
