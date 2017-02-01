@@ -27,7 +27,7 @@ public class ProductController {
                            @RequestParam(value = "stock",  required = false, defaultValue = "1") int page,
                            ModelMap modelMap){
         List<Issue> list = productService.getCataloguePage(page);
-        modelMap.addAttribute("issue", issue);
+       // modelMap.addAttribute("issue", issue);
         modelMap.addAttribute("page", page);
         return "product";
     }
