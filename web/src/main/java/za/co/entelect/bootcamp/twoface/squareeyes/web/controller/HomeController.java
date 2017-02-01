@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.CatalogueService;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -12,7 +14,11 @@ import java.util.List;
  */
 public class HomeController {
 
-    public String HomeController(CatalogueService catalogueService) {
-        return "homepage";
+    private CatalogueService catalogueService;
+
+    @RequestMapping(value = "/Catalogue", method = RequestMethod.GET)
+    public String SayHello(ModelMap modelMap){
+        modelMap.addAttribute("greeting", "Hello World Again, from Spring 4 MVC");
+        return "Catalogue";
     }
 }

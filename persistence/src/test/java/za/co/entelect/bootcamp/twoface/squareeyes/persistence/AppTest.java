@@ -28,7 +28,8 @@ public class AppTest {
 
     @Before
     public void print(){
-
+        //ApplicationContext context = new ClassPathXmlApplicationContext("classpath:za/co/entelect/bootcamp/twoface/squareeyes/persistence/root-context.xml");
+        //sr = context.getBean(RelationalStockRepository.class);
     }
 
     @Test

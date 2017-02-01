@@ -21,12 +21,12 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="homepage.jsp">Square Eyes</a>
+				<a class="navbar-brand" href="homepage">Square Eyes</a>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="homepage.jsp">Home</a></li>
-					<li><a href="Catalogue.html">Catalogue</a></li>
+					<li class="active"><a href="homepage">Home</a></li>
+					<li><a href="Catalogue">Catalogue</a></li>
 				</ul>
 				<form class="navbar-form navbar-right">
 					<input type="text" class="form-control" id="search" placeholder="Search" name="q"></input>
@@ -73,28 +73,28 @@
 							<h3 class="title">Batman &amp; Robin</h3>
 							<img class="item-image" src="SlideShow/c1.jpg" alt="Batman" width="100px" height="100px">
 								<p class="price"> R99.99</p>
-								<p><a class="btn btn-success btn-lg" href="Catalogue.html" role="button">Learn more &raquo;</a></p>
+								<p><a class="btn btn-success btn-lg" href="Catalogue" role="button">Learn more &raquo;</a></p>
 						</div>
 
 						<div class="item">
 							<h3 class="title">Captain America</h3>
 							<img class="item-image" src="SlideShow/c2.jpg" alt="Captain America" width="100px" height="100px">
 							<p class="price"> R99.99</p>
-							<p><a class="btn btn-success btn-lg" href="Catalogue.html" role="button">Learn more &raquo;</a></p>
+							<p><a class="btn btn-success btn-lg" href="Catalogue" role="button">Learn more &raquo;</a></p>
 						</div>
 
 						<div class="item">
 							<h3 class="title">X-Men</h3>
 							<img class="item-image" src="SlideShow/c4.png" alt="X-Men" width="100px" height="100px">
 							<p class="price"> R99.99</p>
-							<p><a class="btn btn-success btn-lg" href="Catalogue.html" role="button">Learn more &raquo;</a></p>
+							<p><a class="btn btn-success btn-lg" href="Catalogue" role="button">Learn more &raquo;</a></p>
 						</div>
 
 						<div class="item">
 							<h3 class="title">Wonder Woman</h3>
 							<img class="item-image" src="SlideShow/comic5.jpg" alt="Wonder Woman" width="100px" height="100px">
 							<p class="price"> R99.99</p>
-							<p><a class="btn btn-success btn-lg" href="Catalogue.html" role="button">Learn more &raquo;</a></p>
+							<p><a class="btn btn-success btn-lg" href="Catalogue" role="button">Learn more &raquo;</a></p>
 						</div>
 					</div>
 

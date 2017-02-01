@@ -36,7 +36,7 @@ public class WebController {
         return "homepage";
     }
 
-    @RequestMapping(value = "/catalogue", method = RequestMethod.GET)
+    @RequestMapping(value = "/Catalogue", method = RequestMethod.GET)
     public String PopulateCatalogue(ModelMap modelMap){
         List<Issue> list = catalogueService.getCataloguePage(1);
         for (Issue issue : list) {

@@ -1,0 +1,98 @@
+.hide{
+	display: none;
+}
+
+.expand{
+	width: 100%;
+}
+.panel-info{
+    background-color: transparent;
+    opacity: 0.8;
+}
+
+.item{
+	position: relative;
+}
+
+.item > .title{
+
+}
+
+.item > .price{
+
+}
+
+
+
+
+
+header{
+}
+
+body{
+	padding-top: 30px;
+	height:100%;
+    background:linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.6) ),url("SlideShow/sp4.jpg") center center;
+	background-repeat: no-repeat;
+	background-size: 130% 100%;
+    background-attachment: fixed;
+}
+
+nav{
+}
+
+aside{
+	width: 20%;
+	float: left;
+}
+
+section{
+	width: 80%;
+	float: right;
+}
+
+article{
+}
+
+footer{
+}
+
+/* my code for css*/
+#myCarousel{
+	position: absolute;
+	width:100%;
+}
+
+.centerText {
+	text-align: center;
+}
+
+footer {
+	text-align: center;
+    font-family: 'Kumar One', cursive;
+	position: absolute;
+	bottom:0px;
+}
+
+.carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+    margin: auto;
+    width: 20%;
+}
+
+.TextFont {
+    font-family: 'Kumar One', cursive;
+}
+
+.TextFontHeading {
+    text-align: center;
+    color: black;
+    font-size:1.5vh;
+}
+
+.TextFontHeadingForComic{
+    font-family: 'Kumar One', cursive;
+    text-align: center;
+    color: black;
+    font-size: 200%;
+}
