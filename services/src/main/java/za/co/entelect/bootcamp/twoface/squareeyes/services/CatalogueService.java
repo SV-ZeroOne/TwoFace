@@ -13,10 +13,12 @@ import java.util.List;
  */
 public class CatalogueService {
 
-    @Autowired
     private IssuesRepository issuesRepository;
 
-    public CatalogueService() {}
+    @Autowired
+    public CatalogueService(IssuesRepository issuesRepository) {
+        this.issuesRepository = issuesRepository;
+    }
 
     public List<Issue> getCataloguePage(int page)
     {

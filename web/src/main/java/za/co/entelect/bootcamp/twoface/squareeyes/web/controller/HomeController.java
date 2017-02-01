@@ -18,9 +18,12 @@ public class HomeController {
 
     private CatalogueService catalogueService;
 
+    public HomeController(CatalogueService catalogueService) {
+        this.catalogueService = catalogueService;
+    }
+
     @RequestMapping(value = "/homepage", method = RequestMethod.GET)
     public String SayHello(ModelMap modelMap){
-        catalogueService = new CatalogueService();
         List<Issue> list = catalogueService.getCataloguePage(1);
         modelMap.addAttribute("list", list);
         return "homepage";

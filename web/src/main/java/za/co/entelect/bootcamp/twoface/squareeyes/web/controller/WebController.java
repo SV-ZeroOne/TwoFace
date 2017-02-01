@@ -28,23 +28,15 @@ public class WebController {
     String getHelloWorldRest() {
         return "Hello, world!";
     }
-
+/*
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String SayHello(ModelMap modelMap){
         List<Issue> list = catalogueService.getCataloguePage(1);
         modelMap.addAttribute("list",list);
         return "homepage";
     }
+*/
 
-    @RequestMapping(value = "/Catalogue", method = RequestMethod.GET)
-    public String PopulateCatalogue(ModelMap modelMap){
-        List<Issue> list = catalogueService.getCataloguePage(1);
-        for (Issue issue : list) {
-            System.out.println("Title: " + issue.getIssueTitle());
-        }
-        modelMap.addAttribute("list",list);
-        return "catalogue";
-    }
 
     public CatalogueService getCatalogueService() {
         return catalogueService;

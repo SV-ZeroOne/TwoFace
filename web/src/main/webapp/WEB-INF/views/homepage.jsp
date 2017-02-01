@@ -62,7 +62,8 @@
 		</article>
 		<article>
 			<c:forEach items="${list}" var="issue">
-					<h1>Issue: <c:out value="${issue}"/></h1>
+					<h1>Title: ${issue.getIssueTitle()}</h1>
+
 			</c:forEach>
 		</article>
 		<article>
