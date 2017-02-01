@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Controller
 public class SearchController {
-
+/*
     @Autowired
     List<Issue> list;
 
@@ -45,5 +45,5 @@ public class SearchController {
             //Default Page
         }
     }
-
+*/
 }
