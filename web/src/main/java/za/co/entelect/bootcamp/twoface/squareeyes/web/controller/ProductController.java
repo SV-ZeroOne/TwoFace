@@ -16,19 +16,19 @@ import java.util.List;
 @Controller
 public class ProductController {
 
-    private CatalogueService catalogueService;
+    private CatalogueService productService;
 
-    public ProductController(CatalogueService catalogueService) {
-        this.catalogueService = catalogueService;
+    public ProductController(CatalogueService productService) {
+        this.productService = productService;
     }
 
-    @RequestMapping(value = "/catalogue", method = RequestMethod.GET)
-    public String SayHello(@RequestParam(value = "search", required = false, defaultValue = "") String search,
-                           @RequestParam(value = "page",  required = false, defaultValue = "1") int page,
+    @RequestMapping(value = "/product", method = RequestMethod.GET)
+    public String SayHello(@RequestParam(value = "issue", required = false, defaultValue = "") String search,
+                           @RequestParam(value = "stock",  required = false, defaultValue = "1") int page,
                            ModelMap modelMap){
-        List<Issue> list = catalogueService.getCataloguePage(page);
-        modelMap.addAttribute("list", list);
+        List<Issue> list = productService.getCataloguePage(page);
+        modelMap.addAttribute("issue", issue);
         modelMap.addAttribute("page", page);
-        return "catalogue";
+        return "product";
     }
 }
