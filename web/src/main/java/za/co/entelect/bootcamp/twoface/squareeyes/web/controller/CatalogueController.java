@@ -1,5 +1,6 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.web.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,27 +21,12 @@ public class CatalogueController {
     public CatalogueController(CatalogueService catalogueService) {
         this.catalogueService = catalogueService;
     }
-/*
-    @RequestMapping(value = "/Catalogue", method = RequestMethod.GET)
-    public String PopulateCatalogue(ModelMap modelMap){
-        List<Issue> list = catalogueService.getCataloguePage(1);
-        for (Issue issue : list) {
-            System.out.println("Title: " + issue.getIssueTitle());
-        }
-        modelMap.addAttribute("list",list);
-        return "catalogue";
-    }
 
-    @RequestMapping(value = "/homepage", method = RequestMethod.GET)
+    @RequestMapping(value = "/catalogue", method = RequestMethod.GET)
     public String SayHello(ModelMap modelMap){
         List<Issue> list = catalogueService.getCataloguePage(1);
         modelMap.addAttribute("list", list);
-        return "homepage";
+        return "catalogue";
     }
-    */
-    @RequestMapping(value = "/Catalogue", method = RequestMethod.GET)
-    public String SayHello(ModelMap modelMap){
-        modelMap.addAttribute("greeting", "Hello World Again, from Spring 4 MVC");
-        return "Catalogue";
-    }
+
 }
