@@ -18,9 +18,6 @@ import java.util.List;
 @Controller
 public class WebController {
 
-    @Autowired
-    CatalogueService catalogueService;
-
     private String testVariable;
 
     @RequestMapping(value = "test", method = RequestMethod.GET)
@@ -29,10 +26,4 @@ public class WebController {
         return "Hello, world!";
     }
 
-    public CatalogueService getCatalogueService() {
-        return catalogueService;
-    }
-    public void setCatalogueService(CatalogueService catalogueService) {
-        this.catalogueService = catalogueService;
-    }
 }
