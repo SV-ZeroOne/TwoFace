@@ -26,7 +26,7 @@ public class CatalogueController {
     public String SayHello(@RequestParam(value = "search", required = false, defaultValue = "") String search,
                            @RequestParam(value = "page",  required = false, defaultValue = "1") int page,
                            ModelMap modelMap){
-        List<Issue> list = catalogueService.getCataloguePage(1);
+        List<Issue> list = catalogueService.getCataloguePage(page);
         modelMap.addAttribute("list", list);
         modelMap.addAttribute("page", page);
         return "catalogue";
