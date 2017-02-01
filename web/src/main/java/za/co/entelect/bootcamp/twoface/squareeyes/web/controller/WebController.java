@@ -23,7 +23,7 @@ public class WebController {
         return "Hello, world!";
     }
 
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String SayHello(ModelMap modelMap){
         modelMap.addAttribute("greeting", "Hello World Again, from Spring 4 MVC");
         return "homepage";

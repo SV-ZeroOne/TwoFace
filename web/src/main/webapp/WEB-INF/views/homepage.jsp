@@ -1,3 +1,5 @@
+<%@ taglib prefix="c"
+           uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,6 +67,11 @@
 					<h1 style="padding-top: 20px;">Our daily deals!</h1>
 					<div class="carousel-inner" role="listbox">
 						<div class="item active">
+							<c:forEach items="${list}" var="issue">
+								<tr>
+									<td>Issue: <c:out value="${issue}"/></td>
+								</tr>
+							</c:forEach>
 							<h3 class="title">Batman &amp; Robin</h3>
 							<img class="item-image" src="SlideShow/c1.jpg" alt="Batman" width="100px" height="100px">
 								<p class="price"> R99.99</p>

@@ -1,6 +1,7 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.CatalogueService;
@@ -12,14 +13,17 @@ import java.util.List;
 /**
  * Created by sean.vienings on 2017/01/31.
  */
+@Controller
 public class HomeController {
 
     private CatalogueService catalogueService;
 
-    @RequestMapping(value = "/Catalogue", method = RequestMethod.GET)
+    @RequestMapping(value = "/homepage", method = RequestMethod.GET)
     public String SayHello(ModelMap modelMap){
-        modelMap.addAttribute("greeting", "Hello World Again, from Spring 4 MVC");
-        return "Catalogue";
+        catalogueService = new CatalogueService();
+        List<Issue> list = catalogueService.getCataloguePage(1);
+        modelMap.addAttribute("list", list);
+        return "homepage";
     }
 /*
     @Autowired
