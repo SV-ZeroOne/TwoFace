@@ -25,14 +25,4 @@ public class HomeController {
         modelMap.addAttribute("list", list);
         return "homepage";
     }
-/*
-    @Autowired
-    public String HomeController(CatalogueService catalogueService) {
-        this.catalogueService = catalogueService;
-        List<Issue> list;
-        list = catalogueService.HomePage();
-        ModelMap modelMap = new ModelMap();
-        modelMap.addAttribute("list",list);
-        return "homepage";
-    }*/
 }

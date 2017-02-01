@@ -1,10 +1,7 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational;
 
-import org.hibernate.ejb.EntityManagerFactoryImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.generic.Repository;
 
 import javax.persistence.*;
@@ -107,14 +104,10 @@ public abstract class RelationalRepository<T> implements Repository<T> {
         return (Long)query.getSingleResult();
     }
 
-    @PersistenceContext
     public void delete(Object id) {
-        entityManager.getTransaction().begin();
         entityManager.remove(this.entityManager.getReference(type, id));
-        entityManager.getTransaction().commit();
     }
 
-    @PersistenceContext
     public T create(T t) {
         //entityManager.getTransaction().begin();
         entityManager.persist(t);

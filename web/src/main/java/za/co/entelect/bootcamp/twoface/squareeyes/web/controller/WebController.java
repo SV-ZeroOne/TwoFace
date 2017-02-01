@@ -1,10 +1,15 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.web.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
+import za.co.entelect.bootcamp.twoface.squareeyes.services.CatalogueService;
+
+import java.util.List;
 
 /**
  * Created by sean.vienings on 2017/01/30.
@@ -13,9 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class WebController {
 
+    @Autowired
+    CatalogueService catalogueService;
+
     private String testVariable;
-    //IssuesRepositoryIMP is = new IssuesRepositoryIMP();
-    //Issue tempIssue = is.find(32);
 
     @RequestMapping(value = "test", method = RequestMethod.GET)
     public @ResponseBody
@@ -25,36 +31,25 @@ public class WebController {
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public String SayHello(ModelMap modelMap){
-        modelMap.addAttribute("greeting", "Hello World Again, from Spring 4 MVC");
+        List<Issue> list = catalogueService.getCataloguePage(1);
+        modelMap.addAttribute("list",list);
         return "homepage";
     }
 
     @RequestMapping(value = "/Catalogue", method = RequestMethod.GET)
     public String PopulateCatalogue(ModelMap modelMap){
-        modelMap.addAttribute("Issues", "List of issues");
-        return "Catalogue";
-    }
-/*
-    @RequestMapping(value = "/issue", method = RequestMethod.GET)
-    public String TestIssue(ModelMap modelMap){
-        modelMap.addAttribute("issueTitle", tempIssue.getIssueTitle());
-        modelMap.addAttribute("publisher", tempIssue.getPublisher());
-        return "issue";
+        List<Issue> list = catalogueService.getCataloguePage(1);
+        for (Issue issue : list) {
+            System.out.println("Title: " + issue.getIssueTitle());
+        }
+        modelMap.addAttribute("list",list);
+        return "catalogue";
     }
 
-
-    Insert page number
-    Search Criteria
-
-
-
-
-
-
-    @RequestMapping(value = "/catalogue", method = RequestMethod.GET)
-    public String SayHello(ModelMap modelMap){
-        modelMap.addAttribute("greeting", "Hello World Again, from Spring 4 MVC");
-        return "hello";
+    public CatalogueService getCatalogueService() {
+        return catalogueService;
     }
-    */
+    public void setCatalogueService(CatalogueService catalogueService) {
+        this.catalogueService = catalogueService;
+    }
 }

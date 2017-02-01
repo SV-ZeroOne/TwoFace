@@ -61,6 +61,11 @@
 
 		</article>
 		<article>
+			<c:forEach items="${list}" var="issue">
+					<h1>Issue: <c:out value="${issue}"/></h1>
+			</c:forEach>
+		</article>
+		<article>
 			<div class="centerText">
 				<div id="myCarousel" class="carousel slide" data-ride="carousel">
 					<!-- Wrapper for slides -->

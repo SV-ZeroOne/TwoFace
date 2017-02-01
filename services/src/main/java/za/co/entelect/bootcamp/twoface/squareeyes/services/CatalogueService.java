@@ -1,5 +1,6 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.IssuesRepository;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.RelationalIssuesRepository;
@@ -12,6 +13,7 @@ import java.util.List;
  */
 public class CatalogueService {
 
+    @Autowired
     private IssuesRepository issuesRepository;
 
     public CatalogueService() {}
