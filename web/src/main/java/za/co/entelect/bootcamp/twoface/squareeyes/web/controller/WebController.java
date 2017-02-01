@@ -29,10 +29,10 @@ public class WebController {
         return "homepage";
     }
 
-    @RequestMapping(value = "/catalogue", method = RequestMethod.GET)
+    @RequestMapping(value = "/Catalogue", method = RequestMethod.GET)
     public String PopulateCatalogue(ModelMap modelMap){
         modelMap.addAttribute("Issues", "List of issues");
-        return "catalogue";
+        return "Catalogue";
     }
 /*
     @RequestMapping(value = "/issue", method = RequestMethod.GET)

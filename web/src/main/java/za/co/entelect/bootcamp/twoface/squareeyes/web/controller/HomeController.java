@@ -16,12 +16,12 @@ public class HomeController {
 
     private CatalogueService catalogueService;
 
-    /*@RequestMapping(value = "/Catalogue", method = RequestMethod.GET)
+    @RequestMapping(value = "/Catalogue", method = RequestMethod.GET)
     public String SayHello(ModelMap modelMap){
         modelMap.addAttribute("greeting", "Hello World Again, from Spring 4 MVC");
         return "Catalogue";
-    }*/
-
+    }
+/*
     @Autowired
     public String HomeController(CatalogueService catalogueService) {
         this.catalogueService = catalogueService;
@@ -30,5 +30,5 @@ public class HomeController {
         ModelMap modelMap = new ModelMap();
         modelMap.addAttribute("list",list);
         return "homepage";
-    }
+    }*/
 }

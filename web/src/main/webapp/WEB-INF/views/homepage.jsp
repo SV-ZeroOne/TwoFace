@@ -26,7 +26,7 @@
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="homepage">Home</a></li>
-					<li><a href="Catalogue.html">Catalogue</a></li>
+					<li><a href="Catalogue">Catalogue</a></li>
 				</ul>
 				<form class="navbar-form navbar-right">
 					<input type="text" class="form-control" id="search" placeholder="Search" name="q"></input>
