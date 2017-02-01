@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Controller
 public class SearchController {
-
+/*
     @Autowired
     List<Issue> list;
 
@@ -38,12 +38,12 @@ public class SearchController {
         list = searchService.SearchService(pSearchTerm);
         if (list.size() != 0)
         {
-            //Catalog with new Issues
+            //return list
         }
         else
         {
             //Default Page
         }
     }
-
+*/
 }
