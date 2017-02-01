@@ -20,7 +20,10 @@ public abstract class RelationalRepository<T> implements Repository<T> {
 
     private static final Logger logger = LoggerFactory.getLogger(RelationalRepository.class);
 
+    /*EntityManagerFactory factory = Persistence.createEntityManagerFactory("Ironman");
     @PersistenceContext
+    protected EntityManager entityManager = factory.createEntityManager();
+    */@PersistenceContext
     protected EntityManager entityManager;
 
     private Class<T> type;
@@ -113,7 +116,9 @@ public abstract class RelationalRepository<T> implements Repository<T> {
 
     @PersistenceContext
     public T create(T t) {
+        //entityManager.getTransaction().begin();
         entityManager.persist(t);
+        //entityManager.getTransaction().commit();
         entityManager.flush();
         return t;
     }

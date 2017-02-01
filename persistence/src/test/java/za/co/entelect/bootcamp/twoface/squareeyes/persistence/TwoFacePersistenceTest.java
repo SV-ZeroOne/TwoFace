@@ -15,7 +15,8 @@ import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.supplie
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.RelationalSuppliersRepository;
 
 import java.util.Date;
-
+import java.util.List;
+import static org.junit.Assert.assertNotEquals;
 /**
  * Created by sean.vienings on 2017/01/19.
  */
@@ -33,6 +34,14 @@ public class TwoFacePersistenceTest {
         singleIssueRepository = new RelationalIssuesRepository();
         singleOrderRepository = new RelationalOrdersRepository();
         singleSupplierRepository = new RelationalSuppliersRepository();
+    }
+
+    @Test
+    public void getDataFromDatabase()
+    {
+        IssuesRepository sr = new RelationalIssuesRepository();
+        List<Issue> suppliers = sr.findAll();
+        assertNotEquals(0, suppliers.size());
     }
 
     @Test

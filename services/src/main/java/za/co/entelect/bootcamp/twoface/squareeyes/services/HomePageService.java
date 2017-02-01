@@ -16,7 +16,7 @@ public class HomePageService {
         //
     }
 
-    public List<Issue> getCa()
+    public List<Issue> HomePage()
     {
         singleIssueRepository = new RelationalIssuesRepository();
 
@@ -29,5 +29,10 @@ public class HomePageService {
         issue = singleIssueRepository.find(1);
         list.add(issue);
         return list;
+       /* public ApplicationContext context = new ClassPathXmlApplicationContext("classpath:za/co/entelect/bootcamp/twoface/squareeyes/services/root-context.xml");
+        Issue issue = singleIssueRepository.find(32);
+        return issue.getIssueTitle();*/
     }
+
+
 }
