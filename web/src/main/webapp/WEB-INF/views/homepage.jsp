@@ -27,7 +27,7 @@
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="homepage">Home</a></li>
-					<li><a href="Catalogue">Catalogue</a></li>
+					<li><a href="catalogue">catalogue</a></li>
 				</ul>
 				<form class="navbar-form navbar-right">
 					<input type="text" class="form-control" id="search" placeholder="Search" name="q"></input>
@@ -72,11 +72,11 @@
 					<h1 style="padding-top: 20px;">Our daily deals!</h1>
 					<div class="carousel-inner" role="listbox">
 						<div class="item active">
-							<c:forEach items="${list}" var="issue">
+							<%--<c:forEach items="${list}" var="issue">
 								<tr>
 									<td>Issue: <c:out value="${issue}"/></td>
 								</tr>
-							</c:forEach>
+							</c:forEach>--%>
 							<h3 class="title">Batman &amp; Robin</h3>
 							<img class="item-image" src="SlideShow/c1.jpg" alt="Batman" width="100px" height="100px">
 								<p class="price"> R99.99</p>
