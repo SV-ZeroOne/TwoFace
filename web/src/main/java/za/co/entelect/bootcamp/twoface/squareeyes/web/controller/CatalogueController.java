@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.CatalogueService;
+import za.co.entelect.bootcamp.twoface.squareeyes.services.SearchService;
 
 import java.util.List;
 
@@ -17,18 +18,31 @@ import java.util.List;
 public class CatalogueController {
 
     private CatalogueService catalogueService;
+    private SearchService searchService;
 
     public CatalogueController(CatalogueService catalogueService) {
         this.catalogueService = catalogueService;
+        //this.searchService = SearchService;
     }
 
     @RequestMapping(value = "/catalogue", method = RequestMethod.GET)
     public String SayHello(@RequestParam(value = "search", required = false, defaultValue = "") String search,
                            @RequestParam(value = "page",  required = false, defaultValue = "1") int page,
                            ModelMap modelMap){
-        List<Issue> list = catalogueService.getCataloguePage(page);
-        modelMap.addAttribute("list", list);
-        modelMap.addAttribute("page", page);
-        return "catalogue";
+        List<Issue> list;
+       /* list = searchService.SearchService(search);
+        System.out.println(list.size());
+        if (!(list.isEmpty()))
+        {
+            modelMap.addAttribute("list", list);
+            return "catalogue";
+        }
+        else
+        {*/
+            list = catalogueService.getCataloguePage(page);
+            modelMap.addAttribute("list", list);
+            modelMap.addAttribute("page", page);
+            return "catalogue";
+        //}
     }
 }

@@ -14,9 +14,14 @@ import java.util.List;
 public class SearchService {
 
     public List<Issue> SearchService(String searchTerm) {
+        List<Issue> list = null;
+        if (searchTerm == "")
+        {
+            return list;
+        }
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath:za/co/entelect/bootcamp/twoface/squareeyes/services/root-context.xml");
         RelationalIssuesRepository ir = context.getBean(RelationalIssuesRepository.class);
-        List<Issue> list = ir.search("Title",searchTerm);
+        list = ir.search("Title",searchTerm);
         if(list.size() > 0)
         {
             return list;

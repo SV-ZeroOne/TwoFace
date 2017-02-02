@@ -31,20 +31,27 @@ public class SearchController {
         this.searchService = searchService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping("/search")
     public String Search(ModelMap modelMap, @RequestParam(value = "search", required = false)
-                                       String pSearchTerm, HttpServletRequest request, HttpServletResponse response) {
+                                       String pSearchTerm) {
 
-        list = searchService.SearchService(pSearchTerm);
-        if (list.size() != 0)
-        {
-            modelMap.addAttribute("list", list);
-            return "catalogue";
-        }
-        else
-        {
-            return "issue doesnt exist";
-        }
+        System.out.println("------------------------------------");
+        System.out.println("Here!!!!! " + pSearchTerm);
+        System.out.println("------------------------------------");
+
+//        list = searchService.SearchService(pSearchTerm);
+//        System.out.println(list.size());
+//        if (list.size() != 0)
+//        {
+//            modelMap.addAttribute("list", list);
+//            return "catalogue";
+//        }
+//        else
+//        {
+//            return "catalogue";
+//        }
+
+        return "homepage";
     }
 
 }

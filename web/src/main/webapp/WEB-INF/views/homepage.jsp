@@ -27,11 +27,11 @@
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="homepage">Home</a></li>
-					<li><a href="catalogue">catalogue</a></li>
+					<li><a href="catalogue">Catalogue</a></li>
 				</ul>
-				<form class="navbar-form navbar-right">
-					<input type="text" class="form-control" id="search" placeholder="Search" name="q"></input>
-					<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+				<form class="navbar-form navbar-right" action="/catalogue">
+					<input type="text" class="form-control" id="search" placeholder="Search" name="search"></input>
+					<button type="button" class="btn btn-primary" value="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 					<button type="button" onclick="hideOrShowShoppingCart()" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Shopping Cart</button>
 				</form>
 			</div><!--/.nav-collapse -->
