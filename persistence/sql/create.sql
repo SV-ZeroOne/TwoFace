@@ -46,7 +46,7 @@ CREATE TABLE CustomerAddress
 
 CREATE TABLE CustomerOrders
 (
-	CustomerOrdersID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	CustomerOrderID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	CustomerID INT FOREIGN KEY REFERENCES Customers(CustomerID) NOT NULL,
 	CustomerAddressID INT FOREIGN KEY REFERENCES CustomerAddress(CustomerAddressID) NULL,
 	DeliveryOption VARCHAR(15) NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE CustomerOrders
 CREATE TABLE Invoices
 (
 	InvoiceID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	CustomerOrderID INT FOREIGN KEY REFERENCES CustomerOrders(CustomerOrdersID) NOT NULL,
+	CustomerOrderID INT FOREIGN KEY REFERENCES CustomerOrders(CustomerOrderID) NOT NULL,
 	StockID INT FOREIGN KEY REFERENCES Stock(StockReferenceID) NOT NULL,
 	Quantity SMALLINT NOT NULL,
 	Price NUMERIC(8,2) NOT NULL
@@ -84,16 +84,16 @@ CREATE TABLE Vouchers
 
 CREATE TABLE VoucherPayments
 (
-	PaymentID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	CustomerOrderID INT FOREIGN KEY REFERENCES CustomerOrders(CustomerOrdersID) NOT NULL,
+	VoucherPaymentID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	CustomerOrderID INT FOREIGN KEY REFERENCES CustomerOrders(CustomerOrderID) NOT NULL,
 	VoucherID INT FOREIGN KEY REFERENCES Vouchers(VoucherID) NOT NULL,
 	VoucherAmount NUMERIC(8,2) NULL
 );
 
 CREATE TABLE CardPayments
 (
-	PaymentID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	CustomerOrderID INT FOREIGN KEY REFERENCES CustomerOrders(CustomerOrdersID) NOT NULL,
+	CardPaymentID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	CustomerOrderID INT FOREIGN KEY REFERENCES CustomerOrders(CustomerOrderID) NOT NULL,
 	ReferenceID VARCHAR(50) UNIQUE NOT NULL,
 	CardAmount NUMERIC(8,2) NULL
 );

@@ -51,6 +51,9 @@ public class Invoice {
     public int getInvoiceID() {
         return invoiceID;
     }
+    public void setInvoiceID(int invoiceID){
+        this.invoiceID = invoiceID;
+    }
 
     @Column(name="Quantity")
     public short getQuantity() {
