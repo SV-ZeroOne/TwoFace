@@ -30,10 +30,18 @@ public class ShoppingCartService {
         return shoppingCartsRepository.search("customer.customerID", customerID);
     }
 
-    public ShoppingCart addToShoppingCart(short quantity, int customerID, int stockID)
+    public ShoppingCart addToShoppingCart(short quantity, String email, int stockID)
     {
         ShoppingCart shoppingCart = new ShoppingCart(quantity);
-        shoppingCart.setCustomer(customersRepository.find(customerID));
+        shoppingCart.setCustomer(customersRepository.search("email", "quinton@gmail.com").get(0));
+        shoppingCart.setStock(stockRepository.find(stockID));
+        return shoppingCartsRepository.create(shoppingCart);
+    }
+
+    public ShoppingCart removeFromShoppingCart(short quantity, String email, int stockID)
+    {
+        ShoppingCart shoppingCart = new ShoppingCart(quantity);
+        shoppingCart.setCustomer(customersRepository.search("email", "quinton@gmail.com").get(0));
         shoppingCart.setStock(stockRepository.find(stockID));
         return shoppingCartsRepository.create(shoppingCart);
     }

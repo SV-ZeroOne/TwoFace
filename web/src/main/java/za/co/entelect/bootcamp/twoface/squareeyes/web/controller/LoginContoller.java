@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.customer.Customer;
 
 import java.security.Principal;
 
@@ -66,6 +67,20 @@ public class LoginContoller {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(ModelMap model) {
         System.out.println("In the login method");
+        return "login";
+
+    }
+
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public String signup(@RequestParam(value = "email", required = true) String email,
+                         @RequestParam(value = "password", required = true) String password,
+                         @RequestParam(value = "title", required = true) String title,
+                         @RequestParam(value = "firstName", required = true) String firstName,
+                         @RequestParam(value = "surname", required = true) String surname,
+            ModelMap model) {
+        System.out.println("In the login method");
+        Customer customer = new Customer(email, title, firstName, surname, "salt", password);
+        
         return "login";
 
     }

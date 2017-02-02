@@ -41,57 +41,59 @@
         <div class="container">
             <div id="shoppingCart" class="hide" style="position: fixed; z-index: 2;">
                 <div id="shoppingItems" class="well container">
-                    <c:choose>
-                        <c:when test="${shoppingCart != null}">
-                            <table class='table table-condensed col-xs-12'>
-                                <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Condition</th>
-                                    <th>Price</th>
-                                    <th>Qty</th>
-                                    <th>Actions</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach items="${shoppingCart}" var="cartitem">
+                    <sec:authorize access="hasRole('USER')">
+                        <c:choose>
+                            <c:when test="${shoppingCart != null}">
+                                <table class='table table-condensed col-xs-12'>
+                                    <thead>
                                     <tr>
-                                        <td>${cartitem.stock.issue.issueTitle}</td>
-                                        <td>${cartitem.stock.condition}</td>
-                                        <td>R${cartitem.stock.price * cartitem.quantity}</td>
-                                        <td>
-                                            <button type='button' class='btn btn-default'
-                                                    onclick='decreaseQty()' style=''>
-                                                <span class='glyphicon glyphicon-minus' aria-hidden='true'></span>
-                                            </button>
-                                                ${cartitem.quantity}
-                                            <button type='button' class='btn btn-default'
-                                                    onclick='increaseQty()' style=''>
-                                                <span class='glyphicon glyphicon-plus' aria-hidden='true'></span>
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <button type='button' class='btn btn-warning'
-                                                    onclick='removeFromCart()' style=''>
-                                                <span class='glyphicon glyphicon-remove' aria-hidden='true'></span>
-                                            </button>
-                                        </td>
+                                        <th>Title</th>
+                                        <th>Condition</th>
+                                        <th>Price</th>
+                                        <th>Qty</th>
+                                        <th>Actions</th>
                                     </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                            <button type='button' class='btn' onclick='hideOrShowShoppingCart()' id='checkout' style='float:left; margin-right:5px'>
-                                <span class='glyphicon glyphicon-remove' aria-hidden='true'></span> Close
-                            </button>
-                            <button type='button' class='btn' onclick='removeCart()' id='checkout' style='float:left'>
-                                <span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Trash
-                            </button>
-                            <button type='button' class='btn btn-success' onclick='checkout()' id='checkout' style='float:right'>
-                                <span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Checkout
-                            </button>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach items="${shoppingCart}" var="cartitem">
+                                        <tr>
+                                            <td>${cartitem.stock.issue.issueTitle}</td>
+                                            <td>${cartitem.stock.condition}</td>
+                                            <td>R${cartitem.stock.price * cartitem.quantity}</td>
+                                            <td>
+                                                <button type='button' class='btn btn-default'
+                                                        onclick='decreaseQty()' style=''>
+                                                    <span class='glyphicon glyphicon-minus' aria-hidden='true'></span>
+                                                </button>
+                                                    ${cartitem.quantity}
+                                                <button type='button' class='btn btn-default'
+                                                        onclick='increaseQty()' style=''>
+                                                    <span class='glyphicon glyphicon-plus' aria-hidden='true'></span>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <button type='button' class='btn btn-warning'
+                                                        onclick='removeFromCart()' style=''>
+                                                    <span class='glyphicon glyphicon-remove' aria-hidden='true'></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                                <button type='button' class='btn' onclick='hideOrShowShoppingCart()' id='checkout' style='float:left; margin-right:5px'>
+                                    <span class='glyphicon glyphicon-remove' aria-hidden='true'></span> Close
+                                </button>
+                                <button type='button' class='btn' onclick='removeCart()' id='checkout' style='float:left'>
+                                    <span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Trash
+                                </button>
+                                <button type='button' class='btn btn-success' onclick='checkout()' id='checkout' style='float:right'>
+                                    <span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Checkout
+                                </button>
 
-                        </c:when>
-                    </c:choose>
+                            </c:when>
+                        </c:choose>
+                    </sec:authorize>
                 </div>
             </div>
             <div class="container" style="padding-top:10px">
@@ -118,7 +120,6 @@
                     <form id="addToCartForm" method="post" action="/shoppingcart">
                         <input type="hidden" name="stockID" value="${stock.stockReferenceID}"/>
                         <input type="hidden" name="quantity" value="1"/>
-                        <input type="hidden" name="customerID" value="1"/>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     </form>
 
