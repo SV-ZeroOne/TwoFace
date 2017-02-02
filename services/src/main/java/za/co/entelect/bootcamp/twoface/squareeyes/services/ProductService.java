@@ -6,7 +6,6 @@ import za.co.entelect.bootcamp.twoface.squareeyes.domain.stock.Stock;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.IssuesRepository;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.stock.StockRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

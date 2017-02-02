@@ -14,5 +14,8 @@
 	<bean id="ProductService" class="za.co.entelect.bootcamp.twoface.squareeyes.services.ProductService">
 		<!--<property name="issuesRepository" ref="IssuesRepository"></property>-->
 	</bean>
+	<bean id="ShoppingCartService" class="za.co.entelect.bootcamp.twoface.squareeyes.services.ShoppingCartService">
+		<!--<property name="issuesRepository" ref="IssuesRepository"></property>-->
+	</bean>
 
 </beans>
