@@ -26,11 +26,11 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="homepage.html">Home</a></li>
+                <li><a href="/homepage">Home</a></li>
                 <li class="active"><a href="/catalogue">Catalogue</a></li>
             </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" id="search" placeholder="Search" name="q"></input>
+            <form class="navbar-form navbar-right" action="/catalogue">
+                <input type="text" class="form-control" id="search" placeholder="Search" name="search"></input>
                 <button type="button" class="btn btn-primary form-control">
                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                 </button>
