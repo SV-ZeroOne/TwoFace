@@ -29,9 +29,19 @@
                 <li><a href="/homepage">Home</a></li>
                 <li class="active"><a href="/catalogue">Catalogue</a></li>
             </ul>
+            <c:choose>
+                <c:when test="${shoppingCart != null}">
+                    <form class="navbar-form navbar-right" action="/logout" method="post">
+                        <button type="submit" class="form-control btn btn-info">
+                        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log Out
+                        </button>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    </form>
+                </c:when>
+            </c:choose>
             <form class="navbar-form navbar-right" action="/catalogue">
                 <input type="text" class="form-control" id="search" placeholder="Search" name="search"></input>
-                <button type="button" class="btn btn-primary form-control">
+                <button type="submit" class="btn btn-primary form-control">
                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                 </button>
                 <c:choose>
@@ -47,6 +57,7 @@
                     </c:otherwise>
                 </c:choose>
             </form>
+
         </div>
     </div>
 </nav>

@@ -24,7 +24,7 @@ public class HomeController {
 
     public HomeController(CatalogueService catalogueService, ShoppingCartService shoppingCartService) {
         this.catalogueService = catalogueService;
-        shoppingCartService = shoppingCartService;
+        this.shoppingCartService = shoppingCartService;
     }
 
     @RequestMapping(value = "/homepage", method = RequestMethod.GET)
