@@ -21,13 +21,26 @@
 %>
 
 <form name="loginForm" action="<c:url value="/login" />" method="post">
-    Emailz: <input type="text" placeholder="email" name="user" requird/>
+    Email: <input type="text" placeholder="email" name="user" requird/>
     <br/>
-    Passwordz: <input type="password" placeholder="password" name="user" required/>
+    Password: <input type="password" placeholder="password" name="user" required/>
     <br/>
-    <input type="submit"  value="log inz">
+    <input type="submit"  value="log in">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    <p><a href="register">Sign up</a></p>
+</form>
+<form name="signUpForm" action="<c:url value="/signup" />" method="post">
+    Email: <input type="text" placeholder="email" name="user" requird/>
+    <br/>
+    Password: <input type="password" placeholder="password" name="user" required/>
+    <br/>
+    Title: <input type="password" placeholder="password" name="user" required/>
+    <br/>
+    FirstName: <input type="password" placeholder="password" name="user" required/>
+    <br/>
+    Surname: <input type="password" placeholder="password" name="user" required/>
+    <br/>
+    <input type="submit"  value="SignUp">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 </form>
 </body>
 </html>

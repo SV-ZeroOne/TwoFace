@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<!DOCTYPE html>
-
 <html>
 <head>
     <meta charset="UTF-8"/>
@@ -44,6 +42,7 @@
         <div class="container">
             <div id="shoppingCart" class="hide" style="position: fixed; z-index: 2;">
                 <div id="shoppingItems" class="well container">
+                    <sec:authorize access="hasRole('USER')">
                     <c:choose>
                         <c:when test="${shoppingCart != null}">
                             <table class='table table-condensed col-xs-12'>
@@ -95,6 +94,7 @@
 
                         </c:when>
                     </c:choose>
+                    </sec:authorize>
                 </div>
             </div>
 
@@ -138,12 +138,7 @@
             </div>
 
             <div id="footer" class="col-xs-12" style="margin-top: 30px;">
-                <sec:authorize access="hasRole('USER')">
 
-                    This content will only be visible to users who have
-                    the "supervisor" authority in their list of <tt>GrantedAuthority</tt>s.
-
-                </sec:authorize>
             </div>
         </div>
     </article>
