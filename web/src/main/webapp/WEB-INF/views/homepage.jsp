@@ -28,6 +28,7 @@
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="homepage">Home</a></li>
 					<li><a href="catalogue">catalogue</a></li>
+					<li><a href="login">login</a></li>
 				</ul>
 				<form class="navbar-form navbar-right">
 					<input type="text" class="form-control" id="search" placeholder="Search" name="q"></input>
@@ -125,6 +126,12 @@
 					<input type="submit" value="Log out"/>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				</form>
+				${message}
+
+
+				<c:url value="/logout" var="logoutUrl" />
+				<a href="${logoutUrl}">Log Out</a>
+
 			</div>
 		</article>
 
