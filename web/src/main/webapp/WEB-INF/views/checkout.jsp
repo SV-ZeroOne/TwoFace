@@ -31,8 +31,8 @@
 					<li class="active"><a href="homepage">Home</a></li>
 					<li><a href="catalogue">Catalogue</a></li>
 				</ul>
-				<form class="navbar-form navbar-right">
-					<input type="text" class="form-control" id="search" placeholder="search" name="search"></input>
+				<form class="navbar-form navbar-right" action="/catalogue">
+					<input type="text" class="form-control" id="search" placeholder="Search" name="search"></input>
 					<button type="button" class="btn btn-primary" name="search">Search</button>
 				</form>
 			</div><!--/.nav-collapse -->
@@ -50,14 +50,16 @@
 								Your Order <div class="pull-right"></div>
 							</div>
 							<div class="panel-cart" id="shoppingItems">
+							<c:forEach items="${list}" var="issue">
 								<!--Here we pull our product items into cart details-->
 								<div class="form-group" id="checkout-cart-items"></div>
-								<div class="form-group">
+									<div>${issue.issueTitle} + ${issue.publisher} + ${}</div>
 									<div class="col-xs-12">
 										<strong>Subtotal</strong>
 										<div class="pull-right" id="Subtotal"><span>$</span><span>0.00</span></div>
 									</div>
-								</div>
+
+							</c:forEach>
 								<div class="form-group"><hr /></div>
 								<div class="form-group">
 									<div class="col-xs-12">
@@ -67,6 +69,7 @@
 								</div>
 							</div>
 						</div>
+
 						<!--REVIEW ORDER END-->
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 panel-group">
