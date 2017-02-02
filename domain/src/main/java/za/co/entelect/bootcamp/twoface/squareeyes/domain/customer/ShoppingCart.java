@@ -23,7 +23,7 @@ public class ShoppingCart {
         this.quantity = quantity;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "CustomerID", referencedColumnName = "CustomerID")
     public Customer getCustomer() {
         return customer;
@@ -32,7 +32,7 @@ public class ShoppingCart {
         this.customer = customer;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "StockID", referencedColumnName = "StockReferenceID")
     public Stock getStock() {
         return stock;

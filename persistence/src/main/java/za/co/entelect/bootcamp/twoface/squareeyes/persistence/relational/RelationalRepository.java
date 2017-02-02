@@ -2,6 +2,7 @@ package za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.generic.Repository;
 
 import javax.persistence.*;
@@ -17,10 +18,7 @@ public abstract class RelationalRepository<T> implements Repository<T> {
 
     private static final Logger logger = LoggerFactory.getLogger(RelationalRepository.class);
 
-    /*EntityManagerFactory factory = Persistence.createEntityManagerFactory("Ironman");
     @PersistenceContext
-    protected EntityManager entityManager = factory.createEntityManager();
-    */@PersistenceContext
     protected EntityManager entityManager;
 
     private Class<T> type;
@@ -96,18 +94,19 @@ public abstract class RelationalRepository<T> implements Repository<T> {
         return (Long)query.getSingleResult();
     }
 
+    @Transactional
     public void delete(Object id) {
         entityManager.remove(this.entityManager.getReference(type, id));
     }
 
+    @Transactional
     public T create(T t) {
-        //entityManager.getTransaction().begin();
         entityManager.persist(t);
-        //entityManager.getTransaction().commit();
         entityManager.flush();
         return t;
     }
 
+    @Transactional
     public T update(T t) {
         this.entityManager.merge(t);
         this.entityManager.flush();
