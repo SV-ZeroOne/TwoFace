@@ -30,14 +30,15 @@ public class CatalogueController {
                            @RequestParam(value = "page",  required = false, defaultValue = "1") int page,
                            ModelMap modelMap){
         List<Issue> list;
-        list = searchService.SearchService(search);
-        System.out.println(list.size());
-        if (!(list.isEmpty()))
+        if (search == "")
         {
+            System.out.println(search);
+            list = searchService.SearchService(search);
             modelMap.addAttribute("list", list);
         }
         else
         {
+            System.out.println("No Search");
             list = catalogueService.getCataloguePage(page);
             modelMap.addAttribute("list", list);
             modelMap.addAttribute("page", page);
