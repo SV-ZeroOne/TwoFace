@@ -22,6 +22,7 @@ public class Issue {
     private String publisher;
     private short seriesNumber;
     private String description;
+    private String imageRef;
 
     public Issue(){}
 
@@ -94,4 +95,10 @@ public class Issue {
         this.description = description;
     }
 
+    public void setImageRef(String imageRef) {this.imageRef = imageRef;}
+
+    @Column(name="imageRef")
+    public String getImageRef() {
+        return imageRef;
+    }
 }
