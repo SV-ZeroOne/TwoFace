@@ -218,7 +218,6 @@
         </div> <!--REVIEW USER DETAILS END-->
     </article>
 </section>
-
     <div class="modal confirm" id="Confirmation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -229,7 +228,7 @@
                     Order Completed Successfully
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="removeCartAfterPurchase()">Completed</button>
+                    <button type="button"  class="btn btn-default" data-dismiss="modal" onclick="location.href='homepage'"/>Completed</button>
                 </div>
             </div>
         </div>
