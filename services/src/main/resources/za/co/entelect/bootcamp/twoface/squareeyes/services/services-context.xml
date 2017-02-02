@@ -8,4 +8,8 @@
 		<!--<property name="issuesRepository" ref="IssuesRepository"></property>-->
 	</bean>
 
+	<bean id="ProductService" class="za.co.entelect.bootcamp.twoface.squareeyes.services.ProductService">
+		<!--<property name="issuesRepository" ref="IssuesRepository"></property>-->
+	</bean>
+
 </beans>

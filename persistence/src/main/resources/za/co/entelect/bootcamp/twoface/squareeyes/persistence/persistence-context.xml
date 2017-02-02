@@ -49,52 +49,5 @@
 <bean id="jpaAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" p:showSql="true" />
 
 
-<bean id="ComicCreatorsRepository" class="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.creators.RelationalComicCreatorsRepository">
-    <property name="entityManager" ref="entityManager"></property>
-</bean>
-<bean id="CreatorsRepository" class="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.creators.RelationalCreatorsRepository">
-    <property name="entityManager" ref="entityManager"></property>
-</bean>
-<bean id="CustomerAddressRepository" class="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.customers.RelationalCustomerAddressRepository">
-    <property name="entityManager" ref="entityManager"></property>
-</bean>
-<bean id="CustomersRepository" class="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.customers.RelationalCustomersRepository">
-    <property name="entityManager" ref="entityManager"></property>
-</bean>
-<bean id="ShoppingCartsRepository" class="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.customers.RelationalShoppingCartsRepository">
-    <property name="entityManager" ref="entityManager"></property>
-</bean>
-<!--<bean id="IssuesRepository" class="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.issues.RelationalIssuesRepository">-->
-    <!--<property name="entityManager" ref="entityManager"></property>-->
-<!--</bean>-->
-<bean id="CardPaymentsRepository" class="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.sales.RelationalCardPaymentsRepository">
-    <property name="entityManager" ref="entityManager"></property>
-</bean>
-<bean id="CustomerOrdersRepository" class="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.sales.RelationalCustomerOrdersRepository">
-    <property name="entityManager" ref="entityManager"></property>
-</bean>
-<bean id="InvoicesRepository" class="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.sales.RelationalInvoicesRepository">
-    <property name="entityManager" ref="entityManager"></property>
-</bean>
-<bean id="VoucherPaymentsRepository" class="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.sales.RelationalVoucherPaymentsRepository">
-    <property name="entityManager" ref="entityManager"></property>
-</bean>
-<bean id="VouchersRepository" class="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.sales.RelationalVouchersRepository">
-    <property name="entityManager" ref="entityManager"></property>
-</bean>
-<bean id="StockRepository" class="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.stock.RelationalStockRepository">
-    <property name="entityManager" ref="entityManager"></property>
-</bean>
-<bean id="OrdersRepository" class="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.RelationalOrdersRepository">
-    <property name="entityManager" ref="entityManager"></property>
-</bean>
-<bean id="SupplierPaymentsRepository" class="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.RelationalSupplierPaymentsRepository">
-    <property name="entityManager" ref="entityManager"></property>
-</bean>
-<bean id="SupplierQuotesRepository" class="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.RelationalSupplierQuotesRepository">
-    <property name="entityManager" ref="entityManager"></property>
-</bean>
-<bean id="SuppliersRepository" class="za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.suppliers.RelationalSuppliersRepository">
-    <property name="entityManager" ref="entityManager"></property>
-</bean>
+
 </beans>
