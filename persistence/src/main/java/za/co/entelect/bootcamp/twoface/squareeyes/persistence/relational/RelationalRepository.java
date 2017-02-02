@@ -57,40 +57,32 @@ public abstract class RelationalRepository<T> implements Repository<T> {
     }
 
     public List<T> search(String property, String criteria) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("select x from ");
-        sb.append(type.getSimpleName());
-        sb.append(" x where x.");
-        sb.append(property);
-        sb.append(" like %");
-        sb.append(criteria);
-        sb.append("%");
-        Query query = this.entityManager.createQuery(sb.toString());
+        Query query = this.entityManager.createQuery("select x from " +
+                type.getSimpleName() +
+                " x where x."+
+                property+
+                " like :criteria");
+        query.setParameter("criteria", "%" + criteria + "%");
         return query.getResultList();
     }
 
     public List<T> search(String property, Integer criteria) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("select x from ");
-        sb.append(type.getSimpleName());
-        sb.append(" x where x.");
-        sb.append(property);
-        sb.append(" = ");
-        sb.append(criteria.toString());
-        Query query = this.entityManager.createQuery(sb.toString());
+        Query query = this.entityManager.createQuery("select x from " +
+                type.getSimpleName() +
+                " x where x."+
+                property+
+                " = :criteria");
+        query.setParameter("criteria", criteria);
         return query.getResultList();
     }
 
     public List<T> search(String property, String criteria, int pageSize, int pageNumber) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("select x from ");
-        sb.append(type.getSimpleName());
-        sb.append(" x where x.");
-        sb.append(property);
-        sb.append(" like %");
-        sb.append(criteria);
-        sb.append("%");
-        Query query = this.entityManager.createQuery(sb.toString());
+        Query query = this.entityManager.createQuery("select x from " +
+                type.getSimpleName() +
+                " x where x."+
+                property+
+                " like :criteria");
+        query.setParameter("criteria", "%" + criteria + "%");
         query.setFirstResult((pageNumber - 1) * pageSize).setMaxResults(pageSize);
         return query.getResultList();
     }

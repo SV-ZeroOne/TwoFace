@@ -19,13 +19,11 @@ import java.util.List;
 public class CatalogueController {
 
     private CatalogueService catalogueService;
-    private SearchService searchService;
     private ShoppingCartService shoppingCartService;
 
     public CatalogueController(CatalogueService catalogueService, ShoppingCartService shoppingCartService) {
         this.catalogueService = catalogueService;
         this.shoppingCartService = shoppingCartService;
-        //this.searchService = SearchService;
     }
 
     @RequestMapping(value = "/catalogue", method = RequestMethod.GET)
@@ -33,20 +31,20 @@ public class CatalogueController {
                            @RequestParam(value = "page",  required = false, defaultValue = "1") int page,
                            ModelMap modelMap){
         List<Issue> list;
-        if (search == "")
+        if (search != "")
         {
             System.out.println(search);
-            list = searchService.SearchService(search);
-            modelMap.addAttribute("list", list);
+            list = catalogueService.SearchService(search, page);
         }
         else
         {
             System.out.println("No Search");
             list = catalogueService.getCataloguePage(page);
-            modelMap.addAttribute("list", list);
-            modelMap.addAttribute("page", page);
         }
+        modelMap.addAttribute("list", list);
+        modelMap.addAttribute("page", page);
         modelMap.addAttribute("shoppingCart", shoppingCartService.getShoppingCart(1));
+        modelMap.addAttribute("search", search);
         return "catalogue";
     }
 }

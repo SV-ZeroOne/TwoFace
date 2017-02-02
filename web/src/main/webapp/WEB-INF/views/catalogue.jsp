@@ -128,12 +128,12 @@
             <div id="paging" class="col-xs-offset-2 col-xs-8">
                 <c:choose>
                     <c:when test="${page > 1}"><a class='btn flat-butt' style='float:left; background-color:#fff;
-                        color:black; margin:5px; box-shadow: 10px 10px 8px #222;' href='/catalogue?page=${page - 1}'
+                        color:black; margin:5px; box-shadow: 10px 10px 8px #222;' href='/catalogue?search=${search}&page=${page - 1}'
                                                    role='button'>Page ${page - 1}&raquo;</a>
                     </c:when>
                 </c:choose>
                 <a class='btn flat-butt' style='float:right; background-color:#fff;
-                color:black; margin:5px; box-shadow: 10px 10px 8px #222;' href='/catalogue?page=${page + 1}'
+                color:black; margin:5px; box-shadow: 10px 10px 8px #222;' href='/catalogue?search=${search}&page=${page + 1}'
                    role='button'>Page ${page + 1} &raquo;</a>
             </div>
 
