@@ -26,11 +26,15 @@
     <div class="container" style="padding-top:10px">
         <div class="well col-xs-12 col-md-5">
             <form name="loginForm" action="<c:url value="/login" />" method="post">
-                Email: <input type="text" placeholder="email" name="user" requird/>
-                <br/>
-                Password: <input type="password" placeholder="password" name="password" required/>
-                <br/>
-                <input type="submit"  value="log in">
+                <div class="form-group">
+                    <label for="user">Email address:</label>
+                    <input class="form-control" type="text" placeholder="email" id="user" name="user" requird/>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input class="form-control" type="password" placeholder="password" id="password" name="password" required/>
+                </div>
+                <input type="submit" class="btn btn-default" value="log in">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
         </div>

@@ -30,10 +30,21 @@
             </ul>
             <form class="navbar-form navbar-right">
                 <input type="text" class="form-control" id="search" placeholder="Search" name="q"></input>
-                <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                <sec:authorize access="hasRole('USER')">
-                    <button type="button" onclick="hideOrShowShoppingCart()" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Shopping Cart</button>
-                </sec:authorize>
+                <button type="button" class="btn btn-primary form-control">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </button>
+                <c:choose>
+                    <c:when test="${shoppingCart != null}">
+                        <button type="button" onclick="hideOrShowShoppingCart()" class="btn btn-success">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Shopping Cart
+                        </button>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="<c:url value="/login"/>" class="btn btn-success" role="button">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Log in
+                        </a>
+                    </c:otherwise>
+                </c:choose>
             </form>
         </div><!--/.nav-collapse -->
     </div>

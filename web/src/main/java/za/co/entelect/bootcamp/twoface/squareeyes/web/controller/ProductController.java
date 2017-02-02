@@ -35,7 +35,8 @@ public class ProductController {
                                  @RequestParam(value = "stock", required = false, defaultValue="-1") int stockID,
                                  ModelMap modelMap, Principal principal){
 
-        modelMap.addAttribute("shoppingCart", shoppingCartService.getShoppingCart(principal.getName()));
+        if(principal != null)
+            modelMap.addAttribute("shoppingCart", shoppingCartService.getShoppingCart(principal.getName()));
         Stock stock = productService.getStock(stockID, issueID);
         modelMap.addAttribute("stock", stock);
         modelMap.addAttribute("stockList", productService.getStockList(stock.getIssue().getIssueID()));
