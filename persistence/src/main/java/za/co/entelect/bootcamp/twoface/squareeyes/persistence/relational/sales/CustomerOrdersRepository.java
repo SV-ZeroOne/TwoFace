@@ -7,5 +7,6 @@ import za.co.entelect.bootcamp.twoface.squareeyes.persistence.generic.Repository
 /**
  * Created by quinton.weenink on 2017/01/31.
  */
+
 public interface CustomerOrdersRepository extends Repository<CustomerOrder> {
 }

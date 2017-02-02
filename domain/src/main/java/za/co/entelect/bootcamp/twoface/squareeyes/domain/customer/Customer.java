@@ -28,6 +28,11 @@ public class Customer {
         this.passwordHash = passwordHash;
     }
 
+    public Customer(String email, String passwordHash){
+        this.email = email;
+        this.passwordHash = passwordHash;
+    }
+
     @Id
     @GeneratedValue
     @Column(name = "CustomerID")
@@ -85,4 +90,5 @@ public class Customer {
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
+
 }

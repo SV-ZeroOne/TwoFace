@@ -119,8 +119,8 @@
                 <version>4.3.6.Final</version>
             </dependency>-->
             <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
+                <groupId>ch.qos.Logging.logback</groupId>
+                <artifactId>Logging.logback-classic</artifactId>
                 <version>1.1.8</version>
             </dependency>
             <dependency>

@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import za.co.entelect.bootcamp.twoface.squareeyes.services.AuthenticationService;
 
 /**
  * Created by mpho.mahase on 2017/02/01.
@@ -14,6 +15,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
+
+    @Autowired()
+    private AuthenticationService authenticationService;
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
@@ -25,14 +30,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //                .formLogin();
         http
                 .authorizeRequests()
-                .antMatchers( "/login").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers( "/cart/**").authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .permitAll()
+                .failureUrl("/loginError")
                 .usernameParameter("user")
-                .passwordParameter("user");
+                .passwordParameter("password")
+                .and()
+                .logout()
+                .logoutSuccessUrl("/logout");
 
 //        http
 //                .authorizeRequests()
@@ -45,11 +52,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-        auth
-                .inMemoryAuthentication()
-                .withUser("user").password("user").roles("USER")
-                .and()
-                .withUser("admin").password("admin").roles("ADMIN");
+        auth.userDetailsService(authenticationService);
+//        auth
+//                .inMemoryAuthentication()
+//                .withUser("user").password("user").roles("USER")
+//                .and()
+//                .withUser("admin").password("admin").roles("ADMIN");
     }
+
+    /*@Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(customUserDetails);
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        return authenticationProvider;
+    }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(12);
+    }*/
 
 }

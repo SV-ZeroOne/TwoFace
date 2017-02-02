@@ -23,7 +23,7 @@
 <form name="loginForm" action="<c:url value="/login" />" method="post">
     Emailz: <input type="text" placeholder="email" name="user" requird/>
     <br/>
-    Passwordz: <input type="password" placeholder="password" name="user" required/>
+    Passwordz: <input type="password" placeholder="password" name="password" required/>
     <br/>
     <input type="submit"  value="log inz">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
