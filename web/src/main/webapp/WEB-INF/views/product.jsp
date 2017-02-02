@@ -111,7 +111,7 @@
                         </button>
                         <ul id="condition" class="dropdown-menu">
                             <c:forEach items="${stockList}" var="s">
-                                <li><a href='/product?issue=${issue.issueID}&stock=${s.stockReferenceID}'>
+                                <li><a href='/product?stock=${s.stockReferenceID}'>
                                 ${s.condition} - <strong>R</strong> ${s.price}
                                 </a></li>
                             </c:forEach>
