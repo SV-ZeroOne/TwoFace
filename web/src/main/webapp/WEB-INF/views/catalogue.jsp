@@ -88,7 +88,7 @@
                             <button type='button' class='btn' onclick='removeCart()' id='checkout' style='float:left'>
                             <span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Trash
                             </button>
-                            <button type='button' class='btn btn-success' onclick='checkout()' id='checkout' style='float:right'>
+                            <button type='button' class='btn btn-success' action="/checkout" id='checkout' style='float:right'>
                             <span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Checkout
                             </button>
 

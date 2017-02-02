@@ -1,4 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 
 <html>
@@ -7,6 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>Index</title>
 	<link href="https://fonts.googleapis.com/css?family=Kumar+One" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="<c:url value="/assets/css/catalogue.css"/>"/>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<!-- Optional theme -->
@@ -58,14 +61,6 @@
 					</div>
 				</div>
 			</div>
-
-
-		</article>
-		<article>
-			<c:forEach items="${list}" var="issue">
-					<h1>Title: ${issue.getIssueTitle()}</h1>
-
-			</c:forEach>
 		</article>
 		<article>
 			<div class="centerText">
@@ -74,17 +69,19 @@
 					<h1 style="padding-top: 20px;">Our daily deals!</h1>
 					<div class="carousel-inner" role="listbox">
 						<div class="item active">
-							<%--<c:forEach items="${list}" var="issue">
-								<tr>
-									<td>Issue: <c:out value="${issue}"/></td>
-								</tr>
-							</c:forEach>--%>
-							<h3 class="title">Batman &amp; Robin</h3>
-							<img class="item-image" src="SlideShow/c1.jpg" alt="Batman" width="100px" height="100px">
-								<p class="price"> R99.99</p>
-								<p><a class="btn btn-success btn-lg" href="Catalogue" role="button">Learn more &raquo;</a></p>
-						</div>
+                            <c:forEach items="${list}" var="issue">
+                                <div class="item">
+                                <h1 class="title":> ${issue.getIssueTitle()}</h1>
+                                <p class="price":>SALE</p>
+                                <h2 class="description">${issue.getDescription()}</h2>
+                                <img class="item-image" src="SlideShow/c1.jpg" alt="Batman" width="100px" height="100px">
 
+                                <p><a class="btn btn-success btn-lg" href="Catalogue" role="button">Learn more &raquo;</a></p>
+                                </div>
+                            </c:forEach>
+
+						</div>
+<%--
 						<div class="item">
 							<h3 class="title">Captain America</h3>
 							<img class="item-image" src="SlideShow/c2.jpg" alt="Captain America" width="100px" height="100px">
@@ -104,7 +101,7 @@
 							<img class="item-image" src="SlideShow/comic5.jpg" alt="Wonder Woman" width="100px" height="100px">
 							<p class="price"> R99.99</p>
 							<p><a class="btn btn-success btn-lg" href="Catalogue" role="button">Learn more &raquo;</a></p>
-						</div>
+						</div>--%>
 					</div>
 
 					<!-- Left and right controls -->
