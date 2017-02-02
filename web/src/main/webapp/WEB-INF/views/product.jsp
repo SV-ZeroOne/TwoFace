@@ -128,6 +128,7 @@
                     <h3 id="price">${stock.price}</h3>
                     <h4 id="publicationDate">${stock.issue.publicationDate.year} / ${stock.issue.publicationDate.month} / ${stock.issue.publicationDate.day}</h4>
                     <h5 id="description">${stock.issue.description}</h5>
+
                     <div id="condtionDropdown" class="dropdown">
                         <button id="currentCondition" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
                             ${stock.condition} - <strong>R</strong> ${stock.price} <span class="caret"></span>

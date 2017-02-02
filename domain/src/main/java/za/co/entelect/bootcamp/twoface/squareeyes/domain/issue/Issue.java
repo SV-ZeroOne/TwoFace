@@ -34,7 +34,7 @@ public class Issue {
         this.description = description;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.issues", cascade=CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.issues", cascade = CascadeType.MERGE)
     public List<ComicCreator> getComicCreators() {
         return comicCreators;
     }

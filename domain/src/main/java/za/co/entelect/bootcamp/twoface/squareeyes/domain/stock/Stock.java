@@ -28,7 +28,7 @@ public class Stock{
         this.price = price;
     }
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "IssueID", referencedColumnName = "IssueID")
     public Issue getIssue(){
         return this.issue;

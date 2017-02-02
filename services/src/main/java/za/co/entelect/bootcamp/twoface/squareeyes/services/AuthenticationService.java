@@ -24,8 +24,8 @@ public class AuthenticationService implements UserDetailsService {
         this.customersRepository = customersRepository;
     }
 
-    public Customer getCustomerWithEmail(Customer customer) {
-        return customersRepository.find(customer.getEmail());
+    public Customer getCustomerWithEmail(String email) {
+        return customersRepository.search("email", email).get(0);
     }
 
     public Customer getCustomerWithID(Customer customer) {

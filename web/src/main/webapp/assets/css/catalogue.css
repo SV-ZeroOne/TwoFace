@@ -24,6 +24,9 @@ body{
 .table-catalogue{
 
 }
+#search {
+width: 175px;
+}
 .issue{
 	background-color: white;
 }
@@ -61,11 +64,9 @@ body{
 }
 
 #addToCartButton{
-	float: right;
 }
 
 #condtionDropdown{
-	float: left;
 }
 .well{
 	border:0;

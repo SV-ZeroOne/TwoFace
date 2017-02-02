@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
+import za.co.entelect.bootcamp.twoface.squareeyes.services.AuthenticationService;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.CatalogueService;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.SearchService;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.ShoppingCartService;
@@ -21,10 +22,12 @@ public class CatalogueController {
 
     private CatalogueService catalogueService;
     private ShoppingCartService shoppingCartService;
+    private AuthenticationService authenticationService;
 
-    public CatalogueController(CatalogueService catalogueService, ShoppingCartService shoppingCartService) {
+    public CatalogueController(CatalogueService catalogueService, ShoppingCartService shoppingCartService, AuthenticationService authenticationService) {
         this.catalogueService = catalogueService;
         this.shoppingCartService = shoppingCartService;
+        this.authenticationService = authenticationService;
     }
 
     @RequestMapping(value = "/catalogue", method = RequestMethod.GET)
@@ -47,6 +50,7 @@ public class CatalogueController {
         if(principal != null)
             modelMap.addAttribute("shoppingCart", shoppingCartService.getShoppingCart(principal.getName()));
         modelMap.addAttribute("search", search);
+        modelMap.addAttribute("customer", authenticationService.getCustomerWithEmail(principal.getName()));
         return "catalogue";
     }
 }
