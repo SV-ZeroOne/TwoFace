@@ -19,6 +19,7 @@ public class AppTest {
     }
 
     @Test
+    @Ignore
     public void test() {
 
         IssuesRepository ir = new RelationalIssuesRepository();
