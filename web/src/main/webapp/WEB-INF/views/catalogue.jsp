@@ -1,4 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 
 <html>
@@ -6,7 +8,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>Index</title>
-    <link rel="stylesheet" type="text/css" href="<c:url value="assets/css/Catalogue.css"/>"/>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/assets/css/catalogue.css"/>"/>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Optional theme -->
@@ -22,12 +24,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="homepage.html"><strong>Square Eyes</strong></a>
+            <a class="navbar-brand" href="/homepage"><strong>Square Eyes</strong></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="homepage.html">Home</a></li>
-                <li class="active"><a href="Catalogue.html">Catalogue</a></li>
+                <li class="active"><a href="/catalogue">Catalogue</a></li>
             </ul>
             <form class="navbar-form navbar-right">
                 <input type="text" class="form-control" id="search" placeholder="Search" name="q"></input>
@@ -51,7 +53,7 @@
                 <c:forEach items="${list}" var="issue">
                     <div class='col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-3 col-md-3'>
                         <div class='issue' style='margin:5px; box-shadow: 10px 10px 8px #222; margin-top: 15px;'>
-                            <a class='image-container' href='product.html?issue=${issue.issueID}'>
+                            <a class='image-container' href='product?issue=${issue.issueID}'>
                                 <img src='http://pre10.deviantart.net/23f7/th/pre/i/2015/327/0/d/star_wars_vintage_tfa_comic_cover_issue1_by_daztibbles-d9hq35o.png' alt='Loading..' class='img-responsive'/>
                             </a>
                             <div class='issueNo'><button type='button' class='btn flat-butt'>
@@ -75,21 +77,35 @@
             </div>
 
             <div id="paging" class="col-xs-offset-2 col-xs-8">
+                <c:choose>
+                    <c:when test="${page > 1}"><a class='btn flat-butt' style='float:left; background-color:#fff;
+                        color:black; margin:5px; box-shadow: 10px 10px 8px #222;' href='/catalogue?page=${page - 1}'
+                                                   role='button'>Page ${page - 1}&raquo;</a>
+                    </c:when>
+                </c:choose>
+                <a class='btn flat-butt' style='float:right; background-color:#fff;
+                color:black; margin:5px; box-shadow: 10px 10px 8px #222;' href='/catalogue?page=${page + 1}'
+                   role='button'>Page ${page + 1} &raquo;</a>
             </div>
 
             <div id="footer" class="col-xs-12" style="margin-top: 30px;">
+                <sec:authorize access="hasRole('USER')">
 
+                    This content will only be visible to users who have
+                    the "supervisor" authority in their list of <tt>GrantedAuthority</tt>s.
+
+                </sec:authorize>
             </div>
         </div>
     </article>
 </section>
 <footer class="footer-middle">
-    <p>&copy; 2017 - Entelect - Team Two Face</p>
+    <p>2017 - &copy;Entelect - Team Two Face</p>
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script type="text/javascript" src="global.js"></script>
-<script type="text/javascript" src="Catalogue.js"></script>
+<script src="<c:url value="/assets/js/global.js"/>"></script>
+<script src="<c:url value="/assets/js/catalogue.js"/>"></script>
 </body>
 </html>

@@ -23,7 +23,14 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/homepage", method = RequestMethod.GET)
-    public String SayHello(ModelMap modelMap){
+    public String getHomepage(ModelMap modelMap){
+        List<Issue> list = catalogueService.getCataloguePage(1);
+        modelMap.addAttribute("list", list);
+        return "homepage";
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String getHomepageAtDefault(ModelMap modelMap){
         List<Issue> list = catalogueService.getCataloguePage(1);
         modelMap.addAttribute("list", list);
         return "homepage";
