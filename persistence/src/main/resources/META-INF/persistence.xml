@@ -4,15 +4,29 @@
     <persistence-unit name="Ironman" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
-        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.Creator</class>
         <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.ComicCreator</class>
         <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.ComicCreatorsId</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.creator.Creator</class>
+
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.customer.Customer</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.customer.CustomerAddress</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.customer.ShoppingCart</class>
+
         <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue</class>
-        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Order</class>
+
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.sale.CardPayment</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.sale.CustomerOrder</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.sale.Invoice</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.sale.Voucher</class>
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.sale.VoucherPayment</class>
+
         <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.stock.Stock</class>
+
+        <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Order</class>
         <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.Supplier</class>
         <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.SupplierPayment</class>
         <class>za.co.entelect.bootcamp.twoface.squareeyes.domain.supplier.SupplierQuote</class>
+
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
