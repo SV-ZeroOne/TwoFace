@@ -15,11 +15,11 @@ public class Customer {
     private String firstName;
     private String surname;
     private String salt;
-    private byte[] passwordHash;
+    private String passwordHash;
 
     public Customer() {}
 
-    public Customer(String email, String title, String firstName, String surname, String salt, byte[] passwordHash){
+    public Customer(String email, String title, String firstName, String surname, String salt, String passwordHash){
         this.email = email;
         this.title = title;
         this.firstName = firstName;
@@ -78,11 +78,11 @@ public class Customer {
         this.salt = salt;
     }
 
-    @Column(name = "PasswordHash", columnDefinition = "BINARY(64)")
-    public byte[] getPasswordHash() {
+    @Column(name = "PasswordHash")
+    public String getPasswordHash() {
         return passwordHash;
     }
-    public void setPasswordHash(byte[] passwordHash) {
+    public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
 }
