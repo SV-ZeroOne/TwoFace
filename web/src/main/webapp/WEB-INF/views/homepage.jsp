@@ -28,7 +28,7 @@
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="homepage">Home</a></li>
                     <li><a href="catalogue">Catalogue</a></li>
-					<li><a href="login">login</a></li>
+					<%--<li><a href="login">login</a></li>--%>
 
 				</ul>
 				<form class="navbar-form navbar-right" action="/catalogue">
