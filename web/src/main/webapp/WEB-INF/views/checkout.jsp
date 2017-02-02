@@ -215,7 +215,7 @@
                     </div>
                 </div>
             </div> <!--PAYMENT DETAILS END-->
-        </div>
+        </div> <!--REVIEW USER DETAILS END-->
     </article>
 </section>
 
