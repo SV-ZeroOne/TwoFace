@@ -108,8 +108,7 @@ function increaseQty(stockID, csrftoken)
         url: "/shoppingcart/increase",
         data: { stock: stockID, _csrf: csrftoken}
     }).done(function() {
-    	var quantityDiv = $("#my_id .my_class");
-        quantityDiv.html = quantityDiv+1;
+        $("#"+stockID+" .quantity").html(($("#"+stockID+" .quantity").html()*1)+1);
 
     });
 }
@@ -121,8 +120,8 @@ function decreaseQty(stockID, csrftoken)
         url: "/shoppingcart/decrease",
         data: { stock: stockID, _csrf: csrftoken}
     }).done(function() {
-        var quantityDiv = $("#my_id .my_class");
-        quantityDiv.html = quantityDiv-1;
+        var quantityDiv = $("#"+stockID+" .quantity");
+        $("#"+stockID+" .quantity").html(($("#"+stockID+" .quantity").html()*1)-1);
     });
 }
 

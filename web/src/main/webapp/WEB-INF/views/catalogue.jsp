@@ -115,9 +115,9 @@
                             <button type='button' class='btn' onclick='removeCart()' id='checkout' style='float:left'>
                             <span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Trash
                             </button>
-                            <button type='button' class='btn btn-success' action="/checkout" id='checkout' style='float:right'>
-                            <span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Checkout
-                            </button>
+                            <a href="<c:url value="/checkout"/>" class="btn btn-success" role="button" id='checkout' style='float:right'>
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Checkout
+                            </a>
                 </div>
             </div>
             </c:when>

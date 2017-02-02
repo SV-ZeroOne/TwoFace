@@ -55,7 +55,6 @@ public class ShoppingCartService {
         List<ShoppingCart> shoppingCartList = shoppingCartsRepository.search("customer.email", email);
         for (ShoppingCart sc:shoppingCartList) {
             if(sc.getStock().getStockReferenceID() == stockID) {
-                sc.setQuantity((short)(sc.getQuantity()-1));
                 shoppingCartsRepository.decreaseQty(sc.getShoppingCartID());
                 return;
             }
@@ -67,7 +66,6 @@ public class ShoppingCartService {
         List<ShoppingCart> shoppingCartList = shoppingCartsRepository.search("customer.email", email);
         for (ShoppingCart sc:shoppingCartList) {
             if(sc.getStock().getStockReferenceID() == stockID) {
-                sc.setQuantity((short)(sc.getQuantity()+1));
                 shoppingCartsRepository.increaseQty(sc.getShoppingCartID());
                 return;
             }

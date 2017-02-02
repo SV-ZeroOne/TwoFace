@@ -36,7 +36,7 @@
 				<c:when test="${shoppingCart != null}">
 					<form class="navbar-form navbar-right" action="/logout" method="post">
 						<button type="submit" class="form-control btn btn-info">
-							<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log Out
+							<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> LogOut
 						</button>
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					</form>
@@ -50,7 +50,7 @@
 				<c:choose>
 					<c:when test="${shoppingCart != null}">
 						<button type="button" onclick="hideOrShowShoppingCart()" class="btn btn-success">
-							<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Shopping Cart
+							<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Cart
 						</button>
 					</c:when>
 					<c:otherwise>
@@ -88,18 +88,21 @@
 											<td>R${cartitem.stock.price * cartitem.quantity}</td>
 											<td>
 												<button type='button' class='btn btn-default'
-														onclick='decreaseQty()' style=''>
+														onclick='decreaseQty("${cartitem.stock.stockReferenceID}", "${_csrf.token}")' style=''>
 													<span class='glyphicon glyphicon-minus' aria-hidden='true'></span>
 												</button>
-													${cartitem.quantity}
+												<span class="quantity">
+														${cartitem.quantity}
+												</span>
+
 												<button type='button' class='btn btn-default'
-														onclick='increaseQty()' style=''>
+														onclick='increaseQty("${cartitem.stock.stockReferenceID}", "${_csrf.token}")' style=''>
 													<span class='glyphicon glyphicon-plus' aria-hidden='true'></span>
 												</button>
 											</td>
 											<td>
 												<button type='button' class='btn btn-warning'
-														onclick='removeFromCart()' style=''>
+														onclick='removeFromCart("${cartitem.stock.stockReferenceID}", "${_csrf.token}")'>
 													<span class='glyphicon glyphicon-remove' aria-hidden='true'></span>
 												</button>
 											</td>
@@ -113,9 +116,9 @@
 								<button type='button' class='btn' onclick='removeCart()' id='checkout' style='float:left'>
 									<span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Trash
 								</button>
-								<button type='button' class='btn btn-success' action="/checkout" id='checkout' style='float:right'>
-									<span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Checkout
-								</button>
+								<a href="<c:url value="/checkout"/>" class="btn btn-success" role="button" id='checkout' style='float:right'>
+									<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Checkout
+								</a>
 							</div>
 						</div>
 					</c:when>

@@ -41,7 +41,7 @@
                 <c:when test="${shoppingCart != null}">
                     <form class="navbar-form navbar-right" action="/logout" method="post">
                         <button type="submit" class="form-control btn btn-info">
-                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log Out
+                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> LogOut
                         </button>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     </form>
@@ -55,7 +55,7 @@
                 <c:choose>
                     <c:when test="${shoppingCart != null}">
                         <button type="button" onclick="hideOrShowShoppingCart()" class="btn btn-success">
-                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Shopping Cart
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Cart
                         </button>
                     </c:when>
                     <c:otherwise>
