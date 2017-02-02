@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>Index</title>
 	<link href="https://fonts.googleapis.com/css?family=Kumar+One" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="<c:url value="/assets/css/catalogue.css"/>"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/assets/css/homepage.css"/>"/>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<!-- Optional theme -->
@@ -131,15 +131,14 @@
 						<div class="item active">
                             <c:forEach items="${list}" var="issue">
                                 <div class="item">
+									<a href="/product?issue=2"><img class="item-image" src="/assets/images/SlideShow/c1.jpg" alt="Batman" width="100px" height="100px"></a>
                                 <h1 class="title":> ${issue.getIssueTitle()}</h1>
                                 <p class="price":>SALE</p>
                                 <h2 class="description">${issue.getDescription()}</h2>
-                                <img class="item-image" src="SlideShow/c1.jpg" alt="Batman" width="100px" height="100px">
 
-                                <p><a class="btn btn-success btn-lg" href="Catalogue" role="button">Learn more &raquo;</a></p>
-                                </div>
                             </c:forEach>
 
+								</div>
 						</div>
 <%--
 						<div class="item">
@@ -163,7 +162,7 @@
 							<p><a class="btn btn-success btn-lg" href="Catalogue" role="button">Learn more &raquo;</a></p>
 						</div>--%>
 					</div>
-
+					<p><a class="btn btn-success btn-lg" href="catalogue" role="button">Learn more &raquo;</a></p>
 					<!-- Left and right controls -->
 					<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
 						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -178,25 +177,11 @@
 
 			</div>
 		</article>
-		<article>
-			<div class="centerText">
-				<form action="/logout" method="post">
-					<input type="submit" value="Log out"/>
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-				</form>
-				${message}
-
-
-				<c:url value="/logout" var="logoutUrl" />
-				<a href="${logoutUrl}">Log Out</a>
-
-			</div>
-		</article>
-
+		<footer>
+			<p>2017 - &copy;Entelect - Team Two Face</p>
+		</footer>
 	</section>
-	<footer class="footer-middle">
-		<!-- <p>&copy; 2017 Team Two Face</p> -->
-	</footer>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script src="<c:url value="/assets/js/global.js"/>"></script>
