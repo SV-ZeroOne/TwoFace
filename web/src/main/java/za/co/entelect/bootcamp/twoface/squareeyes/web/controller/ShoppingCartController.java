@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.ShoppingCartService;
 
+import java.security.Principal;
 import java.util.List;
 
 /**
@@ -26,10 +27,18 @@ public class ShoppingCartController {
     @RequestMapping(value = "/shoppingcart", method = RequestMethod.POST)
     public String getProductPage(@RequestParam(value = "stockID", required = true, defaultValue="-1") int stockID,
                                  @RequestParam(value = "quantity", required = true, defaultValue="-1") int quantity,
-                                 ModelMap modelMap){
+                                 ModelMap modelMap, Principal principal){
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        shoppingCartService.addToShoppingCart((short)quantity, auth.getName(), stockID);
+        shoppingCartService.addToShoppingCart((short)quantity, principal.getName(), stockID);
+
+        return "redirect:product?stock=" + stockID;
+    }
+
+    @RequestMapping(value = "/shoppingcart", method = RequestMethod.DELETE)
+    public String getProductPage(@RequestParam(value = "stockID", required = true) int stockID,
+                                 ModelMap modelMap, Principal principal){
+
+        shoppingCartService.removeFromShoppingCart(principal.getName(), stockID);
 
         return "redirect:product?stock=" + stockID;
     }

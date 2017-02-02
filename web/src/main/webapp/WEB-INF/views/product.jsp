@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Index</title>
+    <title>Product</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/catalogue.css"/>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -28,12 +28,23 @@
                 <li><a href="/homepage">Home</a></li>
                 <li><a href="/catalogue">Catalogue</a></li>
             </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" id="search" placeholder="Search" name="q"></input>
-                <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                <sec:authorize access="hasRole('USER')">
-                    <button type="button" onclick="hideOrShowShoppingCart()" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Shopping Cart</button>
-                </sec:authorize>
+            <form class="navbar-form navbar-right" action="/catalogue">
+                <input type="text" class="form-control" id="search" placeholder="Search" name="search"></input>
+                <button type="button" class="btn btn-primary form-control">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </button>
+                <c:choose>
+                    <c:when test="${shoppingCart != null}">
+                        <button type="button" onclick="hideOrShowShoppingCart()" class="btn btn-success">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Shopping Cart
+                        </button>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="<c:url value="/login"/>" class="btn btn-success" role="button">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Log in
+                        </a>
+                    </c:otherwise>
+                </c:choose>
             </form>
         </div><!--/.nav-collapse -->
     </div>

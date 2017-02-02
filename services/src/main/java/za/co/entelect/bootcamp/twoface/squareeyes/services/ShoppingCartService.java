@@ -1,6 +1,7 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.customer.Customer;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.customer.ShoppingCart;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.customers.CustomersRepository;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational.customers.ShoppingCartsRepository;
@@ -25,25 +26,29 @@ public class ShoppingCartService {
         this.stockRepository = stockRepository;
     }
 
-    public List<ShoppingCart> getShoppingCart(int customerID)
+    public List<ShoppingCart> getShoppingCart(String email)
     {
-        return shoppingCartsRepository.search("customer.customerID", customerID);
+        return shoppingCartsRepository.search("customer.email", email);
     }
 
     public ShoppingCart addToShoppingCart(short quantity, String email, int stockID)
     {
         ShoppingCart shoppingCart = new ShoppingCart(quantity);
-        shoppingCart.setCustomer(customersRepository.search("email", "quinton@gmail.com").get(0));
+        shoppingCart.setCustomer(customersRepository.search("email", email).get(0));
         shoppingCart.setStock(stockRepository.find(stockID));
         return shoppingCartsRepository.create(shoppingCart);
     }
 
-    public ShoppingCart removeFromShoppingCart(short quantity, String email, int stockID)
+    public void removeFromShoppingCart(String email, int stockID)
     {
-        ShoppingCart shoppingCart = new ShoppingCart(quantity);
-        shoppingCart.setCustomer(customersRepository.search("email", "quinton@gmail.com").get(0));
-        shoppingCart.setStock(stockRepository.find(stockID));
-        return shoppingCartsRepository.create(shoppingCart);
+        Customer customer = customersRepository.search("email", email).get(0);
+        List<ShoppingCart> shoppingCartList = shoppingCartsRepository.search("customerID", customer.getCustomerID());
+        for (ShoppingCart sc:shoppingCartList) {
+            if(sc.getStock().getStockReferenceID() == stockID) {
+                shoppingCartsRepository.delete(sc.getShoppingCartID());
+                return;
+            }
+        }
     }
 
     public void setIssuesRepository(ShoppingCartsRepository issuesRepository) {

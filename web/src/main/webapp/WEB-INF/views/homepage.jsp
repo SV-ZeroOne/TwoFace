@@ -16,32 +16,43 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 </head>
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="homepage">Square Eyes</a>
-			</div>
-			<div id="navbar" class="collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="homepage">Home</a></li>
-                    <li><a href="catalogue">Catalogue</a></li>
-					<%--<li><a href="login">login</a></li>--%>
-
-				</ul>
-				<form class="navbar-form navbar-right" action="/catalogue">
-					<input type="text" class="form-control" id="search" placeholder="Search" name="search"></input>
-					<button type="button" class="btn btn-primary" value="search"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-					<button type="button" onclick="hideOrShowShoppingCart()" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Shopping Cart</button>
-				</form>
-			</div><!--/.nav-collapse -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/homepage"><strong>Square Eyes</strong></a>
 		</div>
-	</nav>
+		<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="/homepage">Home</a></li>
+				<li><a href="/catalogue">Catalogue</a></li>
+			</ul>
+			<form class="navbar-form navbar-right" action="/catalogue">
+				<input type="text" class="form-control" id="search" placeholder="Search" name="search"></input>
+				<button type="button" class="btn btn-primary form-control">
+					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+				</button>
+				<c:choose>
+					<c:when test="${shoppingCart != null}">
+						<button type="button" onclick="hideOrShowShoppingCart()" class="btn btn-success">
+							<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Shopping Cart
+						</button>
+					</c:when>
+					<c:otherwise>
+						<a href="<c:url value="/login"/>" class="btn btn-success" role="button">
+							<span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Log in
+						</a>
+					</c:otherwise>
+				</c:choose>
+			</form>
+		</div>
+	</div>
+</nav>
 	<aside id="sidebar" class="hide">
 
 		<h1>Sidebar</h1>

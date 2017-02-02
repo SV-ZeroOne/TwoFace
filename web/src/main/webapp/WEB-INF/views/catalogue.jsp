@@ -26,28 +26,37 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="homepage.html">Home</a></li>
+                <li><a href="/homepage">Home</a></li>
                 <li class="active"><a href="/catalogue">Catalogue</a></li>
             </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" id="search" placeholder="Search" name="q"></input>
-                <button type="button" class="btn btn-primary">
+            <form class="navbar-form navbar-right" action="/catalogue">
+                <input type="text" class="form-control" id="search" placeholder="Search" name="search"></input>
+                <button type="button" class="btn btn-primary form-control">
                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                 </button>
-                <button type="button" onclick="hideOrShowShoppingCart()" class="btn btn-success">
-                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Shopping Cart
-                </button>
+                <c:choose>
+                    <c:when test="${shoppingCart != null}">
+                        <button type="button" onclick="hideOrShowShoppingCart()" class="btn btn-success">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Shopping Cart
+                        </button>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="<c:url value="/login"/>" class="btn btn-success" role="button">
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Log in
+                        </a>
+                    </c:otherwise>
+                </c:choose>
             </form>
-        </div><!--/.nav-collapse -->
+        </div>
     </div>
 </nav>
 <section id="content" class="expand">
     <article>
         <div class="container">
+            <c:choose>
+            <c:when test="${shoppingCart != null}">
             <div id="shoppingCart" class="hide" style="position: fixed; z-index: 2;">
-                <div id="shoppingItems" class="well container">
-                    <c:choose>
-                        <c:when test="${shoppingCart != null}">
+                        <div id="shoppingItems" class="well container">
                             <table class='table table-condensed col-xs-12'>
                                 <thead>
                                 <tr>
@@ -94,12 +103,10 @@
                             <button type='button' class='btn btn-success' action="/checkout" id='checkout' style='float:right'>
                             <span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Checkout
                             </button>
-
-                        </c:when>
-                    </c:choose>
                 </div>
             </div>
-
+            </c:when>
+            </c:choose>
             <div id="catalogue" class="col-xs-12">
                 <c:forEach items="${list}" var="issue">
                     <div class='col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-3 col-md-3'>

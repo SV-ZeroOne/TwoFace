@@ -25,10 +25,8 @@ public class CheckoutController {
             @RequestParam(value = "cart", required = false, defaultValue = "-1") int cartID,
             @RequestParam(value = "customer",  required = false, defaultValue = "-1") int customerID,
                            ModelMap modelMap){
-        cartID = 1;
-        customerID = 1;
-        modelMap.addAttribute("customer", shoppingCartService.getShoppingCart(customerID));
-        modelMap.addAttribute("shoppingCart", shoppingCartService.getShoppingCart(cartID));
+        modelMap.addAttribute("customer", shoppingCartService.getShoppingCart("quinton@gmail.com"));
+        modelMap.addAttribute("shoppingCart", shoppingCartService.getShoppingCart("quinton@gmail.com"));
         return "checkout";
     }
 }
