@@ -29,12 +29,22 @@
 		</div>
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="/homepage">Home</a></li>
+				<li class="active"><a href="/homepage">Home</a></li>
 				<li><a href="/catalogue">Catalogue</a></li>
 			</ul>
+			<c:choose>
+				<c:when test="${shoppingCart != null}">
+					<form class="navbar-form navbar-right" action="/logout" method="post">
+						<button type="submit" class="form-control btn btn-info">
+							<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log Out
+						</button>
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+					</form>
+				</c:when>
+			</c:choose>
 			<form class="navbar-form navbar-right" action="/catalogue">
 				<input type="text" class="form-control" id="search" placeholder="Search" name="search"></input>
-				<button type="button" class="btn btn-primary form-control">
+				<button type="submit" class="btn btn-primary form-control">
 					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 				</button>
 				<c:choose>
@@ -53,24 +63,63 @@
 		</div>
 	</div>
 </nav>
-	<aside id="sidebar" class="hide">
-
-		<h1>Sidebar</h1>
-		<ul>
-			<li>Item 1</li>
-			<li>Item 2</li>
-			<li>Item 3</li>
-		</ul>
-	</aside>
 	<section id="content" class="expand">
 		<article>
 			<div class="container">
-				<div id="shoppingCart" class="hide" style="position: fixed; z-index: 2;">
-					<!-- <h3 class="col-xs-12 col-md-offset-3 col-md-6">Shopping Cart:</h3> -->
-					<div id="shoppingItems" class="well container">
-						loading..
-					</div>
-				</div>
+				<c:choose>
+					<c:when test="${shoppingCart != null}">
+						<div id="shoppingCart" class="hide" style="position: fixed; z-index: 2;">
+							<div id="shoppingItems" class="well container">
+								<table class='table table-condensed col-xs-12'>
+									<thead>
+									<tr>
+										<th>Title</th>
+										<th>Condition</th>
+										<th>Price</th>
+										<th>Qty</th>
+										<th>Actions</th>
+									</tr>
+									</thead>
+									<tbody>
+									<c:forEach items="${shoppingCart}" var="cartitem">
+										<tr>
+											<td>${cartitem.stock.issue.issueTitle}</td>
+											<td>${cartitem.stock.condition}</td>
+											<td>R${cartitem.stock.price * cartitem.quantity}</td>
+											<td>
+												<button type='button' class='btn btn-default'
+														onclick='decreaseQty()' style=''>
+													<span class='glyphicon glyphicon-minus' aria-hidden='true'></span>
+												</button>
+													${cartitem.quantity}
+												<button type='button' class='btn btn-default'
+														onclick='increaseQty()' style=''>
+													<span class='glyphicon glyphicon-plus' aria-hidden='true'></span>
+												</button>
+											</td>
+											<td>
+												<button type='button' class='btn btn-warning'
+														onclick='removeFromCart()' style=''>
+													<span class='glyphicon glyphicon-remove' aria-hidden='true'></span>
+												</button>
+											</td>
+										</tr>
+									</c:forEach>
+									</tbody>
+								</table>
+								<button type='button' class='btn' onclick='hideOrShowShoppingCart()' id='checkout' style='float:left; margin-right:5px'>
+									<span class='glyphicon glyphicon-remove' aria-hidden='true'></span> Close
+								</button>
+								<button type='button' class='btn' onclick='removeCart()' id='checkout' style='float:left'>
+									<span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Trash
+								</button>
+								<button type='button' class='btn btn-success' action="/checkout" id='checkout' style='float:right'>
+									<span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Checkout
+								</button>
+							</div>
+						</div>
+					</c:when>
+				</c:choose>
 			</div>
 		</article>
 		<article>
@@ -150,8 +199,7 @@
 	</footer>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="Issues.json"></script>
-	<script type="text/javascript" src="global.js"></script>
-	<script type="text/javascript" src="homepage.js"></script>
+	<script src="<c:url value="/assets/js/global.js"/>"></script>
+	<script src="<c:url value="/assets/js/catalogue.js"/>"></script>
 </body>
 </html>
