@@ -80,7 +80,7 @@ public class LoginContoller {
             ModelMap model) {
         System.out.println("In the login method");
         Customer customer = new Customer(email, title, firstName, surname, "salt", password);
-        
+
         return "login";
 
     }
