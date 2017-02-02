@@ -2,6 +2,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Login/Signup</title>
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="/assets/css/catalogue.css"/>
     <!-- Latest compiled and minified CSS -->
@@ -19,8 +22,9 @@
     }
 %>
 <section>
+    <article>
     <div class="container" style="padding-top:10px">
-        <div class="col-md-6 col-xs-12">
+        <div class="well col-xs-12 col-md-5">
             <form name="loginForm" action="<c:url value="/login" />" method="post">
                 Email: <input type="text" placeholder="email" name="user" requird/>
                 <br/>
@@ -30,7 +34,7 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
         </div>
-        <div class="col-md-6 col-xs-12">
+        <div class="well col-xs-12 col-md-offset-2 col-md-5">
             <form name="signUpForm" action="<c:url value="/signup" />" method="post">
                 Email: <input type="text" placeholder="email" name="email" requird/>
                 <br/>
@@ -47,8 +51,9 @@
             </form>
         </div>
     </div>
+    </article>
 </section>
-<footer class="footer-middle">
+<footer class="footer-middle" style="">
     <p>2017 - &copy;Entelect - Team Two Face</p>
 </footer>
 
