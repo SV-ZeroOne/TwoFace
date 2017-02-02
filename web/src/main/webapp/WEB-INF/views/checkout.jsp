@@ -53,7 +53,7 @@
 							<c:forEach items="${list}" var="issue">
 								<!--Here we pull our product items into cart details-->
 								<div class="form-group" id="checkout-cart-items"></div>
-									<div>${issue.issueTitle} + ${issue.publisher} + ${}</div>
+									<div>${issue.issueTitle} + ${issue.publisher}</div>
 									<div class="col-xs-12">
 										<strong>Subtotal</strong>
 										<div class="pull-right" id="Subtotal"><span>$</span><span>0.00</span></div>
