@@ -8,7 +8,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>Index</title>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/assets/css/Catalogue.css"/>"/>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/assets/css/catalogue.css"/>"/>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Optional theme -->
@@ -89,12 +89,7 @@
             </div>
 
             <div id="footer" class="col-xs-12" style="margin-top: 30px;">
-                <sec:authorize access="hasRole('USER')">
 
-                    This content will only be visible to users who have
-                    the "supervisor" authority in their list of <tt>GrantedAuthority</tt>s.
-
-                </sec:authorize>
             </div>
         </div>
     </article>
@@ -105,7 +100,5 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script type="text/javascript" src="global.js"></script>
-<script type="text/javascript" src="Catalogue.js"></script>
 </body>
 </html>
