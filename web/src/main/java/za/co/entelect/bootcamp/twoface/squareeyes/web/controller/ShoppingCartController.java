@@ -25,12 +25,12 @@ public class ShoppingCartController {
     }
 
     @RequestMapping(value = "/shoppingcart", method = RequestMethod.POST)
-    public String getProductPage(@RequestParam(value = "stockID", required = false, defaultValue="-1") int stockID,
-                                 @RequestParam(value = "stockID", required = false, defaultValue="-1") int quantity,
-                                 @RequestParam(value = "stockID", required = false, defaultValue="-1") int userID,
+    public String getProductPage(@RequestParam(value = "stockID", required = true, defaultValue="-1") int stockID,
+                                 @RequestParam(value = "quantity", required = true, defaultValue="-1") int quantity,
+                                 @RequestParam(value = "customerID", required = true, defaultValue="-1") int customerID,
                                  ModelMap modelMap){
-        shoppingCartService.addToShoppingCart((short)1, 1, stockID);
+        shoppingCartService.addToShoppingCart((short)quantity, customerID, stockID);
 
-        return "product?stock=" + stockID;
+        return "redirect:product?stock=" + stockID;
     }
 }
