@@ -50,10 +50,10 @@
                     <img id="imagecomic" src="https://s-media-cache-ak0.pinimg.com/originals/b8/d8/cb/b8d8cb19503b644127da29e5b287e124.jpg" alt="Loading.." class="img-responsive"/>
                 </div>
                 <div class="col-sm-8 col-md-8 col-xs-12" id="comicdetails">
-                    <h3 id="title">${issue.issueTitle}</h3>
-                    <h3 id="price"></h3>
-                    <h4 id="publicationDate">${issue.publicationDate.year} / ${issue.publicationDate.month} / ${issue.publicationDate.day}</h4>
-                    <h5 id="description">${issue.description}</h5>
+                    <h3 id="title">${stock.issue.issueTitle}</h3>
+                    <h3 id="price">${stock.price}</h3>
+                    <h4 id="publicationDate">${stock.issue.publicationDate.year} / ${stock.issue.publicationDate.month} / ${stock.issue.publicationDate.day}</h4>
+                    <h5 id="description">${stock.issue.description}</h5>
                     <div id="condtionDropdown" class="dropdown">
                         <button id="currentCondition" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
                             ${stock.condition} - <strong>R</strong> ${stock.price} <span class="caret"></span>

@@ -9,6 +9,7 @@ import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.stock.Stock;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.CatalogueService;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.ProductService;
+import za.co.entelect.bootcamp.twoface.squareeyes.services.ShoppingCartService;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,22 +22,21 @@ import java.util.List;
 public class ProductController {
 
     private ProductService productService;
+    private ShoppingCartService shoppingCartService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, ShoppingCartService shoppingCartService) {
         this.productService = productService;
+        this.shoppingCartService = shoppingCartService;
     }
 
     @RequestMapping(value = "/product", method = RequestMethod.GET)
     public String getProductPage(@RequestParam(value = "issue", required = false, defaultValue="-1") int issueID,
                            @RequestParam(value = "stock", required = false, defaultValue="-1") int stockID,
                            ModelMap modelMap){
-        Issue issue = productService.getIssue(issueID);
-        Stock stock = productService.getStock(stockID, issueID);
-        List<Stock> stockList = productService.getStockList(issueID);
 
-        modelMap.addAttribute("issue", issue);
-        modelMap.addAttribute("stock", stock);
-        modelMap.addAttribute("stockList", stockList);
+        modelMap.addAttribute("shoppingCart", shoppingCartService.getShoppingCart(1));
+        modelMap.addAttribute("stock", productService.getStock(stockID, issueID));
+        modelMap.addAttribute("stockList", productService.getStockList(issueID));
 
         return "product";
     }

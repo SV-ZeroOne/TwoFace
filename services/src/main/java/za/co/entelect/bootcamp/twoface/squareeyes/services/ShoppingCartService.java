@@ -12,14 +12,13 @@ import java.util.List;
  */
 public class ShoppingCartService {
     private ShoppingCartsRepository shoppingCartsRepository;
-    private int
 
     @Autowired
     public ShoppingCartService(ShoppingCartsRepository shoppingCartsRepository) {
         this.shoppingCartsRepository = shoppingCartsRepository;
     }
 
-    public List<ShoppingCart> getCataloguePage(int customerID)
+    public List<ShoppingCart> getShoppingCart(int customerID)
     {
         return shoppingCartsRepository.search("customer.customerID", customerID);
     }
