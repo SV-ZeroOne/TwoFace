@@ -25,6 +25,7 @@
     <article>
     <div class="container" style="padding-top:10px">
         <div class="well col-xs-12 col-md-5">
+            <h3>Log in:</h3>
             <form name="loginForm" action="<c:url value="/login" />" method="post">
                 <div class="form-group">
                     <label for="user">Email address:</label>
@@ -39,18 +40,29 @@
             </form>
         </div>
         <div class="well col-xs-12 col-md-offset-2 col-md-5">
+            <h3>Sign Up:</h3>
             <form name="signUpForm" action="<c:url value="/signup" />" method="post">
-                Email: <input type="text" placeholder="email" name="email" requird/>
-                <br/>
-                Password: <input type="password" placeholder="password" name="password" required/>
-                <br/>
-                Title: <input type="password" placeholder="password" name="title" required/>
-                <br/>
-                FirstName: <input type="password" placeholder="password" name="firstName" required/>
-                <br/>
-                Surname: <input type="password" placeholder="password" name="surname" required/>
-                <br/>
-                <input type="submit"  value="SignUp">
+                <div class="form-group">
+                    <label for="regemail">Email address:</label>
+                    <input class="form-control" type="text" placeholder="email" name="email" id="regemail" requird/>
+                </div>
+                <div class="form-group">
+                    <label for="regpassword">Password:</label>
+                    <input class="form-control" type="password" placeholder="password" name="password" id="regpassword" required/>
+                </div>
+                <div class="form-group">
+                    <label for="regtitle">Title:</label>
+                    <input class="form-control" type="password" placeholder="title" name="title" id="regtitle" required/>
+                </div>
+                <div class="form-group">
+                    <label for="regfirstName">First Name:</label>
+                    <input class="form-control" type="password" placeholder="first-name" name="firstName" id="regfirstName" required/>
+                </div>
+                <div class="form-group">
+                    <label for="regsurname">Surname:</label>
+                    <input class="form-control" type="password" placeholder="surname" name="surname" id="regsurname" required/>
+                </div>
+                <input type="submit" class="btn btn-default" value="SignUp">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
         </div>
