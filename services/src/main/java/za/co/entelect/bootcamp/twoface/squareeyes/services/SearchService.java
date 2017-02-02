@@ -15,10 +15,18 @@ import java.util.List;
 
 public class SearchService {
 
+    @Autowired
+    RelationalIssuesRepository relationalIssuesRepository;
+
     public List<Issue> SearchService(String searchTerm) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:za/co/entelect/bootcamp/twoface/squareeyes/services/root-context.xml");
-        RelationalIssuesRepository ir = context.getBean(RelationalIssuesRepository.class);
-        List<Issue> list = ir.search("Title",searchTerm);
+        List<Issue> list = null;
+        if (searchTerm == "")
+        {
+            return list;
+        }
+//        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:za/co/entelect/bootcamp/twoface/squareeyes/services/root-context.xml");
+//        RelationalIssuesRepository ir = context.getBean(RelationalIssuesRepository.class);
+        list = relationalIssuesRepository.search("Title",searchTerm);
         if(list.size() > 0)
         {
             return list;

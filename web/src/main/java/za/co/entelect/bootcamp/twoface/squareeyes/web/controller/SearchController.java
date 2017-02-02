@@ -24,27 +24,45 @@ public class SearchController {
 
 
     List<Issue> list;
+
     private SearchService searchService;
 
-    //@Autowired
     public SearchController(SearchService serchService) {
         this.searchService = searchService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping("/search")
     public String Search(ModelMap modelMap, @RequestParam(value = "search", required = false)
-                                       String pSearchTerm, HttpServletRequest request, HttpServletResponse response) {
+            String pSearchTerm, HttpServletRequest request, HttpServletResponse response) {
         Model model;
         list = searchService.SearchService(pSearchTerm);
-        if (list.size() != 0)
-        {
-           modelMap.addAttribute("list",list);
-           return "catalogue";
-        }
-        else
-        {
+        System.out.println("------------------------------------");
+        System.out.println("Here!!!!! " + pSearchTerm);
+        System.out.println("------------------------------------");
+        if (list.size() != 0) {
+            modelMap.addAttribute("list", list);
+            return "catalogue";
+        } else {
             return "Item not Found";
         }
-    }
 
+
+
+
+/*        list = searchService.SearchService(pSearchTerm);
+//        System.out.println(list.size());
+//        if (list.size() != 0)
+//        {
+//            modelMap.addAttribute("list", list);
+//            return "catalogue";
+//        }
+//        else
+//        {
+//            return "catalogue";
+//        }
+
+
+    }
+*/
+    }
 }
