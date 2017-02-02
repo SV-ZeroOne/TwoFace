@@ -31,10 +31,12 @@
             </ul>
             <form class="navbar-form navbar-right">
                 <input type="text" class="form-control" id="search" placeholder="Search" name="q"></input>
-                <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                <sec:authorize access="hasRole('USER')">
-                <button type="button" onclick="hideOrShowShoppingCart()" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Shopping Cart</button>
-                </sec:authorize>
+                <button type="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </button>
+                <button type="button" onclick="hideOrShowShoppingCart()" class="btn btn-success">
+                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Shopping Cart
+                </button>
             </form>
         </div><!--/.nav-collapse -->
     </div>
@@ -44,7 +46,6 @@
         <div class="container">
             <div id="shoppingCart" class="hide" style="position: fixed; z-index: 2;">
                 <div id="shoppingItems" class="well container">
-                    <sec:authorize access="hasRole('USER')">
                     <c:choose>
                         <c:when test="${shoppingCart != null}">
                             <table class='table table-condensed col-xs-12'>
@@ -96,7 +97,6 @@
 
                         </c:when>
                     </c:choose>
-                    </sec:authorize>
                 </div>
             </div>
 
