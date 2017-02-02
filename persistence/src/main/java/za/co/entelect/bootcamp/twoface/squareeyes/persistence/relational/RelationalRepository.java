@@ -2,6 +2,7 @@ package za.co.entelect.bootcamp.twoface.squareeyes.persistence.relational;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 import za.co.entelect.bootcamp.twoface.squareeyes.persistence.generic.Repository;
 
 import javax.persistence.*;
@@ -17,10 +18,7 @@ public abstract class RelationalRepository<T> implements Repository<T> {
 
     private static final Logger logger = LoggerFactory.getLogger(RelationalRepository.class);
 
-    /*EntityManagerFactory factory = Persistence.createEntityManagerFactory("Ironman");
     @PersistenceContext
-    protected EntityManager entityManager = factory.createEntityManager();
-    */@PersistenceContext
     protected EntityManager entityManager;
 
     private Class<T> type;
@@ -57,40 +55,32 @@ public abstract class RelationalRepository<T> implements Repository<T> {
     }
 
     public List<T> search(String property, String criteria) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("select x from ");
-        sb.append(type.getSimpleName());
-        sb.append(" x where x.");
-        sb.append(property);
-        sb.append(" like %");
-        sb.append(criteria);
-        sb.append("%");
-        Query query = this.entityManager.createQuery(sb.toString());
+        Query query = this.entityManager.createQuery("select x from " +
+                type.getSimpleName() +
+                " x where x."+
+                property+
+                " like :criteria");
+        query.setParameter("criteria", "%" + criteria + "%");
         return query.getResultList();
     }
 
     public List<T> search(String property, Integer criteria) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("select x from ");
-        sb.append(type.getSimpleName());
-        sb.append(" x where x.");
-        sb.append(property);
-        sb.append(" = ");
-        sb.append(criteria.toString());
-        Query query = this.entityManager.createQuery(sb.toString());
+        Query query = this.entityManager.createQuery("select x from " +
+                type.getSimpleName() +
+                " x where x."+
+                property+
+                " = :criteria");
+        query.setParameter("criteria", criteria);
         return query.getResultList();
     }
 
     public List<T> search(String property, String criteria, int pageSize, int pageNumber) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("select x from ");
-        sb.append(type.getSimpleName());
-        sb.append(" x where x.");
-        sb.append(property);
-        sb.append(" like %");
-        sb.append(criteria);
-        sb.append("%");
-        Query query = this.entityManager.createQuery(sb.toString());
+        Query query = this.entityManager.createQuery("select x from " +
+                type.getSimpleName() +
+                " x where x."+
+                property+
+                " like :criteria");
+        query.setParameter("criteria", "%" + criteria + "%");
         query.setFirstResult((pageNumber - 1) * pageSize).setMaxResults(pageSize);
         return query.getResultList();
     }
@@ -104,18 +94,19 @@ public abstract class RelationalRepository<T> implements Repository<T> {
         return (Long)query.getSingleResult();
     }
 
+    @Transactional
     public void delete(Object id) {
         entityManager.remove(this.entityManager.getReference(type, id));
     }
 
+    @Transactional
     public T create(T t) {
-        //entityManager.getTransaction().begin();
         entityManager.persist(t);
-        //entityManager.getTransaction().commit();
         entityManager.flush();
         return t;
     }
 
+    @Transactional
     public T update(T t) {
         this.entityManager.merge(t);
         this.entityManager.flush();

@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<!DOCTYPE html>
-
 <html>
 <head>
     <meta charset="UTF-8"/>
@@ -34,7 +32,9 @@
             <form class="navbar-form navbar-right">
                 <input type="text" class="form-control" id="search" placeholder="Search" name="q"></input>
                 <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                <sec:authorize access="hasRole('USER')">
                 <button type="button" onclick="hideOrShowShoppingCart()" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Shopping Cart</button>
+                </sec:authorize>
             </form>
         </div><!--/.nav-collapse -->
     </div>
@@ -44,6 +44,7 @@
         <div class="container">
             <div id="shoppingCart" class="hide" style="position: fixed; z-index: 2;">
                 <div id="shoppingItems" class="well container">
+                    <sec:authorize access="hasRole('USER')">
                     <c:choose>
                         <c:when test="${shoppingCart != null}">
                             <table class='table table-condensed col-xs-12'>
@@ -89,12 +90,13 @@
                             <button type='button' class='btn' onclick='removeCart()' id='checkout' style='float:left'>
                             <span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Trash
                             </button>
-                            <button type='button' class='btn btn-success' onclick='checkout()' id='checkout' style='float:right'>
+                            <button type='button' class='btn btn-success' action="/checkout" id='checkout' style='float:right'>
                             <span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Checkout
                             </button>
 
                         </c:when>
                     </c:choose>
+                    </sec:authorize>
                 </div>
             </div>
 
@@ -128,22 +130,17 @@
             <div id="paging" class="col-xs-offset-2 col-xs-8">
                 <c:choose>
                     <c:when test="${page > 1}"><a class='btn flat-butt' style='float:left; background-color:#fff;
-                        color:black; margin:5px; box-shadow: 10px 10px 8px #222;' href='/catalogue?page=${page - 1}'
+                        color:black; margin:5px; box-shadow: 10px 10px 8px #222;' href='/catalogue?search=${search}&page=${page - 1}'
                                                    role='button'>Page ${page - 1}&raquo;</a>
                     </c:when>
                 </c:choose>
                 <a class='btn flat-butt' style='float:right; background-color:#fff;
-                color:black; margin:5px; box-shadow: 10px 10px 8px #222;' href='/catalogue?page=${page + 1}'
+                color:black; margin:5px; box-shadow: 10px 10px 8px #222;' href='/catalogue?search=${search}&page=${page + 1}'
                    role='button'>Page ${page + 1} &raquo;</a>
             </div>
 
             <div id="footer" class="col-xs-12" style="margin-top: 30px;">
-                <sec:authorize access="hasRole('USER')">
 
-                    This content will only be visible to users who have
-                    the "supervisor" authority in their list of <tt>GrantedAuthority</tt>s.
-
-                </sec:authorize>
             </div>
         </div>
     </article>

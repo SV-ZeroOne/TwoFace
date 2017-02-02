@@ -35,8 +35,9 @@ public class ProductController {
                            ModelMap modelMap){
 
         modelMap.addAttribute("shoppingCart", shoppingCartService.getShoppingCart(1));
-        modelMap.addAttribute("stock", productService.getStock(stockID, issueID));
-        modelMap.addAttribute("stockList", productService.getStockList(issueID));
+        Stock stock = productService.getStock(stockID, issueID);
+        modelMap.addAttribute("stock", stock);
+        modelMap.addAttribute("stockList", productService.getStockList(stock.getIssue().getIssueID()));
 
         return "product";
     }

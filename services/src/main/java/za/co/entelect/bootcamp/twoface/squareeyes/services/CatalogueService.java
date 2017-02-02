@@ -24,6 +24,16 @@ public class CatalogueService {
         return issuesRepository.findAll(8, page);
     }
 
+    public List<Issue> SearchService(String searchTerm, int page) {
+        List<Issue> list = null;
+        if (searchTerm == "") {
+            System.out.println("No search");
+        } else {
+            list = issuesRepository.search("issueTitle", searchTerm, 8, page);
+        }
+        return list;
+    }
+
     public void setIssuesRepository(IssuesRepository issuesRepository) {
         this.issuesRepository = issuesRepository;
     }

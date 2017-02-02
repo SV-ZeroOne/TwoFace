@@ -1,10 +1,14 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>Index</title>
-	<link rel="stylesheet" type="text/css" href="Checkout.css"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/assets/css/catalogue.css"/>"/>
+
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<!-- Optional theme -->
@@ -20,15 +24,15 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="homepage.html">Square Eyes</a>
+				<a class="navbar-brand" href="homepage">Square Eyes</a>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="homepage.html">Home</a></li>
-					<li><a href="Catalogue.html">Catalogue</a></li>
+					<li class="active"><a href="homepage">Home</a></li>
+					<li><a href="catalogue">Catalogue</a></li>
 				</ul>
-				<form class="navbar-form navbar-right">
-					<input type="text" class="form-control" id="search" placeholder="search" name="search"></input>
+				<form class="navbar-form navbar-right" action="/catalogue">
+					<input type="text" class="form-control" id="search" placeholder="Search" name="search"></input>
 					<button type="button" class="btn btn-primary" name="search">Search</button>
 				</form>
 			</div><!--/.nav-collapse -->
@@ -46,14 +50,16 @@
 								Your Order <div class="pull-right"></div>
 							</div>
 							<div class="panel-cart" id="shoppingItems">
+							<c:forEach items="${list}" var="issue">
 								<!--Here we pull our product items into cart details-->
 								<div class="form-group" id="checkout-cart-items"></div>
-								<div class="form-group">
+									<div>${issue.issueTitle} + ${issue.publisher}</div>
 									<div class="col-xs-12">
 										<strong>Subtotal</strong>
 										<div class="pull-right" id="Subtotal"><span>$</span><span>0.00</span></div>
 									</div>
-								</div>
+
+							</c:forEach>
 								<div class="form-group"><hr /></div>
 								<div class="form-group">
 									<div class="col-xs-12">
@@ -63,6 +69,7 @@
 								</div>
 							</div>
 						</div>
+
 						<!--REVIEW ORDER END-->
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 panel-group">

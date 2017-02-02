@@ -16,7 +16,7 @@ import za.co.entelect.bootcamp.twoface.squareeyes.services.AuthenticationService
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
-    @Autowired()
+    @Autowired
     private AuthenticationService authenticationService;
 
 

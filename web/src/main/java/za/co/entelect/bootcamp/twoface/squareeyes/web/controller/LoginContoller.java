@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import za.co.entelect.bootcamp.twoface.squareeyes.domain.customer.Customer;
+import za.co.entelect.bootcamp.twoface.squareeyes.services.AuthenticationService;
+import za.co.entelect.bootcamp.twoface.squareeyes.services.CatalogueService;
+import za.co.entelect.bootcamp.twoface.squareeyes.services.ShoppingCartService;
 
 import java.security.Principal;
 
@@ -15,41 +19,12 @@ import java.security.Principal;
 @Controller
 public class LoginContoller {
 
-//    @RequestMapping(value = "/login", method = RequestMethod.GET)
-//    public ModelAndView login(@RequestParam(value = "error", required = false) String error,
-//                              @RequestParam(value = "logout", required = false) String logout){
-//        ModelAndView model = new ModelAndView();
-//        if (error != null){
-//            model.addObject("error", "Invalid username and password!");
-//        }
-//
-//        if (logout != null){
-//            model.addObject("msg", "You've been logged out successfully.");
-//        }
-//        model.setViewName("login");
-//
-//        return model;
-//    }
+    AuthenticationService authenticationService;
 
-    //Spring Security see this :
-//    @RequestMapping(value = "/login", method = RequestMethod.GET)
-//    public ModelAndView login(
-//            @RequestParam(value = "error", required = false) String error,
-//            @RequestParam(value = "logout", required = false) String logout) {
-//
-//        ModelAndView model = new ModelAndView();
-//        if (error != null) {
-//            model.addObject("error", "Invalid username and password!");
-//        }
-//
-//        if (logout != null) {
-//            model.addObject("msg", "You've been logged out successfully.");
-//        }
-//        model.setViewName("login");
-//
-//        return model;
-//
-//    }
+    public LoginContoller(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
+    }
+
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public String error403(ModelMap model) {
         return "403";
@@ -66,6 +41,22 @@ public class LoginContoller {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(ModelMap model) {
         System.out.println("In the login method");
+        return "login";
+
+    }
+
+    @RequestMapping(value = "/signup", method = RequestMethod.POST)
+    public String signup(@RequestParam(value = "email", required = true) String email,
+                         @RequestParam(value = "password", required = true) String password,
+                         @RequestParam(value = "title", required = true) String title,
+                         @RequestParam(value = "firstName", required = true) String firstName,
+                         @RequestParam(value = "surname", required = true) String surname,
+            ModelMap model) {
+        System.out.println("In the login method");
+
+        Customer customer = new Customer(email, title, firstName, surname, "salt", password);
+        authenticationService.createCustomer(customer);
+
         return "login";
 
     }

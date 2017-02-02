@@ -1,13 +1,12 @@
 package za.co.entelect.bootcamp.twoface.squareeyes.web.controller;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.customer.ShoppingCart;
-import za.co.entelect.bootcamp.twoface.squareeyes.domain.stock.Stock;
-import za.co.entelect.bootcamp.twoface.squareeyes.services.ProductService;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.ShoppingCartService;
 
 import java.util.List;
@@ -25,14 +24,13 @@ public class ShoppingCartController {
     }
 
     @RequestMapping(value = "/shoppingcart", method = RequestMethod.POST)
-    public String getProductPage(@RequestParam(value = "issue", required = false, defaultValue="-1") int issueID,
-                                 @RequestParam(value = "stock", required = false, defaultValue="-1") int stockID,
+    public String getProductPage(@RequestParam(value = "stockID", required = true, defaultValue="-1") int stockID,
+                                 @RequestParam(value = "quantity", required = true, defaultValue="-1") int quantity,
                                  ModelMap modelMap){
-        //List<ShoppingCart> shoppingList
 
-//        modelMap.addAttribute("stock", stock);
-//        modelMap.addAttribute("stockList", stockList);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        shoppingCartService.addToShoppingCart((short)quantity, auth.getName(), stockID);
 
-        return "product";
+        return "redirect:product?stock=" + stockID;
     }
 }
