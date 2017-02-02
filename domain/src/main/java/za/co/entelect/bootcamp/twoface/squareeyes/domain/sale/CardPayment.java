@@ -35,7 +35,7 @@ public class CardPayment {
 
     @Id
     @GeneratedValue
-    @Column(name = "PaymentID")
+    @Column(name = "CardPaymentID")
     public int getPaymentID() {
         return paymentID;
     }

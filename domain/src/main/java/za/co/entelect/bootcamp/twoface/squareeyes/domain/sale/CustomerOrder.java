@@ -58,6 +58,9 @@ public class CustomerOrder {
     public int getCustomerOrderID() {
         return customerOrderID;
     }
+    public void setCustomerOrderID(int customerOrderID) {
+        this.customerOrderID = customerOrderID;
+    }
 
     @Column(name="DeliveryOption")
     public String getDeliveryOption() {

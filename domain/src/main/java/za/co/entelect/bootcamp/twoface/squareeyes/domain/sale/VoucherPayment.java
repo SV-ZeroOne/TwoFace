@@ -43,7 +43,7 @@ public class VoucherPayment {
 
     @Id
     @GeneratedValue
-    @Column(name = "PaymentID")
+    @Column(name = "VoucherPaymentID")
     public int getPaymentID() {
         return paymentID;
     }
