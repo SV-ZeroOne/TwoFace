@@ -30,7 +30,7 @@ CREATE TABLE Customers
 	FirstName VARCHAR(30) NOT NULL,
 	Surname VARCHAR(30) NOT NULL,
 	Salt VARCHAR(15) NOT NULL,
-	PasswordHash BINARY(64) NOT NULL
+	PasswordHash VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE CustomerAddress

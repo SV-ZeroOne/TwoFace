@@ -7,10 +7,10 @@
 
 --DUMMY DATA
 
-INSERT INTO dbo.Customers (Email, Title, FirstName, Surname)
-VALUES ('quinton@gmail.com', 'Mr', 'Quinton', 'Weenink'),
-('sean@gmail.com', 'Mr', 'Sean', 'Seansurname'),
-('Mpho@gmail.com', 'Mr', 'Mpho', 'Mphosurname');
+INSERT INTO dbo.Customers (Email, Title, FirstName, Surname, Salt, PasswordHash)
+VALUES ('quinton@gmail.com', 'Mr', 'Quinton', 'Weenink', 'salt', 'password'),
+('sean@gmail.com', 'Mr', 'Sean', 'Seansurname', 'salt', 'password'),
+('Mpho@gmail.com', 'Mr', 'Mpho', 'Mphosurname', 'salt', 'password');
 
 INSERT INTO dbo.CustomerAddress (CustomerID, DeliveryDetails, Suburb, City, PostalCode, AddressType)
 VALUES (1, '7 Malberry Drive', 'Queens Park', 'Johannesburg', '2256', 'Delivery'),
