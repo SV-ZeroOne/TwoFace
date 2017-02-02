@@ -10,6 +10,7 @@ import za.co.entelect.bootcamp.twoface.squareeyes.services.CatalogueService;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.SearchService;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.ShoppingCartService;
 
+import java.security.Principal;
 import java.util.List;
 
 /**
@@ -29,7 +30,7 @@ public class CatalogueController {
     @RequestMapping(value = "/catalogue", method = RequestMethod.GET)
     public String SayHello(@RequestParam(value = "search", required = false, defaultValue = "") String search,
                            @RequestParam(value = "page",  required = false, defaultValue = "1") int page,
-                           ModelMap modelMap){
+                           ModelMap modelMap, Principal principal){
         List<Issue> list;
         if (search != "")
         {
@@ -43,7 +44,8 @@ public class CatalogueController {
         }
         modelMap.addAttribute("list", list);
         modelMap.addAttribute("page", page);
-        modelMap.addAttribute("shoppingCart", shoppingCartService.getShoppingCart(1));
+        if(principal != null)
+            modelMap.addAttribute("shoppingCart", shoppingCartService.getShoppingCart(principal.getName()));
         modelMap.addAttribute("search", search);
         return "catalogue";
     }

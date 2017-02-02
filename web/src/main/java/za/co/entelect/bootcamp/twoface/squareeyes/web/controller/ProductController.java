@@ -11,6 +11,7 @@ import za.co.entelect.bootcamp.twoface.squareeyes.services.CatalogueService;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.ProductService;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.ShoppingCartService;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,10 +32,10 @@ public class ProductController {
 
     @RequestMapping(value = "/product", method = RequestMethod.GET)
     public String getProductPage(@RequestParam(value = "issue", required = false, defaultValue="-1") int issueID,
-                           @RequestParam(value = "stock", required = false, defaultValue="-1") int stockID,
-                           ModelMap modelMap){
+                                 @RequestParam(value = "stock", required = false, defaultValue="-1") int stockID,
+                                 ModelMap modelMap, Principal principal){
 
-        modelMap.addAttribute("shoppingCart", shoppingCartService.getShoppingCart(1));
+        modelMap.addAttribute("shoppingCart", shoppingCartService.getShoppingCart(principal.getName()));
         Stock stock = productService.getStock(stockID, issueID);
         modelMap.addAttribute("stock", stock);
         modelMap.addAttribute("stockList", productService.getStockList(stock.getIssue().getIssueID()));

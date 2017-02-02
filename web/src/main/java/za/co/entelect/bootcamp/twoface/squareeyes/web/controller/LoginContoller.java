@@ -40,7 +40,6 @@ public class LoginContoller {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(ModelMap model) {
-        System.out.println("In the login method");
         return "login";
 
     }
