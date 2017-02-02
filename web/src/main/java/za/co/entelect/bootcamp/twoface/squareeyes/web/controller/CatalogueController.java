@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.CatalogueService;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.SearchService;
+import za.co.entelect.bootcamp.twoface.squareeyes.services.ShoppingCartService;
 
 import java.util.List;
 
@@ -19,9 +20,11 @@ public class CatalogueController {
 
     private CatalogueService catalogueService;
     private SearchService searchService;
+    private ShoppingCartService shoppingCartService;
 
-    public CatalogueController(CatalogueService catalogueService) {
+    public CatalogueController(CatalogueService catalogueService, ShoppingCartService shoppingCartService) {
         this.catalogueService = catalogueService;
+        this.shoppingCartService = shoppingCartService;
         //this.searchService = SearchService;
     }
 
@@ -43,6 +46,7 @@ public class CatalogueController {
             modelMap.addAttribute("list", list);
             modelMap.addAttribute("page", page);
         }
+        modelMap.addAttribute("shoppingCart", shoppingCartService.getShoppingCart(1));
         return "catalogue";
     }
 }

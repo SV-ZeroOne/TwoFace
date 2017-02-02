@@ -24,7 +24,7 @@ public class ShoppingCartController {
         this.shoppingCartService = shoppingCartService;
     }
 
-    @RequestMapping(value = "/product", method = RequestMethod.GET)
+    @RequestMapping(value = "/shoppingcart", method = RequestMethod.POST)
     public String getProductPage(@RequestParam(value = "issue", required = false, defaultValue="-1") int issueID,
                                  @RequestParam(value = "stock", required = false, defaultValue="-1") int stockID,
                                  ModelMap modelMap){
