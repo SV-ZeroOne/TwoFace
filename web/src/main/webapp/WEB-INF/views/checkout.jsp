@@ -1,10 +1,14 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>Index</title>
-	<link rel="stylesheet" type="text/css" href="Checkout.css"/>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/assets/css/catalogue.css"/>"/>
+
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<!-- Optional theme -->
@@ -20,12 +24,12 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="homepage.html">Square Eyes</a>
+				<a class="navbar-brand" href="homepage">Square Eyes</a>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="homepage.html">Home</a></li>
-					<li><a href="Catalogue.html">Catalogue</a></li>
+					<li class="active"><a href="homepage">Home</a></li>
+					<li><a href="catalogue">Catalogue</a></li>
 				</ul>
 				<form class="navbar-form navbar-right">
 					<input type="text" class="form-control" id="search" placeholder="search" name="search"></input>
