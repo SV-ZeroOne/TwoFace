@@ -16,12 +16,12 @@ import java.util.List;
 @org.springframework.stereotype.Repository
 public abstract class RelationalRepository<T> implements Repository<T> {
 
-    private static final Logger logger = LoggerFactory.getLogger(RelationalRepository.class);
+    //private static final Logger logger = LoggerFactory.getLogger(RelationalRepository.class);
 
     @PersistenceContext
     protected EntityManager entityManager;
 
-    private Class<T> type;
+    protected Class<T> type;
 
     public RelationalRepository() {
         Type t = getClass().getGenericSuperclass();
@@ -30,7 +30,7 @@ public abstract class RelationalRepository<T> implements Repository<T> {
     }
 
     public T find(Object id) {
-        logger.info("name holds {}", type.getSimpleName());
+        //logger.info("name holds {}", type.getSimpleName());
         System.out.println(id);
         return this.entityManager.find(type, id);
     }

@@ -101,58 +101,41 @@ function addToCart(shoppingCart)
 	}
 }
 
-function increaseQty(issueID, stockID)
+function increaseQty(stockID, csrftoken)
 {
-	var shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"))
+    $.ajax({
+        type: "POST",
+        url: "/shoppingcart/increase",
+        data: { stock: stockID, _csrf: csrftoken}
+    }).done(function() {
+    	var quantityDiv = $("#my_id .my_class");
+        quantityDiv.html = quantityDiv+1;
 
-	for (var i = 0; i < shoppingCart.length; i++) {
-		if(shoppingCart[i].Id == issueID && shoppingCart[i].selectedStock.Id == stockID){
-			if(shoppingCart[i].selectedStock.AvailableQuantity >= (shoppingCart[i].qty + 1))
-				shoppingCart[i].qty = shoppingCart[i].qty + 1
-			else{
-				alert("There is more stock for this item");
-			}
-			break
-		}
-	}
-
-	localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart))
-
-	populateShoppingCart(shoppingCart);
+    });
 }
 
-function decreaseQty(issueID, stockID)
+function decreaseQty(stockID, csrftoken)
 {
-	var shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"))
-
-	for (var i = 0; i < shoppingCart.length; i++) {
-		if(shoppingCart[i].Id == issueID && shoppingCart[i].selectedStock.Id == stockID){
-			if(shoppingCart[i].qty > 1)
-				shoppingCart[i].qty = shoppingCart[i].qty - 1
-			else{
-				alert("You can't have a negative stock Quantity");
-			}
-			break
-		}
-	}
-
-	localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart))
-
-	populateShoppingCart(shoppingCart);
+    $.ajax({
+        type: "POST",
+        url: "/shoppingcart/decrease",
+        data: { stock: stockID, _csrf: csrftoken}
+    }).done(function() {
+        var quantityDiv = $("#my_id .my_class");
+        quantityDiv.html = quantityDiv-1;
+    });
 }
 
-function removeFromCart(issueID, stockID)
+function removeFromCart(stockID, csrftoken)
 {
-	var shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"))
+    $.ajax({
+        type: "POST",
+        url: "/shoppingcart/remove",
+        data: { stock: stockID, _csrf: csrftoken}
+    }).done(function() {
+		$('#'+stockID).slideUp()
 
-	for (var i = 0; i < shoppingCart.length; i++) {
-		if(shoppingCart[i].Id == issueID && shoppingCart[i].selectedStock.Id == stockID)
-			shoppingCart.splice(i, 1);
-	}
-
-	localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart))
-
-	populateShoppingCart(shoppingCart);
+    });
 }
 
 
