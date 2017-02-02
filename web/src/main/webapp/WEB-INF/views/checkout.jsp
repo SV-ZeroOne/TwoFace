@@ -39,36 +39,61 @@
 		</div>
 	</nav>
 
-	<div class="container" id="checkoutPage">
-		<div class="container wrapper">
+	<form class="container" id="checkoutPage">
+
 			<div class="row cart-body">
 				<form class="form-horizontal" method="post" action="">
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 						<!--REVIEW ORDER-->
 						<div class="panel panel-info">
 							<div class="panel-heading">
 								Your Order <div class="pull-right"></div>
 							</div>
 							<div class="panel-cart" id="shoppingItems">
-							<c:forEach items="${list}" var="issue">
-								<!--Here we pull our product items into cart details-->
-								<div class="form-group" id="checkout-cart-items"></div>
-									<div>${issue.issueTitle} + ${issue.publisher}</div>
-									<div class="col-xs-12">
-										<strong>Subtotal</strong>
-										<div class="pull-right" id="Subtotal"><span>$</span><span>0.00</span></div>
-									</div>
+                                <c:set var="subTotal" value="${0}" scope="page"></c:set>
+                    <c:choose>
+                        <c:when test="${shoppingCart != null}">
+                            <table class='table col-xs-12'>
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Condition</th>
+                                        <th>Qty</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="${shoppingCart}" var="cartitem">
+                                    <tr>
+                                        <td>${cartitem.stock.issue.issueTitle}</td>
+                                        <td>${cartitem.stock.condition}</td>
+                                        <td>${cartitem.quantity}</td>
+                                        <c:set var="subTotal" value="${value + cartitem.stock.price * cartitem.quantity}"></c:set>
+                                        <td>R${cartitem.stock.price * cartitem.quantity}</td>
+                                    </tr>
+                                    </c:forEach>
+                                <tr>
+                                    <td>Total:</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>R${subTotal}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </c:when>
+                    </c:choose>
+                            </div>
+                        </div>
+                    <div class="form-group">
+                    <div class="col-xs-12">
+                    <strong>Order Total</strong>
+                    <div class="pull-right" id="Order-total"><span>$</span><span>0.00</span></div>
+                    </div>
+                    </div>
+                    </div>
+                </form>
+            </div>
 
-							</c:forEach>
-								<div class="form-group"><hr /></div>
-								<div class="form-group">
-									<div class="col-xs-12">
-										<strong>Order Total</strong>
-										<div class="pull-right" id="Order-total"><span>$</span><span>0.00</span></div>
-									</div>
-								</div>
-							</div>
-						</div>
 
 						<!--REVIEW ORDER END-->
 					</div>
@@ -176,9 +201,7 @@
 						</div>
 					</div>
 				</form>
-			</div>
-		</div>
-	</div>
+
     <div class="modal confirm" id="Confirmation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
