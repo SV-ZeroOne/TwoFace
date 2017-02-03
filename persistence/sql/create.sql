@@ -1,6 +1,17 @@
 -- Create Statements
+  ALTER TABLE dbo.Issues
+  ADD imageRef varchar(MAX);
 
+  UPDATE dbo.Issues SET imageRef='http://vignette4.wikia.nocookie.net/marvel_dc/images/2/26/1st_Issue_Special_1.jpg/revision/latest?cb=20070721120954'
+  WHERE Title='1st Issue Special';
 
+  UPDATE dbo.Issues SET imageRef='https://upload.wikimedia.org/wikipedia/en/0/04/Cover_52_Week_One_(May_10,_2006).jpg',
+  Description='52 consists of 52 issues, published weekly for one year, each issue detailing an actual week chronicling the events that took place during the missing year after the end of Infinite Crisis'
+    WHERE Title='52';
+
+ UPDATE dbo.Issues SET imageRef='http://vignette1.wikia.nocookie.net/marvel_dc/images/a/af/52_Aftermath_Four_Horsemen_1.jpg/revision/latest?cb=20081225212710'
+ WHERE Title='52 Aftermath: The Four Horsemen';
+--Old
 DROP TABLE SquareEyes.dbo.Payments;
 GO
 DROP TABLE SquareEyes.dbo.VoucherPayments;

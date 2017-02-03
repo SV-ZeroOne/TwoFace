@@ -55,6 +55,7 @@
                         <div class="panel-cart" id="shoppingItems">
                             <c:choose>
                             <c:when test="${shoppingCart != null}">
+                                <c:set var="subTotal" value="${0}"/>
                                 <table class='table col-xs-12'>
                                     <thead>
                                         <tr>
@@ -65,13 +66,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:set var="subTotal" value="${0}" scope="page"/>
+
                                         <c:forEach items="${shoppingCart}" var="cartitem">
                                         <tr>
                                             <td>${cartitem.stock.issue.issueTitle}</td>
                                             <td>${cartitem.stock.condition}</td>
                                             <td>${cartitem.quantity}</td>
-                                            <c:set var="subTotal" value="${value + cartitem.stock.price * cartitem.quantity}"></c:set>
+                                            <c:set var="subTotal" value="${subTotal + cartitem.stock.price*cartitem.quantity}"></c:set>
                                             <td>R${cartitem.stock.price * cartitem.quantity}</td>
                                         </tr>
                                         </c:forEach>

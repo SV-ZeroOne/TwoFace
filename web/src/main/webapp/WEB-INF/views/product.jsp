@@ -121,8 +121,10 @@
                 </div>
             </div>
             <div class="container" style="padding-top:10px">
+
                 <div class="col-sm-4 col-md-4 col-xs-12">
-                    <img id="imagecomic" src="https://s-media-cache-ak0.pinimg.com/originals/b8/d8/cb/b8d8cb19503b644127da29e5b287e124.jpg" alt="Loading.." class="img-responsive"/>
+                    <img src="${stock.issue.imageRef}" alt='Loading..' onerror="this.src='http://pre10.deviantart.net/23f7/th/pre/i/2015/327/0/d/star_wars_vintage_tfa_comic_cover_issue1_by_daztibbles-d9hq35o.png'" class='img-responsive'/>
+                    <%--<img id="imagecomic" src="https://s-media-cache-ak0.pinimg.com/originals/b8/d8/cb/b8d8cb19503b644127da29e5b287e124.jpg" alt="Loading.." class="img-responsive"/>--%>
                 </div>
                 <div class="col-sm-8 col-md-8 col-xs-12" id="comicdetails">
                     <h3 id="title">${stock.issue.issueTitle}</h3>
