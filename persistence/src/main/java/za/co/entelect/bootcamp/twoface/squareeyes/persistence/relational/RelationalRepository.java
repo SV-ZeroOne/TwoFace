@@ -64,6 +64,16 @@ public abstract class RelationalRepository<T> implements Repository<T> {
         return query.getResultList();
     }
 
+    public List<T> searchNoWild(String property, String criteria) {
+        Query query = this.entityManager.createQuery("select x from " +
+                type.getSimpleName() +
+                " x where x."+
+                property+
+                " like :criteria");
+        query.setParameter("criteria",  criteria );
+        return query.getResultList();
+    }
+
     public List<T> search(String property, Integer criteria) {
         Query query = this.entityManager.createQuery("select x from " +
                 type.getSimpleName() +
