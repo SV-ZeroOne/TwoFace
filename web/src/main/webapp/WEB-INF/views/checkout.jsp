@@ -240,8 +240,7 @@
 </footer>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="Issues.json"></script>
-	<script type="text/javascript" src="global.js"></script>
-	<script type="text/javascript" src="Checkout.js"></script>
+    <script src="<c:url value="/assets/js/global.js"/>"></script>
+    <script src="<c:url value="/assets/js/catalogue.js"/>"></script>
 </body>
 </html>
