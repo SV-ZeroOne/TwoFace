@@ -37,6 +37,7 @@ public class TwoFacePersistenceTest {
     }
 
     @Test
+    @Ignore
     public void getDataFromDatabase()
     {
         IssuesRepository sr = new RelationalIssuesRepository();

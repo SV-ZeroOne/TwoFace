@@ -34,12 +34,30 @@ public class ShoppingCartController {
         return "redirect:product?stock=" + stockID;
     }
 
-    @RequestMapping(value = "/shoppingcart", method = RequestMethod.DELETE)
-    public String getProductPage(@RequestParam(value = "stockID", required = true) int stockID,
+    @RequestMapping(value = "/shoppingcart/remove", method = RequestMethod.POST)
+    public String removeItem(@RequestParam(value = "stock", required = true) int stockID,
                                  ModelMap modelMap, Principal principal){
 
         shoppingCartService.removeFromShoppingCart(principal.getName(), stockID);
 
-        return "redirect:product?stock=" + stockID;
+        return "catalogue";
+    }
+
+    @RequestMapping(value = "/shoppingcart/increase", method = RequestMethod.POST)
+    public String increaseQuantity(@RequestParam(value = "stock", required = true) int stockID,
+                                 ModelMap modelMap, Principal principal){
+
+        shoppingCartService.increaseQuantity(principal.getName(), stockID);
+
+        return "catalogue";
+    }
+
+    @RequestMapping(value = "/shoppingcart/decrease", method = RequestMethod.POST)
+    public String decreaseQuantity(@RequestParam(value = "stock", required = true) int stockID,
+                                 ModelMap modelMap, Principal principal){
+
+        shoppingCartService.decreaseQuantity(principal.getName(), stockID);
+
+        return "catalogue";
     }
 }

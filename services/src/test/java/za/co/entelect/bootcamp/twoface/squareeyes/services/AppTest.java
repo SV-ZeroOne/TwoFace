@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * Unit test for simple Repository.
  */
+@Ignore
 public class AppTest {
 
     private CatalogueService cs;
@@ -24,6 +25,7 @@ public class AppTest {
     }
 
     @Test
+    @Ignore
     public void testCatalogueService() {
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath:za/co/entelect/bootcamp/twoface/squareeyes/services/root-context.xml");
         cs = context.getBean(CatalogueService.class);

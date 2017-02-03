@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //                .formLogin();
         http
                 .authorizeRequests()
-                .antMatchers( "/cart/**").authenticated()
+                .antMatchers( "/checkout").authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")

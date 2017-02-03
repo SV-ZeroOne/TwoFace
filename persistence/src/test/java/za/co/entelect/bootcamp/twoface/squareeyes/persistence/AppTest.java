@@ -48,6 +48,7 @@ public class AppTest {
     }
 
     @Test
+    @Ignore
     public void getStockByID() {
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath:za/co/entelect/bootcamp/twoface/squareeyes/persistence/root-context.xml");
         sr = context.getBean(RelationalStockRepository.class);

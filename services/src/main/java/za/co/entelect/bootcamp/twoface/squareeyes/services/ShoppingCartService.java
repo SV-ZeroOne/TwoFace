@@ -41,11 +41,32 @@ public class ShoppingCartService {
 
     public void removeFromShoppingCart(String email, int stockID)
     {
-        Customer customer = customersRepository.search("email", email).get(0);
-        List<ShoppingCart> shoppingCartList = shoppingCartsRepository.search("customerID", customer.getCustomerID());
+        List<ShoppingCart> shoppingCartList = shoppingCartsRepository.search("customer.email", email);
         for (ShoppingCart sc:shoppingCartList) {
             if(sc.getStock().getStockReferenceID() == stockID) {
                 shoppingCartsRepository.delete(sc.getShoppingCartID());
+                return;
+            }
+        }
+    }
+
+    public void decreaseQuantity(String email, int stockID)
+    {
+        List<ShoppingCart> shoppingCartList = shoppingCartsRepository.search("customer.email", email);
+        for (ShoppingCart sc:shoppingCartList) {
+            if(sc.getStock().getStockReferenceID() == stockID) {
+                shoppingCartsRepository.decreaseQty(sc.getShoppingCartID());
+                return;
+            }
+        }
+    }
+
+    public void increaseQuantity(String email, int stockID)
+    {
+        List<ShoppingCart> shoppingCartList = shoppingCartsRepository.search("customer.email", email);
+        for (ShoppingCart sc:shoppingCartList) {
+            if(sc.getStock().getStockReferenceID() == stockID) {
+                shoppingCartsRepository.increaseQty(sc.getShoppingCartID());
                 return;
             }
         }
