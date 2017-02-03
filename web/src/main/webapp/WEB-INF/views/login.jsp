@@ -14,13 +14,7 @@
 
 </head>
 <body>
-<%
 
-    String errorString = (String)request.getAttribute("error");
-    if(errorString != null && errorString.trim().equals("true")){
-        out.println("<span class=\"dark\">Incorrect login name or password. Please try again");
-    }
-%>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -73,6 +67,13 @@
     <div class="container" style="padding-top:10px">
         <div class="well col-xs-12 col-md-5">
             <h3>Log in:</h3>
+            <%
+
+                String errorString = (String)request.getAttribute("error");
+                if(errorString != null && errorString.trim().equals("true")){
+                    out.println("<span class=\"dark\">Incorrect login name or password. Please try again");
+                }
+            %>
             <form name="loginForm" action="<c:url value="/login" />" method="post">
                 <div class="form-group">
                     <label for="user">Email address:</label>
