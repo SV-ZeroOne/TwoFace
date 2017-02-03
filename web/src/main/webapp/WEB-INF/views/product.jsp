@@ -151,10 +151,20 @@
                     </form>
                     <c:choose>
                         <c:when test="${shoppingCart != null}">
-                            <button type="submit" form="addToCartForm" class="btn btn-success" onclick="addToCart()" id="addToCartButton">
-                                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                                 Add to Cart - ${stock.availableQty} Left
-                            </button>
+                            <c:choose>
+                                <c:when test="${stock.availableQty gt 0}">
+                                    <button type="submit" form="addToCartForm" class="btn btn-success" onclick="addToCart()" id="addToCartButton">
+                                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                                        Add to Cart - ${stock.availableQty} Left
+                                    </button>
+                                </c:when>
+                                <c:when test="${stock.availableQty eq 0}">
+                                    <button type="submit" class="btn btn-default disabled" id="addToCartButton">
+                                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                                        No stock left
+                                    </button>
+                                </c:when>
+                            </c:choose>
                         </c:when>
                         <c:otherwise>
                             <a href="<c:url value="/login"/>" class="btn btn-success" role="button">
