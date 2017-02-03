@@ -38,4 +38,16 @@ public class HomeController {
         return "homepage";
     }
 
+    @RequestMapping(value = "/homepage/**", method = RequestMethod.GET)
+    public String getHomepageErrorWithArgument(ModelMap modelMap, Principal principal) throws Exception{
+        modelMap.addAttribute("error", "true");
+        return "error";
+    }
+
+    @RequestMapping(value = "/*", method = RequestMethod.GET)
+    public String getHomepageError(ModelMap modelMap, Principal principal) throws Exception{
+        modelMap.addAttribute("error", "true");
+        return "error";
+    }
+
 }
