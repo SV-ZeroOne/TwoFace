@@ -82,7 +82,7 @@
 									</thead>
 									<tbody>
 									<c:forEach items="${shoppingCart}" var="cartitem">
-										<tr>
+										<tr id="${cartitem.stock.stockReferenceID}">
 											<td>${cartitem.stock.issue.issueTitle}</td>
 											<td>${cartitem.stock.condition}</td>
 											<td>R${cartitem.stock.price * cartitem.quantity}</td>
