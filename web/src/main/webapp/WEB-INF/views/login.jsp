@@ -77,7 +77,7 @@
             <form name="loginForm" action="<c:url value="/login" />" method="post">
                 <div class="form-group">
                     <label for="user">Email address:</label>
-                    <input class="form-control" type="text" placeholder="email" id="user" name="user" requird/>
+                    <input class="form-control" type="email" placeholder="email" id="user" name="user" requird/>
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>
@@ -92,7 +92,7 @@
             <form name="signUpForm" action="<c:url value="/signup" />" method="post">
                 <div class="form-group">
                     <label for="regemail">Email address:</label>
-                    <input class="form-control" type="text" placeholder="email" name="email" id="regemail" requird/>
+                    <input class="form-control" type="email" placeholder="email" name="email" id="regemail" requird/>
                 </div>
                 <div class="form-group">
                     <label for="regpassword">Password:</label>
