@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import za.co.entelect.bootcamp.twoface.squareeyes.domain.issue.Issue;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.AuthenticationService;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.CatalogueService;
-import za.co.entelect.bootcamp.twoface.squareeyes.services.SearchService;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.ShoppingCartService;
 
 import java.security.Principal;
