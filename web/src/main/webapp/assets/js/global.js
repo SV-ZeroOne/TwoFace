@@ -142,6 +142,21 @@ function removeFromCart(stockID, csrftoken)
     });
 }
 
+function removeAllFromCart(csrftoken)
+{
+    $.ajax({
+        type: "POST",
+        url: "/shoppingcart/removeall",
+        data: { _csrf: csrftoken}
+    }).done(function() {
+        location.href='homepage';
+    }).fail(function(xhr, status, error) {
+        alert("There was a problem removing all stock");
+        location.href='homepage';
+    });
+}
+
+
 
 function getIssue(issueId){
 	for (var i = 0; i < issues.length; i++) {

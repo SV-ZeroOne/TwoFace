@@ -149,8 +149,6 @@
                         </c:choose>
                     </div>
                 </div>
-            </div> <!--REVIEW USER END-->
-            <div class="well col-xs-12 col-md-offset-7 col-md-5">
                 <div class="panel panel-info">
                     <div class="panel-heading"><span><i class="glyphicon glyphicon-lock"></i></span> Secure Payment</div>
                     <%-- <div class="pull-right"></div>--%>
@@ -231,7 +229,7 @@
                     Order Completed Successfully
                 </div>
                 <div class="modal-footer">
-                    <button type="button"  class="btn btn-default" data-dismiss="modal" onclick="location.href='homepage'"/>Completed</button>
+                    <button type="button"  class="btn btn-default" data-dismiss="modal" onclick='removeAllFromCart("${_csrf.token}");'/>Completed</button>
                 </div>
             </div>
         </div>

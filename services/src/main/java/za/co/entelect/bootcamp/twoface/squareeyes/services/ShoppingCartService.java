@@ -50,6 +50,14 @@ public class ShoppingCartService {
         }
     }
 
+    public void removeAllFromShoppingCart(String email)
+    {
+        List<ShoppingCart> shoppingCartList = shoppingCartsRepository.search("customer.email", email);
+        for (ShoppingCart sc:shoppingCartList) {
+            shoppingCartsRepository.delete(sc.getShoppingCartID());
+        }
+    }
+
     public int decreaseQuantity(String email, int stockID)
     {
         List<ShoppingCart> shoppingCartList = shoppingCartsRepository.search("customer.email", email);

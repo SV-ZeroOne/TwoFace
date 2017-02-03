@@ -112,7 +112,7 @@
                             <button type='button' class='btn' onclick='hideOrShowShoppingCart()' id='checkout' style='float:left; margin-right:5px'>
                             <span class='glyphicon glyphicon-remove' aria-hidden='true'></span> Close
                             </button>
-                            <button type='button' class='btn' onclick='removeCart()' id='checkout' style='float:left'>
+                            <button type='button' class='btn' onclick='removeAllFromCart("${_csrf.token}");' id='checkout' style='float:left'>
                             <span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Trash
                             </button>
                             <a href="<c:url value="/checkout"/>" class="btn btn-success" role="button" id='checkout' style='float:right'>
@@ -122,46 +122,55 @@
             </div>
             </c:when>
             </c:choose>
-            <div id="catalogue" class="col-xs-12">
-                <c:forEach items="${list}" var="issue">
-                    <div class='col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-3 col-md-3'>
-                        <div class='issue' style='margin:5px; box-shadow: 10px 10px 8px #222; margin-top: 15px;'>
-                            <a class='image-container' href='product?issue=${issue.issueID}'>
-                                <%--<img src='http://pre10.deviantart.net/23f7/th/pre/i/2015/327/0/d/star_wars_vintage_tfa_comic_cover_issue1_by_daztibbles-d9hq35o.png' alt='Loading..' class='img-responsive'/>
-                         --%>
-                                <img src="${issue.imageRef}" alt='Loading..' onerror="this.src='http://pre10.deviantart.net/23f7/th/pre/i/2015/327/0/d/star_wars_vintage_tfa_comic_cover_issue1_by_daztibbles-d9hq35o.png'" class='img-responsive'/>
-                            </a>
-                            <div class='issueNo'><button type='button' class='btn flat-butt'>
-                                <strong>#${issue.seriesNumber}</strong>
-                            </button></div>
-                            <div class='publisher'>
-                                <button type='button' style='background-color:${issue.publisher == "Marvel" ? "#b71c1c" : "#1565C0"};color: white;' class='btn flat-butt'>
-                                    <strong>${issue.publisher}</strong>
-                                </button>
+            <c:choose>
+                <c:when test="${list.size() < 1}">
+                    <h1 id="noitems" style="color: white;">No Issues match search</h1>
+                </c:when>
+                <c:otherwise>
+                    <div id="catalogue" class="col-xs-12">
+                        <c:forEach items="${list}" var="issue">
+                            <div class='col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-3 col-md-3'>
+                                <div class='issue' style='margin:5px; box-shadow: 10px 10px 8px #222; margin-top: 15px;'>
+                                    <a class='image-container' href='product?issue=${issue.issueID}'>
+                                            <%--<img src='http://pre10.deviantart.net/23f7/th/pre/i/2015/327/0/d/star_wars_vintage_tfa_comic_cover_issue1_by_daztibbles-d9hq35o.png' alt='Loading..' class='img-responsive'/>
+                                     --%>
+                                        <img src="${issue.imageRef}" alt='Loading..' onerror="this.src='http://pre10.deviantart.net/23f7/th/pre/i/2015/327/0/d/star_wars_vintage_tfa_comic_cover_issue1_by_daztibbles-d9hq35o.png'" class='img-responsive'/>
+                                    </a>
+                                    <div class='issueNo'><button type='button' class='btn flat-butt'>
+                                        <strong>#${issue.seriesNumber}</strong>
+                                    </button></div>
+                                    <div class='publisher'>
+                                        <button type='button' style='background-color:${issue.publisher == "Marvel" ? "#b71c1c" : "#1565C0"};color: white;' class='btn flat-butt'>
+                                            <strong>${issue.publisher}</strong>
+                                        </button>
+                                    </div>
+                                    <div class='details' style='padding:5px;'><div class='date'>
+                                        <button type='button' style='background-color:#666;color: white;' class='btn flat-butt'>
+                                            <strong>${issue.publicationDate.year} / ${issue.publicationDate.month} / ${issue.publicationDate.day}</strong>
+                                        </button>
+                                    </div><h4><strong>${issue.issueTitle}</strong></h4>
+                                    </div>
+                                </div>
                             </div>
-                            <div class='details' style='padding:5px;'><div class='date'>
-                                <button type='button' style='background-color:#666;color: white;' class='btn flat-butt'>
-                                    <strong>${issue.publicationDate.year} / ${issue.publicationDate.month} / ${issue.publicationDate.day}</strong>
-                                </button>
-                            </div><h4><strong>${issue.issueTitle}</strong></h4>
-                            </div>
-                        </div>
+
+                        </c:forEach>
                     </div>
-
-                </c:forEach>
-            </div>
-
-            <div id="paging" class="col-xs-offset-2 col-xs-8">
-                <c:choose>
-                    <c:when test="${page > 1}"><a class='btn flat-butt' style='float:left; background-color:#fff;
+                    <div id="paging" class="col-xs-offset-2 col-xs-8">
+                        <c:choose>
+                            <c:when test="${page > 1}"><a class='btn flat-butt' style='float:left; background-color:#fff;
                         color:black; margin:5px; box-shadow: 10px 10px 8px #222;' href='/catalogue?search=${search}&page=${page - 1}'
-                                                   role='button'>Page ${page - 1}&raquo;</a>
-                    </c:when>
-                </c:choose>
-                <a class='btn flat-butt' style='float:right; background-color:#fff;
+                                                          role='button'>Page ${page - 1}&raquo;</a>
+                            </c:when>
+                        </c:choose>
+                        <a class='btn flat-butt' style='float:right; background-color:#fff;
                 color:black; margin:5px; box-shadow: 10px 10px 8px #222;' href='/catalogue?search=${search}&page=${page + 1}'
-                   role='button'>Page ${page + 1} &raquo;</a>
-            </div>
+                           role='button'>Page ${page + 1} &raquo;</a>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+
+
+
 
             <div id="footer" class="col-xs-12" style="margin-top: 30px;">
 

@@ -43,6 +43,14 @@ public class ShoppingCartController {
         return "catalogue";
     }
 
+    @RequestMapping(value = "/shoppingcart/removeall", method = RequestMethod.POST)
+    public String removeAllItem(ModelMap modelMap, Principal principal){
+
+        shoppingCartService.removeAllFromShoppingCart(principal.getName());
+
+        return "catalogue";
+    }
+
     @RequestMapping(value = "/shoppingcart/increase", method = RequestMethod.POST)
     public String increaseQuantity(@RequestParam(value = "stock", required = true) int stockID,
                                  ModelMap modelMap, Principal principal){
