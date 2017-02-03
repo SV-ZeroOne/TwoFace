@@ -92,9 +92,7 @@
                         </div>
                 </div>
             </div>
-        </div> <!--REVIEW ORDER END-->
-        <div class="container" style="padding-top:10px"> <!--REVIEW USER DETAILS-->
-            <div class="well col-xs-12 col-md-5">
+            <div class="well col-xs-12 col-md-offset-2 col-md-5">
                 <div class="panel panel-info">
                     <div class="panel-heading">Customer Details</div>
                     <%-- <div class="pull-right"></div>--%>
@@ -151,7 +149,7 @@
                     </div>
                 </div>
             </div> <!--REVIEW USER END-->
-            <div class="well col-xs-12 col-md-5">
+            <div class="well col-xs-12 col-md-offset-7 col-md-5">
                 <div class="panel panel-info">
                     <div class="panel-heading"><span><i class="glyphicon glyphicon-lock"></i></span> Secure Payment</div>
                     <%-- <div class="pull-right"></div>--%>
