@@ -99,15 +99,15 @@
                 </div>
                 <div class="form-group">
                     <label for="regtitle">Title:</label>
-                    <input class="form-control" type="password" placeholder="title" name="title" id="regtitle" required/>
+                    <input class="form-control" type="text" placeholder="title" name="title" id="regtitle" required/>
                 </div>
                 <div class="form-group">
                     <label for="regfirstName">First Name:</label>
-                    <input class="form-control" type="password" placeholder="first-name" name="firstName" id="regfirstName" required/>
+                    <input class="form-control" type="text" placeholder="first-name" name="firstName" id="regfirstName" required/>
                 </div>
                 <div class="form-group">
                     <label for="regsurname">Surname:</label>
-                    <input class="form-control" type="password" placeholder="surname" name="surname" id="regsurname" required/>
+                    <input class="form-control" type="text" placeholder="surname" name="surname" id="regsurname" required/>
                 </div>
                 <input type="submit" class="btn btn-default" value="SignUp">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
