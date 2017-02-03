@@ -8,8 +8,8 @@
 	<meta charset="UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>Index</title>
-	<link href="https://fonts.googleapis.com/css?family=Kumar+One" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="<c:url value="/assets/css/homepage.css"/>"/>
+	<%--<link href="https://fonts.googleapis.com/css?family=Kumar+One" rel="stylesheet">--%>
+	<link rel="stylesheet" type="text/css" href="<c:url value="/assets/css/catalogue.css"/>"/>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<!-- Optional theme -->
@@ -124,22 +124,41 @@
 		</article>
 		<article>
 			<div class="centerText">
+                <h1 class="greeting">Welcome to Square Eyes!</h1>
 				<div id="myCarousel" class="carousel slide" data-ride="carousel">
 					<!-- Wrapper for slides -->
-					<h1 style="padding-top: 20px;">Our daily deals!</h1>
+					<%--<h1 style="padding-top: 20px;">Our daily deals!</h1>--%>
 					<div class="carousel-inner" role="listbox">
-						<div class="item active">
-                            <c:forEach items="${list}" var="issue">
-                                <div class="item">
-									<a href="/product?issue=2"><img class="item-image" src="/assets/images/SlideShow/c1.jpg" alt="Batman" width="100px" height="100px"></a>
-                                <h1 class="title":> ${issue.getIssueTitle()}</h1>
-                                <p class="price":>SALE</p>
-                                <h2 class="description">${issue.getDescription()}</h2>
+						<div class="item peopleCarouselImg active">
+                             <%--items="${list}" var="issue">--%>
+                                <%--<div class="item">--%>
+									<%--<a href="/product?issue=2"><img class="item-image" src="/assets/images/SlideShow/c1.jpg" alt="Batman" width="100px" height="100px"></a>--%>
+                                <%--<h1 class="title":> ${issue.getIssueTitle()}</h1>--%>
+                                <%--<p class="price":>SALE</p>--%>
+                                <%--<h2 class="description">${issue.getDescription()}</h2>--%>
 
-                            </c:forEach>
-
-								</div>
+                            <%--</c:forEach>--%>
+								 <a href="/product?issue=2"><img class="d-block img-fluid center peopleCarouselImg" src="/assets/images/SlideShow/c1.jpg" alt="First slide" width="300px" height="300px"></a>
+								 <div class="carousel-caption d-none d-md-block">
+									 <h3>1st Issue Special</h3>
+									 <p>R 188.03</p>
+								 </div>
 						</div>
+						<div class="item peopleCarouselImg">
+							<a href="/product?issue=64"><img class="d-block img-fluid center peopleCarouselImg" src="/assets/images/SlideShow/c2.jpg" alt="Second slide" width="300px" height="300px"></a>
+							<div class="carousel-caption d-none d-md-block">
+								<h3>52</h3>
+								<p>R 186.53</p>
+							</div>
+						</div>
+						<div class="item peopleCarouselImg">
+							<a href="product?issue=100"><img class="d-block img-fluid center peopleCarouselImg" src="/assets/images/SlideShow/comic5.jpg" alt="Third slide" width="300px" height="300px"></a>
+							<div class="carousel-caption d-none d-md-block">
+								<h3>Action Comics (Vol. 1)</h3>
+								<p>R 100.49</p>
+							</div>
+						</div>
+					</div>
 <%--
 						<div class="item">
 							<h3 class="title">Captain America</h3>
@@ -161,8 +180,8 @@
 							<p class="price"> R99.99</p>
 							<p><a class="btn btn-success btn-lg" href="Catalogue" role="button">Learn more &raquo;</a></p>
 						</div>--%>
-					</div>
-					<p><a class="btn btn-success btn-lg" href="catalogue" role="button">Learn more &raquo;</a></p>
+					<%--</div>--%>
+
 					<!-- Left and right controls -->
 					<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
 						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -172,16 +191,19 @@
 						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 						<span class="sr-only">Next</span>
 					</a>
+                    <br/>
+                    <br/>
+                    <p><a class="btn btn-success btn-lg center" href="catalogue" role="button">Learn more &raquo;</a></p>
 				</div>
-				<br/>
-
 			</div>
-		</article>
-		<footer>
-			<p>2017 - &copy;Entelect - Team Two Face</p>
-		</footer>
-	</section>
 
+		</article>
+
+
+	</section>
+<footer class="footer-middle">
+    <p>2017 - &copy;Entelect - Team Two Face</p>
+</footer>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script src="<c:url value="/assets/js/global.js"/>"></script>
