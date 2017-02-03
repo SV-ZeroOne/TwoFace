@@ -59,9 +59,9 @@
                         </button>
                     </c:when>
                     <c:otherwise>
-                        <a href="<c:url value="/login"/>" class="btn btn-success" role="button">
-                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Log in
-                        </a>
+                        <%--<a href="<c:url value="/login"/>" class="btn btn-success" role="button">--%>
+                            <%--<span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Log in--%>
+                        <%--</a>--%>
                     </c:otherwise>
                 </c:choose>
             </form>
