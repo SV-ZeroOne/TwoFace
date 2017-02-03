@@ -70,7 +70,7 @@
 
                                         <c:forEach items="${shoppingCart}" var="cartitem">
                                         <tr>
-                                            <td><img src="${stock.issue.imageRef}" alt='Loading..' onerror="this.src='http://pre10.deviantart.net/23f7/th/pre/i/2015/327/0/d/star_wars_vintage_tfa_comic_cover_issue1_by_daztibbles-d9hq35o.png'" class='img-responsive' height="50" width="50"/>
+                                            <td><img src="${cartitem.stock.issue.imageRef}" alt="http://pre10.deviantart.net/23f7/th/pre/i/2015/327/0/d/star_wars_vintage_tfa_comic_cover_issue1_by_daztibbles-d9hq35o.png" class='img-responsive' height="50" width="50"/>
                                             </td>
                                             <td>${cartitem.stock.issue.issueTitle}</td>
                                             <td>${cartitem.stock.condition}</td>
