@@ -38,14 +38,15 @@ public class HomeController {
         return "homepage";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String getHomepageAtDefault(ModelMap modelMap, Principal principal){
-        List<Issue> list;
-        list = catalogueService.getCataloguePage(1);
-        modelMap.addAttribute("list", list);
-        modelMap.addAttribute("page", 1);
-        if(principal != null)
-            modelMap.addAttribute("shoppingCart", shoppingCartService.getShoppingCart(principal.getName()));
-        return "homepage";
+    @RequestMapping(value = "/homepage/**", method = RequestMethod.GET)
+    public String getHomepageErrorWithArgument(ModelMap modelMap, Principal principal) throws Exception{
+        modelMap.addAttribute("error", "true");
+        return "error";
+    }
+
+    @RequestMapping(value = "/*", method = RequestMethod.GET)
+    public String getHomepageError(ModelMap modelMap, Principal principal) throws Exception{
+        modelMap.addAttribute("error", "true");
+        return "error";
     }
 }
