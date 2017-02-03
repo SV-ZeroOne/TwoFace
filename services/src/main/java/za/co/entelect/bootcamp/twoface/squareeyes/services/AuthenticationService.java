@@ -35,8 +35,7 @@ public class AuthenticationService implements UserDetailsService {
 
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         try {
-            Customer customer = customersRepository.search("email", email).get(0);
-            //Customer customer = cR.findByUsername("email",email);
+            Customer customer = customersRepository.searchNoWild("email", email).get(0);
 
             if (customer == null) {
                 logger.debug("email that was returned was null (empty)");
