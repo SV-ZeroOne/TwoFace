@@ -68,6 +68,6 @@ public class LoginContoller {
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(ModelMap model) {
-        return "homepage";
+        return "catalogue";
     }
 }

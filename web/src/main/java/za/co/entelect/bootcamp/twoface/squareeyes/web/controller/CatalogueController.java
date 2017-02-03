@@ -29,6 +29,32 @@ public class CatalogueController {
         this.authenticationService = authenticationService;
     }
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String goHome(@RequestParam(value = "search", required = false, defaultValue = "") String search,
+                           @RequestParam(value = "page",  required = false, defaultValue = "1") int page,
+                           ModelMap modelMap, Principal principal){
+        List<Issue> list;
+        if (search != "")
+        {
+            System.out.println(search);
+            list = catalogueService.SearchService(search, page);
+        }else
+        {
+            System.out.println("No Search");
+            list = catalogueService.getCataloguePage(page);
+        }
+
+        modelMap.addAttribute("list", list);
+        modelMap.addAttribute("page", page);
+        if(principal != null) {
+            modelMap.addAttribute("shoppingCart", shoppingCartService.getShoppingCart(principal.getName()));
+            modelMap.addAttribute("customer", authenticationService.getCustomerWithEmail(principal.getName()));
+        }
+        modelMap.addAttribute("search", search);
+
+        return "catalogue";
+    }
+
     @RequestMapping(value = "/catalogue", method = RequestMethod.GET)
     public String SayHello(@RequestParam(value = "search", required = false, defaultValue = "") String search,
                            @RequestParam(value = "page",  required = false, defaultValue = "1") int page,
