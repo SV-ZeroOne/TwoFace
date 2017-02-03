@@ -64,7 +64,6 @@
         <div class="container">
             <div id="shoppingCart" class="hide" style="position: fixed; z-index: 2;">
                 <div id="shoppingItems" class="well container">
-                    <sec:authorize access="hasRole('USER')">
                         <c:choose>
                             <c:when test="${shoppingCart != null}">
                                 <table class='table table-condensed col-xs-12'>
@@ -119,7 +118,6 @@
 
                             </c:when>
                         </c:choose>
-                    </sec:authorize>
                 </div>
             </div>
             <div class="container" style="padding-top:10px">
@@ -149,11 +147,19 @@
                         <input type="hidden" name="quantity" value="1"/>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     </form>
-
-                    <button type="submit" form="addToCartForm" class="btn btn-success" onclick="addToCart()" id="addToCartButton">
-                        <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                         Add to Cart - ${stock.availableQty} Left
-                    </button>
+                    <c:choose>
+                        <c:when test="${shoppingCart != null}">
+                            <button type="submit" form="addToCartForm" class="btn btn-success" onclick="addToCart()" id="addToCartButton">
+                                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+                                 Add to Cart - ${stock.availableQty} Left
+                            </button>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="<c:url value="/login"/>" class="btn btn-success" role="button">
+                                <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> LogIn to add to Cart
+                            </a>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>

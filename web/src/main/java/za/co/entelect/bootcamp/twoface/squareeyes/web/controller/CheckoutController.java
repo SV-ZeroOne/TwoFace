@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import za.co.entelect.bootcamp.twoface.squareeyes.services.ShoppingCartService;
 
+import java.security.Principal;
+
 /**
  * Created by sean.vienings on 2017/01/31.
  *
@@ -24,9 +26,10 @@ public class CheckoutController {
     public String PopulateCheckout(
             @RequestParam(value = "cart", required = false, defaultValue = "-1") int cartID,
             @RequestParam(value = "customer",  required = false, defaultValue = "-1") int customerID,
-                           ModelMap modelMap){
-        modelMap.addAttribute("customer", shoppingCartService.getShoppingCart("quinton@gmail.com"));
-        modelMap.addAttribute("shoppingCart", shoppingCartService.getShoppingCart("quinton@gmail.com"));
+            ModelMap modelMap, Principal principal){
+
+        modelMap.addAttribute("customer", shoppingCartService.getShoppingCart(principal.getName()));
+        modelMap.addAttribute("shoppingCart", shoppingCartService.getShoppingCart(principal.getName()));
         return "checkout";
     }
 }

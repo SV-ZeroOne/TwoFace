@@ -109,7 +109,8 @@ function increaseQty(stockID, csrftoken)
         data: { stock: stockID, _csrf: csrftoken}
     }).done(function() {
         $("#"+stockID+" .quantity").html(($("#"+stockID+" .quantity").html()*1)+1);
-
+    }).fail(function(xhr, status, error) {
+    	alert("Not enough stock left for stockID: "+stockID);
     });
 }
 
@@ -122,6 +123,8 @@ function decreaseQty(stockID, csrftoken)
     }).done(function() {
         var quantityDiv = $("#"+stockID+" .quantity");
         $("#"+stockID+" .quantity").html(($("#"+stockID+" .quantity").html()*1)-1);
+    }).fail(function(xhr, status, error) {
+        alert("You can not have a shopping cart item with no quantity, stockID: "+stockID);
     });
 }
 
@@ -134,6 +137,8 @@ function removeFromCart(stockID, csrftoken)
     }).done(function() {
 		$('#'+stockID).slideUp()
 
+    }).fail(function(xhr, status, error) {
+        alert("There was a problem removing StockId: "+stockID+ " from your cart.");
     });
 }
 

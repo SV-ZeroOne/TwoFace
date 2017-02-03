@@ -47,10 +47,12 @@ public class CatalogueController {
         }
         modelMap.addAttribute("list", list);
         modelMap.addAttribute("page", page);
-        if(principal != null)
+        if(principal != null) {
             modelMap.addAttribute("shoppingCart", shoppingCartService.getShoppingCart(principal.getName()));
+            modelMap.addAttribute("customer", authenticationService.getCustomerWithEmail(principal.getName()));
+        }
         modelMap.addAttribute("search", search);
-        modelMap.addAttribute("customer", authenticationService.getCustomerWithEmail(principal.getName()));
+
         return "catalogue";
     }
 }

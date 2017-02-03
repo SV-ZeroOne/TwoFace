@@ -50,26 +50,34 @@ public class ShoppingCartService {
         }
     }
 
-    public void decreaseQuantity(String email, int stockID)
+    public int decreaseQuantity(String email, int stockID)
     {
         List<ShoppingCart> shoppingCartList = shoppingCartsRepository.search("customer.email", email);
         for (ShoppingCart sc:shoppingCartList) {
             if(sc.getStock().getStockReferenceID() == stockID) {
-                shoppingCartsRepository.decreaseQty(sc.getShoppingCartID());
-                return;
+                if(sc.getQuantity() != 1) {
+                    shoppingCartsRepository.decreaseQty(sc.getShoppingCartID());
+                    return sc.getQuantity();
+                }
+                return -1;
             }
         }
+        return -1;
     }
 
-    public void increaseQuantity(String email, int stockID)
+    public int increaseQuantity(String email, int stockID)
     {
         List<ShoppingCart> shoppingCartList = shoppingCartsRepository.search("customer.email", email);
         for (ShoppingCart sc:shoppingCartList) {
             if(sc.getStock().getStockReferenceID() == stockID) {
-                shoppingCartsRepository.increaseQty(sc.getShoppingCartID());
-                return;
+                if(sc.getQuantity() != sc.getStock().getAvailableQty()) {
+                    shoppingCartsRepository.increaseQty(sc.getShoppingCartID());
+                    return sc.getQuantity();
+                }
+                return -1;
             }
         }
+        return -1;
     }
 
     public void setIssuesRepository(ShoppingCartsRepository issuesRepository) {

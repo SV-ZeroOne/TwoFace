@@ -47,8 +47,10 @@ public class ShoppingCartController {
     public String increaseQuantity(@RequestParam(value = "stock", required = true) int stockID,
                                  ModelMap modelMap, Principal principal){
 
-        shoppingCartService.increaseQuantity(principal.getName(), stockID);
+        int flag = shoppingCartService.increaseQuantity(principal.getName(), stockID);
 
+        if(flag == -1)
+            return "Invailid quantity!";
         return "catalogue";
     }
 
@@ -56,8 +58,10 @@ public class ShoppingCartController {
     public String decreaseQuantity(@RequestParam(value = "stock", required = true) int stockID,
                                  ModelMap modelMap, Principal principal){
 
-        shoppingCartService.decreaseQuantity(principal.getName(), stockID);
+        int flag = shoppingCartService.decreaseQuantity(principal.getName(), stockID);
 
+        if(flag == -1)
+            return "Invailid quantity!";
         return "catalogue";
     }
 }
