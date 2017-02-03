@@ -109,7 +109,7 @@
                                 <button type='button' class='btn' onclick='hideOrShowShoppingCart()' id='checkout' style='float:left; margin-right:5px'>
                                     <span class='glyphicon glyphicon-remove' aria-hidden='true'></span> Close
                                 </button>
-                                <button type='button' class='btn' onclick='removeCart()' id='checkout' style='float:left'>
+                                <button type='button' class='btn' onclick='removeAllFromCart("${_csrf.token}");' id='checkout' style='float:left'>
                                     <span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Trash
                                 </button>
                                 <a href="<c:url value="/checkout"/>" class="btn btn-success" role="button" id='checkout' style='float:right'>

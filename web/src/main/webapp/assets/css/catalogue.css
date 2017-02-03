@@ -10,6 +10,11 @@ footer {
     font-family: 'Kumar One', cursive;
 	color: white;
 }
+
+#noitems {
+	text-align: center;
+	color: white;
+}
 .expand{
 	width: 100%;
 }
