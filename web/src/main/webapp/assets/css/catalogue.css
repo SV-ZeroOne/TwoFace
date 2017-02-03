@@ -49,6 +49,7 @@ width: 175px;
 }
 .flat-butt {
 	background-color:#ffa700;
+	box-shadow: 10px 10px 8px #222;
 }
 #imagecomic{
 	width:100%;
