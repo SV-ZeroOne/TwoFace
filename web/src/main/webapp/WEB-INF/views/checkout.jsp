@@ -98,7 +98,7 @@
                     <%-- <div class="pull-right"></div>--%>
                     <div class="panel-body" id="shippingItems">
                     <c:choose>
-                        <c:when test="${shoppingCart != null}">
+                        <c:when test="${customer != null}">
                             <table class='table col-xs-12'>
                                 <thead>
                                     <tr>
@@ -109,13 +109,14 @@
                                 <tbody>
                                     <tr>
                                         <td>Name : </td>
-                                        <%--<td>${User.name}</td>--%>
-                                        <td>Stanley Martin</td>
+                                        <td>${customer.firstName}</td>
+                                        <%--<td>${User.name}</td>
+                                        <td>Stanley Martin</td>--%>
                                     </tr>
                                     <tr>
                                         <td>Surname : </td>
-                                        <%--<td>${User.name}</td>--%>
-                                        <td>Lieber</td>
+                                        <td>${customer.surname}</td>
+                                        <%--<td>Lieber</td>--%>
                                     </tr>
                                     <tr>
                                         <td>Address : </td>
@@ -139,8 +140,8 @@
                                     </tr>
                                     <tr>
                                         <td>Email : </td>
-                                        <%--<td>${User.name}</td>--%>
-                                        <td>marvelsubs@midtowncomics.com </td>
+                                        <td>${customer.email}</td>
+                                        <%--<td>marvelsubs@midtowncomics.com </td>--%>
                                     </tr>
                                 </tbody>
                             </table>
