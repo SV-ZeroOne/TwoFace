@@ -149,7 +149,7 @@ function removeAllFromCart(csrftoken)
         url: "/shoppingcart/removeall",
         data: { _csrf: csrftoken}
     }).done(function() {
-        location.href='homepage';
+        location.href='catalogue';
     }).fail(function(xhr, status, error) {
         alert("There was a problem removing all stock");
         location.href='homepage';
