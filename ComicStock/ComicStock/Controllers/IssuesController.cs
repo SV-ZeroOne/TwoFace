@@ -1,14 +1,9 @@
 ﻿using ComicStock.Data.Implementations;
 using ComicStock.Domain;
 using ComicStock.Models;
-using Newtonsoft.Json;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace ComicStock.Controllers
@@ -16,18 +11,27 @@ namespace ComicStock.Controllers
     public class IssuesController : ApiController
     {
         IssuesRepo issueRepo;
+        List<IssueDTO> newIssues;
 
         public IssuesController()
         {
             issueRepo = new IssuesRepo();
+            IEnumerable someIssues = issueRepo.GetAll();
+            newIssues = new List<IssueDTO>();
+            foreach(Issue i in someIssues)
+            {
+                IssueDTO newIssue = new IssueDTO(i);
+                newIssues.Add(newIssue);
+
+            }
         }
 
         // GET api/issues
         public IEnumerable<IssueDTO> Get()
         {
-            IEnumerable issueList = issueRepo.GetAll();
-            IssueDTO[] issues = issueList.Cast<IssueDTO>().ToArray();
-            return issues;
+            //issueList = issueRepo.GetAll();
+            //IssueDTO[] issues = issueList.Cast<IssueDTO>().ToArray();
+            return newIssues;
         }
 
         // GET api/issues/id

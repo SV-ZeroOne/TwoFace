@@ -21,6 +21,11 @@ namespace ComicStock.Models
 
         public string Description { get; set; }
 
+        public IssueDTO()
+        {
+
+        }
+
         public IssueDTO(Issue newIssue)
         {
             this.IssueID = newIssue.IssueID;
