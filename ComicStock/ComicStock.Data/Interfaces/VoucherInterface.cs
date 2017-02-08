@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ComicStock.Data.Interfaces
 {
-    interface VoucherInterface :IRepository<Voucher, int>
+    public interface VoucherInterface :IRepository<Voucher, int>
     {
 
     }

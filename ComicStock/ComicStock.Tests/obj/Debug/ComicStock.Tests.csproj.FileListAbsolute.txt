@@ -60,3 +60,6 @@ C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock.Tests\bin\Debug\M
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock.Tests\obj\Debug\ComicStock.Tests.csprojResolveAssemblyReference.cache
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock.Tests\obj\Debug\ComicStock.Tests.dll
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock.Tests\obj\Debug\ComicStock.Tests.pdb
+C:\Users\mpho.mahase\Desktop\TwoFace\twoface\ComicStock\ComicStock.Tests\obj\Debug\ComicStock.Tests.csprojResolveAssemblyReference.cache
+C:\Users\mpho.mahase\Desktop\TwoFace\twoface\ComicStock\ComicStock.Tests\obj\Debug\ComicStock.Tests.dll
+C:\Users\mpho.mahase\Desktop\TwoFace\twoface\ComicStock\ComicStock.Tests\obj\Debug\ComicStock.Tests.pdb

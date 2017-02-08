@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ComicStock.Data.Implementations
 {
-    class VoucherRepo : EFRepository<Voucher, int>, VoucherInterface
+    internal class VoucherRepo : EFRepository<Voucher, int>, VoucherInterface
     {
 
     }

@@ -65,8 +65,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreatorRepository.cs" />
     <Compile Include="DataUnityContainerExtension.cs" />
     <Compile Include="EFRepository.cs" />
+    <Compile Include="Implementations\CreatorRepo.cs" />
     <Compile Include="Implementations\IssuesRepo.cs" />
     <Compile Include="Implementations\StockRepo.cs" />
     <Compile Include="Implementations\SupplierRepo.cs" />
