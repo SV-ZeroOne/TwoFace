@@ -8,6 +8,7 @@ namespace ComicStock.Models
 {
     public class IssueDTO
     {
+        public int IssueID { get; set; }
 
         public string Title { get; set; }
 

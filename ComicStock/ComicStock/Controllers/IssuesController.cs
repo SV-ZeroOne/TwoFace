@@ -11,7 +11,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System;
 
-namespace ComicStock.Controllers
+namespace ComicStock.WebAPI.Controllers
 {
     public class IssuesController : ApiController
     {
@@ -70,7 +70,17 @@ namespace ComicStock.Controllers
 
         public void Put(IssueDTO issue)
         {
+            //Need to test this.
+            Issue issueToUpdate = issueRepo.findSpecificIssue(issue.Title, issue.SeriesNumber);
+            issueRepo.Update(issueToUpdate);
+        }
 
+        //Again have to search for Item to delete
+        public void Delete(IssueDTO issue)
+        {
+            //Need to test this.
+            Issue issueToDelete = issueRepo.findSpecificIssue(issue.Title, issue.SeriesNumber);
+            issueRepo.Delete(issueToDelete);
         }
 
         private Issue convertDTO(IssueDTO issueDto)

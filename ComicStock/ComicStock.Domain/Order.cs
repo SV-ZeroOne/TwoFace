@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComicStock.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ComicStock.Domain
 {
-    public partial class Order
+    public partial class Order : IEntity<int>
     {
         public Order()
         {
@@ -21,14 +22,14 @@ namespace ComicStock.Domain
 
         public int IssueID { get; set; }
 
-        public int QtyOrdered { get; set; }
+        public Int16 QtyOrdered { get; set; }
 
         public decimal Total { get; set; }
 
         [MaxLength(10)]
         public string ShipmentRef { get; set; }
 
-        public DateTime ShipmentDate { get; set; }
+        public DateTime? ShipmentDate { get; set; }
 
         [MaxLength(20)]
         public string DeliveryStatus { get; set; }

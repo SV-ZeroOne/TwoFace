@@ -36,7 +36,7 @@ namespace ComicStock.Domain
 
         public virtual ICollection<Order> Orders { get; set; }
 
-        public virtual ICollection<ComicCreator> ComicCreator { get; set; }
+        //public virtual ICollection<ComicCreator> ComicCreator { get; set; }
 
     }
 

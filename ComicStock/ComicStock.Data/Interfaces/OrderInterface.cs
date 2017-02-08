@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace ComicStock.Data.Interfaces
 {
-   public interface IssueInterface : IRepository<Issue, int>
+    public interface OrderInterface : IRepository<Order, int>
     {
-        Issue findSpecificIssue(string issueTitle, Int16 seriesNumber);
+
     }
 }

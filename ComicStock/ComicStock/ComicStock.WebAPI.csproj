@@ -199,12 +199,14 @@
     <Compile Include="Controllers\CreatorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IssuesController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CreatorsDTO.cs" />
     <Compile Include="Models\IssueDTO.cs" />
+    <Compile Include="Models\OrderDTO.cs" />
     <Compile Include="Models\StockDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
