@@ -71,16 +71,22 @@
     <Compile Include="Implementations\StockRepo.cs" />
     <Compile Include="Implementations\SupplierRepo.cs" />
     <Compile Include="Implementations\VoucherRepo.cs" />
+    <Compile Include="Interfaces\CreatorInterface.cs" />
     <Compile Include="Interfaces\IssueInterface.cs" />
     <Compile Include="Interfaces\StockInterface.cs" />
     <Compile Include="Interfaces\SupplierInterface.cs" />
     <Compile Include="Interfaces\VoucherInterface.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="IssueRepository.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SquareEyesContext.cs" />
+    <Compile Include="StockRepository.cs" />
+    <Compile Include="SupplierQoutesRepository.cs" />
+    <Compile Include="SupplierRepository.cs" />
+    <Compile Include="VoucherRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

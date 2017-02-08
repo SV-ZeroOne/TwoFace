@@ -9,5 +9,6 @@ namespace ComicStock.Data.Interfaces
 {
     interface VoucherInterface :IRepository<Voucher, int>
     {
+
     }
 }
