@@ -1,7 +1,12 @@
-C:\Users\mpho.mahase\Documents\Graduate Bootcamp 2017\DotNet projects\ComicStock\ComicStock.Data\bin\Debug\ComicStock.Data.dll
-C:\Users\mpho.mahase\Documents\Graduate Bootcamp 2017\DotNet projects\ComicStock\ComicStock.Data\bin\Debug\ComicStock.Data.pdb
-C:\Users\mpho.mahase\Documents\Graduate Bootcamp 2017\DotNet projects\ComicStock\ComicStock.Data\bin\Debug\ComicStock.Domain.dll
-C:\Users\mpho.mahase\Documents\Graduate Bootcamp 2017\DotNet projects\ComicStock\ComicStock.Data\bin\Debug\ComicStock.Domain.pdb
-C:\Users\mpho.mahase\Documents\Graduate Bootcamp 2017\DotNet projects\ComicStock\ComicStock.Data\obj\Debug\ComicStock.Data.csprojResolveAssemblyReference.cache
-C:\Users\mpho.mahase\Documents\Graduate Bootcamp 2017\DotNet projects\ComicStock\ComicStock.Data\obj\Debug\ComicStock.Data.dll
-C:\Users\mpho.mahase\Documents\Graduate Bootcamp 2017\DotNet projects\ComicStock\ComicStock.Data\obj\Debug\ComicStock.Data.pdb
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock.Data\bin\Debug\ComicStock.Data.dll.config
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock.Data\bin\Debug\ComicStock.Data.dll
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock.Data\bin\Debug\ComicStock.Data.pdb
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock.Data\bin\Debug\ComicStock.Domain.dll
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock.Data\bin\Debug\EntityFramework.dll
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock.Data\bin\Debug\ComicStock.Domain.pdb
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock.Data\bin\Debug\EntityFramework.xml
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock.Data\obj\Debug\ComicStock.Data.csprojResolveAssemblyReference.cache
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock.Data\obj\Debug\ComicStock.Data.dll
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock.Data\obj\Debug\ComicStock.Data.pdb

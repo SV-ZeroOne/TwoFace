@@ -49,17 +49,50 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EFRepository.cs" />
+    <Compile Include="Implementations\IssuesRepo.cs" />
+    <Compile Include="Interfaces\IssueInterface.cs" />
+    <Compile Include="Interfaces\StockInterface.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Domain\ComicStock.Domain\ComicStock.Domain.csproj">
-      <Project>{84c8e0f0-91bb-4cbe-91c4-0cf2a0534404}</Project>
-      <Name>ComicStock.Domain</Name>
-    </ProjectReference>
+    <Compile Include="SquareEyesContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="bin\Debug\ComicStock.Data.dll.config" />
+    <None Include="bin\Debug\nunit_random_seed.tmp" />
+    <None Include="obj\Debug\ComicStock.Data.csprojResolveAssemblyReference.cache" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\ComicStock.Data.dll" />
+    <Content Include="bin\Debug\ComicStock.Data.pdb" />
+    <Content Include="bin\Debug\ComicStock.Domain.dll" />
+    <Content Include="bin\Debug\ComicStock.Domain.pdb" />
+    <Content Include="bin\Debug\EntityFramework.dll" />
+    <Content Include="bin\Debug\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\Debug\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\Debug\EntityFramework.xml" />
+    <Content Include="obj\Debug\ComicStock.Data.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\ComicStock.Data.dll" />
+    <Content Include="obj\Debug\ComicStock.Data.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ComicStock.Domain\ComicStock.Domain.csproj">
+      <Project>{eae5027d-c948-449c-a463-12a1e32e4c1a}</Project>
+      <Name>ComicStock.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

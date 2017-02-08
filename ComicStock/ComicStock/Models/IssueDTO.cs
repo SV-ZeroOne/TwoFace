@@ -7,17 +7,17 @@ namespace ComicStock.Models
 {
     public class IssueDTO
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public int SeriesNumber { get; set; }
-        public string PublicationDate { get; set; }
-        public int Publisher { get; set; }
-        public List<StockDTO> Stock { get; set; }
 
-        public static implicit operator List<object>(IssueDTO v)
-        {
-            throw new NotImplementedException();
-        }
+        public int Id { get; set; }
+
+        public String Title { get; set; }
+
+        public String Description { get; set; }
+
+        public int SeriesNumber { get; set; }
+
+        public DateTime PublicationDate { get; set; }
+
+        public StockDTO[] Stock { get; set; }
     }
 }

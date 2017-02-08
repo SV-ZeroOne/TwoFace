@@ -1,5 +1,5 @@
-C:\Users\mpho.mahase\Documents\Graduate Bootcamp 2017\DotNet projects\ComicStock\Domain\ComicStock.Domain\bin\Debug\ComicStock.Domain.dll
-C:\Users\mpho.mahase\Documents\Graduate Bootcamp 2017\DotNet projects\ComicStock\Domain\ComicStock.Domain\bin\Debug\ComicStock.Domain.pdb
-C:\Users\mpho.mahase\Documents\Graduate Bootcamp 2017\DotNet projects\ComicStock\Domain\ComicStock.Domain\obj\Debug\ComicStock.Domain.csprojResolveAssemblyReference.cache
-C:\Users\mpho.mahase\Documents\Graduate Bootcamp 2017\DotNet projects\ComicStock\Domain\ComicStock.Domain\obj\Debug\ComicStock.Domain.dll
-C:\Users\mpho.mahase\Documents\Graduate Bootcamp 2017\DotNet projects\ComicStock\Domain\ComicStock.Domain\obj\Debug\ComicStock.Domain.pdb
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\Domain\ComicStock.Domain\bin\Debug\ComicStock.Domain.dll
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\Domain\ComicStock.Domain\bin\Debug\ComicStock.Domain.pdb
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\Domain\ComicStock.Domain\obj\Debug\ComicStock.Domain.dll
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\Domain\ComicStock.Domain\obj\Debug\ComicStock.Domain.pdb
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\Domain\ComicStock.Domain\obj\Debug\ComicStock.Domain.csprojResolveAssemblyReference.cache

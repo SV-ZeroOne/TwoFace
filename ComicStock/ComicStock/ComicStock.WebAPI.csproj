@@ -129,10 +129,6 @@
       <Project>{84295a62-fdd8-48ee-9042-77936f39a0c9}</Project>
       <Name>ComicStock.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Domain\ComicStock.Domain\ComicStock.Domain.csproj">
-      <Project>{84c8e0f0-91bb-4cbe-91c4-0cf2a0534404}</Project>
-      <Name>ComicStock.Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -170,7 +166,6 @@
     <Compile Include="Controllers\CreatorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IssuesController.cs" />
-    <Compile Include="Controllers\StocksController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -259,7 +254,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>62652</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:62652/</IISUrl>
+          <IISUrl>http://localhost:62655/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

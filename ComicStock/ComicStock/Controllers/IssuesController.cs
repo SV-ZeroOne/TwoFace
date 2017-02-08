@@ -12,32 +12,35 @@ namespace ComicStock.Controllers
 {
     public class IssuesController : ApiController
     {
-        public IEnumerable<IssueDTO> list;
-
-        public IEnumerable<IssueDTO> readJson()
+        // GET api/issues
+        public IEnumerable<IssueDTO> Get()
         {
-            string json = File.ReadAllText(@"C:\Users\mpho.mahase\Documents\Graduate Bootcamp 2017\DotNet projects\ComicStock\ComicStock\App_Data\Issues.json");
-            var issueList = JsonConvert.DeserializeObject<IEnumerable<Models.IssueDTO>>(json);
-            return issueList;
-        }
-      
-       
-        public IEnumerable<IssueDTO> GetAllIssues()
-        {
-            list = readJson();
-            return list;
+            string jsonFile = AppDomain.CurrentDomain.GetData("DataDirectory").ToString() + "\\Issues.json";
+            String issuesString = System.IO.File.ReadAllText(jsonFile);
+            IssueDTO[] issues = JsonConvert.DeserializeObject<IssueDTO[]>(issuesString);
+            return issues;
         }
 
-        public IssueDTO GetIssuesById(int ID)
+        // GET api/issues/id
+        public IssueDTO Get(int id)
         {
-            IEnumerable<IssueDTO> issues = GetAllIssues();
-            return issues.FirstOrDefault(x => x.Id == ID);
+            string jsonFile = AppDomain.CurrentDomain.GetData("DataDirectory").ToString() + "\\Issues.json";
+            String issuesString = System.IO.File.ReadAllText(jsonFile);
+            IssueDTO[] issues = JsonConvert.DeserializeObject<IssueDTO[]>(issuesString);
+            foreach (var item in issues)
+            {
+                if (item.Id == id)
+                {
+                    return item;
+                }
+            }
+            return null;
         }
 
-        public IEnumerable<IssueDTO> GetSearch(String title)
+        // Lamda
+        public IList<IssueDTO> Get(string search)
         {
-            IEnumerable<IssueDTO> issues = GetAllIssues();
-            return issues.Where(x => x.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
+            return Get().Where(i => i.Title.Contains(search)).ToList<IssueDTO>();
         }
     }
 }

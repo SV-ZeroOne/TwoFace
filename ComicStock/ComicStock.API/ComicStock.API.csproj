@@ -47,10 +47,6 @@
       <Project>{84295a62-fdd8-48ee-9042-77936f39a0c9}</Project>
       <Name>ComicStock.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Domain\ComicStock.Domain\ComicStock.Domain.csproj">
-      <Project>{84c8e0f0-91bb-4cbe-91c4-0cf2a0534404}</Project>
-      <Name>ComicStock.Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
