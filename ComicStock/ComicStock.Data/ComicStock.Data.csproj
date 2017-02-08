@@ -51,8 +51,13 @@
   <ItemGroup>
     <Compile Include="EFRepository.cs" />
     <Compile Include="Implementations\IssuesRepo.cs" />
+    <Compile Include="Implementations\StockRepo.cs" />
+    <Compile Include="Implementations\SupplierRepo.cs" />
+    <Compile Include="Implementations\VoucherRepo.cs" />
     <Compile Include="Interfaces\IssueInterface.cs" />
     <Compile Include="Interfaces\StockInterface.cs" />
+    <Compile Include="Interfaces\SupplierInterface.cs" />
+    <Compile Include="Interfaces\VoucherInterface.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />

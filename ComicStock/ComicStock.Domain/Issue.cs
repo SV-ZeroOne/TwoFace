@@ -22,7 +22,7 @@ namespace ComicStock.Domain
 
         public string Publisher { get; set; }
 
-        public int SeriesNumber { get; set; }
+        public Int16 SeriesNumber { get; set; }
 
         public string Description { get; set; }
 

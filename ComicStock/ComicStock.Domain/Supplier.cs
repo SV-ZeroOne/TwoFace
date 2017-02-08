@@ -1,12 +1,13 @@
-﻿using System;
+﻿using ComicStock.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ComicStock.Domain
+namespace ComicStock.Domain 
 {
-    public partial class Supplier
+    public partial class Supplier : IEntity<int>
     {
         public int SupplierID { get; set; }
 
@@ -18,7 +19,7 @@ namespace ComicStock.Domain
 
         public virtual SupplierQuote SupplierQuote { get; set; }
 
-        public virtual Order Order { get; set; }
+        //public virtual Order Order { get; set; }
 
     }
 }

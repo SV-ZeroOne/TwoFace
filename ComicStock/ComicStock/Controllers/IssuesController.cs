@@ -12,6 +12,11 @@ namespace ComicStock.Controllers
 {
     public class IssuesController : ApiController
     {
+        public IssuesController()
+        {
+           
+        }
+
         // GET api/issues
         public IEnumerable<IssueDTO> Get()
         {
@@ -22,7 +27,7 @@ namespace ComicStock.Controllers
         }
 
         // GET api/issues/id
-        public IssueDTO Get(int id)
+        public IssueDTO GetById(int id)
         {
             string jsonFile = AppDomain.CurrentDomain.GetData("DataDirectory").ToString() + "\\Issues.json";
             String issuesString = System.IO.File.ReadAllText(jsonFile);

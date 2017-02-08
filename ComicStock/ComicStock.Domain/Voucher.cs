@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComicStock.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ComicStock.Domain
 {
-    public partial class Voucher
+    public partial class Voucher : IEntity<int>
     {
         public int VoucherID { get; set; }
 

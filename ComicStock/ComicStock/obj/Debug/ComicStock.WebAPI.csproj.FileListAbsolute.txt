@@ -16,7 +16,6 @@ C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\ComicStock.We
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\Antlr3.Runtime.dll
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\ComicStock.API.dll
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\ComicStock.Data.dll
-C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\ComicStock.Domain.dll
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\Microsoft.Web.Infrastructure.dll
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\Newtonsoft.Json.dll
@@ -31,9 +30,10 @@ C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\System.Web.We
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\System.Web.WebPages.dll
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\System.Web.WebPages.Razor.dll
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\WebGrease.dll
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\ComicStock.Domain.dll
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\EntityFramework.dll
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\ComicStock.API.pdb
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\ComicStock.Data.pdb
-C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\ComicStock.Domain.pdb
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\Newtonsoft.Json.xml
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\System.Net.Http.Formatting.xml
@@ -47,8 +47,10 @@ C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\System.Web.We
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\System.Web.WebPages.Deployment.xml
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\System.Web.WebPages.Razor.xml
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\Antlr3.Runtime.pdb
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\ComicStock.Domain.pdb
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\EntityFramework.xml
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\obj\Debug\ComicStock.WebAPI.csprojResolveAssemblyReference.cache
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\obj\Debug\ComicStock.WebAPI.dll
 C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\obj\Debug\ComicStock.WebAPI.pdb
-C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\EntityFramework.dll
-C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\EntityFramework.xml
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\EntityFramework.SqlServer.dll
+C:\Twoface\Entelect^bootcamp2017-twoface\ComicStock\ComicStock\bin\EntityFramework.SqlServer.xml

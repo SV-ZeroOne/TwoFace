@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,11 +9,15 @@ namespace ComicStock.Domain
 {
     public partial class Order
     {
+        public Order()
+        {
+
+        }
+
         public int OrderID { get; set; }
 
         public DateTime OrderDate { get; set; }
 
-        //Check this foreign key relationship
         public int IssueID { get; set; }
 
         public int QtyOrdered { get; set; }
@@ -25,10 +30,8 @@ namespace ComicStock.Domain
 
         public string DeliveryStatus { get; set; }
 
-        //Check this foreign key relationship
+        [ForeignKey("Supplier")]
         public int SupplierID { get; set; }
-
-        public virtual SupplierPayment SupplierPayment { get; set; }
 
         public virtual Supplier Supplier { get; set; }
 
