@@ -1,24 +1,37 @@
 ﻿using ComicStock.Controllers;
 using ComicStock.Data.Implementations;
+using ComicStock.Data.Interfaces;
+using ComicStock.Domain;
 using ComicStock.Models;
 using NUnit.Framework;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace ComicStock.Tests
 {
+
     [TestFixture]
     class IssuesControllerTest
     {
+        IssueInterface issueRepo;
+
+        [TestFixtureSetUp]
+        public void Init(IssueInterface issueRepo)
+        {
+            this.issueRepo = issueRepo;
+        }
+
         [Test]
         public void GetAllIssue()
         {
             //Arrange
-            var issueRepo = new IssuesRepo();
+            var newissueRepo = issueRepo;
 
             //Act
-            var issue = issueRepo.GetAll();
+            IEnumerable<Issue> issues = newissueRepo.GetAll();
 
             //Assert
-            Assert.IsNotNull(issue);
+            Assert.IsNotNull(issues);
             //Assert.AreEqual(2, issueDto.Id, "MyInt is not equal");
         }
 
@@ -26,7 +39,7 @@ namespace ComicStock.Tests
         public void GetIssue()
         {
             //Arrange
-            var issueRepo = new IssuesRepo();
+            var issueRepo = this.issueRepo;
 
             //Act
             var issue = issueRepo.GetById(2);
