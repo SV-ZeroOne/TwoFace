@@ -13,7 +13,7 @@ namespace ComicStock.Domain
         [Key]
         public int StockReferenceID { get; set; }
 
-        public ICollection<Issue> IssuesID { get; set; }
+        public int IssuesID { get; set; }
 
         public string Condition { get; set; }
 

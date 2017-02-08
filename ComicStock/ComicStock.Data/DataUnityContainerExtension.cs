@@ -6,7 +6,7 @@ using ComicStock.Data.Implementations;
 
 namespace ComicStock.WebAPI
 {
-    internal class DataUnityContainerExtension : UnityContainerExtension
+    public class DataUnityContainerExtension : UnityContainerExtension
     {
         protected override void Initialize()
         {

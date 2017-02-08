@@ -1,12 +1,13 @@
 ﻿using ComicStock.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ComicStock.Domain
-{
+{   
     public partial class Issue : IEntity<int>
     {
         public Issue()
@@ -14,12 +15,15 @@ namespace ComicStock.Domain
 
         }
 
+
         public int IssueID { get; set; }
 
+        [MaxLength(500)]
         public string Title { get; set; }
 
         public DateTime PublicationDate { get; set; }
 
+        [MaxLength(50)]
         public string Publisher { get; set; }
 
         public Int16 SeriesNumber { get; set; }
