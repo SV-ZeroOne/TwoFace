@@ -1,4 +1,6 @@
-﻿using ComicStock.Data.Implementations;
+﻿using ComicStock.Data;
+using ComicStock.Data.Implementations;
+using ComicStock.Data.Interfaces;
 using ComicStock.Domain;
 using ComicStock.Models;
 using System.Collections;
@@ -10,12 +12,13 @@ namespace ComicStock.Controllers
 {
     public class IssuesController : ApiController
     {
-        IssuesRepo issueRepo;
-        List<IssueDTO> newIssues;
+        private readonly IssueInterface issueRepo;
+        private List<IssueDTO> newIssues;
 
-        public IssuesController()
+        public IssuesController(IssueInterface issueRepo)
         {
-            issueRepo = new IssuesRepo();
+            this.issueRepo = issueRepo;
+            //issueRepo = new IssuesRepo();
             IEnumerable someIssues = issueRepo.GetAll();
             newIssues = new List<IssueDTO>();
             foreach(Issue i in someIssues)

@@ -8,7 +8,7 @@ namespace ComicStock.Data
 {
     public abstract class EFRepository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, IEntity<TKey>
     {
-        private SquareEyesContext context = new SquareEyesContext();
+        private readonly SquareEyesContext context = new SquareEyesContext();
 
         public virtual TEntity GetById(TKey id)
         {

@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace ComicStock.Data.Implementations
 {
-    public class IssuesRepo : EFRepository<Issue, int>, IssueInterface
+    internal class IssuesRepo : EFRepository<Issue, int>, IssueInterface
     { 
-        
+       
     }
 }

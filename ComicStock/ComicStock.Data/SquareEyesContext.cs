@@ -4,7 +4,7 @@ using System.Data.Entity;
 
 namespace ComicStock.Data
 {
-    class SquareEyesContext : DbContext
+    internal class SquareEyesContext : DbContext
     {
         public SquareEyesContext() : base("name=SquareEyes")
         {
