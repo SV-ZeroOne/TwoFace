@@ -26,5 +26,7 @@ namespace ComicStock.Domain
 
         [MaxLength(256)]
         public string EmailAddress { get; set; }
+
+        public virtual ICollection<ComicCreator> ComicCreator { get;  set; }
     }
 }

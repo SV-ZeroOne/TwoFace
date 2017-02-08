@@ -9,8 +9,6 @@ namespace ComicStock.Models
     public class IssueDTO
     {
 
-        public int IssueID { get; set; }
-
         public string Title { get; set; }
 
         public DateTime PublicationDate { get; set; }
@@ -28,7 +26,6 @@ namespace ComicStock.Models
 
         public IssueDTO(Issue newIssue)
         {
-            this.IssueID = newIssue.IssueID;
             this.Title = newIssue.Title;
             this.PublicationDate = newIssue.PublicationDate;
             this.Publisher = newIssue.Publisher;
