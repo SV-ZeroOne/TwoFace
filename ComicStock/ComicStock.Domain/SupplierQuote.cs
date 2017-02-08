@@ -8,7 +8,12 @@ using System.Threading.Tasks;
 namespace ComicStock.Domain
 {
     public partial class SupplierQuote
-    {   
+    {
+        public SupplierQuote()
+        {
+
+        }
+
         [Key]
         public int QuoteID { get; set; }
 

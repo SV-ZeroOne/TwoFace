@@ -9,13 +9,19 @@ using System.Threading.Tasks;
 namespace ComicStock.Domain
 {
     public partial class SupplierPayment
-    {   
+    {
+        public SupplierPayment()
+        {
+
+        }
+
         [Key]
         public int PaymentID { get; set; }
 
         [ForeignKey("Order")]
         public int OrderID { get; set; }
 
+        [Required]
         public decimal Total { get; set; }
 
         public DateTime ProcessedDate { get; set; }

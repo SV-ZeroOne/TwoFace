@@ -15,7 +15,6 @@ namespace ComicStock.Domain
 
         }
 
-
         public int IssueID { get; set; }
 
         [MaxLength(500)]
@@ -27,6 +26,9 @@ namespace ComicStock.Domain
         public string Publisher { get; set; }
 
         public Int16 SeriesNumber { get; set; }
+
+        [MaxLength(300)]
+        public string ImageURL { get; set; }
 
         public string Description { get; set; }
 
