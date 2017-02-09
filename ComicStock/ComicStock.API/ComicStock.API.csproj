@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="returnStock.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ComicStock.Data\ComicStock.Data.csproj">

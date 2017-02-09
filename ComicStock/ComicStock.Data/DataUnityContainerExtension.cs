@@ -12,6 +12,8 @@ namespace ComicStock.WebAPI
         {
             this.Container.RegisterType<SquareEyesContext>();
             this.Container.RegisterType<IssueInterface, IssuesRepo>(new HierarchicalLifetimeManager());
+            this.Container.RegisterType<CreatorInterface, CreatorRepo>(new HierarchicalLifetimeManager());
+            this.Container.RegisterType<VoucherInterface, VoucherRepo>(new HierarchicalLifetimeManager());
         }
     }
 }

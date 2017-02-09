@@ -12,6 +12,7 @@ namespace ComicStock.Domain
     {
         public Creator()
         {
+
         }
 
         public int CreatorID { get; set; }
