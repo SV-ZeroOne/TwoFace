@@ -65,6 +65,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="config\ComicCreatorEntityConfiguration.cs" />
+    <Compile Include="config\CreatorEntityConfiguration.cs" />
+    <Compile Include="config\IssuesEntityConfiguration.cs" />
     <Compile Include="DataUnityContainerExtension.cs" />
     <Compile Include="EFRepository.cs" />
     <Compile Include="Implementations\IssuesRepo.cs" />

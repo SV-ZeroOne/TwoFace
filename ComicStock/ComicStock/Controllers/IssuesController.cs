@@ -22,9 +22,9 @@ namespace ComicStock.WebAPI.Controllers
         {
             this.issueRepo = issueRepo;
             //issueRepo = new IssuesRepo();
-            IEnumerable someIssues = issueRepo.GetAll();
+            //IEnumerable someIssues = issueRepo.GetAll();
             newIssues = new List<IssueDTO>();
-            foreach(Issue i in someIssues)
+            foreach (Issue i in issueRepo.GetAll())
             {
                 IssueDTO newIssue = new IssueDTO(i);
                 newIssues.Add(newIssue);
@@ -65,21 +65,35 @@ namespace ComicStock.WebAPI.Controllers
                 return null;
                 throw new HttpResponseException(HttpStatusCode.NotAcceptable);
             }
-            return convertDTO(issueDto);
+            Issue newIssue = convertDTO(issueDto);
+            issueRepo.Add(newIssue);
+            return newIssue;
         }
 
-        public void Put(IssueDTO issue)
+        public IssueDTO Put(IssueDTO issue)
         {
-            //Need to test this.
-            Issue issueToUpdate = issueRepo.findSpecificIssue(issue.Title, issue.SeriesNumber);
+            //Need to have error handling!
+            Issue issueToGet = issueRepo.GetById(issue.IssueID);
+            var issueToUpdate = updateIssue(issue, issueToGet);
             issueRepo.Update(issueToUpdate);
+            return issue;
         }
 
-        //Again have to search for Item to delete
+        private Issue updateIssue(IssueDTO issue, Issue issueToUpdate)
+        {
+            issueToUpdate.Title = issue.Title;
+            issueToUpdate.Description = issue.Description;
+            issueToUpdate.PublicationDate = issue.PublicationDate;
+            issueToUpdate.Publisher = issue.Publisher;
+            issueToUpdate.SeriesNumber = issue.SeriesNumber;
+            //Might need to map more fields to update.
+            return issueToUpdate;
+        }
+
         public void Delete(IssueDTO issue)
         {
-            //Need to test this.
-            Issue issueToDelete = issueRepo.findSpecificIssue(issue.Title, issue.SeriesNumber);
+            //Need to have error handling!
+            var issueToDelete = issueRepo.GetById(issue.IssueID);
             issueRepo.Delete(issueToDelete);
         }
 
@@ -91,6 +105,7 @@ namespace ComicStock.WebAPI.Controllers
             newIssue.Publisher = issueDto.Publisher;
             newIssue.SeriesNumber = issueDto.SeriesNumber;
             newIssue.Description = issueDto.Description;
+            //newIssue.ComicCreator = issueDto.ComicCreator;
             return newIssue;
         }
 

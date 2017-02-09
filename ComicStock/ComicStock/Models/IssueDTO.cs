@@ -20,6 +20,8 @@ namespace ComicStock.Models
 
         public string Description { get; set; }
 
+        //public ICollection<ComicCreator> ComicCreator { get; set; }
+
         public IssueDTO()
         {
 
@@ -27,6 +29,7 @@ namespace ComicStock.Models
 
         public IssueDTO(Issue newIssue)
         {
+            this.IssueID = newIssue.IssueID;
             this.Title = newIssue.Title;
             this.PublicationDate = newIssue.PublicationDate;
             this.Publisher = newIssue.Publisher;

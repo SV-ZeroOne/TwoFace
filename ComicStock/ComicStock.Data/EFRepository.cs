@@ -30,6 +30,7 @@ namespace ComicStock.Data
         {
             if (entity == null) throw new NullReferenceException(entity.ToString());
             context.Set<TEntity>().Add(entity);
+            Save();
         }
 
         public void Update(TEntity entity)
@@ -37,12 +38,14 @@ namespace ComicStock.Data
             if (entity == null) throw new NullReferenceException(entity.ToString());
             context.Set<TEntity>().Attach(entity);
             context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+            Save();
         }
 
         public void Delete(TEntity entity)
         {
             if (entity == null) throw new NullReferenceException(entity.ToString());
             context.Set<TEntity>().Remove(entity);
+            Save();
         }
 
         public void Save()
