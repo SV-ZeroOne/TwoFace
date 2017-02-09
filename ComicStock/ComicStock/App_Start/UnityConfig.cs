@@ -1,3 +1,4 @@
+using ComicStock.API;
 using ComicStock.Data;
 using Microsoft.Practices.Unity;
 using System.Web.Http;
@@ -16,6 +17,7 @@ namespace ComicStock.WebAPI
 
             // e.g. container.RegisterType<ITestService, TestService>();
             container.AddExtension(new DataUnityContainerExtension());
+            container.AddExtension(new APIUnityContainerExtension());
             //container.AddExtension(new TestUnitiyContainerExtension());
 
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);

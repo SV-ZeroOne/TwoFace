@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace ComicStock.Data.Implementations
 {
-    class SupplierRepo : EFRepository<Supplier, int>, SupplierInterface
+    internal class SupplierPaymentRepo : EFRepository<SupplierPayment, int>, SupplierPaymentInterface
     {
-        
     }
 }

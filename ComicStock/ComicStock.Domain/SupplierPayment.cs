@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComicStock.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ComicStock.Domain
 {
-    public partial class SupplierPayment
+    public partial class SupplierPayment : IEntity<int>
     {
         public SupplierPayment()
         {

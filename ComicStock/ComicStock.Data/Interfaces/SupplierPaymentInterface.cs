@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace ComicStock.Data.Interfaces
 {
-    public interface SupplierInterface : IRepository<Supplier, int>
+    public interface SupplierPaymentInterface : IRepository<SupplierPayment, int>
     {
+
     }
 }

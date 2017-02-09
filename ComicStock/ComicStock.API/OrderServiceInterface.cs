@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace ComicStock.API
 {
-    class AddingStock
+    public interface OrderServiceInterface
     {
-        //Draft out logic first.
-
+        void placeOrder(int issueID, Int16 quantity);
     }
 }

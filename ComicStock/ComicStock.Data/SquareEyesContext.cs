@@ -1,4 +1,5 @@
 ﻿using ComicStock.Domain;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 
 
@@ -22,6 +23,15 @@ namespace ComicStock.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<SupplierQuote>()
+                .HasKey(e => new
+                {
+                    e.IssueID,
+                    e.SupplierID,
+                    e.QuoteID
+                })
+                .Property(e => e.QuoteID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
     }
 }

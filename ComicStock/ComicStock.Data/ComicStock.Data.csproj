@@ -73,12 +73,16 @@
     <Compile Include="Implementations\IssuesRepo.cs" />
     <Compile Include="Implementations\OrderRepo.cs" />
     <Compile Include="Implementations\StockRepo.cs" />
+    <Compile Include="Implementations\SupplierPaymentRepo.cs" />
+    <Compile Include="Implementations\SupplierQuoteRepo.cs" />
     <Compile Include="Implementations\SupplierRepo.cs" />
     <Compile Include="Implementations\VoucherRepo.cs" />
     <Compile Include="Interfaces\IssueInterface.cs" />
     <Compile Include="Interfaces\OrderInterface.cs" />
     <Compile Include="Interfaces\StockInterface.cs" />
     <Compile Include="Interfaces\SupplierInterface.cs" />
+    <Compile Include="Interfaces\SupplierPaymentInterface.cs" />
+    <Compile Include="Interfaces\SupplierQuoteInterface.cs" />
     <Compile Include="Interfaces\VoucherInterface.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />

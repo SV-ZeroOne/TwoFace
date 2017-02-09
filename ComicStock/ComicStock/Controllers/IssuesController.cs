@@ -32,7 +32,7 @@ namespace ComicStock.WebAPI.Controllers
             }
         }
 
-        // GET api/issues
+        //GET api/issues
         public IEnumerable<IssueDTO> Get()
         {
             //issueList = issueRepo.GetAll();
@@ -107,6 +107,28 @@ namespace ComicStock.WebAPI.Controllers
             newIssue.Description = issueDto.Description;
             //newIssue.ComicCreator = issueDto.ComicCreator;
             return newIssue;
+        }
+
+        [Route("api/Issues/GetPaged")]
+        [HttpGet]
+        public IHttpActionResult GetPaged(int pageNo = 1, int pageSize = 50)
+        {
+            // Determine the number of records to skip
+            int skip = (pageNo - 1) * pageSize;
+
+            // Get total number of records
+
+            int total = newIssues.Count();
+
+            // Select the customers based on paging parameters
+            List<IssueDTO> issues = newIssues
+                .OrderBy(c => c.IssueID)
+                .Skip(skip)
+                .Take(pageSize)
+                .ToList();
+
+            // Return the list of customers
+            return Ok(new PagedResult<IssueDTO>(issues, pageNo, pageSize, total));
         }
 
     }

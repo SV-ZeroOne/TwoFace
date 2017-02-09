@@ -13,6 +13,8 @@ namespace ComicStock.Data
             this.Container.RegisterType<SquareEyesContext>();
             this.Container.RegisterType<IssueInterface, IssuesRepo>(new HierarchicalLifetimeManager());
             this.Container.RegisterType<OrderInterface, OrderRepo>(new HierarchicalLifetimeManager());
+            this.Container.RegisterType<SupplierInterface, SupplierRepo>(new HierarchicalLifetimeManager());
+            this.Container.RegisterType<SupplierQuoteInterface, SupplierQuoteRepo>(new HierarchicalLifetimeManager());
         }
     }
 }

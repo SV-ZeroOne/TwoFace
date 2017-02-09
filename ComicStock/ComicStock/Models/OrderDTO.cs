@@ -14,7 +14,7 @@ namespace ComicStock.WebAPI.Models
 
         public int IssueID { get; set; }
 
-        public int QtyOrdered { get; set; }
+        public Int16 QtyOrdered { get; set; }
 
         public decimal Total { get; set; }
 
