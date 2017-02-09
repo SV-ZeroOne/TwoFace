@@ -26,7 +26,7 @@ namespace ComicStock.Domain
         [MaxLength(25)]
         public string ReferenceNumber { get; set; }
 
-        public virtual SupplierQuote SupplierQuote { get; set; }
+        //public virtual SupplierQuote SupplierQuote { get; set; }
 
         //public virtual Order Order { get; set; }
 

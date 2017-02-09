@@ -56,9 +56,9 @@ namespace ComicStock.WebAPI.Controllers
         }
 
         [Route("api/Orders/PlaceOrder")]
-        public void PlaceOrder(int issueID, Int16 quantity)
+        public void PlaceOrder(int issueID, Int16 quantity, int supplierID)
         {
-            orderService.placeOrder(issueID, quantity);
+            orderService.placeOrder(issueID, quantity, supplierID);
         }
 
         public Order Post(OrderDTO orderDto)

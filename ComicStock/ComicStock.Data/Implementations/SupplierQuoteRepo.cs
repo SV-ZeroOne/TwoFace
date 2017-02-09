@@ -12,12 +12,14 @@ namespace ComicStock.Data.Implementations
     internal class SupplierQuoteRepo : EFRepository<SupplierQuote, int>, SupplierQuoteInterface
     {
         private readonly SquareEyesContext dbContext = new SquareEyesContext();
-        public SupplierQuote getSupplierQuoteByIssue(int issueID)
+        public SupplierQuote getSupplierQuote(int issueID, int supplierID)
         {
             try
             {
-                SupplierQuote someQuote = dbContext.SupplierQuote.SqlQuery("SELECT * FROM SupplierQuotes WHERE IssueID = issueID", new SqlParameter("issueID", issueID)).FirstOrDefault<SupplierQuote>();
-                return someQuote;
+                SupplierQuote someQuote = dbContext.SupplierQuote.SqlQuery("SELECT * FROM SupplierQuotes WHERE IssueID = @issueID AND SupplierID = @supplierID", 
+                    new SqlParameter("issueID", issueID),
+                    new SqlParameter("supplierID", supplierID)).FirstOrDefault<SupplierQuote>();
+                return someQuote; 
             }
             catch(ArgumentNullException e)
             {

@@ -9,6 +9,6 @@ namespace ComicStock.Data.Interfaces
 {
     public interface SupplierQuoteInterface : IRepository<SupplierQuote, int>
     {
-        SupplierQuote getSupplierQuoteByIssue(int issueID);
+        SupplierQuote getSupplierQuote(int issueID, int supplierIDs);
     }
 }

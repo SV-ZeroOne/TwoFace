@@ -24,14 +24,6 @@ namespace ComicStock.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<SupplierQuote>()
-                .HasKey(e => new
-                {
-                    e.IssueID,
-                    e.SupplierID,
-                    e.QuoteID
-                })
-                .Property(e => e.QuoteID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
     }
 }

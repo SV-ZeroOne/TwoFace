@@ -27,5 +27,7 @@ namespace ComicStock.Domain
         public DateTime EffectiveDate { get; set; }
 
         public virtual Issue Issue { get; set; }
+
+        public virtual Supplier Supplier { get; set; }
     }
 }
