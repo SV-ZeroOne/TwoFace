@@ -65,13 +65,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIUnityContainerExtension.cs" />
+    <Compile Include="IStockService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="returnStock.cs" />
+    <Compile Include="StockService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ComicStock.Data\ComicStock.Data.csproj">
       <Project>{84295a62-fdd8-48ee-9042-77936f39a0c9}</Project>
       <Name>ComicStock.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ComicStock.Domain\ComicStock.Domain.csproj">
+      <Project>{EAE5027D-C948-449C-A463-12A1E32E4C1A}</Project>
+      <Name>ComicStock.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
