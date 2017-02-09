@@ -15,6 +15,7 @@ namespace ComicStock.Data
             this.Container.RegisterType<OrderInterface, OrderRepo>(new HierarchicalLifetimeManager());
             this.Container.RegisterType<SupplierInterface, SupplierRepo>(new HierarchicalLifetimeManager());
             this.Container.RegisterType<SupplierQuoteInterface, SupplierQuoteRepo>(new HierarchicalLifetimeManager());
+            this.Container.RegisterType<SupplierPaymentInterface, SupplierPaymentRepo>(new HierarchicalLifetimeManager());
         }
     }
 }

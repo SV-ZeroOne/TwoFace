@@ -28,8 +28,6 @@ namespace ComicStock.Domain
         public DateTime ProcessedDate { get; set; }
 
         public virtual Order Order { get; set; }
-
-        public virtual Supplier Supplier { get; set; }
    
     }
 }

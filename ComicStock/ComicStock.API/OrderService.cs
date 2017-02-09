@@ -21,13 +21,13 @@ namespace ComicStock.API
 
         }
 
-        public OrderService(IssueInterface issuerepo, OrderInterface orderrepo, SupplierInterface supplierRepo, SupplierQuoteInterface supplierQuoteRepo, SupplierPaymentInterface supplierPaymentRepo)
+        public OrderService(IssueInterface issuerepo, OrderInterface orderrepo, SupplierInterface supplierRepo, SupplierQuoteInterface supplierQuoteRepo, SupplierPaymentInterface suppPay)
         {
             this.issueRepo = issuerepo;
             this.orderRepo = orderrepo;
             this.supplierRepo = supplierRepo;
             this.supplierQuoteRepo = supplierQuoteRepo;
-            this.supplierPaymentRepo = supplierPaymentRepo;
+            this.supplierPaymentRepo = suppPay;
         }
 
         public void placeOrder(int issueID, Int16 quantity, int supplierID)
