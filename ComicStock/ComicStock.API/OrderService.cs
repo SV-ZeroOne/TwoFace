@@ -14,18 +14,20 @@ namespace ComicStock.API
         private readonly OrderInterface orderRepo;
         private readonly SupplierInterface supplierRepo;
         private readonly SupplierQuoteInterface supplierQuoteRepo;
+        private readonly SupplierPaymentInterface supplierPaymentRepo;
 
         public OrderService()
         {
 
         }
 
-        public OrderService(IssueInterface issuerepo, OrderInterface orderrepo, SupplierInterface supplierRepo, SupplierQuoteInterface supplierQuoteRepo)
+        public OrderService(IssueInterface issuerepo, OrderInterface orderrepo, SupplierInterface supplierRepo, SupplierQuoteInterface supplierQuoteRepo, SupplierPaymentInterface supplierPaymentRepo)
         {
             this.issueRepo = issuerepo;
             this.orderRepo = orderrepo;
             this.supplierRepo = supplierRepo;
             this.supplierQuoteRepo = supplierQuoteRepo;
+            this.supplierPaymentRepo = supplierPaymentRepo;
         }
 
         public void placeOrder(int issueID, Int16 quantity, int supplierID)
@@ -47,6 +49,19 @@ namespace ComicStock.API
             newOrder.ShipmentDate = null;
             newOrder.DeliveryStatus = "Pending Payment";
             orderRepo.Add(newOrder);
+        }
+
+        //Make a payment to supplier
+        public void makePayment(int orderID)
+        {
+            Order order = orderRepo.GetById(orderID);
+            SupplierPayment newPayment = new SupplierPayment();
+            newPayment.OrderID = order.OrderID;
+            //might have to pass in partial payment
+            newPayment.Total = order.Total;
+            newPayment.ProcessedDate = DateTime.Now;
+            //might need to change the order status if paid.
+            supplierPaymentRepo.Add(newPayment);
         }
 
     }

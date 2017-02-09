@@ -55,10 +55,18 @@ namespace ComicStock.WebAPI.Controllers
             return Get().Where(i => i.DeliveryStatus.Contains(search)).ToList<OrderDTO>();
         }
 
+        //might need to change this to return the order.
         [Route("api/Orders/PlaceOrder")]
         public void PlaceOrder(int issueID, Int16 quantity, int supplierID)
         {
             orderService.placeOrder(issueID, quantity, supplierID);
+        }
+
+        //might need to change this to return the payment.
+        [Route("api/Orders/MakePayment")]
+        public void MakePayment(int orderID)
+        {
+            orderService.makePayment(orderID);
         }
 
         public Order Post(OrderDTO orderDto)

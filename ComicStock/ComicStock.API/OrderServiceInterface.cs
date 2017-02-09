@@ -9,5 +9,7 @@ namespace ComicStock.API
     public interface OrderServiceInterface
     {
         void placeOrder(int issueID, Int16 quantity, int supplierIDs);
+
+        void makePayment(int orderID);
     }
 }
