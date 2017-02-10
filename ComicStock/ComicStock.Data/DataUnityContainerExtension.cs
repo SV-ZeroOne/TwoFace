@@ -14,6 +14,7 @@ namespace ComicStock.WebAPI
             this.Container.RegisterType<IssueInterface, IssuesRepo>(new HierarchicalLifetimeManager());
             this.Container.RegisterType<CreatorInterface, CreatorRepo>(new HierarchicalLifetimeManager());
             this.Container.RegisterType<VoucherInterface, VoucherRepo>(new HierarchicalLifetimeManager());
+            this.Container.RegisterType<StockInterface, StockRepo>(new HierarchicalLifetimeManager());
         }
     }
 }
