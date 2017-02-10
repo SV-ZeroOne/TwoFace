@@ -23,7 +23,7 @@ namespace ComicStock.Domain
         [MaxLength(10)]
         public string Condition { get; set; }
 
-        public int AvailableQty { get; set; }
+        public Int16 AvailableQty { get; set; }
 
         public decimal Price { get; set; }
 

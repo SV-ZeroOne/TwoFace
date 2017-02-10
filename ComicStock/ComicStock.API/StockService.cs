@@ -1,12 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ComicStock.WebAPI;
 using ComicStock.Data.Interfaces;
 using ComicStock.Domain;
-using ComicStock.Data.Implementations;
 
 namespace ComicStock.API
 {
