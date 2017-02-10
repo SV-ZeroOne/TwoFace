@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ComicStock.Data.Implementations
 {
-    class StockRepo : EFRepository<Stock, int>,  StockInterface
+    public class StockRepo : EFRepository<Stock, int>,  StockInterface
     {
     }
 }

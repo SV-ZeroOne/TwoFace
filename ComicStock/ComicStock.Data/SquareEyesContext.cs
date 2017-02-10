@@ -19,6 +19,7 @@ namespace ComicStock.Data
         public virtual DbSet<SupplierPayment> SupplierPayments { get; set; }
         public virtual DbSet<SupplierQuote> SupplierQuote { get; set; }
         public virtual DbSet<Voucher> Vouchers { get; set; }
+        public virtual DbSet<Creator> Creators { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
