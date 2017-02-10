@@ -1,8 +1,10 @@
-﻿using ComicStock.Controllers;
+using ComicStock.Controllers;
 using ComicStock.Data.Implementations;
 using ComicStock.Data.Interfaces;
 using ComicStock.Domain;
 using ComicStock.Models;
+using ComicStock.WebAPI.Controllers;
+using Moq;
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,28 +15,29 @@ namespace ComicStock.Tests
     [TestFixture]
     class IssuesControllerTest
     {
-        IssueInterface issueRepo;
+        //IssueInterface issueRepo;
 
-        //Need to get dependency injection to work for tests.
         //[TestFixtureSetUp]
         //public void Init(IssueInterface issueRepo)
         //{
         //    this.issueRepo = issueRepo;
         //}
 
-        //[Test]
-        //public void GetAllIssue()
-        //{
-        //    //Arrange
-        //    var newissueRepo = issueRepo;
+        [Test]
+        public void GetAllIssue()
+        {
+            //Arrange
+            var mockIssueRepo = new Mock<IssueInterface>();
+            mockIssueRepo.Setup(x => x.GetById(3)).Returns(new Issue { IssueID = 3 });
 
-        //    //Act
-        //    IEnumerable<Issue> issues = newissueRepo.GetAll();
+            var controller = new IssuesController(mockIssueRepo.Object);
 
-        //    //Assert
-        //    Assert.IsNotNull(issues);
-        //    //Assert.AreEqual(2, issueDto.Id, "MyInt is not equal");
-        //}
+            //Act
+            IssueDTO issueDTO = controller.GetById(3);
+
+            //Assert
+            Assert.AreEqual(3, issueDTO.IssueID);
+        }
 
         //[Test]
         //public void GetIssue()

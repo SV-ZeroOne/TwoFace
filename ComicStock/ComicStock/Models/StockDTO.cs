@@ -26,7 +26,7 @@ namespace ComicStock.Models
         public StockDTO(Stock stock)
         {
             this.StockReferenceID = stock.StockReferenceID;
-            this.IssueID = stock.IssuesID;
+            this.IssueID = stock.IssueID;
             this.Condition = stock.Condition;
             this.AvailableQuantity = stock.AvailableQty;
             this.Price = stock.Price;
