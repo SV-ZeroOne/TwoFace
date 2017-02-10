@@ -7,7 +7,8 @@ namespace ComicStock.API
     {
         protected override void Initialize()
         {
-            this.Container.RegisterType<OrderServiceInterface, OrderService>(new HierarchicalLifetimeManager());
+            this.Container.RegisterType<IOrderService, OrderService>(new HierarchicalLifetimeManager());
+            this.Container.RegisterType<IStockService, StockService>(new HierarchicalLifetimeManager());
         }
     }
 }

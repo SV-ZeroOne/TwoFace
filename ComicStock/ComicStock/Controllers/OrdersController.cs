@@ -16,9 +16,9 @@ namespace ComicStock.WebAPI.Controllers
     {
         private readonly OrderInterface orderRepo;
         private List<OrderDTO> newOrders;
-        private readonly OrderServiceInterface orderService;
+        private readonly IOrderService orderService;
 
-        public OrdersController(OrderInterface orderRepo, OrderServiceInterface orderService)
+        public OrdersController(OrderInterface orderRepo, IOrderService orderService)
         {
             this.orderService = orderService;
             this.orderRepo = orderRepo;

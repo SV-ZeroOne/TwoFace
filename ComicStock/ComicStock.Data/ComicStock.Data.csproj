@@ -70,6 +70,7 @@
     <Compile Include="config\IssuesEntityConfiguration.cs" />
     <Compile Include="DataUnityContainerExtension.cs" />
     <Compile Include="EFRepository.cs" />
+    <Compile Include="Implementations\CreatorRepo.cs" />
     <Compile Include="Implementations\IssuesRepo.cs" />
     <Compile Include="Implementations\OrderRepo.cs" />
     <Compile Include="Implementations\StockRepo.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Implementations\SupplierQuoteRepo.cs" />
     <Compile Include="Implementations\SupplierRepo.cs" />
     <Compile Include="Implementations\VoucherRepo.cs" />
+    <Compile Include="Interfaces\CreatorInterface.cs" />
     <Compile Include="Interfaces\IssueInterface.cs" />
     <Compile Include="Interfaces\OrderInterface.cs" />
     <Compile Include="Interfaces\StockInterface.cs" />

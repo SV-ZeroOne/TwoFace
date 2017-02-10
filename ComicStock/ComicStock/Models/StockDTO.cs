@@ -14,5 +14,19 @@ namespace ComicStock.Models
         public int AvailableQuantity { get; set; }
 
         public float Price { get; set; }
+
+        public StockDTO()
+        {
+
+        }
+
+        public StockDTO(Stock stock)
+        {
+            this.StockReferenceID = stock.StockReferenceID;
+            this.IssueID = stock.IssueID;
+            this.Condition = stock.Condition;
+            this.AvailableQuantity = stock.AvailableQty;
+            this.Price = stock.Price;
+        }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ComicStock.API
 {
-    public class OrderService : OrderServiceInterface
+    public class OrderService : IOrderService
     {
         private readonly IssueInterface issueRepo;
         private readonly OrderInterface orderRepo;
