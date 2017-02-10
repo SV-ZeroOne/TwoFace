@@ -10,5 +10,6 @@ namespace ComicStock.Data.Implementations
 {
     class SupplierRepo : EFRepository<Supplier, int>, SupplierInterface
     {
+        
     }
 }

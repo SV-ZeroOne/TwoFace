@@ -9,6 +9,6 @@ namespace ComicStock.Data.Interfaces
 {
    public interface IssueInterface : IRepository<Issue, int>
     {
-       
+        Issue findSpecificIssue(string issueTitle, Int16 seriesNumber);
     }
 }

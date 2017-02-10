@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComicCreator.cs" />
+    <Compile Include="Creator.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="Issue.cs" />
     <Compile Include="Order.cs" />

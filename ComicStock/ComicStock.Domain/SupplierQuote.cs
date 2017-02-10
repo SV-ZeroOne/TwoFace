@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComicStock.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,8 +8,13 @@ using System.Threading.Tasks;
 
 namespace ComicStock.Domain
 {
-    public partial class SupplierQuote
-    {   
+    public partial class SupplierQuote : IEntity<int>
+    {
+        public SupplierQuote()
+        {
+
+        }
+
         [Key]
         public int QuoteID { get; set; }
 
@@ -21,5 +27,7 @@ namespace ComicStock.Domain
         public DateTime EffectiveDate { get; set; }
 
         public virtual Issue Issue { get; set; }
+
+        public virtual Supplier Supplier { get; set; }
     }
 }

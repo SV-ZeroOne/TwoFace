@@ -1,51 +1,135 @@
-﻿using ComicStock.Models;
-using Newtonsoft.Json;
-using System;
+﻿using ComicStock.Data;
+using ComicStock.Data.Implementations;
+using ComicStock.Data.Interfaces;
+using ComicStock.Domain;
+using ComicStock.Models;
+using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System;
 
-namespace ComicStock.Controllers
+namespace ComicStock.WebAPI.Controllers
 {
     public class IssuesController : ApiController
     {
-        public IssuesController()
+        private readonly IssueInterface issueRepo;
+        private List<IssueDTO> newIssues;
+
+        public IssuesController(IssueInterface issueRepo)
         {
-           
+            this.issueRepo = issueRepo;
+            //issueRepo = new IssuesRepo();
+            //IEnumerable someIssues = issueRepo.GetAll();
+            newIssues = new List<IssueDTO>();
+            foreach (Issue i in issueRepo.GetAll())
+            {
+                IssueDTO newIssue = new IssueDTO(i);
+                newIssues.Add(newIssue);
+
+            }
         }
 
-        // GET api/issues
+        //GET api/issues
         public IEnumerable<IssueDTO> Get()
         {
-            string jsonFile = AppDomain.CurrentDomain.GetData("DataDirectory").ToString() + "\\Issues.json";
-            String issuesString = System.IO.File.ReadAllText(jsonFile);
-            IssueDTO[] issues = JsonConvert.DeserializeObject<IssueDTO[]>(issuesString);
-            return issues;
+            //issueList = issueRepo.GetAll();
+            //IssueDTO[] issues = issueList.Cast<IssueDTO>().ToArray();
+            return newIssues;
         }
 
         // GET api/issues/id
         public IssueDTO GetById(int id)
         {
-            string jsonFile = AppDomain.CurrentDomain.GetData("DataDirectory").ToString() + "\\Issues.json";
-            String issuesString = System.IO.File.ReadAllText(jsonFile);
-            IssueDTO[] issues = JsonConvert.DeserializeObject<IssueDTO[]>(issuesString);
-            foreach (var item in issues)
+            Issue someIssue = issueRepo.GetById(id);
+            if (someIssue == null)
             {
-                if (item.Id == id)
-                {
-                    return item;
-                }
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
-            return null;
+            IssueDTO someIssueDTO = new IssueDTO(someIssue);   
+            return someIssueDTO;
         }
 
-        // Lamda
+        // Lamda Function
         public IList<IssueDTO> Get(string search)
         {
             return Get().Where(i => i.Title.Contains(search)).ToList<IssueDTO>();
         }
+
+        public Issue Post(IssueDTO issueDto)
+        {
+            if (issueDto == null)
+            {
+                return null;
+                throw new HttpResponseException(HttpStatusCode.NotAcceptable);
+            }
+            Issue newIssue = convertDTO(issueDto);
+            issueRepo.Add(newIssue);
+            return newIssue;
+        }
+
+        public IssueDTO Put(IssueDTO issue)
+        {
+            //Need to have error handling!
+            Issue issueToGet = issueRepo.GetById(issue.IssueID);
+            var issueToUpdate = updateIssue(issue, issueToGet);
+            issueRepo.Update(issueToUpdate);
+            return issue;
+        }
+
+        private Issue updateIssue(IssueDTO issue, Issue issueToUpdate)
+        {
+            issueToUpdate.Title = issue.Title;
+            issueToUpdate.Description = issue.Description;
+            issueToUpdate.PublicationDate = issue.PublicationDate;
+            issueToUpdate.Publisher = issue.Publisher;
+            issueToUpdate.SeriesNumber = issue.SeriesNumber;
+            //Might need to map more fields to update.
+            return issueToUpdate;
+        }
+
+        public void Delete(IssueDTO issue)
+        {
+            //Need to have error handling!
+            var issueToDelete = issueRepo.GetById(issue.IssueID);
+            issueRepo.Delete(issueToDelete);
+        }
+
+        private Issue convertDTO(IssueDTO issueDto)
+        {
+            Issue newIssue = new Issue();
+            newIssue.Title = issueDto.Title;
+            newIssue.PublicationDate = issueDto.PublicationDate;
+            newIssue.Publisher = issueDto.Publisher;
+            newIssue.SeriesNumber = issueDto.SeriesNumber;
+            newIssue.Description = issueDto.Description;
+            //newIssue.ComicCreator = issueDto.ComicCreator;
+            return newIssue;
+        }
+
+        [Route("api/Issues/GetPaged")]
+        [HttpGet]
+        public IHttpActionResult GetPaged(int pageNo = 1, int pageSize = 50)
+        {
+            // Determine the number of records to skip
+            int skip = (pageNo - 1) * pageSize;
+
+            // Get total number of records
+
+            int total = newIssues.Count();
+
+            // Select the customers based on paging parameters
+            List<IssueDTO> issues = newIssues
+                .OrderBy(c => c.IssueID)
+                .Skip(skip)
+                .Take(pageSize)
+                .ToList();
+
+            // Return the list of customers
+            return Ok(new PagedResult<IssueDTO>(issues, pageNo, pageSize, total));
+        }
+
     }
 }

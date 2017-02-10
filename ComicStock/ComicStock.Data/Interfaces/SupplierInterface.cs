@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ComicStock.Data.Interfaces
 {
-    interface SupplierInterface : IRepository<Supplier, int>
+    public interface SupplierInterface : IRepository<Supplier, int>
     {
     }
 }
