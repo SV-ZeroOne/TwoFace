@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace ComicStock
 {
@@ -13,6 +14,11 @@ namespace ComicStock
 
             // Web API routes
             config.MapHttpAttributeRoutes();
+
+            //This solves the access-control-allow-origin error
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
+
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
