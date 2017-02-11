@@ -13,6 +13,29 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicStock.API", "ComicStoc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComicStock.Domain", "ComicStock.Domain\ComicStock.Domain.csproj", "{EAE5027D-C948-449C-A463-12A1E32E4C1A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ComicStock.Frontend", "ComicStock.Frontend", "{4EEABEEA-E53F-4749-9D79-0EDEEAAC6E43}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{AA713293-A130-4FCA-99CA-160D8FAA29AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{0357F850-8C3E-4ECF-8435-11562E1229C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stock", "Stock", "{890E5D3B-CC84-4FE7-A6B9-2AFB3AA8609D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orders", "Orders", "{61C96129-E8E1-4864-AE59-49A2AACDD532}"
+	ProjectSection(SolutionItems) = preProject
+		orders.html = orders.html
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSS", "CSS", "{5FC61C74-0EA4-4F83-94CF-59DD124DDCC9}"
+	ProjectSection(SolutionItems) = preProject
+		MainStyleSheet.css = MainStyleSheet.css
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{6F918E63-6D22-4E15-A1B0-1107B6024A8E}"
+	ProjectSection(SolutionItems) = preProject
+		navbar.html = navbar.html
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +65,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AA713293-A130-4FCA-99CA-160D8FAA29AB} = {4EEABEEA-E53F-4749-9D79-0EDEEAAC6E43}
+		{0357F850-8C3E-4ECF-8435-11562E1229C3} = {4EEABEEA-E53F-4749-9D79-0EDEEAAC6E43}
+		{890E5D3B-CC84-4FE7-A6B9-2AFB3AA8609D} = {AA713293-A130-4FCA-99CA-160D8FAA29AB}
+		{61C96129-E8E1-4864-AE59-49A2AACDD532} = {AA713293-A130-4FCA-99CA-160D8FAA29AB}
+		{5FC61C74-0EA4-4F83-94CF-59DD124DDCC9} = {0357F850-8C3E-4ECF-8435-11562E1229C3}
+		{6F918E63-6D22-4E15-A1B0-1107B6024A8E} = {0357F850-8C3E-4ECF-8435-11562E1229C3}
 	EndGlobalSection
 EndGlobal
