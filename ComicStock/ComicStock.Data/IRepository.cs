@@ -12,6 +12,8 @@ namespace ComicStock.Data
         IEnumerable<TEntity> GetAll();
         //IEnumerable<TEntity> Get(Expression<Func<TEntity, bool> where);
 
+        //IEnumerable<TEntity> Find(string criteria);
+
         void Add(TEntity Entity);
 
         void Update(TEntity Entity);

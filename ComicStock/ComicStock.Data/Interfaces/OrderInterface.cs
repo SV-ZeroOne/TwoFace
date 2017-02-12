@@ -9,6 +9,6 @@ namespace ComicStock.Data.Interfaces
 {
     public interface OrderInterface : IRepository<Order, int>
     {
-
+        IEnumerable<Order> SearchOrders(params string[] keywords);
     }
 }

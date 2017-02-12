@@ -55,6 +55,19 @@ namespace ComicStock.WebAPI.Controllers
             return Get().Where(i => i.DeliveryStatus.Contains(search)).ToList<OrderDTO>();
         }
 
+        [Route("api/Orders/Search")]
+        public IEnumerable<OrderDTO> Search(string[] searchWords)
+        {
+            IEnumerable<Order> orders = orderRepo.SearchOrders(searchWords);
+            List<OrderDTO> orderDTOs = new List<OrderDTO>(); 
+            foreach(Order o in orders)
+            {
+                OrderDTO newOrder = new OrderDTO(o);
+                orderDTOs.Add(newOrder);
+            }
+            return orderDTOs;
+        }
+
         //might need to change this to return the order.
         [Route("api/Orders/PlaceOrder")]
         public void PlaceOrder(int issueID, Int16 quantity, int supplierID)
@@ -85,12 +98,12 @@ namespace ComicStock.WebAPI.Controllers
         {
             //Need to have error handling!
             Order orderToGet = orderRepo.GetById(order.OrderID);
-            var orderToUpdate = updateIssue(order, orderToGet);
+            var orderToUpdate = updateOrder(order, orderToGet);
             orderRepo.Update(orderToUpdate);
             return order;
         }
 
-        private Order updateIssue(OrderDTO order, Order orderToUpdate)
+        private Order updateOrder(OrderDTO order, Order orderToUpdate)
         {
             orderToUpdate.OrderDate = order.OrderDate;
             orderToUpdate.QtyOrdered = order.QtyOrdered;
@@ -118,6 +131,28 @@ namespace ComicStock.WebAPI.Controllers
             newOrder.Total = orderDto.Total;
             //Might need to map more fields.
             return newOrder;
+        }
+
+        [Route("api/Orders/GetPaged")]
+        [HttpGet]
+        public IHttpActionResult GetPaged(int pageNo = 1, int pageSize = 50)
+        {
+            // Determine the number of records to skip
+            int skip = (pageNo - 1) * pageSize;
+
+            // Get total number of records
+
+            int total = newOrders.Count();
+
+            // Select the customers based on paging parameters
+            List<OrderDTO> orders = newOrders
+                .OrderBy(c => c.OrderID)
+                .Skip(skip)
+                .Take(pageSize)
+                .ToList();
+
+            // Return the list of customers
+            return Ok(new PagedResult<OrderDTO>(orders, pageNo, pageSize, total));
         }
 
     }

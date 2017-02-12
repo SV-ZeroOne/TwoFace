@@ -36,21 +36,21 @@ namespace ComicStock.WebAPI.Controllers
         }
 
         // PUT api?id={id}&quantity={quantity}
-        [Route("api/")]
+        [Route("api/Stock/Add")]
         public void Put(int id, int quantity)
         {
             stock.AddStock(id, quantity);
         }
 
         // DELETE api/id
-        [Route("api/id")]
+        [Route("api/Stock/Remove")]
         public void Delete(int id)
         {
             stock.RemovingStock(id);
         }
 
         // PUT api?id={id}&condition={condition}
-        [Route("api/")]
+        [Route("api/Stock/Return")]
         public void PutForReturn (int id, string condition)
         {
             stock.ReturningStock(id, condition);

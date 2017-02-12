@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,11 +21,10 @@ namespace ComicStock.Data
             return context.Set<TEntity>().ToList();
         }
 
-        public IEnumerable<TEntity> find(string Criteria)
-        {
-            throw new NotImplementedException();
-            // To Be Completed
-        }
+        //public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> expression)
+        //{
+        //    return context.Set<TEntity>().Where(expression).ToList();
+        //}
 
         public void Add(TEntity entity)
         {
