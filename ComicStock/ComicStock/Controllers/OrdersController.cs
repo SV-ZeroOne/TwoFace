@@ -141,7 +141,7 @@ namespace ComicStock.WebAPI.Controllers
 
         [Route("api/Orders/GetPaged")]
         [HttpGet]
-        public IHttpActionResult GetPaged(int pageNo = 1, int pageSize = 50)
+        public IHttpActionResult GetPaged(int pageNo = 1, int pageSize = 10)
         {
             // Determine the number of records to skip
             int skip = (pageNo - 1) * pageSize;

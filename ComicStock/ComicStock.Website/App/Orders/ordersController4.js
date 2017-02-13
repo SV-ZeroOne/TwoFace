@@ -9,9 +9,11 @@ app.controller("ordersController4", function ($http) {
     $octrl.showMe = false;
     $octrl.newOrder = {};
     $octrl.currentPage = 1;
+    $octrl.rowAmount = 10;
+    $octrl.someOrders;
 
     $http
-        .get('http://localhost:62655/api/Orders/GetPaged?pageNo=1&pageSize=50')
+        .get('http://localhost:62655/api/Orders/GetPaged?pageNo=1&pageSize=' + $octrl.rowAmount)
         .then(function (response) {
             $octrl.someOrders = response.data;
             $octrl.noOfPages = $octrl.someOrders.Paging.PageCount;
@@ -34,7 +36,7 @@ app.controller("ordersController4", function ($http) {
     }
 
     // delete order
-    $octrl.removeOrder = function (index , orderID) {
+    $octrl.removeOrder = function (index, orderID) {
         console.log("Deleting Order No" + orderID)
         $octrl.someOrders.Data.splice(index, 1);
         //Cascade Error, however delete should not be possible for orders because of business logic.
@@ -61,7 +63,12 @@ app.controller("ordersController4", function ($http) {
 
     $octrl.pageChanged = function () {
         console.log("Page changed function");
-        $log.log('Page changed to: ' + $octrl.currentPage);
+        console.log("Current Page: " + $octrl.currentPage + " Row amount " + $octrl.rowAmount);
+        $http.get('http://localhost:62655/api/Orders/GetPaged?pageNo=' + $octrl.currentPage + '&pageSize=' + $octrl.rowAmount)
+        .then(function (response) {
+            $octrl.someOrders = response.data;
+        });
+        //$log.log('Page changed to: ' + $octrl.s);
     };
-    
+
 });
