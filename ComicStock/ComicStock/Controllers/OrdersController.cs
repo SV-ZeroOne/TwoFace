@@ -105,19 +105,22 @@ namespace ComicStock.WebAPI.Controllers
 
         private Order updateOrder(OrderDTO order, Order orderToUpdate)
         {
+            orderToUpdate.IssueID = order.IssueID;
+            orderToUpdate.SupplierID = order.SupplierID;
             orderToUpdate.OrderDate = order.OrderDate;
             orderToUpdate.QtyOrdered = order.QtyOrdered;
             orderToUpdate.ShipmentDate = order.ShipmentDate;
             orderToUpdate.ShipmentRef = order.ShipmentRef;
             orderToUpdate.Total = order.Total;
+            orderToUpdate.DeliveryStatus = order.DeliveryStatus;
             //Might need to map more fields to update.
             return orderToUpdate;
         }
 
-        public void Delete(OrderDTO order)
+        public void Delete(int orderID)
         {
             //Need to have error handling!
-            var orderToDelete = orderRepo.GetById(order.OrderID);
+            var orderToDelete = orderRepo.GetById(orderID);
             orderRepo.Delete(orderToDelete);
         }
 
@@ -125,10 +128,13 @@ namespace ComicStock.WebAPI.Controllers
         {
             Order newOrder = new Order();
             newOrder.OrderDate = orderDto.OrderDate;
+            newOrder.IssueID = orderDto.IssueID;
+            newOrder.SupplierID = orderDto.SupplierID;
             newOrder.QtyOrdered = orderDto.QtyOrdered;
             newOrder.ShipmentDate = orderDto.ShipmentDate;
             newOrder.ShipmentRef = orderDto.ShipmentRef;
             newOrder.Total = orderDto.Total;
+            newOrder.DeliveryStatus = orderDto.DeliveryStatus;
             //Might need to map more fields.
             return newOrder;
         }
