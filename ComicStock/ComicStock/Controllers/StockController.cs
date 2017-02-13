@@ -44,9 +44,9 @@ namespace ComicStock.WebAPI.Controllers
 
         // DELETE api/id
         [Route("api/id")]
-        public void Delete(int id)
+        public void Delete(int id, int quantity)
         {
-            stock.RemovingStock(id);
+            stock.RemovingStock(id, quantity);
         }
 
         // PUT api?id={id}&condition={condition}

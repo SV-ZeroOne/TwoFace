@@ -7,10 +7,14 @@ namespace ComicStock.Data
 {
     internal class SquareEyesContext : DbContext
     {
-        public SquareEyesContext() : base("name=SquareEyes")
-        {
-
-        }
+        public SquareEyesContext()
+        
+            #if DEBUG
+            : base("name=SquareEyes")
+#else
+            : base("name=SquareEyesRelease")
+#endif
+        { }
 
         public virtual DbSet<Issue> Issues { get; set; }
         public virtual DbSet<Order> Orders { get; set; }

@@ -8,7 +8,7 @@ namespace ComicStock.API
     public interface IStockService
     {
          void AddStock(int id, int quantity);
-         void RemovingStock(int id);
+         void RemovingStock(int id, int quantity);
          void ReturningStock(int id, String condition);
     }
 }

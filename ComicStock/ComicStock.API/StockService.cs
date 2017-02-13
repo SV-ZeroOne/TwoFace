@@ -30,16 +30,18 @@ namespace ComicStock.API
             stockInterface.Update(stock);
         }
 
-        public void RemovingStock(int id)
+        public void RemovingStock(int id, int quantity)
         {
             Stock stock = stockInterface.GetById(id);
 
-            if (stock == null)
+            if ((stock == null) && (quantity <= 0))
             {
                 throw new Exception();
             }
 
-            stockInterface.Delete(stock);
+            stock.AvailableQty -= (Int16)quantity;
+
+            stockInterface.Update(stock);
         }
 
         public void ReturningStock(int id, String condition)
