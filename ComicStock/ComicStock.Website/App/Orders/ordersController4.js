@@ -1,10 +1,10 @@
-﻿var app = angular.module("ordersModule", ["xeditable", "ui.bootstrap", 'ui.select', 'ngSanitize']);
+﻿var app = angular.module("ordersModule", ["xeditable", "ui.bootstrap", 'ui.select', 'ngSanitize', 'ngMaterial', 'ngMessages']);
 
 app.run(function (editableOptions) {
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
 });
 
-app.controller("ordersController4", function ($http) {
+app.controller("ordersController4", function ($http, $mdDialog) {
     var $octrl = this;
     $octrl.showMe = false;
     $octrl.newOrder = {};
@@ -15,6 +15,7 @@ app.controller("ordersController4", function ($http) {
     $octrl.ordersSearch = '';
     $octrl.selectedIssue;
     $octrl.issueSet = true;
+    $octrl.newOrder.qtyOrdered = 0;
 
     $http
         .get('http://localhost:62655/api/Orders/GetPaged?pageNo=1&pageSize=' + $octrl.rowAmount)
@@ -45,9 +46,8 @@ app.controller("ordersController4", function ($http) {
     }
 
     $octrl.placeOrder = function () {
-        $http
-          .post('http://localhost:62655/api/Orders/PlaceOrder?issueID=' + $octrl.newOrder.issueID + '&quantity=' + $octrl.newOrder.qtyOrdered + '&supplierID=' + $octrl.newOrder.supplierID);
-
+        //$http
+          //.post('http://localhost:62655/api/Orders/PlaceOrder?issueID=' + $octrl.selectedIssue.IssueID + '&quantity=' + $octrl.newOrder.qtyOrdered + '&supplierID=' + $octrl.selectedQuotes.SupplierID);
     }
 
     // delete order
@@ -119,13 +119,31 @@ app.controller("ordersController4", function ($http) {
                 $octrl.issueSet = false;
             }
             else {
-                $octrl.quotes = [{ Name: "No supplier available" }];
-                $octrl.selectedQuotes = $octrl.quotes[0];
+                $octrl.quotes = [{ Price: "No quote available" }];
+                $octrl.selectedQuotes = $octrl.quotes[0].Price;
+                console.log($octrl.selectedQuotes)
             }
 
         }, function (error) {
             console.log('Some error getting quotes')
         });
     }
+
+    //Place order dialog popup
+    $octrl.showAlert = function (ev) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        // Modal dialogs should fully cover application
+        // to prevent interaction outside of dialog
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('#popupContainer')))
+            .clickOutsideToClose(true)
+            .title('Order Details')
+            .textContent('Your order has been placed!')
+            .ariaLabel('Alert Dialog Demo')
+            .ok('Got it!')
+            .targetEvent(ev)
+        );
+    };
 
 });

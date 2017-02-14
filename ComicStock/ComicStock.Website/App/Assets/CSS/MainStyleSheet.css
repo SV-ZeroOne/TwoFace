@@ -1,5 +1,9 @@
-﻿body
+﻿#stockbody
 {
+    padding-top: 50px;
+}
+
+#ordersBody{
     padding-top: 50px;
 }
 

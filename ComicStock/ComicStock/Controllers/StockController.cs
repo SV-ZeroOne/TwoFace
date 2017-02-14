@@ -17,6 +17,7 @@ namespace ComicStock.WebAPI.Controllers
         private readonly IStockService stock;
         private readonly StockInterface stockRepo;
         private List<StockDTO> newStocks;
+        private int totalRecords = 0;
 
         public StockController(StockInterface stockRepo, IStockService stock)
         {
@@ -29,6 +30,7 @@ namespace ComicStock.WebAPI.Controllers
                 StockDTO newStock = new StockDTO(i);
                 newStocks.Add(newStock);
             }
+            totalRecords = newStocks.Count();
         }
 
         public StockController()
@@ -77,7 +79,8 @@ namespace ComicStock.WebAPI.Controllers
         // Lamda
         public IList<StockDTO> Get(string search)
         {
-            return Get().Where(i => i.Condition.Contains(search)).ToList<StockDTO>();
+            string searchString = search.ToLower();
+            return Get().Where(i => i.Condition.ToLower().Contains(searchString)).ToList<StockDTO>();
         }
 
         //PUT api/stocks
@@ -128,6 +131,28 @@ namespace ComicStock.WebAPI.Controllers
             newStock.AvailableQty = stockDto.AvailableQuantity;
             newStock.Price = stockDto.Price;
             return newStock;
+        }
+
+        [Route("api/Stock/GetPaged")]
+        [HttpGet]
+        public IHttpActionResult GetPaged(int pageNo = 1, int pageSize = 10)
+        {
+            // Determine the number of records to skip
+            int skip = (pageNo - 1) * pageSize;
+
+            // Get total number of records
+
+            int total = totalRecords;
+
+            // Select the customers based on paging parameters
+            List<StockDTO> stock = newStocks
+                .OrderBy(c => c.StockReferenceID)
+                .Skip(skip)
+                .Take(pageSize)
+                .ToList();
+
+            // Return the list of customers
+            return Ok(new PagedResult<StockDTO>(stock, pageNo, pageSize, total));
         }
     }
 }
