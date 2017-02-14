@@ -21,6 +21,9 @@ namespace ComicStock.Data.Implementations
             {
                 var temp = keyword;
                 predicate = predicate.Or(p => p.OrderID.ToString().Contains(temp));
+                //var result = newContext.Set<Order>().Where(x => x.IssueID == Convert.ToInt32(keyword) ||
+                //x.OrderDate == DateTime.Parse(keyword) ||
+                //).ToList();
             }
             return newContext.Orders.AsExpandable().Where (predicate);
         }

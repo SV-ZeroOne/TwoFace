@@ -214,6 +214,7 @@
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\PagedResult.cs" />
     <Compile Include="Controllers\StockController.cs" />
+    <Compile Include="Controllers\SupplierQuoteController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\VouchersController.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="Models\OrderDTO.cs" />
     <Compile Include="Models\StockDTO.cs" />
     <Compile Include="Models\SupplierDTO.cs" />
+    <Compile Include="Models\SupplierQuoteDTO.cs" />
     <Compile Include="Models\VoucherDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

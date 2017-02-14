@@ -1,4 +1,4 @@
-﻿var app = angular.module("ordersModule", ["xeditable", "ui.bootstrap"]);
+﻿var app = angular.module("ordersModule", ["xeditable", "ui.bootstrap", 'ui.select', 'ngSanitize']);
 
 app.run(function (editableOptions) {
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
@@ -11,6 +11,10 @@ app.controller("ordersController4", function ($http) {
     $octrl.currentPage = 1;
     $octrl.rowAmount = 10;
     $octrl.someOrders;
+    //search criteria
+    $octrl.ordersSearch = '';
+    $octrl.selectedIssue;
+    $octrl.issueSet = true;
 
     $http
         .get('http://localhost:62655/api/Orders/GetPaged?pageNo=1&pageSize=' + $octrl.rowAmount)
@@ -24,6 +28,17 @@ app.controller("ordersController4", function ($http) {
         .catch(function (errorResponse) {
             $octrl.context = "Something went wrong with getting issues";
         });
+
+    $http
+        .get('http://localhost:62655/api/Issues/GetPaged?pageNo=1&pageSize=10')
+        .then(function (response) {
+            console.log("Getting issues")
+            $octrl.someIssues = response.data;
+        })
+        .catch(function (errorResponse) {
+            $octrl.context = "Something went wrong with getting issues";
+        });
+    
 
     $octrl.showNewOrder = function () {
         $octrl.showMe = !$octrl.showMe;
@@ -70,5 +85,47 @@ app.controller("ordersController4", function ($http) {
         });
         //$log.log('Page changed to: ' + $octrl.s);
     };
+
+    $octrl.searchAll = function () {
+        $http.get('http://localhost:62655/api/Orders?search=' + $octrl.ordersSearch)
+        .then(function (response) {
+            $octrl.someOrders.Data = response.data;
+        });
+    }
+
+    $octrl.refreshIssues = function (search) {
+        switchToPage(search, 1);
+    }
+
+    function switchToPage(searchKey, page) {
+        //if ($octrl.searchCriteria == null) $octrl.searchCriteria = "";
+        console.log("searching")
+        $http.get('http://localhost:62655/api/Issues/GetSearchPaged?searchKey='+ searchKey +' &pageNumber=' + page)
+        .then(function (response) {
+            $octrl.someIssues = response.data;
+        }, function (error) {
+            console.log("error searching")
+        });
+    }
+
+    $octrl.getQuotes = function (item, model) {
+        console.log('Getting quotes')
+        $octrl.issueSet = true;
+        $http.get("http://localhost:62655/api/SupplierQuote?issueID=" + $octrl.selectedIssue.IssueID)
+        .then(function (response) {
+
+            if (response.data.length > 0) {
+                $octrl.quotes = response.data;
+                $octrl.issueSet = false;
+            }
+            else {
+                $octrl.quotes = [{ Name: "No supplier available" }];
+                $octrl.selectedQuotes = $octrl.quotes[0];
+            }
+
+        }, function (error) {
+            console.log('Some error getting quotes')
+        });
+    }
 
 });

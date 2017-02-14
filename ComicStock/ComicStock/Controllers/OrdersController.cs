@@ -17,6 +17,7 @@ namespace ComicStock.WebAPI.Controllers
         private readonly OrderInterface orderRepo;
         private List<OrderDTO> newOrders;
         private readonly IOrderService orderService;
+        private int totalRecords = 0;
 
         public OrdersController(OrderInterface orderRepo, IOrderService orderService)
         {
@@ -28,6 +29,7 @@ namespace ComicStock.WebAPI.Controllers
                 OrderDTO newOrder = new OrderDTO(i);
                 newOrders.Add(newOrder);
             }
+            totalRecords = newOrders.Count();
         }
 
         // GET api/orders
@@ -52,21 +54,42 @@ namespace ComicStock.WebAPI.Controllers
         // Need to figure out what property they might want to search orders for.
         public IList<OrderDTO> Get(string search)
         {
-            return Get().Where(i => i.DeliveryStatus.Contains(search)).ToList<OrderDTO>();
+            string searchString = search.ToLower();
+            //Orders converts to 1944/03
+            //List<OrderDTO> results = new List<OrderDTO>();
+            //foreach(var order in Get())
+            //{
+            //    if(order.OrderDate.ToString().Contains(searchString))
+            //    {
+            //        results.Add(order);
+            //    }
+            //}
+            //return results;
+            return Get().Where(i =>
+            i.DeliveryStatus != null && i.DeliveryStatus.ToLower().Contains(searchString) ||
+            i.OrderID.ToString().Contains(searchString) ||
+            i.IssueID.ToString().Contains(searchString) ||
+            i.ShipmentDate != null && i.ShipmentDate.ToString().Contains(searchString) ||
+            i.OrderDate != null && i.OrderDate.ToString().Contains(searchString) ||
+            i.SupplierID.ToString().Contains(searchString) ||
+            i.ShipmentRef != null && i.ShipmentRef.ToLower().Contains(searchString) ||
+            i.Total.ToString().Contains(search) ||
+            i.QtyOrdered.ToString().Contains(search)
+            ).ToList<OrderDTO>();
         }
 
-        [Route("api/Orders/Search")]
-        public IEnumerable<OrderDTO> Search(string[] searchWords)
-        {
-            IEnumerable<Order> orders = orderRepo.SearchOrders(searchWords);
-            List<OrderDTO> orderDTOs = new List<OrderDTO>(); 
-            foreach(Order o in orders)
-            {
-                OrderDTO newOrder = new OrderDTO(o);
-                orderDTOs.Add(newOrder);
-            }
-            return orderDTOs;
-        }
+        //[Route("api/Orders/Search")]
+        //public IEnumerable<OrderDTO> Search(string[] searchWords)
+        //{
+        //    IEnumerable<Order> orders = orderRepo.SearchOrders(searchWords);
+        //    List<OrderDTO> orderDTOs = new List<OrderDTO>(); 
+        //    foreach(Order o in orders)
+        //    {
+        //        OrderDTO newOrder = new OrderDTO(o);
+        //        orderDTOs.Add(newOrder);
+        //    }
+        //    return orderDTOs;
+        //}
 
         //might need to change this to return the order.
         [Route("api/Orders/PlaceOrder")]
@@ -148,7 +171,7 @@ namespace ComicStock.WebAPI.Controllers
 
             // Get total number of records
 
-            int total = newOrders.Count();
+            int total = totalRecords;
 
             // Select the customers based on paging parameters
             List<OrderDTO> orders = newOrders
