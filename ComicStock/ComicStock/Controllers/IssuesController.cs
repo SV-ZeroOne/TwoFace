@@ -186,7 +186,11 @@ namespace ComicStock.WebAPI.Controllers
             if(searchKey != null)
             {
                 string searchString = searchKey.ToLower();
-                IEnumerable<IssueDTO> someIssues = Get().Where(i => i.Title.ToLower().Contains(searchString));
+                IEnumerable<IssueDTO> someIssues = Get().Where(i => i.Title != null && i.Title.ToLower().Contains(searchString) ||
+                i.SeriesNumber.ToString().Contains(searchKey) ||
+                i.IssueID.ToString().Contains(searchString) ||
+                i.PublicationDate != null && i.PublicationDate.ToString().Contains(searchString) ||
+                i.Publisher != null && i.Publisher.ToLower().Contains(searchString));
                 int pageSize = 20;
                 // Determine the number of records to skip
                 int skip = (pageNumber - 1) * pageSize;

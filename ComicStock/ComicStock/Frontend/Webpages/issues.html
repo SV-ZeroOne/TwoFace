@@ -57,16 +57,16 @@
                 <br />
                 <table class="table table-condensed table-hover table-bordered">
                     <thead>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Series No</th>
-                    <th>Publication Date</th>
-                    <th>Publisher</th>
+                    <th ng-click="$ctrl.orderTableBy('ID');">ID</th>
+                    <th ng-click="$ctrl.orderTableBy('Title');">Title</th>
+                    <th ng-click="$ctrl.orderTableBy('SeriesNo');">Series No</th>
+                    <th ng-click="$ctrl.orderTableBy('PublicationDate');">Publication Date</th>
+                    <th ng-click="$ctrl.orderTableBy('Publisher');">Publisher</th>
                     <th>Edit</th>
                     </thead>
                     <tbody>
                         <!--<tr ng-repeat="i in $ctrl.options | filter : 'Issue'">-->
-                        <tr ng-repeat="i in $ctrl.options.Data | filter: $ctrl.issueSearch">
+                        <tr ng-repeat="i in $ctrl.options.Data | filter: $ctrl.issueSearch | orderBy:$ctrl.column:$ctrl.reverse">
                             <td>{{i.IssueID}}</td>
                             <td>
                                 <span editable-text="i.Title" e-name="title" e-form="rowform" onbeforesave="checkTitle($data, i.id)" e-required>

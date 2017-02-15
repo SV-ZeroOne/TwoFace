@@ -61,15 +61,15 @@
             </div><br /><br />    
             <table class="table table-condensed table-hover table-bordered">
                 <thead>
-                <th>SupplierID</th>
-                <th>Name</th>
-                <th>City</th>
+                <th ng-click="$ictrl.orderTableBy('SupplierID');">SupplierID</th>
+                <th ng-click="$ictrl.orderTableBy('Name');">Name</th>
+                <th ng-click="$ictrl.orderTableBy('City');">City</th>
                 <th>Reference Number</th>
                 <th>Edit</th>
                 </th>
                 <tbody>
                     <div class="row">
-                        <tr ng-repeat="i in $ictrl.someSuppliers.Data | filter: $ictrl.suppliersSearch">
+                        <tr ng-repeat="i in $ictrl.someSuppliers.Data | filter: $ictrl.suppliersSearch | orderBy:$ictrl.column:$ictrl.reverse">
                             <td class="col-md-2" style="text-align:center">{{i.SupplierID}}</td>
                             <td class="col-md-2" style="text-align:center">
                                 <span editable-text="i.Name" e-name="Name" e-form="rowform" ng-model="i.Name">

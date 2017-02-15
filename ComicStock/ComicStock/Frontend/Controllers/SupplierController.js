@@ -113,4 +113,11 @@
         });
     }
 
+    $ictrl.column = '';
+    $ictrl.reverse = false;
+    $ictrl.orderTableBy = function orderTableBy(columnName) {
+        $ictrl.column = columnName;
+        $ictrl.reverse = !$ictrl.reverse;
+    };
+
 });

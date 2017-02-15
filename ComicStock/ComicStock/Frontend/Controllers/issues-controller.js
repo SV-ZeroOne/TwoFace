@@ -5,15 +5,13 @@
 .controller('IssuesCtrl', function ($http) {
 
     var $ctrl = this;
-    
     $ctrl.rowAmount = 10;
-
-    $ctrl.showMe = false;
-        
+    $ctrl.showMe = false;      
     $ctrl.currentPage = 1;
-
     $ctrl.jsonObject = {};
     $ctrl.searchFlag = false;
+    $ctrl.column = '';
+    $ctrl.reverse = false;
 
     $http
         .get('../api/Issues/GetPaged?pageNo=1&pageSize=' + $ctrl.rowAmount)
@@ -188,4 +186,9 @@
         });
     }
 
+    $ctrl.orderTableBy = function orderTableBy(columnName) {
+        console.log("trying to filter")
+        $ctrl.column = columnName;
+        $ctrl.reverse = !$ctrl.reverse;
+    };
 });

@@ -55,8 +55,8 @@
             </div><br /><br /> 
             <table class="table table-condensed table-hover table-bordered">
                 <thead>
-                <th>VoucherID</th>
-                <th>Amount</th>
+                <th ng-click="$ictrl.orderTableBy('VoucherID');">VoucherID</th>
+                <th ng-click="$ictrl.orderTableBy('Amount');">Amount</th>
                 <th>Code</th>
                 <th>Date Issued</th>
                 <th>Validity</th>
@@ -64,7 +64,7 @@
                 </th>
                 <tbody>
                     <div class="row">
-                        <tr ng-repeat="i in $ictrl.someVouchers.Data | filter: $ictrl.vouchersSearch">
+                        <tr ng-repeat="i in $ictrl.someVouchers.Data | filter: $ictrl.vouchersSearch | orderBy:$ictrl.column:$ictrl.reverse">
                             <td class="col-md-2" style="text-align:center">{{i.VoucherID}}</td>
                             <td class="col-md-2" style="text-align:center">
                                 <span editable-text="i.Amount" e-name="Amount" e-form="rowform" ng-model="i.Amount">

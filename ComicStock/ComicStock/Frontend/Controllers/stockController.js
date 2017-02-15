@@ -13,6 +13,8 @@ angular.module("SquareEyesModule")
     $sctrl.stockSearch = '';
     $sctrl.someStock;
     $sctrl.searchFlag = false;
+    $sctrl.column = '';
+    $sctrl.reverse = false;
 
     $sctrl.myPromise = $http
         .get('../api/Stock/GetPaged?pageNo=1&pageSize=' + $sctrl.rowAmount)
@@ -143,5 +145,11 @@ angular.module("SquareEyesModule")
             $sctrl.context = "Something went wrong with getting issues";
         });
     }
+
+    $sctrl.orderTableBy = function orderTableBy(columnName) {
+        console.log("trying to filter")
+        $sctrl.column = columnName;
+        $sctrl.reverse = !$sctrl.reverse;
+    };
 
 });

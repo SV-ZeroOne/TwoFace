@@ -67,60 +67,63 @@
                 <div class="row">
                     <div class="col-md-12">
                         <table class="table table-bordered table-hover table-condensed" cg-busy="$sctrl.myPromise">
-                            <tr style="font-weight: bold">
-                                <td style="width:auto">Stock ID</td>
-                                <td style="width:auto">Issue ID</td>
-                                <td style="width:auto">Condition</td>
-                                <td style="width:auto">Quantity</td>
-                                <td style="width:auto">Price</td>
-                                <td style="width:auto">Edit</td>
-                            </tr>
-                            <tr ng-repeat="stock in $sctrl.someStock.Data | filter: $octrl.stockSearch">
-                                <td>
-                                    {{ stock.StockReferenceID || 'empty' }}
-                                </td>
-                                <td>
-                                    <span editable-text="stock.IssueID" e-name="IssueID" e-form="rowform" onbeforesave="checkName($data, stock.IssueID)">
-                                        {{ stock.IssueID || 'empty' }}
-                                    </span>
-                                </td>
-                                <td>
-                                    <span editable-text="stock.Condition" e-name="Condition" e-form="rowform">
-                                        {{ stock.Condition || 'empty' }}
-                                    </span>
-                                </td>
-                                <td>
-                                    <span editable-text="stock.AvailableQuantity" e-name="AvailableQuantity" e-form="rowform">
-                                        {{ stock.AvailableQuantity || 'empty' }}
-                                    </span>
-                                </td>
-                                <td>
-                                    <span editable-text="stock.Price" e-name="Price" e-form="rowform">
-                                        R{{ stock.Price || 'empty' | number:2}}
-                                    </span>
-                                </td>
-                                <td style="white-space: nowrap">
-                                    <!-- form -->
-                                    <form editable-form name="rowform" onbeforesave="$sctrl.saveStock($data, stock.StockReferenceID)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == stock">
-                                        <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
-                                            <span class="glyphicon glyphicon-floppy-saved"></span> Save
-                                        </button>
-                                        <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
-                                            <span class="glyphicon glyphicon-floppy-remove"></span> Cancel
-                                        </button>
-                                    </form>
-                                    <div class="buttons" ng-show="!rowform.$visible">
-                                        <button type="button" class="btn btn-primary" ng-click="rowform.$show()">
-                                            <span class="glyphicon glyphicon-edit"></span> Edit
-                                        </button>
-                                        <!--
-                                        <button type="button" class="btn btn-danger" ng-click="$octrl.removeOrder($index, order.OrderID)">
-                                            <span class="glyphicon glyphicon-trash"></span> Delete
-                                        </button>
-                                        -->
-                                    </div>
-                                </td>
-                            </tr>
+                                <thead>
+                                <th ng-click="$sctrl.orderTableBy('StockReferenceID');" style="width:auto">Stock ID</th>
+                                <th ng-click="$sctrl.orderTableBy('IssueID');" style="width:auto">Issue ID</th>
+                                <th ng-click="$sctrl.orderTableBy('Condition');" style="width:auto">Condition</th>
+                                <th ng-click="$sctrl.orderTableBy('AvailableQuantity');" style="width:auto">Quantity</th>
+                                <th ng-click="$sctrl.orderTableBy('Price');" style="width:auto">Price</th>
+                                <th style="width:auto">Edit</th>
+                                <!--style="width:auto"-->
+                            </th>
+                            <tbody>
+                                <tr ng-repeat="stock in $sctrl.someStock.Data | filter: $sctrl.stockSearch | orderBy:$sctrl.column:$sctrl.reverse">
+                                    <td>
+                                        {{ stock.StockReferenceID || 'empty' }}
+                                    </td>
+                                    <td>
+                                        <span editable-text="stock.IssueID" e-name="IssueID" e-form="rowform" onbeforesave="checkName($data, stock.IssueID)">
+                                            {{ stock.IssueID || 'empty' }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span editable-text="stock.Condition" e-name="Condition" e-form="rowform">
+                                            {{ stock.Condition || 'empty' }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span editable-text="stock.AvailableQuantity" e-name="AvailableQuantity" e-form="rowform">
+                                            {{ stock.AvailableQuantity || 'empty' }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span editable-text="stock.Price" e-name="Price" e-form="rowform">
+                                            R{{ stock.Price || 'empty' | number:2}}
+                                        </span>
+                                    </td>
+                                    <td style="white-space: nowrap">
+                                        <!-- form -->
+                                        <form editable-form name="rowform" onbeforesave="$sctrl.saveStock($data, stock.StockReferenceID)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == stock">
+                                            <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+                                                <span class="glyphicon glyphicon-floppy-saved"></span> Save
+                                            </button>
+                                            <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+                                                <span class="glyphicon glyphicon-floppy-remove"></span> Cancel
+                                            </button>
+                                        </form>
+                                        <div class="buttons" ng-show="!rowform.$visible">
+                                            <button type="button" class="btn btn-primary" ng-click="rowform.$show()">
+                                                <span class="glyphicon glyphicon-edit"></span> Edit
+                                            </button>
+                                            <!--
+                    <button type="button" class="btn btn-danger" ng-click="$octrl.removeOrder($index, order.OrderID)">
+                        <span class="glyphicon glyphicon-trash"></span> Delete
+                    </button>
+                    -->
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>

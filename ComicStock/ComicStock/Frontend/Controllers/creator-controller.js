@@ -5,14 +5,13 @@
 .controller('CreatorsCtrl', function ($http) {
 
     var $ctrl = this;
-
     $ctrl.rowAmount = 10;
-
     $ctrl.showMe = false;
-
     $ctrl.currentPage = 1;
-
     $ctrl.jsonObject = {};
+    $ctrl.column = '';
+    $ctrl.reverse = false;
+
 
     $http
         .get('../api/Creators/GetPaged?pageNo=1&pageSize=' + $ctrl.rowAmount)
@@ -131,5 +130,11 @@
             $ctrl.context = "Something went wrong with getting issues";
         });
     }
+
+    $ctrl.orderTableBy = function orderTableBy(columnName) {
+        console.log("trying to filter")
+        $ctrl.column = columnName;
+        $ctrl.reverse = !$ctrl.reverse;
+    };
 
 });

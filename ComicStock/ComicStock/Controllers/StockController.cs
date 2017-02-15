@@ -80,7 +80,11 @@ namespace ComicStock.WebAPI.Controllers
         public IList<StockDTO> Get(string search)
         {
             string searchString = search.ToLower();
-            return Get().Where(i => i.Condition.ToLower().Contains(searchString)).ToList<StockDTO>();
+            return Get().Where(i => i.Condition.ToLower().Contains(searchString) ||
+            i.IssueID.ToString().Contains(searchString) ||
+            i.StockReferenceID.ToString().Contains(searchString) ||
+            i.Price.ToString().Contains(searchString)
+            ).ToList<StockDTO>();
         }
 
         //PUT api/stocks
@@ -174,7 +178,10 @@ namespace ComicStock.WebAPI.Controllers
             if (searchKey != null)
             {
                 string searchString = searchKey.ToLower();
-                IEnumerable<StockDTO> someStock = Get().Where(i => i.Condition.ToLower().Contains(searchString));
+                IEnumerable<StockDTO> someStock = Get().Where(i => i.Condition.ToLower().Contains(searchString) ||
+                i.IssueID.ToString().Contains(searchString) ||
+                i.StockReferenceID.ToString().Contains(searchString) ||
+                i.Price.ToString().Contains(searchString));
                 int pageSize = 20;
                 // Determine the number of records to skip
                 int skip = (pageNumber - 1) * pageSize;

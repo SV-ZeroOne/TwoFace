@@ -16,6 +16,8 @@ angular.module("SquareEyesModule")
     $octrl.newOrder.qtyOrdered = 0;
     $octrl.someOrders;
     $octrl.searchFlag = false;
+    $octrl.column = '';
+    $octrl.reverse = false;
 
     $octrl.myPromise = $http
         .get('../api/Orders/GetPaged?pageNo=1&pageSize=' + $octrl.rowAmount)
@@ -175,5 +177,11 @@ angular.module("SquareEyesModule")
             $octrl.context = "Something went wrong with getting issues";
         });
     }
+
+    $octrl.orderTableBy = function orderTableBy(columnName) {
+        console.log("trying to filter")
+        $octrl.column = columnName;
+        $octrl.reverse = !$octrl.reverse;
+    };
 
 });

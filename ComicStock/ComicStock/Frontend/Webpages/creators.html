@@ -54,16 +54,16 @@
                 <br />
                 <table class="table table-condensed table-hover table-bordered">
                     <thead>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Country</th>
+                    <th ng-click="$ctrl.orderTableBy('ID');">ID</th>
+                    <th ng-click="$ctrl.orderTableBy('Name');">Name</th>
+                    <th ng-click="$ctrl.orderTableBy('Country');">Country</th>
                     <th>Tax Reference</th>
-                    <th>Email</th>
+                    <th ng-click="$ctrl.orderTableBy('Email');">Email</th>
                     <th>Edit</th>
                     </th>
                     <tbody>
                         <!--<tr ng-repeat="i in $ctrl.options | filter : 'Issue'">-->
-                        <tr ng-repeat="i in $ctrl.options.Data | filter: $ctrl.creatorSearch">
+                        <tr ng-repeat="i in $ctrl.options.Data | filter: $ctrl.creatorSearch | orderBy:$ctrl.column:$ctrl.reverse">
                             <td>{{i.CreatorID}}</td>
                             <td>
                                 <span editable-text="i.Name" e-name="Name" e-form="rowform" onbeforesave="checkName($data, i.id)" e-required>

@@ -70,84 +70,86 @@
         <div class="row">
             <div class="col-md-12">
                 <table class="table table-bordered table-hover table-condensed" cg-busy="$octrl.myPromise">
-                    <tr style="font-weight: bold">
-                        <td style="width:auto">Order ID</td>
-                        <td style="width:auto">Order Date</td>
-                        <td style="width:auto">Issue ID</td>
-                        <td style="width:auto">Qty Ordered</td>
-                        <td style="width:auto">Total</td>
-                        <td style="width:auto">Supplier ID</td>
-                        <td style="width:auto">Shipment Ref</td>
-                        <td style="width:auto">Shipment Date</td>
-                        <td style="width:auto">Delivery Status</td>
-                        <td style="width:auto">Edit</td>
-                    </tr>
-                    <tr ng-repeat="order in $octrl.someOrders.Data | filter: $octrl.ordersSearch">
-                        <td>
-                            {{ order.OrderID || 'empty' }}
-                        </td>
-                        <td>
-                            <span editable-text="order.OrderDate" e-name="OrderDate" e-form="rowform" onbeforesave="checkName($data, order.OrderDate)">
-                                {{ order.OrderDate || 'empty' | date:'medium'}}
-                            </span>
-                        </td>
-                        <td>
-                            <span editable-text="order.IssueID" e-name="IssueID" e-form="rowform">
-                                {{ order.IssueID || 'empty' }}
-                            </span>
-                        </td>
-                        <td>
-                            <span editable-text="order.QtyOrdered" e-name="QtyOrdered" e-form="rowform">
-                                {{ order.QtyOrdered || 'empty' }}
-                            </span>
-                        </td>
-                        <td>
-                            <span editable-text="order.Total" e-name="Total" e-form="rowform">
-                                R{{ order.Total || 'empty' | number:2 }}
-                            </span>
-                        </td>
-                        <td>
-                            <span editable-text="order.SupplierID" e-name="SupplierID" e-form="rowform">
-                                {{ order.SupplierID || 'empty' }}
-                            </span>
-                        </td>
-                        <td>
-                            <span editable-text="order.ShipmentRef" e-name="ShipmentRef" e-form="rowform">
-                                {{ order.ShipmentRef || 'empty' }}
-                            </span>
-                        </td>
-                        <td>
-                            <span editable-text="order.ShipmentDate" e-name="ShipmentDate" e-form="rowform">
-                                {{ order.ShipmentDate || 'empty' | date:'MMM d, y' }}
-                            </span>
-                        </td>
-                        <td>
-                            <span editable-text="order.DeliveryStatus" e-name="DeliveryStatus" e-form="rowform">
-                                {{ order.DeliveryStatus || 'empty' }}
-                            </span>
-                        </td>
-                        <td style="white-space: nowrap">
-                            <!-- form -->
-                            <form editable-form name="rowform" onbeforesave="$octrl.saveOrder($data, order.OrderID)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == order">
-                                <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-floppy-saved"></span> Save
-                                </button>
-                                <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
-                                    <span class="glyphicon glyphicon-floppy-remove"></span> Cancel
-                                </button>
-                            </form>
-                            <div class="buttons" ng-show="!rowform.$visible">
-                                <button type="button" class="btn btn-primary" ng-click="rowform.$show()">
-                                    <span class="glyphicon glyphicon-edit"></span> Edit
-                                </button>
-                                <!--
-                                <button type="button" class="btn btn-danger" ng-click="$octrl.removeOrder($index, order.OrderID)">
-                                    <span class="glyphicon glyphicon-trash"></span> Delete
-                                </button>
-                                -->
-                            </div>
-                        </td>
-                    </tr>
+                    <thead>
+                        <th ng-click="$octrl.orderTableBy('OrderID');">Order ID</th>
+                        <th ng-click="$octrl.orderTableBy('OrderDate');">Order Date</th>
+                        <th ng-click="$octrl.orderTableBy('IssueID');">Issue ID</th>
+                        <th ng-click="$octrl.orderTableBy('QtyOrdered');">Qty Ordered</th>
+                        <th ng-click="$octrl.orderTableBy('Total');">Total</th>
+                        <th ng-click="$octrl.orderTableBy('SupplierID');"">Supplier ID</th>
+                        <th >Shipment Ref</th>
+                        <th ng-click="$octrl.orderTableBy('ShipmentDate');">Shipment Date</th>
+                        <th ng-click="$octrl.orderTableBy('DeliveryStatus');">Delivery Status</th>
+                        <th >Edit</th>
+                    </th>
+                    <tbody>
+                        <tr ng-repeat="order in $octrl.someOrders.Data | filter: $octrl.ordersSearch | orderBy:$octrl.column:$octrl.reverse">
+                            <td>
+                                {{ order.OrderID || 'empty' }}
+                            </td>
+                            <td>
+                                <span editable-text="order.OrderDate" e-name="OrderDate" e-form="rowform" onbeforesave="checkName($data, order.OrderDate)">
+                                    {{ order.OrderDate || 'empty' | date:'medium'}}
+                                </span>
+                            </td>
+                            <td>
+                                <span editable-text="order.IssueID" e-name="IssueID" e-form="rowform">
+                                    {{ order.IssueID || 'empty' }}
+                                </span>
+                            </td>
+                            <td>
+                                <span editable-text="order.QtyOrdered" e-name="QtyOrdered" e-form="rowform">
+                                    {{ order.QtyOrdered || 'empty' }}
+                                </span>
+                            </td>
+                            <td>
+                                <span editable-text="order.Total" e-name="Total" e-form="rowform">
+                                    R{{ order.Total || 'empty' | number:2 }}
+                                </span>
+                            </td>
+                            <td>
+                                <span editable-text="order.SupplierID" e-name="SupplierID" e-form="rowform">
+                                    {{ order.SupplierID || 'empty' }}
+                                </span>
+                            </td>
+                            <td>
+                                <span editable-text="order.ShipmentRef" e-name="ShipmentRef" e-form="rowform">
+                                    {{ order.ShipmentRef || 'empty' }}
+                                </span>
+                            </td>
+                            <td>
+                                <span editable-text="order.ShipmentDate" e-name="ShipmentDate" e-form="rowform">
+                                    {{ order.ShipmentDate || 'empty' | date:'MMM d, y' }}
+                                </span>
+                            </td>
+                            <td>
+                                <span editable-text="order.DeliveryStatus" e-name="DeliveryStatus" e-form="rowform">
+                                    {{ order.DeliveryStatus || 'empty' }}
+                                </span>
+                            </td>
+                            <td style="white-space: nowrap">
+                                <!-- form -->
+                                <form editable-form name="rowform" onbeforesave="$octrl.saveOrder($data, order.OrderID)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == order">
+                                    <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-floppy-saved"></span> Save
+                                    </button>
+                                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-floppy-remove"></span> Cancel
+                                    </button>
+                                </form>
+                                <div class="buttons" ng-show="!rowform.$visible">
+                                    <button type="button" class="btn btn-primary" ng-click="rowform.$show()">
+                                        <span class="glyphicon glyphicon-edit"></span> Edit
+                                    </button>
+                                    <!--
+                    <button type="button" class="btn btn-danger" ng-click="$octrl.removeOrder($index, order.OrderID)">
+                        <span class="glyphicon glyphicon-trash"></span> Delete
+                    </button>
+                    -->
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>

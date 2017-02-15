@@ -15,6 +15,8 @@
     $ictrl.rowAmount = 10;
     $ictrl.someVouchers;
     $ictrl.searchFlag = false;
+    $ictrl.column = '';
+    $ictrl.reverse = false;
 
     $http
         .get('../api/Vouchers/GetPaged?pageNo=1&pageSize='+$ictrl.rowAmount)
@@ -123,5 +125,11 @@
             $ictrl.context = "Something went wrong with getting issues";
         });
     }
+
+    $ictrl.orderTableBy = function orderTableBy(columnName) {
+        console.log("trying to filter")
+        $ictrl.column = columnName;
+        $ictrl.reverse = !$ictrl.reverse;
+    };
 
 });
