@@ -19,7 +19,7 @@ app.controller("ordersController4", function ($http, $mdDialog) {
     $octrl.searchFlag = false;
 
     $octrl.myPromise = $http
-        .get('http://localhost:62655/api/Orders/GetPaged?pageNo=1&pageSize=' + $octrl.rowAmount)
+        .get('../api/Orders/GetPaged?pageNo=1&pageSize=' + $octrl.rowAmount)
         .then(function (response) {
             $octrl.someOrders = response.data;
             $octrl.noOfPages = $octrl.someOrders.Paging.PageCount;
@@ -32,7 +32,7 @@ app.controller("ordersController4", function ($http, $mdDialog) {
         });
 
     $http
-        .get('http://localhost:62655/api/Issues/GetPaged?pageNo=1&pageSize=10')
+        .get('../api/Issues/GetPaged?pageNo=1&pageSize=10')
         .then(function (response) {
             console.log("Getting issues")
             $octrl.someIssues = response.data;
@@ -48,7 +48,7 @@ app.controller("ordersController4", function ($http, $mdDialog) {
 
     $octrl.placeOrder = function () {
         $http
-          .post('http://localhost:62655/api/Orders/PlaceOrder?issueID=' + $octrl.selectedIssue.IssueID + '&quantity=' + $octrl.newOrder.qtyOrdered + '&supplierID=' + $octrl.selectedQuotes.SupplierID)
+          .post('../api/Orders/PlaceOrder?issueID=' + $octrl.selectedIssue.IssueID + '&quantity=' + $octrl.newOrder.qtyOrdered + '&supplierID=' + $octrl.selectedQuotes.SupplierID)
           .then(function (response) {
               $octrl.theNewOrder = response.data;
           }, function (error) {
@@ -74,7 +74,7 @@ app.controller("ordersController4", function ($http, $mdDialog) {
         console.log("Order ID: " + id);
         data.OrderID = id;
         console.log(data);
-        $http.put('http://localhost:62655/api/Orders', data);
+        $http.put('../api/Orders', data);
     };
 
     $octrl.paginationChange = function () {
@@ -88,7 +88,7 @@ app.controller("ordersController4", function ($http, $mdDialog) {
         if ($octrl.searchFlag) {
             $octrl.searchAll();
         } else {
-            $octrl.myPromise = $http.get('http://localhost:62655/api/Orders/GetPaged?pageNo=' + $octrl.currentPage + '&pageSize=' + $octrl.rowAmount)
+            $octrl.myPromise = $http.get('../api/Orders/GetPaged?pageNo=' + $octrl.currentPage + '&pageSize=' + $octrl.rowAmount)
             .then(function (response) {
                 console.log("Getting new paged results.")
                 $octrl.someOrders = response.data;
@@ -98,7 +98,7 @@ app.controller("ordersController4", function ($http, $mdDialog) {
     };
 
     $octrl.searchAll = function () {
-        $octrl.myPromise = $http.get('http://localhost:62655/api/Orders/GetSearchPaged?searchKey=' + $octrl.ordersSearch + '&pageNumber=' + $octrl.currentPage)
+        $octrl.myPromise = $http.get('../api/Orders/GetSearchPaged?searchKey=' + $octrl.ordersSearch + '&pageNumber=' + $octrl.currentPage)
         .then(function (response) {
             $octrl.someOrders = response.data;
             $octrl.noOfPages = $octrl.someOrders.Paging.PageCount;
@@ -115,7 +115,7 @@ app.controller("ordersController4", function ($http, $mdDialog) {
     function switchToPage(searchKey, page) {
         //if ($octrl.searchCriteria == null) $octrl.searchCriteria = "";
         console.log("searching")
-        $octrl.myPromise = $http.get('http://localhost:62655/api/Issues/GetSearchPaged?searchKey=' + searchKey + '&pageNumber=' + page)
+        $octrl.myPromise = $http.get('../api/Issues/GetSearchPaged?searchKey=' + searchKey + '&pageNumber=' + page)
         .then(function (response) {
             $octrl.someIssues = response.data;
         }, function (error) {
@@ -126,7 +126,7 @@ app.controller("ordersController4", function ($http, $mdDialog) {
     $octrl.getQuotes = function (item, model) {
         console.log('Getting quotes')
         $octrl.issueSet = true;
-        $http.get("http://localhost:62655/api/SupplierQuote?issueID=" + $octrl.selectedIssue.IssueID)
+        $http.get("../api/SupplierQuote?issueID=" + $octrl.selectedIssue.IssueID)
         .then(function (response) {
 
             if (response.data.length > 0) {
@@ -163,7 +163,7 @@ app.controller("ordersController4", function ($http, $mdDialog) {
 
     $octrl.restoreAll = function () {
         $octrl.myPromise = $http
-        .get('http://localhost:62655/api/Orders/GetPaged?pageNo=1&pageSize=' + $octrl.rowAmount)
+        .get('../api/Orders/GetPaged?pageNo=1&pageSize=' + $octrl.rowAmount)
         .then(function (response) {
             $octrl.searchFlag = false;
             $octrl.someOrders = response.data;

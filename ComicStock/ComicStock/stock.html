@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Stock</title>
 
-    <link href="/App/Assets/CSS/MainStyleSheet.css" rel="stylesheet">
+    <link href="/Scripts/app/Assets/CSS/MainStyleSheet.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -14,8 +14,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.5.7/angular-sanitize.min.js"></script>
     <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css" />
-    <link rel="stylesheet" href="/App/Assets/CSS/select.min.css" />
-    <script src="/App/Assets/JS/select.min.js"></script>
+    <link rel="stylesheet" href="/Scripts/app/Assets/CSS/select.min.css" />
+    <script src="/Scripts/app/Assets/JS/select.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
     <!--Angular Material stuff-->
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
@@ -24,15 +24,15 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
     <!--Busy loader-->
-    <script src="/App/Assets/JS/angular-busy.min.js"></script>
-    <link href="/App/Assets/CSS/angular-busy.min.css" rel="stylesheet" />
-    <link href="/App/Assets/CSS/xeditable.min.css" rel="stylesheet" />
-    <script src="/App/Assets/JS/xeditable.min.js"></script>
-    <script src="stockController.js"></script>
+    <script src="/Scripts/app/Assets/JS/angular-busy.min.js"></script>
+    <link href="/Scripts/app/Assets/CSS/angular-busy.min.css" rel="stylesheet" />
+    <link href="/Scripts/app/Assets/CSS/xeditable.min.css" rel="stylesheet" />
+    <script src="/Scripts/app/Assets/JS/xeditable.min.js"></script>
+    <script src="/Scripts/app/Stock/stockController.js"></script>
 
 </head>
 <body id="stockbody" ng-app="stockModule" ng-controller="stockController as $sctrl" >
-<div ng-include="'/App/Assets/Views/navbar.html'"></div>
+<div ng-include="'/Scripts/app/Assets/Views/navbar.html'"></div>
 
     <div class="container" id="popupContainer1" >
         <h1>Stock</h1>
