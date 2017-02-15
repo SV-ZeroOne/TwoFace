@@ -66,7 +66,10 @@
                     <br />
                     <form name="newOrderForm">
                         <h4 style="text-align:center">Quantity: </h4>
-                        <input type="number" class="col-md-offset-5" style="width:190px;" name="newQuantity" ng-model="$octrl.newOrder.qtyOrdered" required />
+                        <input type="number" class="col-md-offset-5" style="width:190px;" name="newQuantity" ng-model="$octrl.newOrder.qtyOrdered" required min="0" />
+                        <div ng-messages="newOrderForm.newQuantity.$error" role="alert">
+                            <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
+                        </div>
                         <br />
                         <br />
                         <h5 style="text-align:center">Total: R <test ng-if="$octrl.selectedQuotes.Price != null">{{$octrl.selectedQuotes.Price * $octrl.newOrder.qtyOrdered}}</test></h5> 

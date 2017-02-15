@@ -40,19 +40,31 @@
                         <form name="newCreatorForm">
                                 <div class="col-md-3" style="text-align:center">
                                         <label for="name">Name:</label>
-                                        <input type="text" class="form-control" ng-model="$ctrl.options.name" id="name">
+                                        <input type="text" name="newName" pattern="[a-zA-Z]{1,}" class="form-control" ng-model="$ctrl.options.name" id="name" required oninvalid="setCustomValidity('Please enter only Alphabetical letters ')" onchange="try{setCustomValidity('')}catch(e){}"  style="margin-bottom:10px">
+                                    <div ng-messages="newCreatorForm.newName.$error" role="alert">
+                                        <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
+                                    </div>
                                 </div>
                                 <div class="col-md-3" style="text-align:center">
                                     <label for="country">Country of residence:</label>
-                                    <input type="text" class="form-control" ng-model="$ctrl.options.countryOfResidence" id="country">
+                                    <input type="text" name="newCountry" pattern="[a-zA-Z]{1,}" class="form-control" ng-model="$ctrl.options.countryOfResidence" id="country" required oninvalid="setCustomValidity('Please enter only Alphabetical letters ')" onchange="try{setCustomValidity('')}catch(e){}"  style="margin-bottom:10px">
+                                    <div ng-messages="newCreatorForm.newCountry.$error" role="alert">
+                                        <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
+                                    </div>
                                 </div>
                                 <div class="col-md-3" style="text-align:center">
                                     <label for="taxReference">Tax Reference number:</label>
-                                    <input type="text" class="form-control" ng-model="$ctrl.options.taxReferenceNumber" id="taxReference">
+                                    <input type="text" name="newTax" class="form-control" ng-model="$ctrl.options.taxReferenceNumber" id="taxReference" required>
+                                    <div ng-messages="newCreatorForm.newTax.$error" role="alert">
+                                        <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
+                                    </div>
                                 </div>
                                 <div class="col-md-3" style="text-align:center">
                                     <label for="email">Email:</label>
-                                    <input type="text" class="form-control" ng-model="$ctrl.options.email" id="email">
+                                    <input type="email" name="newEmail" class="form-control" ng-model="$ctrl.options.email" id="email" required>
+                                    <div ng-messages="newCreatorForm.newEmail.$error" role="alert">
+                                        <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
+                                    </div>
                                 </div>
                             <button class="btn btn-primary col-md-4 col-md-offset-4" type="submit" style="margin-top:30px;">Insert Creator</button>
                         </form>

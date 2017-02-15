@@ -6,6 +6,7 @@
    
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="/Scripts/app/Assets/JS/angular-messages.js"></script>
     <script src="/Scripts/app/issues-controller.js"></script>
     <script rel="stylesheet" href="../Assets/css/Main.css"></script>
     <!-- Latest compiled and minified CSS -->
@@ -40,15 +41,24 @@
                         <form name="newIssueForm">
                             <div class="col-md-3" style="text-align:center">
                                 <label for="title">Title:</label>
-                                <input type="text" class="form-control" ng-model="$ctrl.options.title" id="title">
+                                <input type="text" name="newTitle" pattern="[a-zA-Z]{1,}" class="form-control" ng-model="$ctrl.options.title" id="title" required oninvalid="setCustomValidity('Please enter only Alphabetical letters ')" onchange="try{setCustomValidity('')}catch(e){}"  style="margin-bottom:10px">
+                                <div ng-messages="newIssueForm.newTitle.$error" role="alert">
+                                    <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
+                                </div>
                             </div>
                             <div class="col-md-3" style="text-align:center">
                                 <label for="SeriesNo">Series Number:</label>
-                                <input type="text" class="form-control" ng-model="$ctrl.options.series" id="series">
+                                <input type="text" name="newSeriesNo" class="form-control" ng-model="$ctrl.options.series" id="series" required>
+                                <div ng-messages="newIssueForm.newSeriesNo.$error" role="alert">
+                                    <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
+                                </div>
                             </div>
                             <div class="col-md-3" style="text-align:center">
                                 <label for="Publisher">Publisher:</label>
-                                <input type="text" class="form-control" ng-model="$ctrl.options.publisher" id="publisher">
+                                <input type="text" name="newPublisher" pattern="[a-zA-Z]{1,}" class="form-control" ng-model="$ctrl.options.publisher" id="publisher" required oninvalid="setCustomValidity('Please enter only Alphabetical letters ')" onchange="try{setCustomValidity('')}catch(e){}"  style="margin-bottom:10px">
+                                <div ng-messages="newIssueForm.newPublisher.$error" role="alert">
+                                    <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
+                                </div>
                             </div>
                             <div class="col-md-3" style="text-align:center">
                                 <label for="PublicationDate">Publication Date:</label>

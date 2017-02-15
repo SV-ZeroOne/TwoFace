@@ -69,10 +69,16 @@
                     <br />
                     <form name="newStockForm">
                         <h4 style="text-align:center">Quantity: </h4>
-                        <input type="number" name="newQuantity" class="col-md-offset-5" style="width:190px;" ng-model="$sctrl.Quantity"/>
+                        <input type="number" name="newQuantity" class="col-md-offset-5" style="width:190px;" ng-model="$sctrl.Quantity" required min="0"/>
+                        <div ng-messages="newStockForm.newQuantity.$error" role="alert">
+                            <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
+                        </div>
                         <br />
                         <h4 style="text-align:center">Price: </h4>
-                        <input type="number" name="newQuantity" class="col-md-offset-5" style="width:190px;" ng-model="$sctrl.Price" /><br /><br/>
+                        <input type="number" name="newPrice" class="col-md-offset-5" style="width:190px;" ng-model="$sctrl.Price" required min="0"/>
+                        <div ng-messages="newStockForm.newPrice.$error" role="alert">
+                            <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
+                        </div><br /><br/>
                         <button class="btn btn-primary col-md-2 col-lg-offset-5" style="margin-top:5px" ng-click="$sctrl.showAlert($event)" type="submit">Add New Stock</button>
                     </form>
                 </div>
