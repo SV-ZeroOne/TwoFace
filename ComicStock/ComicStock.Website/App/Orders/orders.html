@@ -38,7 +38,7 @@
         <h1>Orders</h1>
         <div class="row">
             <div class="col-md-12">
-                <button class="btn btn-primary" ng-click="$octrl.showNewOrder()">Make New Order</button>
+                <button class="btn btn-primary" ng-click="$octrl.showNewOrder()">New Order</button>
                 <br />
                 <div ng-show="$octrl.showMe" ng-submit="$octrl.placeOrder()">
                     <br />
@@ -121,7 +121,7 @@
                         </td>
                         <td>
                             <span editable-text="order.OrderDate" e-name="OrderDate" e-form="rowform" onbeforesave="checkName($data, order.OrderDate)">
-                                {{ order.OrderDate || 'empty' }}
+                                {{ order.OrderDate || 'empty' | date:'medium'}}
                             </span>
                         </td>
                         <td>
@@ -136,7 +136,7 @@
                         </td>
                         <td>
                             <span editable-text="order.Total" e-name="Total" e-form="rowform">
-                                {{ order.Total || 'empty' }}
+                                R{{ order.Total || 'empty' | number:2 }}
                             </span>
                         </td>
                         <td>
@@ -151,7 +151,7 @@
                         </td>
                         <td>
                             <span editable-text="order.ShipmentDate" e-name="ShipmentDate" e-form="rowform">
-                                {{ order.ShipmentDate || 'empty' }}
+                                {{ order.ShipmentDate || 'empty' | date:'MMM d, y' }}
                             </span>
                         </td>
                         <td>

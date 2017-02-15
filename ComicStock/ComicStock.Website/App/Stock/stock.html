@@ -129,7 +129,7 @@
                         </td>
                         <td>
                             <span editable-text="stock.Price" e-name="Price" e-form="rowform">
-                                {{ stock.Price || 'empty' }}
+                                R{{ stock.Price || 'empty' | number:2}}
                             </span>
                         </td>
                         <td style="white-space: nowrap">

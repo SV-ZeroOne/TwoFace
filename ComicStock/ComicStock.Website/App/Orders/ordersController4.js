@@ -48,7 +48,12 @@ app.controller("ordersController4", function ($http, $mdDialog) {
 
     $octrl.placeOrder = function () {
         $http
-          .post('http://localhost:62655/api/Orders/PlaceOrder?issueID=' + $octrl.selectedIssue.IssueID + '&quantity=' + $octrl.newOrder.qtyOrdered + '&supplierID=' + $octrl.selectedQuotes.SupplierID);
+          .post('http://localhost:62655/api/Orders/PlaceOrder?issueID=' + $octrl.selectedIssue.IssueID + '&quantity=' + $octrl.newOrder.qtyOrdered + '&supplierID=' + $octrl.selectedQuotes.SupplierID)
+          .then(function (response) {
+              $octrl.theNewOrder = response.data;
+          }, function (error) {
+              
+          })
     }
 
     // delete order
