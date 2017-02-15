@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="../Assets/js/angular-messages.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script rel="stylesheet" href="../Assets/css/Main.css"></script>
+    <script src="/App/Vouchers/VoucherController.js"></script>
+    <link href="../../Content/toastr.css" rel="stylesheet"/>
+    <link href="/App/Assets/css/xeditable.min.css" rel="stylesheet"/>
+    <script src="/App/Assets/js/xeditable.js"></script>
+    <script src="/App/Assets/js/xeditable.min.js"></script>
+</head>
+<body ng-app="voucherModule">
+    <div ng-controller="voucherController as $ictrl">
+        <div class="container">
+            <div class="row">
+                <h1 class="col-md-4 col-md-offset-5">Vouchers</h1>
+            </div>
+            <div class="row">
+                <button ng-click="$ictrl.showNewVoucher()" class="btn btn-primary col-md-4 col-md-offset-4" style="margin-bottom:10px">Make New Voucher</button>
+                <br />
+                <br/>
+                <div ng-show="$ictrl.showMe" ng-submit="$ictrl.placeVoucher()" style="background-color:#e7e7e7; border-radius:5px">
+                    <br />
+                    <form name="newVoucherForm">
+                        <div class="row">
+                            <div class="col-md-6" style="text-align:center">
+                                <label style="margin-left:10px;">Amount:</label>
+                                <input type="number" name="newVoucherAmount" ng-model="$ictrl.newVoucher.amount" required min="0" style="margin-bottom:10px" />
+                                <div ng-messages="newVoucherForm.newVoucherAmount.$error" role="alert">
+                                    <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6" style="text-align:center">
+                                <label>Validity:</label>
+                                <select name="newValid" ng-model="$ictrl.newVoucher.valid">
+                                    <option value="true" selected>Valid</option>
+                                    <option value="false">Invalid</option>
+                                </select>  
+                                <div ng-messages="newVoucherForm.newValid.$error" role="alert">
+                                    <div ng-message="required" style="color:red; text-align:center">Required</div>
+                                </div>
+                            </div> 
+                        </div>              
+                        <button type="submit" class="btn btn-primary col-md-4 col-md-offset-4" style="margin-top:5px;">Insert Voucher</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row" style="float:right">
+                <label>Vouchers Per Page:</label>
+                <select ng-init="$ictrl.rowAmount" name="rowAmount" ng-model="$ictrl.rowAmount">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
+            <div class="row" style="float:left">
+                <div class="col-md-12">
+                    Search: <input type="text" name="vouchersSearch" ng-model="$ictrl.vouchersSearch" />
+                    <button class="btn-default" type="button" ng-click="$ictrl.searchAll()">
+                        <span class="glyphicon glyphicon-search"></span> Search All
+                    </button>
+                </div>
+            </div><br /><br /> 
+            <table class="table table-condensed table-hover table-bordered">
+                <thead>
+                <th>VoucherID</th>
+                <th>Amount</th>
+                <th>Code</th>
+                <th>Date Issued</th>
+                <th>Validity</th>
+                <th>Edit</th>
+                </th>
+                <tbody>
+                    <div class="row">
+                        <tr ng-repeat="i in $ictrl.someVouchers.Data | filter: $ictrl.vouchersSearch">
+                            <td class="col-md-2" style="text-align:center">{{i.VoucherID}}</td>
+                            <td class="col-md-2" style="text-align:center">
+                                <span editable-text="i.Amount" e-name="Amount" e-form="rowform" ng-model="i.Amount">
+                                    R{{i.Amount || 'empty' | number:2}}
+                                </span>
+                            </td>
+                            <td class="col-md-2" style="text-align:center">{{i.Code}}</td>
+                            <td class="col-md-2" style="text-align:center">
+                                <span editable-text="i.DateIssued" e-name="DateIssued" e-form="rowform">
+                                    {{i.DateIssued || 'empty' | date:'MMM d, y' }}
+                                </span>
+                            </td>
+                            <td class="col-md-2" style="text-align:center">
+                                <span editable-select="i.Valid" e-name="Valid" e-form="rowform"  e-ng-options="v.value as v.text for v in Valid">
+                                    {{i.Valid || 'empty' | valididity}}
+                                </span>
+                            </td>
+                            <td class="col-md-2" style="text-align:center">
+                                <form editable-form name="rowform" onbeforesave="$ictrl.saveVoucher($data, i.VoucherID)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == i">
+                                    <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+                                        save
+                                    </button>
+                                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+                                        cancel
+                                    </button>
+                                </form>
+                                <div class="buttons" ng-show="!rowform.$visible">
+                                    <button type="button" class="btn btn-primary" ng-click="rowform.$show()">edit</button>
+                                    <button type="button" class="btn btn-danger" ng-click="$ictrl.removeVoucher($index, i.VoucherID)">delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </div>    
+                </tbody>
+            </table>
+            <div class="row text-center">
+                <pagination class="pagination-sm" ng-model="$ictrl.currentPage" boundary-links="true" ng-change="$ictrl.pageChanged()" num-pages="$ictrl.noOfPages" max-size="10" total-items="$ictrl.totalItems" items-per-page="$ictrl.rowAmount"></pagination>
+                <br />
+            </div>
+        </div>
+    </div>
+</body>
+</html>
