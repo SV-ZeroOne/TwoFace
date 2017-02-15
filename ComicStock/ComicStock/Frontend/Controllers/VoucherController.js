@@ -46,12 +46,14 @@
     };
 
     //update voucher
-    $ictrl.saveVoucher = function (data, id) {
+    $ictrl.saveVoucher = function (data, id, code) {
         console.log(data);
         console.log("Voucher ID: " + id);
         data.VoucherID = id;
+        data.Code = code;
+        console.log(data.Valid);
         console.log(data);
-        $http.put('../api/Vouchers', data);
+        $http.put('../api/Vouchers/', data);
     };
 
     //$ictrl.searchAll = function () {

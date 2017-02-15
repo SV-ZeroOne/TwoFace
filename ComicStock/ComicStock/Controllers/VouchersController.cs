@@ -147,7 +147,7 @@ namespace ComicStock.WebAPI.Controllers
         }
 
         // PUT api/vouchers/id ~ Works
-        public VoucherDTO PutCreator(VoucherDTO item)
+        public VoucherDTO PutVoucher(VoucherDTO item)
         {
             Voucher voucherItem = voucherRepo.GetById(item.VoucherID);
 

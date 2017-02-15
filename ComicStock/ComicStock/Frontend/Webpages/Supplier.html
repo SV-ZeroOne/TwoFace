@@ -26,13 +26,6 @@
                                     <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
                                 </div>
                             </div>
-                            <!--<div class="col-md-4" style="text-align:center">
-                                <label>Reference Number:</label>
-                                <input type="text" name="newRef" ng-model="$ictrl.newSupplier.refnum" required style="margin-bottom:10px"/>
-                                <div ng-messages="newSupplierForm.newRef.$error" role="alert">
-                                    <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
-                                </div>
-                            </div>-->
                         </div>
                         <button type="submit" class="btn btn-primary col-md-4 col-md-offset-4" style="margin-top:5px;">Insert Supplier</button>
                     </form>
@@ -83,17 +76,17 @@
                             </td>
                             <td class="col-md-2" style="text-align:center">{{i.ReferenceNumber}}</td>
                             <td class="col-md-2" style="text-align:center">
-                                <form editable-form name="rowform" onbeforesave="$ictrl.saveSupplier($data, i.SupplierID)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == i">
+                                <form editable-form name="rowform" onbeforesave="$ictrl.saveSupplier($data, i.SupplierID, i.ReferenceNumber)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == i">
                                     <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
-                                        save
+                                        <span class="glyphicon glyphicon-floppy-saved"></span>save
                                     </button>
                                     <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
-                                        cancel
+                                        <span class="glyphicon glyphicon-floppy-remove"></span>cancel
                                     </button>
                                 </form>
                                 <div class="buttons" ng-show="!rowform.$visible">
-                                    <button type="button" class="btn btn-primary" ng-click="rowform.$show()">edit</button>
-                                    <!--<button type="button" class="btn btn-danger" ng-click="$ictrl.removeUser($index, i.VoucherID)">delete</button>-->
+                                    <button type="button" class="btn btn-primary" ng-click="rowform.$show()">
+                                        <span class="glyphicon glyphicon-edit"></span>Edit</button>
                                 </div>
                             </td>
                         </tr>

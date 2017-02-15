@@ -38,6 +38,10 @@
         console.log($ctrl.jsonObject);
         $http.post('../api/Creators', $ctrl.jsonObject);
     };
+
+    $ctrl.showNewCreator = function () {
+        $ctrl.showMeNow = !$ctrl.showMeNow;
+    }
     
     $ctrl.saveCreator = function (data, id) {
         data.CreatorID = id;      

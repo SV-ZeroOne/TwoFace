@@ -40,6 +40,10 @@
         $ctrl.pageChanged();
     }
 
+    $ctrl.showNewIssues = function () {
+        $ctrl.showMeNow = !$ctrl.showMeNow;
+    }
+
     $ctrl.addIssue = function(){
         console.log($ctrl.options.title);
         $ctrl.jsonObject = {

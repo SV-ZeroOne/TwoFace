@@ -30,13 +30,13 @@
     $ictrl.placeSupplier = function () {
         $http
           .post('../api/Suppliers/PlaceSupplier?name=' + $ictrl.newSupplier.name + '&city=' + $ictrl.newSupplier.city)
-     }
+    }
 
-    //update order
-    $ictrl.saveSupplier = function (data, id) {
+    $ictrl.saveSupplier = function (data, id, refnum) {
         console.log(data);
         console.log("Supplier ID: " + id);
         data.SupplierID = id;
+        data.ReferenceNumber = refnum;
         console.log(data);
         $http.put('../api/Suppliers', data);
     };

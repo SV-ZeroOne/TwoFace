@@ -8,7 +8,7 @@
                 <button ng-click="$ictrl.showNewVoucher()" class="btn btn-primary col-md-4 col-md-offset-4" style="margin-bottom:10px">Make New Voucher</button>
                 <br />
                 <br/>
-                <div ng-show="$ictrl.showMe" ng-submit="$ictrl.placeVoucher()" style="background-color:#e7e7e7; border-radius:5px">
+                <div ng-show="$ictrl.showMe" ng-submit="$ictrl.placeVoucher()" style="background-color:#e7e7e7; border-radius:5px;">
                     <br />
                     <form name="newVoucherForm">
                         <div class="row">
@@ -30,7 +30,7 @@
                                 </div>
                             </div> 
                         </div>              
-                        <button type="submit" class="btn btn-primary col-md-4 col-md-offset-4" style="margin-top:5px;">Insert Voucher</button>
+                        <button class="btn btn-primary col-md-4 col-md-offset-4" type="submit" style="margin-top:5px;">Insert Voucher</button>
                     </form>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                                     R{{i.Amount || 'empty' | number:2}}
                                 </span>
                             </td>
-                            <td class="col-md-2" style="text-align:center">{{i.Code}}</td>
+                            <td class="col-md-2" style="text-align:center" e-form="rowform" e-name="Code">{{i.Code}}</td>
                             <td class="col-md-2" style="text-align:center">
                                 <span editable-text="i.DateIssued" e-name="DateIssued" e-form="rowform">
                                     {{i.DateIssued || 'empty' | date:'MMM d, y' }}
@@ -83,17 +83,19 @@
                                 </span>
                             </td>
                             <td class="col-md-2" style="text-align:center">
-                                <form editable-form name="rowform" onbeforesave="$ictrl.saveVoucher($data, i.VoucherID)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == i">
+                                <form editable-form name="rowform" onbeforesave="$ictrl.saveVoucher($data, i.VoucherID, i.Code)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == i">
                                     <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
-                                        save
+                                        <span class="glyphicon glyphicon-floppy-saved"></span>save
                                     </button>
                                     <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
-                                        cancel
+                                        <span class="glyphicon glyphicon-floppy-remove"></span>cancel
                                     </button>
                                 </form>
                                 <div class="buttons" ng-show="!rowform.$visible">
-                                    <button type="button" class="btn btn-primary" ng-click="rowform.$show()">edit</button>
-                                    <button type="button" class="btn btn-danger" ng-click="$ictrl.removeVoucher($index, i.VoucherID)">delete</button>
+                                    <button type="button" class="btn btn-primary" ng-click="rowform.$show()">
+                                        <span class="glyphicon glyphicon-edit"></span>Edit</button>
+                                    <button type="button" class="btn btn-danger" ng-click="$ictrl.removeVoucher($index, i.VoucherID)">
+                                        <span class="glyphicon glyphicon-trash"></span>Delete</button>
                                 </div>
                             </td>
                         </tr>
