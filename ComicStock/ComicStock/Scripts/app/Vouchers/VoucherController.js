@@ -49,8 +49,9 @@ app.controller("voucherController", function ($http, $scope) {
         console.log(data);
         console.log("Voucher ID: " + id);
         data.VoucherID = id;
+        console.log(data.Valid);
         console.log(data);
-        $http.put('../api/Vouchers', data);
+        $http.put('../api/Vouchers/', data);
     };
 
     $ictrl.searchAll = function () {
