@@ -28,15 +28,12 @@ namespace ComicStock.WebAPI.Controllers
             {
                 IssueDTO newIssue = new IssueDTO(i);
                 newIssues.Add(newIssue);
-
             }
         }
 
         //GET api/issues
         public IEnumerable<IssueDTO> Get()
         {
-            //issueList = issueRepo.GetAll();
-            //IssueDTO[] issues = issueList.Cast<IssueDTO>().ToArray();
             return newIssues;
         }
 
@@ -181,6 +178,36 @@ namespace ComicStock.WebAPI.Controllers
             i.Publisher != null && i.Publisher.ToLower().Contains(searchString) 
             ).ToList<IssueDTO>();
         }
+
+        [Route("api/Issues/GetSearchPaged")]
+        [HttpGet]
+        public IHttpActionResult GetSearchPaged(string searchKey, int pageNumber)
+        {
+            if(searchKey != null)
+            {
+                string searchString = searchKey.ToLower();
+                IEnumerable<IssueDTO> someIssues = Get().Where(i => i.Title.ToLower().Contains(searchString));
+                int pageSize = 20;
+                // Determine the number of records to skip
+                int skip = (pageNumber - 1) * pageSize;
+
+                // Get total number of records
+
+                int total = someIssues.Count();
+
+                // Select the customers based on paging parameters
+                List<IssueDTO> issues = someIssues
+                    .OrderBy(c => c.IssueID)
+                    .Skip(skip)
+                    .Take(pageSize)
+                    .ToList();
+
+                // Return the list of customers
+                return Ok(new PagedResult<IssueDTO>(issues, pageNumber, pageSize, total));
+            }
+            return null;
+        }
+
 
     }
 }
