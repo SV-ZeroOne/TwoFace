@@ -30,13 +30,13 @@ app.controller("supplierController", function ($http, $mdDialog) {
     $ictrl.placeSupplier = function () {
         $http
           .post('../api/Suppliers/PlaceSupplier?name=' + $ictrl.newSupplier.name + '&city=' + $ictrl.newSupplier.city)
-     }
+    }
 
-    //update order
-    $ictrl.saveSupplier = function (data, id) {
+    $ictrl.saveSupplier = function (data, id, refnum) {
         console.log(data);
         console.log("Supplier ID: " + id);
         data.SupplierID = id;
+        data.ReferenceNumber = refnum;
         console.log(data);
         $http.put('../api/Suppliers', data);
     };
@@ -48,19 +48,6 @@ app.controller("supplierController", function ($http, $mdDialog) {
             $ictrl.someSuppliers.Data = response.data;
         });
     }
-
-    //$ictrl.showAlert = function () {
-    //    $mdDialog.show(
-    //      $mdDialog.alert()
-    //        .parent(angular.element(document.querySelector('#popupContainer1')))
-    //        .clickOutsideToClose(true)
-    //        .title('New Supplier Confirmation')
-    //        .textContent('New Supplier has been added.')
-    //        .ariaLabel('Supplier Confirmation Dialog')
-    //        .ok('Ok')
-    //        .targetEvent(ev)
-    //    );
-    //};
 
     $ictrl.paginationChange = function () {
         console.log("Pagination change event")
