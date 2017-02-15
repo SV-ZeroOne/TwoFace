@@ -17,7 +17,7 @@ app.controller('IssuesCtrl', function ($http) {
     $ctrl.jsonObject = {};
 
     $http
-        .get('http://localhost:62655/api/Issues/GetPaged?pageNo=1&pageSize=' + $ctrl.rowAmount)
+        .get('../api/Issues/GetPaged?pageNo=1&pageSize=' + $ctrl.rowAmount)
         .then(function (response) {
             $ctrl.options = response.data;
             $ctrl.noOfPages = $ctrl.options.Paging.PageCount;
@@ -36,7 +36,7 @@ app.controller('IssuesCtrl', function ($http) {
         console.log("Issue ID: " + id);
         data.IssueID = id;
         console.log(data);
-        $http.put('http://localhost:62655/api/Issues', data);
+        $http.put('../api/Issues', data);
     };
 
     $ctrl.addIssue = function(){
@@ -50,7 +50,7 @@ app.controller('IssuesCtrl', function ($http) {
 
         };
 
-        $http.post('http://localhost:62655/api/Issues', $ctrl.jsonObject);
+        $http.post('../api/Issues', $ctrl.jsonObject);
     };
 
     //$ctrl.removeIssue = function (index) {
@@ -66,8 +66,8 @@ app.controller('IssuesCtrl', function ($http) {
     //        "IsDeleted" : "true"
     //    };
     //    console.log($ctrl.jsonObjectForRemoval);
-    //    //$http.put('http://localhost:62655/api/Issues/' + index.IssueID);
-    //    //$http.put('http://localhost:62655/api/Issues/' + index);
+    //    //$http.put('../api/Issues/' + index.IssueID);
+    //    //$http.put('../api/Issues/' + index);
 
     //};
 
@@ -84,8 +84,8 @@ app.controller('IssuesCtrl', function ($http) {
     //        "IsDeleted" : "true"
     //    };
     //    console.log($ctrl.jsonObjectForRemoval);
-    //    //$http.put('http://localhost:62655/api/Issues/' + index.IssueID);
-    //    //$http.put('http://localhost:62655/api/Issues/' + index);
+    //    //$http.put('../api/Issues/' + index.IssueID);
+    //    //$http.put('../api/Issues/' + index);
 
     //};
 
@@ -102,15 +102,15 @@ app.controller('IssuesCtrl', function ($http) {
     //        };
     //        console.log($ctrl.jsonObjectForRemoval);
            
-    //        //$http.put('http://localhost:62655/api/Issues/' + index.IssueID);
-    //        $http.put('http://localhost:62655/api/Issues', $ctrl.jsonObjectForRemoval);
+    //        //$http.put('../api/Issues/' + index.IssueID);
+    //        $http.put('../api/Issues', $ctrl.jsonObjectForRemoval);
 
     //};
 
     $ctrl.removeIssue = function (data) {  
         data.IsDeleted = true;
         console.log("after: " + data.IsDeleted);
-        $http.put('http://localhost:62655/api/Issues', data);
+        $http.put('../api/Issues', data);
     };
 
     //$ctrl.saveIssue = function (data, id) {
@@ -119,7 +119,7 @@ app.controller('IssuesCtrl', function ($http) {
     //    console.log("Issue ID: " + id);
     //    data.IssueID = id;
     //    console.log(data);
-    //    $http.put('http://localhost:62655/api/Issues', data);
+    //    $http.put('../api/Issues', data);
     //};
 
     $ctrl.paginationChange = function () {
@@ -130,14 +130,14 @@ app.controller('IssuesCtrl', function ($http) {
     $ctrl.pageChanged = function () {
         console.log("Page changed function");
         console.log("Current Page: " + $ctrl.currentPage + " Row amount " + $ctrl.rowAmount);
-        $http.get('http://localhost:62655/api/Issues/GetPaged?pageNo=' + $ctrl.currentPage + '&pageSize=' + $ctrl.rowAmount)
+        $http.get('../api/Issues/GetPaged?pageNo=' + $ctrl.currentPage + '&pageSize=' + $ctrl.rowAmount)
         .then(function (response) {
             $ctrl.options = response.data;
         })
     };
 
     $ctrl.searchAll = function () {
-        $http.get('http://localhost:62655/api/Issues?search=' + $ctrl.issueSearch)
+        $http.get('../api/Issues?search=' + $ctrl.issueSearch)
         .then(function (response) {
             $ctrl.options.Data = response.data;
         });

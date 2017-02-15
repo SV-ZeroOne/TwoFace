@@ -15,7 +15,7 @@ app.controller("stockController", function ($http, $mdDialog) {
     $sctrl.searchFlag = false;
 
     $sctrl.myPromise = $http
-        .get('http://localhost:62655/api/Stock/GetPaged?pageNo=1&pageSize=' + $sctrl.rowAmount)
+        .get('../api/Stock/GetPaged?pageNo=1&pageSize=' + $sctrl.rowAmount)
         .then(function (response) {
             $sctrl.someStock = response.data;
             $sctrl.noOfPages = $sctrl.someStock.Paging.PageCount;
@@ -28,7 +28,7 @@ app.controller("stockController", function ($http, $mdDialog) {
         });
 
     $http
-       .get('http://localhost:62655/api/Issues/GetPaged?pageNo=1&pageSize=10')
+       .get('../api/Issues/GetPaged?pageNo=1&pageSize=10')
        .then(function (response) {
            console.log("Getting issues")
            $sctrl.someIssues = response.data;
@@ -38,7 +38,7 @@ app.controller("stockController", function ($http, $mdDialog) {
        });
 
     $sctrl.searchAll = function () {
-        $sctrl.myPromise = $http.get('http://localhost:62655/api/Stock/GetSearchPaged?searchKey=' + $sctrl.stockSearch + '&pageNumber=' + $sctrl.currentPage)
+        $sctrl.myPromise = $http.get('../api/Stock/GetSearchPaged?searchKey=' + $sctrl.stockSearch + '&pageNumber=' + $sctrl.currentPage)
         .then(function (response) {
             $sctrl.someStock = response.data;
             $sctrl.noOfPages = $sctrl.someStock.Paging.PageCount;
@@ -56,7 +56,7 @@ app.controller("stockController", function ($http, $mdDialog) {
         console.log("Stock ID: " + id);
         data.StockReferenceID = id;
         console.log(data);
-        $http.put('http://localhost:62655/api/Stock', data);
+        $http.put('../api/Stock', data);
     };
 
     $sctrl.paginationChange = function () {
@@ -71,7 +71,7 @@ app.controller("stockController", function ($http, $mdDialog) {
             $sctrl.searchAll();
             console.log("Paged Search Results")
         } else {
-            $http.get('http://localhost:62655/api/Stock/GetPaged?pageNo=' + $sctrl.currentPage + '&pageSize=' + $sctrl.rowAmount)
+            $http.get('../api/Stock/GetPaged?pageNo=' + $sctrl.currentPage + '&pageSize=' + $sctrl.rowAmount)
             .then(function (response) {
                 console.log("Getting new paged results.")
                 $sctrl.someStock = response.data;
@@ -90,7 +90,7 @@ app.controller("stockController", function ($http, $mdDialog) {
     function switchToPage(searchKey, page) {
         //if ($octrl.searchCriteria == null) $octrl.searchCriteria = "";
         console.log("searching")
-        $sctrl.myPromise = $http.get('http://localhost:62655/api/Issues/GetSearchPaged?searchKey=' + searchKey + ' &pageNumber=' + page)
+        $sctrl.myPromise = $http.get('../api/Issues/GetSearchPaged?searchKey=' + searchKey + ' &pageNumber=' + page)
         .then(function (response) {
             $sctrl.someIssues = response.data;
         }, function (error) {
@@ -121,12 +121,12 @@ app.controller("stockController", function ($http, $mdDialog) {
         console.log("Making stock")
         console.log(stockDTO);
         $http
-            .post('http://localhost:62655/api/Stock', stockDTO);
+            .post('../api/Stock', stockDTO);
     }
 
     $sctrl.restoreAll = function(){
         $sctrl.myPromise = $http
-        .get('http://localhost:62655/api/Stock/GetPaged?pageNo=1&pageSize=' + $sctrl.rowAmount)
+        .get('../api/Stock/GetPaged?pageNo=1&pageSize=' + $sctrl.rowAmount)
         .then(function (response) {
             $sctrl.searchFlag = false;
             $sctrl.someStock = response.data;

@@ -62,7 +62,7 @@ app.controller("ordersController4", function ($http, $mdDialog) {
         $octrl.someOrders.Data.splice(index, 1);
         //Cascade Error, however delete should not be possible for orders because of business logic.
         //If you want to make it work delete supplier payment based on order id first.
-        //$http.delete('http://localhost:62655/api/Orders?orderID=' + orderID);
+        //$http.delete('../api/Orders?orderID=' + orderID);
     };
 
     //update order

@@ -18,7 +18,7 @@ app.controller("voucherController", function ($http, $scope) {
     $ictrl.rowAmount = 10;
     $ictrl.someVouchers;
     $http
-        .get('http://localhost:62655/api/Vouchers/GetPaged?pageNo=1&pageSize='+$ictrl.rowAmount)
+        .get('../api/Vouchers/GetPaged?pageNo=1&pageSize='+$ictrl.rowAmount)
         .then(function (response) {
             $ictrl.someVouchers = response.data;
             $ictrl.noOfPages = $ictrl.someVouchers.Paging.PageCount;
@@ -35,13 +35,13 @@ app.controller("voucherController", function ($http, $scope) {
 
     $ictrl.placeVoucher = function () {
         $http
-          .post('http://localhost:62655/api/Vouchers/PlaceVoucher?amount=' + $ictrl.newVoucher.amount + '&valid=' + $ictrl.newVoucher.valid);
+          .post('../api/Vouchers/PlaceVoucher?amount=' + $ictrl.newVoucher.amount + '&valid=' + $ictrl.newVoucher.valid);
     }
 
     // remove voucher
     $ictrl.removeVoucher = function (index, VoucherID) {
         $ictrl.someVouchers.Data.splice(index, 1);
-        $http.delete('http://localhost:62655/api/Vouchers/' + VoucherID);
+        $http.delete('../api/Vouchers/' + VoucherID);
     };
 
     //update voucher
@@ -50,11 +50,11 @@ app.controller("voucherController", function ($http, $scope) {
         console.log("Voucher ID: " + id);
         data.VoucherID = id;
         console.log(data);
-        $http.put('http://localhost:62655/api/Vouchers', data);
+        $http.put('../api/Vouchers', data);
     };
 
     $ictrl.searchAll = function () {
-        $http.get('http://localhost:62655/api/Vouchers?search=' + $ictrl.vouchersSearch)
+        $http.get('../api/Vouchers?search=' + $ictrl.vouchersSearch)
         .then(function (response) {
             $ictrl.someVouchers.Data = response.data;
         });
@@ -73,7 +73,7 @@ app.controller("voucherController", function ($http, $scope) {
     $ictrl.pageChanged = function () {
         console.log("Page changed function");
         console.log("Current Page: " + $ictrl.currentPage + " Row amount " + $ictrl.rowAmount);
-        $http.get('http://localhost:62655/api/Vouchers/GetPaged?pageNo=' + $ictrl.currentPage + '&pageSize=' + $ictrl.rowAmount)
+        $http.get('../api/Vouchers/GetPaged?pageNo=' + $ictrl.currentPage + '&pageSize=' + $ictrl.rowAmount)
         .then(function (response) {
             $ictrl.someVouchers = response.data;
         });

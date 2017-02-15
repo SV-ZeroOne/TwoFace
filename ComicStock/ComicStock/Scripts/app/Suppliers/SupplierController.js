@@ -12,7 +12,7 @@ app.controller("supplierController", function ($http, $mdDialog) {
     $ictrl.rowAmount = 10;
     $ictrl.someSuppliers;
     $http
-        .get('http://localhost:62655/api/Suppliers/GetPaged?pageNo=1&pageSize=' + $ictrl.rowAmount)
+        .get('../api/Suppliers/GetPaged?pageNo=1&pageSize=' + $ictrl.rowAmount)
         .then(function (response) {
             $ictrl.someSuppliers = response.data;
             $ictrl.noOfPages = $ictrl.someSuppliers.Paging.PageCount;
@@ -29,7 +29,7 @@ app.controller("supplierController", function ($http, $mdDialog) {
 
     $ictrl.placeSupplier = function () {
         $http
-          .post('http://localhost:62655/api/Suppliers/PlaceSupplier?name=' + $ictrl.newSupplier.name + '&city=' + $ictrl.newSupplier.city)
+          .post('../api/Suppliers/PlaceSupplier?name=' + $ictrl.newSupplier.name + '&city=' + $ictrl.newSupplier.city)
      }
 
     //update order
@@ -38,11 +38,11 @@ app.controller("supplierController", function ($http, $mdDialog) {
         console.log("Supplier ID: " + id);
         data.SupplierID = id;
         console.log(data);
-        $http.put('http://localhost:62655/api/Suppliers', data);
+        $http.put('../api/Suppliers', data);
     };
 
     $ictrl.searchAll = function () {
-        $http.get('http://localhost:62655/api/Suppliers?search=' + $ictrl.suppliersSearch)
+        $http.get('../api/Suppliers?search=' + $ictrl.suppliersSearch)
         .then(function (response) {
             console.log("search Funtion called")
             $ictrl.someSuppliers.Data = response.data;
@@ -70,7 +70,7 @@ app.controller("supplierController", function ($http, $mdDialog) {
     $ictrl.pageChanged = function () {
         console.log("Page changed function");
         console.log("Current Page: " + $ictrl.currentPage + " Row amount " + $ictrl.rowAmount);
-        $http.get('http://localhost:62655/api/Suppliers/GetPaged?pageNo=' + $ictrl.currentPage + '&pageSize=' + $ictrl.rowAmount)
+        $http.get('../api/Suppliers/GetPaged?pageNo=' + $ictrl.currentPage + '&pageSize=' + $ictrl.rowAmount)
         .then(function (response) {
             $ictrl.someSuppliers = response.data;
         });

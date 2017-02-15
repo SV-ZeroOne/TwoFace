@@ -22,7 +22,7 @@ app.controller('CreatorsCtrl', function ($http) {
     $ctrl.jsonObject = {};
 
     $http
-        .get('http://localhost:62655/api/Creators/GetPaged?pageNo=1&pageSize=' + $ctrl.rowAmount)
+        .get('../api/Creators/GetPaged?pageNo=1&pageSize=' + $ctrl.rowAmount)
         .then(function (response) {
             $ctrl.options = response.data;
             $ctrl.noOfPages = $ctrl.options.Paging.PageCount;
@@ -44,13 +44,13 @@ app.controller('CreatorsCtrl', function ($http) {
             "TaxReferenceNumber": $ctrl.options.taxReferenceNumber          
         };
         console.log($ctrl.jsonObject);
-        $http.post('http://localhost:62655/api/Creators', $ctrl.jsonObject);
+        $http.post('../api/Creators', $ctrl.jsonObject);
     };
     
     $ctrl.saveCreator = function (data, id) {
         data.CreatorID = id;      
         console.log(data);
-        $http.put('http://localhost:62655/api/Creators', data);
+        $http.put('../api/Creators', data);
         
     };
 
@@ -58,25 +58,25 @@ app.controller('CreatorsCtrl', function ($http) {
     //    console.log("Deleting Creator No: " + id);
     //    console.log(index);
     //    $ctrl.options.splice(index, 1);
-    //    $http.delete('http://localhost:62655/api/creators/' + id);
+    //    $http.delete('../api/creators/' + id);
     //};
 
     $ctrl.removeCreator = function (data) {
         data.IsDeleted = true;
         console.log("after: " + data.IsDeleted);
-        $http.put('http://localhost:62655/api/Creators', data);
+        $http.put('../api/Creators', data);
     };
 
     //$ctrl.addCreator = function (data, id) {
     //    console.log(data);
     //    console.log(data);
-    //    $http.post('http://localhost:62655/api/creators', data);
+    //    $http.post('../api/creators', data);
     //}
 
     //$ctrl.removeIssue = function (index, IssueID) {
     //    console.log("Deleting Issue ID: " + IssueID);
     //    $ctrl.options.splice(index, 1);
-    //    $http.delete("http://localhost:62655/api/issues?issueID=" + IssueID);
+    //    $http.delete("../api/issues?issueID=" + IssueID);
     //};
 
     $ctrl.paginationChange = function () {
@@ -87,12 +87,12 @@ app.controller('CreatorsCtrl', function ($http) {
     $ctrl.pageChanged = function () {
         console.log("Page changed function");
         console.log("Current Page: " + $ctrl.currentPage + " Row amount " + $ctrl.rowAmount);
-        $http.get('http://localhost:62655/api/Creators/GetPaged?pageNo=' + $ctrl.currentPage + '&pageSize=' + $ctrl.rowAmount)
+        $http.get('../api/Creators/GetPaged?pageNo=' + $ctrl.currentPage + '&pageSize=' + $ctrl.rowAmount)
         .then(function (response) {
             $ctrl.someOrders = response.data;
         });
 
-        //$http.get("http://localhost:62655/api/issues").then(function (response) {
+        //$http.get("../api/issues").then(function (response) {
 
         //    $ctrl.options = response.data;
 
@@ -105,7 +105,7 @@ app.controller('CreatorsCtrl', function ($http) {
     };
 
     $ctrl.searchAll = function () {
-        $http.get('http://localhost:62655/api/Creators?search=' + $ctrl.creatorSearch)
+        $http.get('../api/Creators?search=' + $ctrl.creatorSearch)
         .then(function (response) {
             $ctrl.options.Data = response.data;
         });
