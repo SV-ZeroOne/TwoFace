@@ -46,7 +46,7 @@ namespace ComicStock.WebAPI.Controllers
 
         // DELETE api/id
         [Route("api/Stock/Remove")]
-        public void Delete(int id)
+        public void Delete(int id, int quantity)
         {
             stock.RemovingStock(id, quantity);
         }
