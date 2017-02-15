@@ -29,5 +29,9 @@ namespace ComicStock.Domain
 
         [Required]
         public bool Valid { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+        public bool isDeleted => IsDeleted;
     }
 }

@@ -18,6 +18,8 @@ namespace ComicStock.Models
 
         public string EmailAddress { get; set; }
 
+        public Boolean IsDeleted { get; set;}
+
         public CreatorDTO()
         {
 

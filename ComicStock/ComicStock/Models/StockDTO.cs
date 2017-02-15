@@ -18,6 +18,8 @@ namespace ComicStock.Models
 
         public decimal Price { get; set; }
 
+        public Boolean IsDeleted { get; set; }
+
         public StockDTO()
         {
 
@@ -30,6 +32,7 @@ namespace ComicStock.Models
             this.Condition = stock.Condition;
             this.AvailableQuantity = stock.AvailableQty;
             this.Price = stock.Price;
+            this.IsDeleted = stock.IsDeleted;
         }
     }
 }

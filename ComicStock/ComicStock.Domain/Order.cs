@@ -37,6 +37,10 @@ namespace ComicStock.Domain
         [ForeignKey("Supplier")]
         public int SupplierID { get; set; }
 
+        public Boolean IsDeleted { get; set; }
+       
+        public bool isDeleted => IsDeleted;
+
         public virtual Supplier Supplier { get; set; }
 
         public virtual Issue Issue { get; set; }

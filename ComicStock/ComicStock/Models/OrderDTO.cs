@@ -26,6 +26,8 @@ namespace ComicStock.WebAPI.Models
 
         public int SupplierID { get; set; }
 
+        public Boolean IsDeleted { get; set; }
+
         public OrderDTO()
         {
 
@@ -42,6 +44,7 @@ namespace ComicStock.WebAPI.Models
             this.ShipmentDate = someOrder.ShipmentDate;
             this.DeliveryStatus = someOrder.DeliveryStatus;
             this.SupplierID = someOrder.SupplierID;
+            this.IsDeleted = someOrder.IsDeleted;
         }
     }
 }

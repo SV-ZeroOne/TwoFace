@@ -20,6 +20,8 @@ namespace ComicStock.Models
 
         public string Description { get; set; }
 
+        public Boolean IsDeleted { get; set; }
+
         //public ICollection<ComicCreator> ComicCreator { get; set; }
 
         public IssueDTO()
@@ -35,6 +37,7 @@ namespace ComicStock.Models
             this.Publisher = newIssue.Publisher;
             this.SeriesNumber = newIssue.SeriesNumber;
             this.Description = newIssue.Description;
+            this.IsDeleted = newIssue.IsDeleted;
         }
     }
 }

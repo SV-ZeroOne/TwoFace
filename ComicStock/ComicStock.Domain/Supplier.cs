@@ -26,6 +26,10 @@ namespace ComicStock.Domain
         [MaxLength(25)]
         public string ReferenceNumber { get; set; }
 
+        public Boolean IsDeleted { get; set; }
+
+        public bool isDeleted => IsDeleted;
+
         //public virtual SupplierQuote SupplierQuote { get; set; }
 
         //public virtual Order Order { get; set; }

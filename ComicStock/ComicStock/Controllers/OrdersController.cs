@@ -97,6 +97,7 @@ namespace ComicStock.WebAPI.Controllers
             orderToUpdate.ShipmentDate = order.ShipmentDate;
             orderToUpdate.ShipmentRef = order.ShipmentRef;
             orderToUpdate.Total = order.Total;
+            orderToUpdate.IsDeleted = order.IsDeleted;
             //Might need to map more fields to update.
             return orderToUpdate;
         }

@@ -17,7 +17,25 @@ namespace ComicStock.Data
 
         public IEnumerable<TEntity> GetAll()
         {
-            return context.Set<TEntity>().ToList();
+           // var entities = context.Set<TEntity>().Where(x => x.IsDeleted == false).ToList();
+           //return entities;
+
+            return context.Set<TEntity>().Where(x => x.IsDeleted == false).ToList();
+
+            //if (context.Set<TEntity>().Where(x => x.isDeleted == false))
+            //{
+            //    return context.Set<TEntity>().ToList();
+            //}
+            //var entities = context.Set<TEntity>().Where(x => !x.isDeleted);
+
+            //if (entities)
+            //{
+
+            //}
+
+            //return context.Set<TEntity>().ToList();
+
+            return null;
         }
 
         public IEnumerable<TEntity> find(string Criteria)

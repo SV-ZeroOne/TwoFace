@@ -24,8 +24,13 @@ namespace ComicStock.Domain
         [MaxLength(50)]
         public string CreatorRole { get; set; }
 
+        public Boolean IsDeleted { get; set; }
+
         public virtual Issue Issue { get; set; }
 
         public virtual Creator Creator { get; set; }
+
+        public bool isDeleted => IsDeleted;
+       
     }
 }

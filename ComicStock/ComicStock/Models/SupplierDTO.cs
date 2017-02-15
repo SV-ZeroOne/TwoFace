@@ -16,6 +16,8 @@ namespace ComicStock.WebAPI.Models
 
         public string ReferenceNumber { get; set; }
 
+        public Boolean IsDeleted { get; set; }
+
         public SupplierDTO()
         {
 
@@ -27,6 +29,7 @@ namespace ComicStock.WebAPI.Models
             this.Name = supplier.Name;
             this.City = supplier.City;
             this.ReferenceNumber = supplier.ReferenceNumber;
+            this.IsDeleted = supplier.IsDeleted;
         }
     }
 }

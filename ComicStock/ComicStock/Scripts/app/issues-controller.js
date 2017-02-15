@@ -1,4 +1,4 @@
-﻿var app = angular.module('SquareEyesApp', ["xeditable"])
+﻿var app = angular.module('SquareEyesApp', ["xeditable", "ui.bootstrap"])
 
 app.run(function (editableOptions) {
     editableOptions.theme = 'bs3';
@@ -6,70 +6,140 @@ app.run(function (editableOptions) {
 
 app.controller('IssuesCtrl', function ($http) {
 
-        var $ctrl = this;
+    var $ctrl = this;
+    
+    $ctrl.rowAmount = 10;
 
-        $ctrl.count = 0;
-
-        $ctrl.test = function () {
-            alert('testing button');
-        }
-
-        //$ctrl.data = [];
-
+    $ctrl.showMe = false;
         
+    $ctrl.currentPage = 1;
 
-        $http.get("http://localhost:62655/api/issues").then(function (response) {
-            console.log("I'm in get method");
+    $ctrl.jsonObject = {};
+
+    $http
+        .get('http://localhost:62655/api/Issues/GetPaged?pageNo=1&pageSize=' + $ctrl.rowAmount)
+        .then(function (response) {
             $ctrl.options = response.data;
-          
-        }).catch(function (errorResponse) {
-
-            $ctrl.context = "Oops... Something went wrong";
-
+            $ctrl.noOfPages = $ctrl.options.Paging.PageCount;
+            console.log("Page Count: " + $ctrl.noOfPages);
+            
+            $ctrl.totalItems = $ctrl.options.Paging.TotalRecordCount;
+            $ctrl.currentPage = $ctrl.options.Paging.PageNo;
+        })
+        .catch(function (errorResponse) {
+            $ctrl.context = "Something went wrong with getting issues";
         });
 
-        $scope.editUser = function (data, id) {
-            edit_data.UserID = id;
-            $http.post("/User/Edit", edit_data).success(function () {
-                angular.extend(data, { id: id });
-            });
+    $ctrl.saveIssue = function (data, id) {
+        console.log(data);
+
+        console.log("Issue ID: " + id);
+        data.IssueID = id;
+        console.log(data);
+        $http.put('http://localhost:62655/api/Issues', data);
+    };
+
+    $ctrl.addIssue = function(){
+        console.log($ctrl.options.title);
+        $ctrl.jsonObject = {
+            "Title": $ctrl.options.title,
+            "PublicationDate": $ctrl.options.publicationDate,
+            "Publisher": $ctrl.options.publisher,
+            "SeriesNumber": $ctrl.options.series,
+            "Description": null
+
         };
 
-        $scope.deleteUser = function (index, id) {
-            $http.post("/User/Delete", id).success(function () {
-                $scope.users.splice(index, 1);
-            });
-        };
+        $http.post('http://localhost:62655/api/Issues', $ctrl.jsonObject);
+    };
 
-        //$ctrl.checkTitle = function (data, id) {
-        //    $ctrl.data = data;
-        //    return $ctrl.data;
-        //};
+    //$ctrl.removeIssue = function (index) {
+    //    console.log(index);
+    //    index.IsDeleted = true;
+    //    console.log(index);
+    //    $ctrl.jsonObjectForRemoval = {
+    //        "Title": index.title,
+    //        "PublicationDate": index.publicationDate,
+    //        "Publisher": index.publisher,
+    //        "SeriesNumber": index.series,
+    //        "Description": index.Description,
+    //        "IsDeleted" : "true"
+    //    };
+    //    console.log($ctrl.jsonObjectForRemoval);
+    //    //$http.put('http://localhost:62655/api/Issues/' + index.IssueID);
+    //    //$http.put('http://localhost:62655/api/Issues/' + index);
 
-        //// update issue
-        //$ctrl.saveIssue = function (data, id) {
+    //};
+
+    // ~ working
+    //$ctrl.removeIssue = function () {
+    //    console.log($ctrl.options.title);
+    //    console.log($ctrl.options.series);
+    //    $ctrl.jsonObjectForRemoval = {
+    //        "Title": $ctrl.options.title,
+    //        "PublicationDate": $ctrl.options.publicationDate,
+    //        "Publisher": $ctrl.options.publisher,
+    //        "SeriesNumber": $ctrl.options.series,
+    //        "Description": null,
+    //        "IsDeleted" : "true"
+    //    };
+    //    console.log($ctrl.jsonObjectForRemoval);
+    //    //$http.put('http://localhost:62655/api/Issues/' + index.IssueID);
+    //    //$http.put('http://localhost:62655/api/Issues/' + index);
+
+    //};
+
+    //$ctrl.removeIssue = function () {
+    //        console.log($ctrl.options.title);
+    //        console.log($ctrl.options.series);
+    //        $ctrl.jsonObjectForRemoval = {
+    //            "Title": $ctrl.options.title,
+    //            "PublicationDate": $ctrl.options.publicationDate,
+    //            "Publisher": $ctrl.options.publisher,
+    //            "SeriesNumber": $ctrl.options.series,
+    //            "Description": null,
+    //            "IsDeleted" : "true"
+    //        };
+    //        console.log($ctrl.jsonObjectForRemoval);
            
-        //    //$ctrl.issue not updated yet
-        //    angular.extend(data, { id: id });
-        //    return $http.put('http://localhost:62655/api/issues/'+id, data);
-        //};
+    //        //$http.put('http://localhost:62655/api/Issues/' + index.IssueID);
+    //        $http.put('http://localhost:62655/api/Issues', $ctrl.jsonObjectForRemoval);
 
-        //// remove issue
-        //$scope.removeUser = function (index) {
-        //    $ctrl.users.splice(index, 1);
-        //};
+    //};
 
-        //// add issue
-        //$scope.addUser = function () {
-        //    $ctrl.inserted = {
-        //        id: $scope.users.length + 1,
-        //        name: '',
-        //        status: null,
-        //        group: null
-        //    };
-        //    $ctrl.users.push($ctrl.inserted);
-        //};
-    });
-//.run(function (editableOptions) {
-//    editableOptions.theme = 'bs3';
-//});
+    $ctrl.removeIssue = function (data) {  
+        data.IsDeleted = true;
+        console.log("after: " + data.IsDeleted);
+        $http.put('http://localhost:62655/api/Issues', data);
+    };
+
+    //$ctrl.saveIssue = function (data, id) {
+    //    console.log(data);
+
+    //    console.log("Issue ID: " + id);
+    //    data.IssueID = id;
+    //    console.log(data);
+    //    $http.put('http://localhost:62655/api/Issues', data);
+    //};
+
+    $ctrl.paginationChange = function () {
+        console.log("Pagination change event")
+        console.log("Page no: " + $ctrl.paginationPage)
+    }
+
+    $ctrl.pageChanged = function () {
+        console.log("Page changed function");
+        console.log("Current Page: " + $ctrl.currentPage + " Row amount " + $ctrl.rowAmount);
+        $http.get('http://localhost:62655/api/Issues/GetPaged?pageNo=' + $ctrl.currentPage + '&pageSize=' + $ctrl.rowAmount)
+        .then(function (response) {
+            $ctrl.options = response.data;
+        })
+    };
+
+    $ctrl.searchAll = function () {
+        $http.get('http://localhost:62655/api/Issues?search=' + $ctrl.issueSearch)
+        .then(function (response) {
+            $ctrl.options.Data = response.data;
+        });
+    }
+});

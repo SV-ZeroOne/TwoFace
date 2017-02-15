@@ -29,5 +29,9 @@ namespace ComicStock.Domain
 
         public decimal Price { get; set; }
 
+        public Boolean IsDeleted { get; set; }     
+
+        public bool isDeleted => IsDeleted;
+
     }
 }

@@ -98,6 +98,7 @@ namespace ComicStock.WebAPI.Controllers
             newSupplier.Name = supplierDto.Name;
             newSupplier.City = supplierDto.City;
             newSupplier.ReferenceNumber = supplierDto.ReferenceNumber;
+            newSupplier.IsDeleted = supplierDto.IsDeleted;
             return newSupplier;
         }
     }

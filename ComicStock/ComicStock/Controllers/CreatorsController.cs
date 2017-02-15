@@ -1,6 +1,7 @@
 ﻿using ComicStock.Data.Interfaces;
 using ComicStock.Domain;
 using ComicStock.Models;
+using ComicStock.WebAPI.Controllers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -52,20 +53,48 @@ namespace ComicStock.Controllers
             return someCreatorDTO;
         }
 
+        [Route("api/Creators/GetPaged")]
+        [HttpGet]
+        public IHttpActionResult GetPaged(int pageNo = 1, int pageSize = 10)
+        {
+            // Determine the number of records to skip
+            int skip = (pageNo - 1) * pageSize;
+
+            // Get total number of records
+
+            int total = newCreators.Count();
+
+            // Select the customers based on paging parameters
+            List<CreatorDTO> creators = newCreators
+                .OrderBy(c => c.CreatorID)
+                .Skip(skip)
+                .Take(pageSize)
+                .ToList();
+
+            // Return the list of customers
+            return Ok(new PagedResult<CreatorDTO>(creators, pageNo, pageSize, total));
+        }
+
         // POST api/creators/ ~ Works
+        [Route("api/Creators/")]
+        [HttpPost]
         public CreatorDTO Post(CreatorDTO item)
         {
-            Creator creator = convertDtoToObject(item);
 
-            if (creator == null)
+
+            if (item == null)
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return null;
+                throw new HttpResponseException(HttpStatusCode.NotAcceptable);
             }
+
+            Creator creator = convertDtoToObject(item);
 
             creatorRepo.Add(creator);
 
             return item;
         }
+
 
         // POST api/creators/
         /*public CreatorDTO PostCreator(Creator item)
@@ -80,26 +109,38 @@ namespace ComicStock.Controllers
             return newCreator;
         }*/
 
-        // PUT api/vouchers/id ~ Works
-        public void PutCreator(CreatorDTO item)
+        // PUT api/Creators ~ Works
+        [Route("api/Creators/")]
+        [HttpPut]
+        public CreatorDTO Put([FromBody] CreatorDTO creator)
         {
             //CreatorDTO CreatorDTO = GetById(id);
-            Creator creatorItem = creatorRepo.GetById(item.CreatorID);
-
-            //newCreators.Find(creator);
-            if (creatorItem == null)
-            {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            }
-
-            var creatorItemUpdate = updateCreator(creatorItem, item);
-
+            Creator creatorItem = creatorRepo.GetById(creator.CreatorID);
+            var creatorItemUpdate = updateCreator(creator, creatorItem);
             creatorRepo.Update(creatorItemUpdate);
-
+            return creator;
         }
 
+        // PUT api/vouchers/id ~ Works
+        //public void PutCreator(CreatorDTO item)
+        //{
+        //    //CreatorDTO CreatorDTO = GetById(id);
+        //    Creator creatorItem = creatorRepo.GetById(item.CreatorID);
+
+        //    //newCreators.Find(creator);
+        //    if (creatorItem == null)
+        //    {
+        //        throw new HttpResponseException(HttpStatusCode.NotFound);
+        //    }
+
+        //    var creatorItemUpdate = updateCreator(creatorItem, item);
+
+        //    creatorRepo.Update(creatorItemUpdate);
+
+        //}
+
         // DELETE api/creators/id ~ Works
-        public void DeleteCreator(int id)
+        public void Delete(int id)
         {
             Creator item = creatorRepo.GetById(id);
             if (item == null)
@@ -121,14 +162,26 @@ namespace ComicStock.Controllers
             return tempCreator;
         }
 
-        public Creator updateCreator(Creator creator, CreatorDTO creatorDTO)
+        public Creator updateCreator(CreatorDTO creatorDTO, Creator creator)
         {
             creator.CreatorID = creatorDTO.CreatorID;
             creator.Name = creatorDTO.Name;
             creator.CountryOfResidence = creatorDTO.CountryOfResidence;
             creator.TaxReferenceNumber = creatorDTO.TaxReferenceNumber;
             creator.EmailAddress = creatorDTO.EmailAddress;
+            creator.IsDeleted = creatorDTO.IsDeleted;
             return creator;
+        }
+
+        public IList<CreatorDTO> Get(string search)
+        {
+            string searchString = search.ToLower();
+            return Get().Where(i =>
+            i.Name != null && i.Name.ToLower().Contains(searchString) ||
+            i.CountryOfResidence.ToLower().Contains(searchString) ||
+            i.TaxReferenceNumber.ToString().Contains(searchString) ||
+            i.EmailAddress != null && i.EmailAddress.ToLower().Contains(searchString) 
+            ).ToList<CreatorDTO>();
         }
     }
     }

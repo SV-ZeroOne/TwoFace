@@ -127,6 +127,7 @@ namespace ComicStock.WebAPI.Controllers
             newStock.Condition = stockDto.Condition;
             newStock.AvailableQty = stockDto.AvailableQuantity;
             newStock.Price = stockDto.Price;
+            newStock.IsDeleted = stockDto.IsDeleted;
             return newStock;
         }
     }

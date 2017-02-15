@@ -30,7 +30,11 @@ namespace ComicStock.Domain
         [MaxLength(300)]
         public string ImageURL { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public string Description { get; set; }
+
+        public bool isDeleted => IsDeleted;
 
         public virtual ICollection<Stock> Stock { get; set; }
 
