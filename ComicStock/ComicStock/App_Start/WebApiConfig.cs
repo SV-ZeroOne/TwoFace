@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace ComicStock
 {
@@ -11,7 +12,10 @@ namespace ComicStock
         {
             // Web API configuration and services
 
-            // Web API routes
+            //// Web API routes
+            var cor = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cor);
+
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(

@@ -9,17 +9,24 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Collections;
+using System.Web.Http.Cors;
+using ComicStock.API;
 
 namespace ComicStock.WebAPI.Controllers
 {
+    //[EnableCors(origins: "http://localhost:49511", headers: "*", methods: "*")]
     public class VouchersController : ApiController
     {
-
         private readonly VoucherInterface voucherRepo;
         private List<VoucherDTO> newVouchers;
 
-        public VouchersController(VoucherInterface voucherRepo)
+        private readonly VoucherService voucherService;
+
+        private static Random random = new Random();
+
+        public VouchersController(VoucherInterface voucherRepo, VoucherService voucherService)
         {
+            this.voucherService = voucherService;
             this.voucherRepo = voucherRepo;
             IEnumerable someVoucher = voucherRepo.GetAll();
             newVouchers = new List<VoucherDTO>();
@@ -27,8 +34,47 @@ namespace ComicStock.WebAPI.Controllers
             {
                 VoucherDTO newVoucher = new VoucherDTO(i);
                 newVouchers.Add(newVoucher);
-
             }
+        }
+
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        public IList<VoucherDTO> Get(string search)
+        {
+            string searchString = search.ToLower();
+            return Get().Where(i =>
+            i.VoucherID.ToString().Contains(searchString) ||
+            i.Amount.ToString().Contains(searchString) ||
+            i.Code != null && i.Code.ToLower().Contains(searchString) ||
+            i.DateIssued != null && i.DateIssued.ToString().Contains(searchString)
+            ).ToList<VoucherDTO>();
+        }
+
+        [Route("api/Vouchers/GetPaged")]
+        [HttpGet]
+        public IHttpActionResult GetPaged(int pageNo = 1, int pageSize = 10)
+        {
+            // Determine the number of records to skip
+            int skip = (pageNo - 1) * pageSize;
+
+            // Get total number of records
+
+            int total = newVouchers.Count();
+
+            // Select the customers based on paging parameters
+            List<VoucherDTO> vouchers = newVouchers
+                .OrderBy(c => c.VoucherID)
+                .Skip(skip)
+                .Take(pageSize)
+                .ToList();
+
+            // Return the list of customers
+            return Ok(new PagedResult<VoucherDTO>(vouchers, pageNo, pageSize, total));
         }
 
         // GET api/vouchers
@@ -50,28 +96,61 @@ namespace ComicStock.WebAPI.Controllers
             return someVoucherDTO;
         }
 
-        // POST api/creators/ 
-        public VoucherDTO Post(VoucherDTO item)
+        //// POST api/vouchers/ 
+        //public Voucher Post(VoucherDTO item)
+        //{
+        //    Voucher voucher = convertDtoToObject(item);
+
+        //    if (voucher == null)
+        //    {
+        //        throw new HttpResponseException(HttpStatusCode.NotFound);
+        //    }
+
+        //    voucherRepo.Add(voucher);
+
+        //    return voucher;
+        //}
+
+        [Route("api/Vouchers/PlaceVoucher")]
+        public void PlaceVoucher(decimal amount, bool valid)
         {
-            Voucher voucher = convertDtoToObject(item);
-
-            if (voucher == null)
+            if (amount < 0)
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                HttpResponseMessage message = new HttpResponseMessage(HttpStatusCode.NotImplemented);
+                message.Content = new StringContent("You entered a invalid Voucher Amount");
+                throw new HttpResponseException(message);
             }
+            else
+            {
+                string codeString = RandomString(10);
+                bool generating = true;
 
-            voucherRepo.Add(voucher);
-
-            return item;
+                IEnumerable<VoucherDTO> vouchers = Get();
+                while (generating)
+                {
+                    foreach (VoucherDTO item in vouchers)
+                    {
+                        if (item.Code.ToLower() == codeString.ToLower())
+                        {
+                            codeString = RandomString(10);
+                            generating = true;
+                        }
+                        else
+                        {
+                            generating = false;
+                        }
+                    }
+                }
+                
+                voucherService.placeVoucher(amount, codeString, valid);
+            }
         }
 
         // PUT api/vouchers/id ~ Works
-        public void PutCreator(VoucherDTO item)
+        public VoucherDTO PutCreator(VoucherDTO item)
         {
-            //CreatorDTO CreatorDTO = GetById(id);
             Voucher voucherItem = voucherRepo.GetById(item.VoucherID);
 
-            //newCreators.Find(creator);
             if (voucherItem == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
@@ -80,6 +159,8 @@ namespace ComicStock.WebAPI.Controllers
             var voucherItemUpdate = updateVoucher(voucherItem, item);
 
             voucherRepo.Update(voucherItemUpdate);
+
+            return item;
 
         }
 
