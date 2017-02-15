@@ -1,4 +1,4 @@
-﻿var app = angular.module("ordersModule", ["xeditable", "ui.bootstrap", 'ui.select', 'ngSanitize', 'ngMaterial', 'ngMessages']);
+﻿var app = angular.module("ordersModule", ["xeditable", "ui.bootstrap", 'ui.select', 'ngSanitize', 'ngMaterial', 'ngMessages', 'cgBusy']);
 
 app.run(function (editableOptions) {
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
@@ -10,14 +10,15 @@ app.controller("ordersController4", function ($http, $mdDialog) {
     $octrl.newOrder = {};
     $octrl.currentPage = 1;
     $octrl.rowAmount = 10;
-    $octrl.someOrders;
     //search criteria
     $octrl.ordersSearch = '';
     $octrl.selectedIssue;
     $octrl.issueSet = true;
     $octrl.newOrder.qtyOrdered = 0;
+    $octrl.someOrders;
+    $octrl.searchFlag = false;
 
-    $http
+    $octrl.myPromise = $http
         .get('http://localhost:62655/api/Orders/GetPaged?pageNo=1&pageSize=' + $octrl.rowAmount)
         .then(function (response) {
             $octrl.someOrders = response.data;
@@ -46,8 +47,8 @@ app.controller("ordersController4", function ($http, $mdDialog) {
     }
 
     $octrl.placeOrder = function () {
-        //$http
-          //.post('http://localhost:62655/api/Orders/PlaceOrder?issueID=' + $octrl.selectedIssue.IssueID + '&quantity=' + $octrl.newOrder.qtyOrdered + '&supplierID=' + $octrl.selectedQuotes.SupplierID);
+        $http
+          .post('http://localhost:62655/api/Orders/PlaceOrder?issueID=' + $octrl.selectedIssue.IssueID + '&quantity=' + $octrl.newOrder.qtyOrdered + '&supplierID=' + $octrl.selectedQuotes.SupplierID);
     }
 
     // delete order
@@ -79,17 +80,26 @@ app.controller("ordersController4", function ($http, $mdDialog) {
     $octrl.pageChanged = function () {
         console.log("Page changed function");
         console.log("Current Page: " + $octrl.currentPage + " Row amount " + $octrl.rowAmount);
-        $http.get('http://localhost:62655/api/Orders/GetPaged?pageNo=' + $octrl.currentPage + '&pageSize=' + $octrl.rowAmount)
-        .then(function (response) {
-            $octrl.someOrders = response.data;
+        if ($octrl.searchFlag) {
+            $octrl.searchAll();
+        } else {
+            $octrl.myPromise = $http.get('http://localhost:62655/api/Orders/GetPaged?pageNo=' + $octrl.currentPage + '&pageSize=' + $octrl.rowAmount)
+            .then(function (response) {
+                console.log("Getting new paged results.")
+                $octrl.someOrders = response.data;
         });
+        }
         //$log.log('Page changed to: ' + $octrl.s);
     };
 
     $octrl.searchAll = function () {
-        $http.get('http://localhost:62655/api/Orders?search=' + $octrl.ordersSearch)
+        $octrl.myPromise = $http.get('http://localhost:62655/api/Orders/GetSearchPaged?searchKey=' + $octrl.ordersSearch + '&pageNumber=' + $octrl.currentPage)
         .then(function (response) {
-            $octrl.someOrders.Data = response.data;
+            $octrl.someOrders = response.data;
+            $octrl.noOfPages = $octrl.someOrders.Paging.PageCount;
+            $octrl.totalItems = $octrl.someOrders.Paging.TotalRecordCount;
+            $octrl.currentPage = $octrl.someOrders.Paging.PageNo;
+            $octrl.searchFlag = true;
         });
     }
 
@@ -100,7 +110,7 @@ app.controller("ordersController4", function ($http, $mdDialog) {
     function switchToPage(searchKey, page) {
         //if ($octrl.searchCriteria == null) $octrl.searchCriteria = "";
         console.log("searching")
-        $http.get('http://localhost:62655/api/Issues/GetSearchPaged?searchKey='+ searchKey +' &pageNumber=' + page)
+        $octrl.myPromise = $http.get('http://localhost:62655/api/Issues/GetSearchPaged?searchKey=' + searchKey + '&pageNumber=' + page)
         .then(function (response) {
             $octrl.someIssues = response.data;
         }, function (error) {
@@ -140,10 +150,26 @@ app.controller("ordersController4", function ($http, $mdDialog) {
             .clickOutsideToClose(true)
             .title('Order Details')
             .textContent('Your order has been placed!')
-            .ariaLabel('Alert Dialog Demo')
-            .ok('Got it!')
+            .ariaLabel('Order Confirmation Dialog')
+            .ok('Ok')
             .targetEvent(ev)
         );
     };
+
+    $octrl.restoreAll = function () {
+        $octrl.myPromise = $http
+        .get('http://localhost:62655/api/Orders/GetPaged?pageNo=1&pageSize=' + $octrl.rowAmount)
+        .then(function (response) {
+            $octrl.searchFlag = false;
+            $octrl.someOrders = response.data;
+            $octrl.noOfPages = $octrl.someOrders.Paging.PageCount;
+            console.log("Page Count: " + $octrl.noOfPages);
+            $octrl.totalItems = $octrl.someOrders.Paging.TotalRecordCount;
+            $octrl.currentPage = $octrl.someOrders.Paging.PageNo;
+        })
+        .catch(function (errorResponse) {
+            $octrl.context = "Something went wrong with getting issues";
+        });
+    }
 
 });

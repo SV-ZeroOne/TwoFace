@@ -184,5 +184,34 @@ namespace ComicStock.WebAPI.Controllers
             return Ok(new PagedResult<OrderDTO>(orders, pageNo, pageSize, total));
         }
 
+        [Route("api/Orders/GetSearchPaged")]
+        [HttpGet]
+        public IHttpActionResult GetSearchPaged(string searchKey, int pageNumber)
+        {
+            if (searchKey != null)
+            {
+                string searchString = searchKey.ToLower();
+                IEnumerable<OrderDTO> someOrders = Get().Where(i => i.DeliveryStatus.ToLower().Contains(searchString));
+                int pageSize = 20;
+                // Determine the number of records to skip
+                int skip = (pageNumber - 1) * pageSize;
+
+                // Get total number of records
+
+                int total = someOrders.Count();
+
+                // Select the customers based on paging parameters
+                List<OrderDTO> orders = someOrders
+                    .OrderBy(c => c.OrderID)
+                    .Skip(skip)
+                    .Take(pageSize)
+                    .ToList();
+
+                // Return the list of customers
+                return Ok(new PagedResult<OrderDTO>(orders, pageNumber, pageSize, total));
+            }
+            return null;
+        }
+
     }
 }

@@ -119,8 +119,19 @@ namespace ComicStock.WebAPI.Controllers
                 throw new HttpResponseException(HttpStatusCode.NotAcceptable);
             }
             Stock newStock = convertDTO(stockDto);
-            stockRepo.Add(newStock);
-            return newStock;
+            Stock existingStock = stockRepo.checkExistingStock(stockDto.IssueID, stockDto.Condition);
+            if(existingStock != null)
+            {
+                existingStock.AvailableQty += stockDto.AvailableQuantity;
+                existingStock.Price = stockDto.Price;
+                stockRepo.Update(existingStock);
+                return existingStock;
+            }else
+            {
+                stockRepo.Add(newStock);
+                return newStock;
+            }
+
         }
 
         private Stock convertDTO(StockDTO stockDto)
@@ -153,6 +164,35 @@ namespace ComicStock.WebAPI.Controllers
 
             // Return the list of customers
             return Ok(new PagedResult<StockDTO>(stock, pageNo, pageSize, total));
+        }
+
+        [Route("api/Stock/GetSearchPaged")]
+        [HttpGet]
+        public IHttpActionResult GetSearchPaged(string searchKey, int pageNumber)
+        {
+            if (searchKey != null)
+            {
+                string searchString = searchKey.ToLower();
+                IEnumerable<StockDTO> someStock = Get().Where(i => i.Condition.ToLower().Contains(searchString));
+                int pageSize = 20;
+                // Determine the number of records to skip
+                int skip = (pageNumber - 1) * pageSize;
+
+                // Get total number of records
+
+                int total = someStock.Count();
+
+                // Select the customers based on paging parameters
+                List<StockDTO> stock = someStock
+                    .OrderBy(c => c.StockReferenceID)
+                    .Skip(skip)
+                    .Take(pageSize)
+                    .ToList();
+
+                // Return the list of customers
+                return Ok(new PagedResult<StockDTO>(stock, pageNumber, pageSize, total));
+            }
+            return null;
         }
     }
 }

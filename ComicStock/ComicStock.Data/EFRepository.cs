@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -36,8 +37,10 @@ namespace ComicStock.Data
         public void Update(TEntity entity)
         {
             if (entity == null) throw new NullReferenceException(entity.ToString());
-            context.Set<TEntity>().Attach(entity);
-            context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+            //context.Set<TEntity>().Attach(entity);
+            //context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+            //_dbContext.Set<UserEntity>().AddOrUpdate(entityToBeUpdatedWithId);
+            context.Set<TEntity>().AddOrUpdate(entity);
             Save();
         }
 
