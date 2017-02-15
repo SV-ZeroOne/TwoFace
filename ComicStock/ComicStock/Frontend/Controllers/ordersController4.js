@@ -1,10 +1,9 @@
-﻿var app = angular.module("ordersModule", ["xeditable", "ui.bootstrap", 'ui.select', 'ngSanitize', 'ngMaterial', 'ngMessages', 'cgBusy']);
-
-app.run(function (editableOptions) {
+﻿//var app = angular.module("ordersModule", ["xeditable", "ui.bootstrap", 'ui.select', 'ngSanitize', 'ngMaterial', 'ngMessages', 'cgBusy']);
+angular.module("SquareEyesModule")
+.run(function (editableOptions) {
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
-});
-
-app.controller("ordersController4", function ($http, $mdDialog) {
+})
+.controller("ordersController4", function ($http, $mdDialog) {
     var $octrl = this;
     $octrl.showMe = false;
     $octrl.newOrder = {};

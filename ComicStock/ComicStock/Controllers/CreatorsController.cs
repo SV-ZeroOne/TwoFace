@@ -183,5 +183,35 @@ namespace ComicStock.Controllers
             i.EmailAddress != null && i.EmailAddress.ToLower().Contains(searchString) 
             ).ToList<CreatorDTO>();
         }
+
+        [Route("api/Creators/GetSearchPaged")]
+        [HttpGet]
+        public IHttpActionResult GetSearchPaged(string searchKey, int pageNumber)
+        {
+            if (searchKey != null)
+            {
+                string searchString = searchKey.ToLower();
+                IEnumerable<CreatorDTO> someStock = Get().Where(i => i.Name.ToLower().Contains(searchString));
+                int pageSize = 20;
+                // Determine the number of records to skip
+                int skip = (pageNumber - 1) * pageSize;
+
+                // Get total number of records
+
+                int total = someStock.Count();
+
+                // Select the customers based on paging parameters
+                List<CreatorDTO> stock = someStock
+                    .OrderBy(c => c.CreatorID)
+                    .Skip(skip)
+                    .Take(pageSize)
+                    .ToList();
+
+                // Return the list of customers
+                return Ok(new PagedResult<CreatorDTO>(stock, pageNumber, pageSize, total));
+            }
+            return null;
+        }
+
     }
-    }
+}

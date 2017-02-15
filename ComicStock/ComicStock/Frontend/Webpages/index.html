@@ -29,18 +29,18 @@
     <link href="/Frontend/Assets/CSS/angular-busy.min.css" rel="stylesheet" />
     <link href="/Frontend/Assets/CSS/xeditable.min.css" rel="stylesheet" />
     <script src="/Frontend/Assets/JS/xeditable.min.js"></script>
-
+    
     <!--Controllers-->
     <script src="/Frontend/Controllers/indexController.js"></script>
     <script src="/Frontend/Controllers/stockController.js"></script>
-    <script src="/Frontend/Controllers/ordersController4.js"></script>
     <script src="/Frontend/Controllers/issues-controller.js"></script>
     <script src="/Frontend/Controllers/creator-controller.js"></script>
+    <script src="/Frontend/Controllers/ordersController4.js"></script>
     <script src="/Frontend/Controllers/SupplierController.js"></script>
     <script src="/Frontend/Controllers/VoucherController.js"></script>
 
 </head>
-<body id="mainBody" ng-app="SquareEyesModule">
+<body ng-app="SquareEyesModule">
     <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -56,18 +56,19 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">Home</a></li>
-                    <li><a ui-sref="issues">Issues</a></li>
-                    <li><a ui-sref="creators">Creators</a></li>
+                    <li><a href="#">Issues</a></li>
+                    <li><a href="#">Creators</a></li>
                     <li><a ui-sref="orders">Orders</a></li>
                     <li><a ui-sref="stock">Stock</a></li>
-                    <li><a ui-sref="Supplier">Suppliers</a></li>
-                    <li><a ui-sref="Voucher">Vouchers</a></li>
+                    <li><a href="#">Suppliers</a></li>
+                    <li><a href="#">Vouchers</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
     </nav>
-    @RenderBody()
-    <div ui-view></div>
 
+    <div ui-view></div>
+    <ui-view></ui-view>
+    
 </body>
 </html>

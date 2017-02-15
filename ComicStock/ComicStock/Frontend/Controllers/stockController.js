@@ -1,11 +1,11 @@
-﻿var app = angular.module("stockModule", ["xeditable", "ui.bootstrap", 'ui.select', 'ngSanitize', 'ngMaterial', 'ngMessages', 'cgBusy']);
-
-app.run(function (editableOptions) {
+﻿//var app = angular.module("SquareEyesModule", ["xeditable", "ui.bootstrap", 'ui.select', 'ngSanitize', 'ngMaterial', 'ngMessages', 'cgBusy']);
+angular.module("SquareEyesModule")
+.run(function (editableOptions) {
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
-});
-
-app.controller("stockController", function ($http, $mdDialog) {
+})
+.controller("stockController", function ($http, $mdDialog) {
     var $sctrl = this;
+    console.log("in stock controller");
     $sctrl.currentPage = 1;
     $sctrl.rowAmount = 10;
     $sctrl.showMe = false;
@@ -122,6 +122,10 @@ app.controller("stockController", function ($http, $mdDialog) {
         console.log(stockDTO);
         $http
             .post('../api/Stock', stockDTO);
+    }
+
+    $sctrl.changeRows = function () {
+        $sctrl.pageChanged();
     }
 
     $sctrl.restoreAll = function(){

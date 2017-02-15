@@ -1,15 +1,8 @@
-﻿//angular.module('SquareEyesApp',[])
-//    .controller('CreatorCtrl', function($http){
-//        var $ctrl = this;
-//    });
-
-var app = angular.module('SquareEyesApp', ["xeditable", "ui.bootstrap"])
-
-app.run(function (editableOptions) {
+﻿angular.module("SquareEyesModule")
+.run(function (editableOptions) {
     editableOptions.theme = 'bs3';
 })
-
-app.controller('CreatorsCtrl', function ($http) {
+.controller('CreatorsCtrl', function ($http) {
 
     var $ctrl = this;
 
@@ -84,30 +77,59 @@ app.controller('CreatorsCtrl', function ($http) {
         console.log("Page no: " + $ctrl.paginationPage)
     }
 
+    //$ctrl.pageChanged = function () {
+    //    console.log("Page changed function");
+    //    console.log("Current Page: " + $ctrl.currentPage + " Row amount " + $ctrl.rowAmount);
+    //    $http.get('../api/Creators/GetPaged?pageNo=' + $ctrl.currentPage + '&pageSize=' + $ctrl.rowAmount)
+    //    .then(function (response) {
+    //        $ctrl.someOrders = response.data;
+    //    });
+    //};
+
     $ctrl.pageChanged = function () {
         console.log("Page changed function");
         console.log("Current Page: " + $ctrl.currentPage + " Row amount " + $ctrl.rowAmount);
-        $http.get('../api/Creators/GetPaged?pageNo=' + $ctrl.currentPage + '&pageSize=' + $ctrl.rowAmount)
-        .then(function (response) {
-            $ctrl.someOrders = response.data;
-        });
-
-        //$http.get("../api/issues").then(function (response) {
-
-        //    $ctrl.options = response.data;
-
-        //}).catch(function (errorResponse) {
-
-        //    $ctrl.context = "Oops... Something went wrong";
-
-        //});
-
+        if ($ctrl.searchFlag) {
+            $ctrl.searchAll();
+            console.log("Paged Search Results")
+        } else {
+            $http.get('../api/Creators/GetPaged?pageNo=' + $ctrl.currentPage + '&pageSize=' + $ctrl.rowAmount)
+            .then(function (response) {
+                console.log("Getting new paged results.")
+                $ctrl.options = response.data;
+            });
+        }
     };
 
     $ctrl.searchAll = function () {
-        $http.get('../api/Creators?search=' + $ctrl.creatorSearch)
+        $ctrl.myPromise = $http.get('../api/Creators/GetSearchPaged?searchKey=' + $ctrl.creatorSearch + '&pageNumber=' + $ctrl.currentPage)
         .then(function (response) {
-            $ctrl.options.Data = response.data;
+            $ctrl.options = response.data;
+            $ctrl.noOfPages = $ctrl.options.Paging.PageCount;
+            $ctrl.totalItems = $ctrl.options.Paging.TotalRecordCount;
+            $ctrl.currentPage = $ctrl.options.Paging.PageNo;
+            $ctrl.searchFlag = true;
+        });
+    };
+
+    $ctrl.changeRows = function () {
+        $ctrl.pageChanged();
+    }
+
+    $ctrl.restoreAll = function () {
+        $ctrl.myPromise = $http
+        .get('../api/Creators/GetPaged?pageNo=1&pageSize=' + $ctrl.rowAmount)
+        .then(function (response) {
+            $ctrl.searchFlag = false;
+            $ctrl.options = response.data;
+            $ctrl.noOfPages = $ctrl.options.Paging.PageCount;
+            console.log("Page Count: " + $ctrl.noOfPages);
+            $ctrl.totalItems = $ctrl.options.Paging.TotalRecordCount;
+            $ctrl.currentPage = $ctrl.options.Paging.PageNo;
+        })
+        .catch(function (errorResponse) {
+            $ctrl.context = "Something went wrong with getting issues";
         });
     }
+
 });

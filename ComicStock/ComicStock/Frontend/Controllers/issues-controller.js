@@ -1,10 +1,8 @@
-﻿var app = angular.module('SquareEyesApp', ["xeditable", "ui.bootstrap"])
-
-app.run(function (editableOptions) {
+﻿angular.module('SquareEyesModule')
+.run(function (editableOptions) {
     editableOptions.theme = 'bs3';
 })
-
-app.controller('IssuesCtrl', function ($http) {
+.controller('IssuesCtrl', function ($http) {
 
     var $ctrl = this;
     
@@ -15,6 +13,7 @@ app.controller('IssuesCtrl', function ($http) {
     $ctrl.currentPage = 1;
 
     $ctrl.jsonObject = {};
+    $ctrl.searchFlag = false;
 
     $http
         .get('../api/Issues/GetPaged?pageNo=1&pageSize=' + $ctrl.rowAmount)
@@ -38,6 +37,10 @@ app.controller('IssuesCtrl', function ($http) {
         console.log(data);
         $http.put('../api/Issues', data);
     };
+
+    $ctrl.changeRows = function () {
+        $ctrl.pageChanged();
+    }
 
     $ctrl.addIssue = function(){
         console.log($ctrl.options.title);
@@ -127,19 +130,62 @@ app.controller('IssuesCtrl', function ($http) {
         console.log("Page no: " + $ctrl.paginationPage)
     }
 
+    //$ctrl.pageChanged = function () {
+    //    console.log("Page changed function");
+    //    console.log("Current Page: " + $ctrl.currentPage + " Row amount " + $ctrl.rowAmount);
+    //    $http.get('../api/Issues/GetPaged?pageNo=' + $ctrl.currentPage + '&pageSize=' + $ctrl.rowAmount)
+    //    .then(function (response) {
+    //        $ctrl.options = response.data;
+    //    })
+    //};
+
     $ctrl.pageChanged = function () {
         console.log("Page changed function");
         console.log("Current Page: " + $ctrl.currentPage + " Row amount " + $ctrl.rowAmount);
-        $http.get('../api/Issues/GetPaged?pageNo=' + $ctrl.currentPage + '&pageSize=' + $ctrl.rowAmount)
-        .then(function (response) {
-            $ctrl.options = response.data;
-        })
+        if ($ctrl.searchFlag) {
+            $ctrl.searchAll();
+            console.log("Paged Search Results")
+        } else {
+            $http.get('../api/Issues/GetPaged?pageNo=' + $ctrl.currentPage + '&pageSize=' + $ctrl.rowAmount)
+            .then(function (response) {
+                console.log("Getting new paged results.")
+                $ctrl.options = response.data;
+            });
+        }
     };
 
+    //$ctrl.searchAll = function () {
+    //    $http.get('../api/Issues?search=' + $ctrl.issueSearch)
+    //    .then(function (response) {
+    //        $ctrl.options.Data = response.data;
+    //    });
+    //}
+
     $ctrl.searchAll = function () {
-        $http.get('../api/Issues?search=' + $ctrl.issueSearch)
+        $http.get('../api/Issues/GetSearchPaged?searchKey=' + $ctrl.issueSearch + '&pageNumber=' + $ctrl.currentPage)
         .then(function (response) {
-            $ctrl.options.Data = response.data;
+            $ctrl.options = response.data;
+            $ctrl.noOfPages = $ctrl.options.Paging.PageCount;
+            $ctrl.totalItems = $ctrl.options.Paging.TotalRecordCount;
+            $ctrl.currentPage = $ctrl.options.Paging.PageNo;
+            $ctrl.searchFlag = true;
+        });
+    };
+
+    $ctrl.restoreAll = function () {
+        $ctrl.myPromise = $http
+        .get('../api/Issues/GetPaged?pageNo=1&pageSize=' + $ctrl.rowAmount)
+        .then(function (response) {
+            $ctrl.searchFlag = false;
+            $ctrl.options = response.data;
+            $ctrl.noOfPages = $ctrl.options.Paging.PageCount;
+            console.log("Page Count: " + $ctrl.noOfPages);
+            $ctrl.totalItems = $ctrl.options.Paging.TotalRecordCount;
+            $ctrl.currentPage = $ctrl.options.Paging.PageNo;
+        })
+        .catch(function (errorResponse) {
+            $ctrl.context = "Something went wrong with getting issues";
         });
     }
+
 });

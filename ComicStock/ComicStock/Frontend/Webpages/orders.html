@@ -1,39 +1,5 @@
-﻿<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Orders</title>
-
-    <link href="/Scripts/app/Assets/CSS/MainStyleSheet.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.5.7/angular-sanitize.min.js"></script>
-    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css"/>
-    <link rel="stylesheet" href="/Scripts/app/Assets/CSS/select.min.css" />
-    <script src="/Scripts/app/Assets/JS/select.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
-    <!--Angular Material stuff-->
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-    <!--Busy loader-->
-    <script src="/Scripts/app/Assets/JS/angular-busy.min.js"></script>
-    <link href="/Scripts/app/Assets/CSS/angular-busy.min.css" rel="stylesheet"/>
-    <link href="/Scripts/app/Assets/CSS/xeditable.min.css" rel="stylesheet"/>
-    <script src="/Scripts/app/Assets/JS/xeditable.min.js"></script>
-    <script src="/Scripts/app/Orders/ordersController4.js"></script>
-
-</head>
-<body id="ordersBody" ng-app="ordersModule" ng-controller="ordersController4 as $octrl" >
-<div ng-include="'/Scripts/app/Assets/Views/navbar.html'"></div>
-
+﻿
+<div ng-controller="ordersController4 as $octrl">
     <div class="container" id="popupContainer">
         <h1>Orders</h1>
         <div class="row">
@@ -68,7 +34,7 @@
                         <input type="number" name="newQuantity" ng-model="$octrl.newOrder.qtyOrdered" required />
                         <br />
                         <br />
-                        <h5>Total: R <test ng-if="$octrl.selectedQuotes.Price != null">{{$octrl.selectedQuotes.Price * $octrl.newOrder.qtyOrdered}}</test></h5> 
+                        <h5>Total: R <test ng-if="$octrl.selectedQuotes.Price != null">{{$octrl.selectedQuotes.Price * $octrl.newOrder.qtyOrdered}}</test></h5>
                         <button class="btn btn-primary" ng-click="$octrl.showAlert($event)" type="submit">Place Order</button>
                     </form>
                 </div>
@@ -91,9 +57,10 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                Search: <input type="text" name="ordersSearch" ng-model="$octrl.ordersSearch"/>
+                Search: <input type="text" name="ordersSearch" ng-model="$octrl.ordersSearch" />
                 <button class="btn-default" type="button" ng-click="$octrl.searchAll()">
-                <span class="glyphicon glyphicon-search"></span> Search All</button>
+                    <span class="glyphicon glyphicon-search"></span> Search All
+                </button>
                 <button class="btn-default" type="button" ng-click="$octrl.restoreAll()">
                     Restore All
                 </button>
@@ -185,6 +152,4 @@
             </div>
         </div>
     </div>
-
-</body>
-</html>
+</div>

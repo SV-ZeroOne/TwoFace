@@ -196,5 +196,35 @@ namespace ComicStock.WebAPI.Controllers
             voucher.Valid = voucherDTO.Valid;
             return voucher;
         }
+
+        [Route("api/Vouchers/GetSearchPaged")]
+        [HttpGet]
+        public IHttpActionResult GetSearchPaged(string searchKey, int pageNumber)
+        {
+            if (searchKey != null)
+            {
+                string searchString = searchKey.ToLower();
+                IEnumerable<VoucherDTO> someVouch = Get().Where(i => i.Code.ToLower().Contains(searchString));
+                int pageSize = 20;
+                // Determine the number of records to skip
+                int skip = (pageNumber - 1) * pageSize;
+
+                // Get total number of records
+
+                int total = someVouch.Count();
+
+                // Select the customers based on paging parameters
+                List<VoucherDTO> voucher = someVouch
+                    .OrderBy(c => c.VoucherID)
+                    .Skip(skip)
+                    .Take(pageSize)
+                    .ToList();
+
+                // Return the list of customers
+                return Ok(new PagedResult<VoucherDTO>(voucher, pageNumber, pageSize, total));
+            }
+            return null;
+        }
+
     }
 }

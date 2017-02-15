@@ -1,27 +1,4 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title>SquareEyes</title>
-    <meta charset="utf-8" />
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-    <script src="/Scripts/app/creator-controller.js"></script>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="/Scripts/app/angular-xeditable-0.6.0/css/xeditable.css" />
-    <link rel="stylesheet" href="/Scripts/app/angular-xeditable-0.6.0/css/xeditable.min.css" />
-    <script src="/Scripts/app/angular-xeditable-0.6.0/js/xeditable.js"></script>
-    <script src="/Scripts/app/angular-xeditable-0.6.0/js/xeditable.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.min.js"></script>
-
-</head>
-<body ng-app="SquareEyesApp">
+﻿
     <div ng-controller="CreatorsCtrl as $ctrl">
         <div class="container">
             <div class="row">
@@ -56,6 +33,9 @@
                     <button class="btn-default" type="button" ng-click="$ctrl.searchAll()">
                         <span class="glyphicon glyphicon-search"></span> Search All
                     </button>
+                    <button class="btn-default" type="button" ng-click="$ctrl.restoreAll()">
+                        Restore All
+                    </button>
                 </div>
             </div>
 
@@ -66,10 +46,10 @@
             <div class="row">
                 <br />
                 Row Count:
-                <select ng-init="$ctrl.rowAmount" name="rowAmount" ng-model="$ctrl.rowAmount">
+                <select ng-change="$ctrl.changeRows()" ng-init="$ctrl.rowAmount" name="rowAmount" ng-model="$ctrl.rowAmount">
                     <option value="10">10</option>
                     <option value="20">20</option>
-                    <option value="50">20</option>
+                    <option value="50">50</option>
                 </select><br>
                 <br />
                 <table class="table table-condensed table-hover table-bordered">
@@ -127,5 +107,3 @@
             </div>
         </div>
     </div>
-</body>
-</html>

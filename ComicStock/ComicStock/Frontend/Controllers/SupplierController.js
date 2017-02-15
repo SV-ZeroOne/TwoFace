@@ -1,16 +1,16 @@
-﻿var app = angular.module("supplierModule", ["xeditable", "ui.bootstrap", "ngMessages", 'ngSanitize', 'ngMaterial']);
-
-app.run(function (editableOptions) {
+﻿angular.module("SquareEyesModule")
+.run(function (editableOptions) {
     editableOptions.theme = 'bs3';
 })
-
-app.controller("supplierController", function ($http, $mdDialog) {
+.controller("supplierController", function ($http, $mdDialog) {
     var $ictrl = this;
     $ictrl.showMe = false;
     $ictrl.newSupplier = {};
     $ictrl.currentPage = 1;
     $ictrl.rowAmount = 10;
     $ictrl.someSuppliers;
+    $ictrl.searchFlag = false;
+
     $http
         .get('../api/Suppliers/GetPaged?pageNo=1&pageSize=' + $ictrl.rowAmount)
         .then(function (response) {
@@ -49,6 +49,17 @@ app.controller("supplierController", function ($http, $mdDialog) {
         });
     }
 
+    $ictrl.searchAll = function () {
+        $ictrl.myPromise = $http.get('../api/Suppliers/GetSearchPaged?searchKey=' + $ictrl.suppliersSearch + '&pageNumber=' + $ictrl.currentPage)
+        .then(function (response) {
+            $ictrl.someSuppliers = response.data;
+            $ictrl.noOfPages = $ictrl.someSuppliers.Paging.PageCount;
+            $ictrl.totalItems = $ictrl.someSuppliers.Paging.TotalRecordCount;
+            $ictrl.currentPage = $ictrl.someSuppliers.Paging.PageNo;
+            $ictrl.searchFlag = true;
+        });
+    };
+
     //$ictrl.showAlert = function () {
     //    $mdDialog.show(
     //      $mdDialog.alert()
@@ -70,9 +81,36 @@ app.controller("supplierController", function ($http, $mdDialog) {
     $ictrl.pageChanged = function () {
         console.log("Page changed function");
         console.log("Current Page: " + $ictrl.currentPage + " Row amount " + $ictrl.rowAmount);
-        $http.get('../api/Suppliers/GetPaged?pageNo=' + $ictrl.currentPage + '&pageSize=' + $ictrl.rowAmount)
-        .then(function (response) {
-            $ictrl.someSuppliers = response.data;
-        });
+        if ($ictrl.searchFlag) {
+            $ictrl.searchAll();
+            console.log("Paged Search Results")
+        } else {
+            $http.get('../api/Suppliers/GetPaged?pageNo=' + $ictrl.currentPage + '&pageSize=' + $ictrl.rowAmount)
+            .then(function (response) {
+                console.log("Getting new paged results.")
+                $ictrl.someSuppliers = response.data;
+            });
+        }
     };
+
+    $ictrl.changeRows = function () {
+        $ictrl.pageChanged();
+    }
+
+    $ictrl.restoreAll = function () {
+        $ictrl.myPromise = $http
+        .get('../api/Suppliers/GetPaged?pageNo=1&pageSize=' + $ictrl.rowAmount)
+        .then(function (response) {
+            $ictrl.searchFlag = false;
+            $ictrl.someSuppliers = response.data;
+            $ictrl.noOfPages = $ictrl.someSuppliers.Paging.PageCount;
+            console.log("Page Count: " + $ictrl.noOfPages);
+            $ictrl.totalItems = $ictrl.someSuppliers.Paging.TotalRecordCount;
+            $ictrl.currentPage = $ictrl.someSuppliers.Paging.PageNo;
+        })
+        .catch(function (errorResponse) {
+            $sctrl.context = "Something went wrong with getting issues";
+        });
+    }
+
 });
