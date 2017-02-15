@@ -12,7 +12,10 @@ namespace ComicStock
         {
             // Web API configuration and services
 
-            // Web API routes
+            //// Web API routes
+            var cor = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cor);
+
             config.MapHttpAttributeRoutes();
 
             //This solves the access-control-allow-origin error
