@@ -71,6 +71,9 @@
                     <button class="btn-default" type="button" ng-click="$ctrl.searchAll()">
                         <span class="glyphicon glyphicon-search"></span> Search All
                     </button>
+                    <button class="btn-default" type="button" ng-click="$ctrl.restoreAll()">
+                        Restore All
+                    </button>
                 </div>
                 <br />
                 <br />
@@ -79,7 +82,7 @@
 
             <!--<div class="container-fluid">-->
             <div class="row" style="float:right">
-                Row Count:
+                <label>Issues Per Page:</label>
                 <select ng-change="$ctrl.changeRows()" ng-init="$ctrl.rowAmount" name="rowAmount" ng-model="$ctrl.rowAmount">
                     <option value="10">10</option>
                     <option value="20">20</option>

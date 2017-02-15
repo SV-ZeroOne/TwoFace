@@ -45,8 +45,8 @@
             </div>
         </div>
         <br />
-        <div class="row">
-            <div class="col-md-8" style="float:left">
+        <div class="row" style="float:left">
+            <div class="col-md-12">
                 Search: <input type="text" name="ordersSearch" ng-model="$octrl.ordersSearch" />
                 <button class="btn-default" type="button" ng-click="$octrl.searchAll()">
                     <span class="glyphicon glyphicon-search"></span> Search All
@@ -55,25 +55,16 @@
                     Restore All
                 </button>
             </div>
-            <div id="selectID"  class="col-md-4">
-                <select id="selectPick" class="selectpicker" ng-init="$octrl.rowAmount" name="rowAmount" ng-model="$octrl.rowAmount" data-width="150px" title="Row Count:">
+        </div>
+            <div id="selectID"  class="row" style="float:right">
+                <label>Orders Per Page:</label>
+                <select ng-init="$octrl.rowAmount" name="rowAmount" ng-model="$octrl.rowAmount" data-width="150px" title="Row Count:">
                     <option value="10">10</option>
                     <option value="20">20</option>
                     <option value="50">50</option>
                 </select>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                Search: <input type="text" name="ordersSearch" ng-model="$octrl.ordersSearch"/>
-                <button class="btn-default" type="button" ng-click="$octrl.searchAll()">
-                <span class="glyphicon glyphicon-search"></span> Search All</button>
-                <button class="btn-default" type="button" ng-click="$octrl.restoreAll()">
-                    Restore All
-                </button>
-            </div>
-        </div>
+        <br />
         <br />
         <div class="row">
             <div class="col-md-12">
