@@ -134,6 +134,7 @@ namespace ComicStock.WebAPI.Controllers
             supplierToUpdate.Name = supplier.Name;
             supplierToUpdate.City = supplier.City;
             supplierToUpdate.ReferenceNumber = supplier.ReferenceNumber;
+            supplierToUpdate.IsDeleted = supplier.IsDeleted;
             //Might need to map more fields to update.
             return supplierToUpdate;
         }

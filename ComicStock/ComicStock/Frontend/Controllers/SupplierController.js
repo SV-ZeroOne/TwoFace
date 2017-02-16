@@ -60,6 +60,11 @@
         });
     };
 
+    $ictrl.removeSupplier = function (data) {
+        console.log(data);
+        data.IsDeleted = true;
+        $http.put("../api/Suppliers", data);
+    }
     //$ictrl.showAlert = function () {
     //    $mdDialog.show(
     //      $mdDialog.alert()
