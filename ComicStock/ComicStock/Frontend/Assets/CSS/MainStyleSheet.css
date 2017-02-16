@@ -61,3 +61,26 @@
         .searchandselect .dropdown li small {
             margin-right: 10px;
         }
+
+    .card {
+        background-color: #ebebeb;
+    }
+
+        .card:hover {
+            /*border-color: deepskyblue;*/
+            /*background:#333;*/
+            background: #82c6ff;
+            color: #eee;
+            transition: background 200ms, color 200ms;
+            font-size: 3rem;
+        }
+
+    .glyphicon glyphicon-briefcase {
+        width: 10rem;
+        height: 5rem;
+    }
+
+    .image {
+        width: 10rem;
+        height: 5rem;
+    }
