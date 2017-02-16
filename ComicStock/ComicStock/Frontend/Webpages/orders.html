@@ -10,17 +10,17 @@
                 <div ng-show="$octrl.showMe" ng-submit="$octrl.placeOrder()" style="background-color:#e7e7e7; border-radius:5px">
                     <br />
                     <h4 style="text-align:center">Issue:</h4>
-                    <ui-select class="col-md-offset-3" ng-model="$octrl.selectedIssue"
+                    <ui-select ng-model="$octrl.selectedIssue"
                                theme="bootstrap"
                                reset-search-input="false"
                                style="width: 600px;"
                                title="Choose an Issue"
-                               append-to-body="true"
                                on-select="$octrl.getQuotes($item, $model)">
                         <ui-select-match placeholder="Enter an issue title">{{$octrl.selectedIssue.Title + " #" + $octrl.selectedIssue.SeriesNumber}}</ui-select-match>
                         <ui-select-choices repeat="item in ($octrl.someIssues.Data | filter: $select.search) track by item.IssueID"
                                            refresh="$octrl.refreshIssues($select.search)"
-                                           refresh-delay="100">
+                                           refresh-delay="100"
+                                           style="width: 600px;">
                             <div ng-bind-html="(item.Title+' #'+item.SeriesNumber)| highlight: $select.search"></div>
                         </ui-select-choices>
                     </ui-select>

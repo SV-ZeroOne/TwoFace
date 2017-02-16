@@ -63,7 +63,20 @@
     $ictrl.removeSupplier = function (data) {
         console.log(data);
         data.IsDeleted = true;
-        $http.put("../api/Suppliers", data);
+        $http.put("../api/Suppliers", data).then(function (response) {
+            $http
+        .get('../api/Suppliers/GetPaged?pageNo=1&pageSize=' + $ictrl.rowAmount)
+        .then(function (response) {
+            $ictrl.someSuppliers = response.data;
+            $ictrl.noOfPages = $ictrl.someSuppliers.Paging.PageCount;
+            $ictrl.totalItems = $ictrl.someSuppliers.Paging.TotalRecordCount;
+            $ictrl.currentPage = $ictrl.someSuppliers.Paging.PageNo;
+        })
+        .catch(function (errorResponse) {
+            $ictrl.context = "Something went wrong with getting suppliers";
+        });
+
+        });
     }
     //$ictrl.showAlert = function () {
     //    $mdDialog.show(
