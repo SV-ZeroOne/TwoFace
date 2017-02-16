@@ -311,12 +311,14 @@
     <Content Include="Content\jqueryui-editable\css\jqueryui-editable.css" />
     <Content Include="Content\jqueryui-editable\img\clear.png" />
     <Content Include="Content\jqueryui-editable\img\loading.gif" />
+    <Content Include="Frontend\Assets\ErrorPage.jpg" />
     <Content Include="Frontend\Assets\JS\date.js" />
     <Content Include="Frontend\Controllers\indexController.js" />
     <Content Include="Frontend\Webpages\creators.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Frontend\Webpages\home.html" />
+    <Content Include="Frontend\Webpages\notfound.html" />
     <Content Include="Global.asax" />
     <Content Include="Frontend\Webpages\index.html" />
     <Content Include="Scripts\angular-animate.js" />
