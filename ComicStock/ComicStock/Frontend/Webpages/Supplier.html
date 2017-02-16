@@ -1,0 +1,102 @@
+﻿
+    <div ng-controller="supplierController as $ictrl">
+        <div class="container" id="popupContainer1">
+            <div class="row">
+                <h1 class="col-md-4 col-md-offset-5">Suppliers</h1>
+            </div>
+            <div class="row">
+                <button ng-click="$ictrl.showNewSupplier()" class="btn btn-primary col-md-4 col-md-offset-4" style="margin-bottom:10px">Make New Supplier</button>
+                <br />
+                <br />
+                <div ng-show="$ictrl.showMe" ng-submit="$ictrl.placeSupplier()" style="background-color:#e7e7e7; border-radius:5px">
+                    <br />
+                    <form name="newSupplierForm">
+                        <div class="row">
+                            <div class="col-md-6" style="text-align:center">
+                                <label style="margin-left:10px;">Name:</label>
+                                <input type="text" name="newSupplierName" ng-model="$ictrl.newSupplier.name" required style="margin-bottom:10px" />
+                                <div ng-messages="newSupplierForm.newSupplierName.$error" role="alert">
+                                    <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6" style="text-align:center">
+                                <label>City:</label>
+                                <input type="text" name="newCity" pattern="[a-zA-Z]{1,}" ng-model="$ictrl.newSupplier.city" required oninvalid="setCustomValidity('Please enter only Alphabetical letters ')" onchange="try{setCustomValidity('')}catch(e){}"  style="margin-bottom:10px"/>
+                                <div ng-messages="newSupplierForm.newCity.$error" role="alert">
+                                    <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary col-md-4 col-md-offset-4" style="margin-top:5px;">Insert Supplier</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row" style="float:right">
+                <div>
+                    <label>Suppliers Per Page:</label>
+                    <select ng-change="$ictrl.changeRows()" ng-init="$ictrl.rowAmount" name="rowAmount" ng-model="$ictrl.rowAmount">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row" style="float:left">
+                <div class="col-md-12">
+                    Search: <input type="text" name="suppliersSearch" ng-model="$ictrl.suppliersSearch"/>
+                    <button class="btn-default" type="button" ng-click="$ictrl.searchAll()">
+                        <span class="glyphicon glyphicon-search"></span> Search All
+                    </button>
+                    <button class="btn-default" type="button" ng-click="$ictrl.restoreAll()">
+                        Restore All
+                    </button>
+                </div>
+            </div><br /><br />    
+            <table class="table table-condensed table-hover table-bordered">
+                <thead>
+                <th ng-click="$ictrl.orderTableBy('SupplierID');">SupplierID</th>
+                <th ng-click="$ictrl.orderTableBy('Name');">Name</th>
+                <th ng-click="$ictrl.orderTableBy('City');">City</th>
+                <th>Reference Number</th>
+                <th>Edit</th>
+                </th>
+                <tbody>
+                    <div class="row">
+                        <tr ng-repeat="i in $ictrl.someSuppliers.Data | filter: $ictrl.suppliersSearch | orderBy:$ictrl.column:$ictrl.reverse">
+                            <td class="col-md-2" style="text-align:center">{{i.SupplierID}}</td>
+                            <td class="col-md-2" style="text-align:center">
+                                <span editable-text="i.Name" e-name="Name" e-form="rowform" ng-model="i.Name">
+                                    {{i.Name || 'empty'}}
+                                </span>
+                            </td>
+                            <td class="col-md-2" style="text-align:center">
+                                <span editable-text="i.City" e-name="City" e-form="rowform">
+                                    {{i.City || 'empty'}}
+                                </span>
+                            </td>
+                            <td class="col-md-2" style="text-align:center">{{i.ReferenceNumber}}</td>
+                            <td class="col-md-2" style="text-align:center">
+                                <form editable-form name="rowform" onbeforesave="$ictrl.saveSupplier($data, i.SupplierID, i.ReferenceNumber)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == i">
+                                    <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-floppy-saved"></span>save
+                                    </button>
+                                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-floppy-remove"></span>cancel
+                                    </button>
+                                </form>
+                                <div class="buttons" ng-show="!rowform.$visible">
+                                    <button type="button" class="btn btn-primary" ng-click="rowform.$show()">
+                                        <span class="glyphicon glyphicon-edit"></span>Edit</button>
+                                    <button type="button" class="btn btn-danger" ng-click="$ictrl.removeSupplier(i)">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </div>
+                </tbody>
+            </table>
+            <div class="row text-center">
+                <pagination class="pagination-sm" ng-model="$ictrl.currentPage" boundary-links="true" ng-change="$ictrl.pageChanged()" num-pages="$ictrl.noOfPages" max-size="10" total-items="$ictrl.totalItems" items-per-page="$ictrl.rowAmount"></pagination>
+                <br />
+            </div>
+        </div>
+    </div>

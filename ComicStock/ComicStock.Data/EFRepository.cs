@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,11 +40,10 @@ namespace ComicStock.Data
             return null;
         }
 
-        public IEnumerable<TEntity> find(string Criteria)
-        {
-            throw new NotImplementedException();
-            // To Be Completed
-        }
+        //public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> expression)
+        //{
+        //    return context.Set<TEntity>().Where(expression).ToList();
+        //}
 
         public void Add(TEntity entity)
         {
@@ -54,8 +55,10 @@ namespace ComicStock.Data
         public void Update(TEntity entity)
         {
             if (entity == null) throw new NullReferenceException(entity.ToString());
-            context.Set<TEntity>().Attach(entity);
-            context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+            //context.Set<TEntity>().Attach(entity);
+            //context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+            //_dbContext.Set<UserEntity>().AddOrUpdate(entityToBeUpdatedWithId);
+            context.Set<TEntity>().AddOrUpdate(entity);
             Save();
         }
 
@@ -70,8 +73,6 @@ namespace ComicStock.Data
         {
             context.SaveChanges();
         }
-
-        
 
     }
 }

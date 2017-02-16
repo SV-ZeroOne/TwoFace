@@ -1,0 +1,153 @@
+﻿
+    <div ng-controller="IssuesCtrl as $ctrl">
+        <div class="container">
+            <!--<div class="container">-->
+            <div class="row">
+                <div class="row">
+                    <h1 style="text-align:center">Issues</h1>
+                </div>
+                <div class="row">
+                    <button ng-click="$ctrl.showNewIssues()" class="btn btn-primary col-md-4 col-md-offset-4" style="margin-bottom:10px">Make New Issue</button>
+                    <br />
+                    <br />
+                    <div ng-show="$ctrl.showMeNow" ng-submit="$ctrl.addIssue()" style="background-color:#e7e7e7; border-radius:5px; height: 100px;">
+                        <br />
+                        <form name="newIssueForm">
+                            <div class="col-md-3" style="text-align:center">
+                                <label for="title">Title:</label>
+                                <input type="text" name="newTitle" pattern="[a-zA-Z]{1,}" class="form-control" ng-model="$ctrl.options.title" id="title" required oninvalid="setCustomValidity('Please enter only Alphabetical letters ')" onchange="try{setCustomValidity('')}catch(e){}"  style="margin-bottom:10px">
+                                <div ng-messages="newIssueForm.newTitle.$error" role="alert">
+                                    <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3" style="text-align:center">
+                                <label for="SeriesNo">Series Number:</label>
+                                <input type="text" name="newSeriesNo" class="form-control" ng-model="$ctrl.options.series" id="series" required>
+                                <div ng-messages="newIssueForm.newSeriesNo.$error" role="alert">
+                                    <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3" style="text-align:center">
+                                <label for="Publisher">Publisher:</label>
+                                <input type="text" name="newPublisher" pattern="[a-zA-Z]{1,}" class="form-control" ng-model="$ctrl.options.publisher" id="publisher" required oninvalid="setCustomValidity('Please enter only Alphabetical letters ')" onchange="try{setCustomValidity('')}catch(e){}"  style="margin-bottom:10px">
+                                <div ng-messages="newIssueForm.newPublisher.$error" role="alert">
+                                    <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3" style="text-align:center">
+                                <label for="PublicationDate">Publication Date:</label>
+                                <input type="text" class="form-control" ng-model="$ctrl.options.publicationDate" id="publicationDate">
+                            </div>
+                            <button class="btn btn-primary col-md-4 col-md-offset-4" type="submit" style="margin-top:30px;">Insert Issue</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!--<form class="form-inline">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" class="form-control" ng-model="$ctrl.options.title" id="title">
+            </div>
+            <div class="form-group">
+                <label for="SeriesNo">Series Number:</label>
+                <input type="text" class="form-control" ng-model="$ctrl.options.series" id="series">
+            </div>
+            <div class="form-group">
+                <label for="Publisher">Publisher:</label>
+                <input type="text" class="form-control" ng-model="$ctrl.options.publisher" id="publisher">
+            </div>
+            <div class="form-group">
+                <label for="PublicationDate">Publication Date:</label>
+                <input type="text" class="form-control" ng-model="$ctrl.options.publicationDate" id="publicationDate">
+            </div>
+            <button type="submit" class="btn btn-default" ng-click="$ctrl.addIssue($data, id)">Add</button>
+            <button type="submit" class="btn btn-default" ng-click="$ctrl.addIssue()">Add</button>
+        </form>-->
+
+            <div class="row" style="float:left">
+                <div class="col-md-12">
+                    Search: <input type="text" name="issueSearch" ng-model="$ctrl.issueSearch" />
+                    <button class="btn-default" type="button" ng-click="$ctrl.searchAll()">
+                        <span class="glyphicon glyphicon-search"></span> Search All
+                    </button>
+                    <button class="btn-default" type="button" ng-click="$ctrl.restoreAll()">
+                        Restore All
+                    </button>
+                </div>
+                <br />
+                <br />
+            </div>
+            
+
+            <!--<div class="container-fluid">-->
+            <div class="row" style="float:right">
+                <label>Issues Per Page:</label>
+                <select ng-change="$ctrl.changeRows()" ng-init="$ctrl.rowAmount" name="rowAmount" ng-model="$ctrl.rowAmount">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                </select>
+                <br />
+            </div>
+            <table class="table table-condensed table-hover table-bordered">
+                <thead>
+                <th ng-click="$ctrl.orderTableBy('ID');">ID</th>
+                <th ng-click="$ctrl.orderTableBy('Title');">Title</th>
+                <th ng-click="$ctrl.orderTableBy('SeriesNo');">Series No</th>
+                <th ng-click="$ctrl.orderTableBy('PublicationDate');">Publication Date</th>
+                <th ng-click="$ctrl.orderTableBy('Publisher');">Publisher</th>
+                <th>Edit</th>
+                </thead>
+                <tbody>
+                    <!--<tr ng-repeat="i in $ctrl.options | filter : 'Issue'">-->
+                    <tr ng-repeat="i in $ctrl.options.Data | filter: $ctrl.issueSearch | orderBy:$ctrl.column:$ctrl.reverse">
+                        <td class="col-md-2" style="text-align:center">{{i.IssueID}}</td>
+                        <td class="col-md-2" style="text-align:center">
+                            <span editable-text="i.Title" e-name="title" e-form="rowform" onbeforesave="checkTitle($data, i.id)" e-required>
+                                {{i.Title || 'empty'}}
+                            </span>
+                        </td>
+                        <td class="col-md-2" style="text-align:center">
+                            <span editable-text="i.SeriesNumber" e-name="seriesNumber" e-form="rowform">
+                                {{i.SeriesNumber || 'empty'}}
+                            </span>
+                        </td>
+                        <td class="col-md-2" style="text-align:center">
+                            <span editable-text="i.PublicationDate" e-name="publicationDate" e-form="rowform">
+                                {{i.PublicationDate || 'empty'}}
+                            </span>
+                        </td>
+                        <td class="col-md-2" style="text-align:center">
+                            <span editable-text="i.Publisher" e-name="publisher" e-form="rowform">
+                                {{i.Publisher || 'empty'}}
+                            </span>
+                        </td>
+                        <td class="col-md-2" style="text-align:center">
+                            <form editable-form name="rowform" ng-show="rowform.$visible" onbeforesave="$ctrl.saveIssue($data, i.IssueID)" class="form-buttons form-inline" shown="inserted == i">
+                                <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-floppy-saved"></span>save
+                                </button>
+                                <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-floppy-remove"></span>cancel
+                                </button>
+                            </form>
+
+                            <div class="buttons" ng-show="!rowform.$visible">
+                                <button type="button" class="btn btn-primary" ng-click="rowform.$show()">
+                                    <span class="glyphicon glyphicon-edit"></span>Edit</button>
+
+                                <!--<button type="button" class="btn btn-danger" ng-click="$ctrl.removeIssue()">del</button>-->
+                                <button type="button" class="btn btn-danger" ng-click="$ctrl.removeIssue(i)">
+                                    <span class="glyphicon glyphicon-trash"></span>Del</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row text-center">
+            <pagination class="pagination-sm" ng-model="$ctrl.currentPage" boundary-links="true" ng-change="$ctrl.pageChanged()" num-pages="$ctrl.noOfPages" max-size="10" total-items="$ctrl.totalItems" items-per-page="20"></pagination>
+        </div>
+    </div>
+

@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Orders</title>
+
+    <link href="/App/Assets/CSS/MainStyleSheet.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.5.7/angular-sanitize.min.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css"/>
+    <link rel="stylesheet" href="/App/Assets/CSS/select.min.css" />
+    <script src="/App/Assets/JS/select.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+    <!--Angular Material stuff-->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <!--Busy loader-->
+    <script src="/App/Assets/JS/angular-busy.min.js"></script>
+    <link href="/App/Assets/CSS/angular-busy.min.css" rel="stylesheet"/>
+    <link href="/App/Assets/CSS/xeditable.min.css" rel="stylesheet"/>
+    <script src="/App/Assets/JS/xeditable.min.js"></script>
+    <script src="ordersController4.js"></script>
+
+</head>
+<body id="ordersBody" ng-app="ordersModule" ng-controller="ordersController4 as $octrl" >
+<div ng-include="'/App/Assets/Views/navbar.html'"></div>
+
+    <div class="container" id="popupContainer">
+        <h1>Orders</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary" ng-click="$octrl.showNewOrder()">New Order</button>
+                <br />
+                <div ng-show="$octrl.showMe" ng-submit="$octrl.placeOrder()">
+                    <br />
+                    <h4>Issue:</h4>
+                    <ui-select ng-model="$octrl.selectedIssue"
+                               theme="bootstrap"
+                               reset-search-input="false"
+                               style="width: 600px;"
+                               title="Choose an Issue"
+                               append-to-body="true"
+                               on-select="$octrl.getQuotes($item, $model)">
+                        <ui-select-match placeholder="Enter an issue title">{{$octrl.selectedIssue.Title + " #" + $octrl.selectedIssue.SeriesNumber}}</ui-select-match>
+                        <ui-select-choices repeat="item in ($octrl.someIssues.Data | filter: $select.search) track by item.IssueID"
+                                           refresh="$octrl.refreshIssues($select.search)"
+                                           refresh-delay="100">
+                            <div ng-bind-html="(item.Title+' #'+item.SeriesNumber)| highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                    <br />
+                    <h4>Supplier Quote:</h4>
+                    <select style="width: 600px;" class="btn btn-default dropdown-toggle" ng-model="$octrl.selectedQuotes" ng-options="x as x.Price + ' - ' + x.Supplier.Name for x in $octrl.quotes">
+                        <option value="">Select Quote</option>
+                    </select>
+                    <br />
+                    <form name="newOrderForm">
+                        <h4>Quantity: </h4>
+                        <input type="number" name="newQuantity" ng-model="$octrl.newOrder.qtyOrdered" required />
+                        <br />
+                        <br />
+                        <h5>Total: R <test ng-if="$octrl.selectedQuotes.Price != null">{{$octrl.selectedQuotes.Price * $octrl.newOrder.qtyOrdered}}</test></h5> 
+                        <button class="btn btn-primary" ng-click="$octrl.showAlert($event)" type="submit">Place Order</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div id="selectID" class="col-md-12">
+                <select id="selectPick" class="selectpicker" ng-init="$octrl.rowAmount" name="rowAmount" ng-model="$octrl.rowAmount" data-width="150px" title="Row Count:">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <pagination id="pagi" ng-model="$octrl.currentPage" boundary-links="true" ng-change="$octrl.pageChanged()" num-pages="$octrl.noOfPages" max-size="10" total-items="$octrl.totalItems" items-per-page="$octrl.rowAmount"></pagination>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                Search: <input type="text" name="ordersSearch" ng-model="$octrl.ordersSearch"/>
+                <button class="btn-default" type="button" ng-click="$octrl.searchAll()">
+                <span class="glyphicon glyphicon-search"></span> Search All</button>
+                <button class="btn-default" type="button" ng-click="$octrl.restoreAll()">
+                    Restore All
+                </button>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered table-hover table-condensed" cg-busy="$octrl.myPromise">
+                    <tr style="font-weight: bold">
+                        <td style="width:auto">Order ID</td>
+                        <td style="width:auto">Order Date</td>
+                        <td style="width:auto">Issue ID</td>
+                        <td style="width:auto">Qty Ordered</td>
+                        <td style="width:auto">Total</td>
+                        <td style="width:auto">Supplier ID</td>
+                        <td style="width:auto">Shipment Ref</td>
+                        <td style="width:auto">Shipment Date</td>
+                        <td style="width:auto">Delivery Status</td>
+                        <td style="width:auto">Edit</td>
+                    </tr>
+                    <tr ng-repeat="order in $octrl.someOrders.Data | filter: $octrl.ordersSearch">
+                        <td>
+                            {{ order.OrderID || 'empty' }}
+                        </td>
+                        <td>
+                            <span editable-text="order.OrderDate" e-name="OrderDate" e-form="rowform" onbeforesave="checkName($data, order.OrderDate)">
+                                {{ order.OrderDate || 'empty' | date:'medium'}}
+                            </span>
+                        </td>
+                        <td>
+                            <span editable-text="order.IssueID" e-name="IssueID" e-form="rowform">
+                                {{ order.IssueID || 'empty' }}
+                            </span>
+                        </td>
+                        <td>
+                            <span editable-text="order.QtyOrdered" e-name="QtyOrdered" e-form="rowform">
+                                {{ order.QtyOrdered || 'empty' }}
+                            </span>
+                        </td>
+                        <td>
+                            <span editable-text="order.Total" e-name="Total" e-form="rowform">
+                                R{{ order.Total || 'empty' | number:2 }}
+                            </span>
+                        </td>
+                        <td>
+                            <span editable-text="order.SupplierID" e-name="SupplierID" e-form="rowform">
+                                {{ order.SupplierID || 'empty' }}
+                            </span>
+                        </td>
+                        <td>
+                            <span editable-text="order.ShipmentRef" e-name="ShipmentRef" e-form="rowform">
+                                {{ order.ShipmentRef || 'empty' }}
+                            </span>
+                        </td>
+                        <td>
+                            <span editable-text="order.ShipmentDate" e-name="ShipmentDate" e-form="rowform">
+                                {{ order.ShipmentDate || 'empty' | date:'MMM d, y' }}
+                            </span>
+                        </td>
+                        <td>
+                            <span editable-text="order.DeliveryStatus" e-name="DeliveryStatus" e-form="rowform">
+                                {{ order.DeliveryStatus || 'empty' }}
+                            </span>
+                        </td>
+                        <td style="white-space: nowrap">
+                            <!-- form -->
+                            <form editable-form name="rowform" onbeforesave="$octrl.saveOrder($data, order.OrderID)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == order">
+                                <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-floppy-saved"></span> Save
+                                </button>
+                                <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-floppy-remove"></span> Cancel
+                                </button>
+                            </form>
+                            <div class="buttons" ng-show="!rowform.$visible">
+                                <button type="button" class="btn btn-primary" ng-click="rowform.$show()">
+                                    <span class="glyphicon glyphicon-edit"></span> Edit
+                                </button>
+                                <!--
+                                <button type="button" class="btn btn-danger" ng-click="$octrl.removeOrder($index, order.OrderID)">
+                                    <span class="glyphicon glyphicon-trash"></span> Delete
+                                </button>
+                                -->
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

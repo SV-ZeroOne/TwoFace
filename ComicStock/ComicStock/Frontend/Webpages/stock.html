@@ -1,0 +1,142 @@
+﻿
+<div ng-controller="stockController as $sctrl">
+    <div class="container" id="popupContainer1">
+        <h1 style="text-align:center">Stock</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary col-md-2 col-lg-offset-5" style="margin-bottom:10px;" ng-click="$sctrl.showNewStock()">Add New Stock</button>
+                <br />
+                <br />
+                <div ng-show="$sctrl.showMe" ng-submit="$sctrl.makeStock()" style="background-color:#e7e7e7; border-radius:5px">
+                    <br />
+                    <h4 style="text-align:center">Issue:</h4>
+                    <ui-select class="col-md-offset-3" ng-model="$sctrl.selectedIssue"
+                               theme="bootstrap"
+                               reset-search-input="false"
+                               style="width: 600px;"
+                               title="Choose an Issue"
+                               append-to-body="true">
+                        <ui-select-match placeholder="Enter an issue title">{{$sctrl.selectedIssue.Title + " #" + $sctrl.selectedIssue.SeriesNumber}}</ui-select-match>
+                        <ui-select-choices repeat="item in ($sctrl.someIssues.Data | filter: $select.search) track by item.IssueID"
+                                           refresh="$sctrl.refreshIssues($select.search)"
+                                           refresh-delay="100">
+                            <div ng-bind-html="(item.Title+' #'+item.SeriesNumber)| highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                    <br />
+                    <h4 style="text-align:center">Condition:</h4>
+                    <select style="width: 600px;" class="btn btn-default dropdown-toggle col-md-offset-3" ng-model="$sctrl.selectedCondition" title="Condition:">
+                        <option value="Very Fine">Very Fine</option>
+                        <option value="Fine">Fine</option>
+                        <option value="Average">Average</option>
+                        <option value="Poor">Poor</option>
+                    </select>
+                    <br />
+                    <form name="newStockForm">
+                        <h4 style="text-align:center">Quantity: </h4>
+                        <input type="number" name="newQuantity" class="col-md-offset-5" style="width:190px;" ng-model="$sctrl.Quantity" required min="0" />
+                        <div ng-messages="newStockForm.newQuantity.$error" role="alert">
+                            <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
+                        </div>
+                        <br />
+                        <h4 style="text-align:center">Price: </h4>
+                        <input type="number" name="newPrice" class="col-md-offset-5" style="width:190px;" ng-model="$sctrl.Price" required min="0" />
+                        <div ng-messages="newStockForm.newPrice.$error" role="alert">
+                            <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
+                        </div><br /><br />
+                        <button class="btn btn-primary col-md-2 col-lg-offset-5" style="margin-top:5px" ng-click="$sctrl.showAlert($event)" type="submit">Add New Stock</button>
+                    </form>
+                </div>
+                <br />
+            </div>
+            <br />
+            <div class="row" style="float:left">
+                <div class="col-md-12">
+                    Search: <input type="text" name="stockSearch" ng-model="$sctrl.stockSearch" />
+                    <button class="btn-default" type="button" ng-click="$sctrl.searchAll()">
+                        <span class="glyphicon glyphicon-search"></span> Search All
+                    </button>
+                    <button class="btn-default" type="button" ng-click="$sctrl.restoreAll()">
+                        Restore All
+                    </button>
+                </div>
+            </div>
+                <div class="row" style="float:right">
+                    <label>Stock Per Page:</label>
+                    <select ng-change="$sctrl.changeRows()" ng-init="$sctrl.rowAmount" name="rowAmount" ng-model="$sctrl.rowAmount" data-width="150px">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+            
+            <br />
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-bordered table-hover table-condensed" cg-busy="$sctrl.myPromise">
+                        <tr style="font-weight: bold">
+                            <th ng-click="$sctrl.orderTableBy('StockReferenceID');" style="width:auto">Stock ID</th>
+                            <th ng-click="$sctrl.orderTableBy('IssueID');" style="width:auto">Issue ID</th>
+                            <th ng-click="$sctrl.orderTableBy('Condition');" style="width:auto">Condition</th>
+                            <th ng-click="$sctrl.orderTableBy('AvailableQuantity');" style="width:auto">Quantity</th>
+                            <th ng-click="$sctrl.orderTableBy('Price');" style="width:auto">Price</th>
+                            <td style="width:auto">Edit</td>
+                        </tr>
+                        <tr ng-repeat="stock in $sctrl.someStock.Data | filter: $octrl.stockSearch | orderBy:$sctrl.column:$sctrl.reverse">
+                            <td class="col-md-2" style="text-align:center">
+                                {{ stock.StockReferenceID || 'empty' }}
+                            </td>
+                            <td class="col-md-2" style="text-align:center">
+                                <span editable-text="stock.IssueID" e-name="IssueID" e-form="rowform" onbeforesave="checkName($data, stock.IssueID)">
+                                    {{ stock.IssueID || 'empty' }}
+                                </span>
+                            </td>
+                            <td class="col-md-2" style="text-align:center">
+                                <span editable-text="stock.Condition" e-name="Condition" e-form="rowform">
+                                    {{ stock.Condition || 'empty' }}
+                                </span>
+                            </td>
+                            <td class="col-md-2" style="text-align:center">
+                                <span editable-text="stock.AvailableQuantity" e-name="AvailableQuantity" e-form="rowform">
+                                    {{ stock.AvailableQuantity || 'empty' }}
+                                </span>
+                            </td>
+                            <td class="col-md-2" style="text-align:center">
+                                <span editable-text="stock.Price" e-name="Price" e-form="rowform">
+                                    R{{ stock.Price || 'empty' | number:2}}
+                                </span>
+                            </td>
+                            <td style="white-space: nowrap; text-align:center" class="col-md-2">
+                                <!-- form -->
+                                <form editable-form name="rowform" onbeforesave="$sctrl.saveStock($data, stock.StockReferenceID)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == stock">
+                                    <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+                                        <span class="glyphicon glyphicon-floppy-saved"></span> Save
+                                    </button>
+                                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-floppy-remove"></span> Cancel
+                                    </button>
+                                </form>
+                                <div class="buttons" ng-show="!rowform.$visible">
+                                    <button type="button" class="btn btn-primary" ng-click="rowform.$show()">
+                                        <span class="glyphicon glyphicon-edit"></span> Edit
+                                    </button>
+                                    <!--
+                                    <button type="button" class="btn btn-danger" ng-click="$octrl.removeOrder($index, order.OrderID)">
+                                        <span class="glyphicon glyphicon-trash"></span> Delete
+                                    </button>
+                                    -->
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row text-center">
+                <pagination id="pagi" ng-model="$sctrl.currentPage" boundary-links="true" ng-change="$sctrl.pageChanged()" num-pages="$sctrl.noOfPages" max-size="10" total-items="$sctrl.totalItems" items-per-page="$sctrl.rowAmount"></pagination>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -17,6 +17,7 @@ namespace ComicStock.WebAPI.Controllers
         private readonly OrderInterface orderRepo;
         private List<OrderDTO> newOrders;
         private readonly IOrderService orderService;
+        private int totalRecords = 0;
 
         public OrdersController(OrderInterface orderRepo, IOrderService orderService)
         {
@@ -28,6 +29,7 @@ namespace ComicStock.WebAPI.Controllers
                 OrderDTO newOrder = new OrderDTO(i);
                 newOrders.Add(newOrder);
             }
+            totalRecords = newOrders.Count();
         }
 
         // GET api/orders
@@ -52,7 +54,19 @@ namespace ComicStock.WebAPI.Controllers
         // Need to figure out what property they might want to search orders for.
         public IList<OrderDTO> Get(string search)
         {
-            return Get().Where(i => i.DeliveryStatus.Contains(search)).ToList<OrderDTO>();
+            string searchString = search.ToLower();
+            
+            return Get().Where(i =>
+            i.DeliveryStatus != null && i.DeliveryStatus.ToLower().Contains(searchString) ||
+            i.OrderID.ToString().Contains(searchString) ||
+            i.IssueID.ToString().Contains(searchString) ||
+            i.ShipmentDate != null && i.ShipmentDate.ToString().Contains(searchString) ||
+            i.OrderDate != null && i.OrderDate.ToString().Contains(searchString) ||
+            i.SupplierID.ToString().Contains(searchString) ||
+            i.ShipmentRef != null && i.ShipmentRef.ToLower().Contains(searchString) ||
+            i.Total.ToString().Contains(search) ||
+            i.QtyOrdered.ToString().Contains(search)
+            ).ToList<OrderDTO>();
         }
 
         //might need to change this to return the order.
@@ -85,27 +99,30 @@ namespace ComicStock.WebAPI.Controllers
         {
             //Need to have error handling!
             Order orderToGet = orderRepo.GetById(order.OrderID);
-            var orderToUpdate = updateIssue(order, orderToGet);
+            var orderToUpdate = updateOrder(order, orderToGet);
             orderRepo.Update(orderToUpdate);
             return order;
         }
 
-        private Order updateIssue(OrderDTO order, Order orderToUpdate)
+        private Order updateOrder(OrderDTO order, Order orderToUpdate)
         {
+            orderToUpdate.IssueID = order.IssueID;
+            orderToUpdate.SupplierID = order.SupplierID;
             orderToUpdate.OrderDate = order.OrderDate;
             orderToUpdate.QtyOrdered = order.QtyOrdered;
             orderToUpdate.ShipmentDate = order.ShipmentDate;
             orderToUpdate.ShipmentRef = order.ShipmentRef;
             orderToUpdate.Total = order.Total;
+            orderToUpdate.DeliveryStatus = order.DeliveryStatus;
             orderToUpdate.IsDeleted = order.IsDeleted;
             //Might need to map more fields to update.
             return orderToUpdate;
         }
 
-        public void Delete(OrderDTO order)
+        public void Delete(int orderID)
         {
             //Need to have error handling!
-            var orderToDelete = orderRepo.GetById(order.OrderID);
+            var orderToDelete = orderRepo.GetById(orderID);
             orderRepo.Delete(orderToDelete);
         }
 
@@ -113,12 +130,74 @@ namespace ComicStock.WebAPI.Controllers
         {
             Order newOrder = new Order();
             newOrder.OrderDate = orderDto.OrderDate;
+            newOrder.IssueID = orderDto.IssueID;
+            newOrder.SupplierID = orderDto.SupplierID;
             newOrder.QtyOrdered = orderDto.QtyOrdered;
             newOrder.ShipmentDate = orderDto.ShipmentDate;
             newOrder.ShipmentRef = orderDto.ShipmentRef;
             newOrder.Total = orderDto.Total;
+            newOrder.DeliveryStatus = orderDto.DeliveryStatus;
             //Might need to map more fields.
             return newOrder;
+        }
+
+        [Route("api/Orders/GetPaged")]
+        [HttpGet]
+        public IHttpActionResult GetPaged(int pageNo = 1, int pageSize = 10)
+        {
+            // Determine the number of records to skip
+            int skip = (pageNo - 1) * pageSize;
+
+            // Get total number of records
+
+            int total = totalRecords;
+
+            // Select the customers based on paging parameters
+            List<OrderDTO> orders = newOrders
+                .OrderBy(c => c.OrderID)
+                .Skip(skip)
+                .Take(pageSize)
+                .ToList();
+
+            // Return the list of customers
+            return Ok(new PagedResult<OrderDTO>(orders, pageNo, pageSize, total));
+        }
+
+        [Route("api/Orders/GetSearchPaged")]
+        [HttpGet]
+        public IHttpActionResult GetSearchPaged(string searchKey, int pageNumber)
+        {
+            if (searchKey != null)
+            {
+                string searchString = searchKey.ToLower();
+                IEnumerable<OrderDTO> someOrders = Get().Where(i => i.DeliveryStatus.ToLower().Contains(searchString) ||
+            i.OrderID.ToString().Contains(searchString) ||
+            i.IssueID.ToString().Contains(searchString) ||
+            i.ShipmentDate != null && i.ShipmentDate.ToString().Contains(searchString) ||
+            i.OrderDate != null && i.OrderDate.ToString().Contains(searchString) ||
+            i.SupplierID.ToString().Contains(searchString) ||
+            i.ShipmentRef != null && i.ShipmentRef.ToLower().Contains(searchString) ||
+            i.Total.ToString().Contains(searchString) ||
+            i.QtyOrdered.ToString().Contains(searchString));
+                int pageSize = 20;
+                // Determine the number of records to skip
+                int skip = (pageNumber - 1) * pageSize;
+
+                // Get total number of records
+
+                int total = someOrders.Count();
+
+                // Select the customers based on paging parameters
+                List<OrderDTO> orders = someOrders
+                    .OrderBy(c => c.OrderID)
+                    .Skip(skip)
+                    .Take(pageSize)
+                    .ToList();
+
+                // Return the list of customers
+                return Ok(new PagedResult<OrderDTO>(orders, pageNumber, pageSize, total));
+            }
+            return null;
         }
 
     }
