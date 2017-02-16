@@ -114,10 +114,16 @@ namespace ComicStock.WebAPI.Controllers
         [Route("api/Vouchers/PlaceVoucher")]
         public void PlaceVoucher(decimal amount, int qty, bool valid)
         {
-            if (amount <= 0)
+            if (amount <= 0 || (amount % 10) != 0)
             {
                 HttpResponseMessage message = new HttpResponseMessage(HttpStatusCode.NotImplemented);
                 message.Content = new StringContent("You entered a invalid Voucher Amount");
+                throw new HttpResponseException(message);
+            }
+            else if (qty <= 0)
+            {
+                HttpResponseMessage message = new HttpResponseMessage(HttpStatusCode.NotImplemented);
+                message.Content = new StringContent("You entered a invalid Voucher Quantity");
                 throw new HttpResponseException(message);
             }
             else
