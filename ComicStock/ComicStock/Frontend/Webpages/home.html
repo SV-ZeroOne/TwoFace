@@ -1,10 +1,4 @@
-  
-    <div class="container">
-        <div class="row" ng-include src="'Scripts/app/Assets/Views/navbar.html'"></div>
-
-        <div class="row">
-            <h2 >Welcome Admin</h2>
-        </div>
+<div class="container">
 
         <div class="row">
             <h1 style="text-align: center;">Admin Dashboard</h1>
@@ -12,70 +6,83 @@
         
         <div class="row">
            
-            
-            <div class="card-deck" style="margin-left: auto; margin-right:auto ;">
-            
-                <div class="card" style="width: 40rem; height: 26rem;">
-                    <i class="glyphicon glyphicon-stats image"></i>
-                    <div class="card-block">
-                        
-                        <h4 class="card-title" style="text-align:center;">Stock</h4>
-                        
-                        <p class="card-text" style="text-align:center;">Here as the admin you will
-                        be adding new stock</p>
-                        
-                    </div>
-                </div>
+          
+           <div class="card-deck" style="margin-left: auto; margin-right:auto ; ">
+               
+                   <div class="card" style="width: 40rem; height: 26rem;">
+                       <span class="glyphiconcenter glyphicon glyphicon-stats image"></span>
+                       <div class="card-block">
 
-                <div class="card" style="width: 40rem;">
-                    <i class="glyphicon glyphicon-pencil"></i>
-                    <div class="card-block">
-                        <h4 class="card-title" style="text-align:center;">Creators</h4>
-                        <p class="card-text" style="text-align:center;">The people that contributed to the comic</p>
-                    </div>
-                </div>
+                           <h4 class="card-title" style="text-align:center;"><a ui-sref="stock">Stock </a></h4>
 
-                <div class="card" style="width: 40rem;">
-                    <i class="glyphicon glyphicon-barcode"></i>
-                    <div class="card-block">
-                        <h4 class="card-title" style="text-align:center;">Issues</h4>
-                        <p class="card-text" style="text-align:center;">Where our issues management resides</p>
-                        
-                    </div>
+                           <p class="card-text" style="text-align:center;">
+                               Here as the admin you will
+                               be adding new stock
+                           </p>
+
+                       </div>
+                   </div>
+              
+               
+                   
+                   <div class="card" style="width: 40rem;height: 26rem;">
+                       <i class="glyphiconcenter glyphicon glyphicon-pencil"></i>
+                       <div class="card-block">
+                           <h4 class="card-title" style="text-align:center;"><a ui-sref="creators">Creators</a></h4>
+                           <p class="card-text" style="text-align:center;">The people that contributed to the comic</p>
+                       </div>
+                   </div>
+               
+              
+                   <div class="card" style="width: 40rem;height: 26rem;">
+                       <i class="glyphiconcenter glyphicon glyphicon-barcode"></i>
+                       <div class="card-block">
+                           <h4 class="card-title" style="text-align:center;"><a ui-sref="issues">Issues</a></h4>
+                           <p class="card-text" style="text-align:center;">Where our issues management resides</p>
+
+                       </div>
+                   </div>
+               
                 </div>
-            </div>
         </div>
         <br/>
         
         <div class="row">
             <div class="card-deck" style="margin-left: auto; margin-right:auto;">
-                <div class="card" style="width: 40rem; height: 24rem;">
-                    <i class="glyphicon glyphicon-briefcase" style=""></i>
-                    <div class="card-block">
-                        <h4 class="card-title" style="text-align:center;">Orders</h4>
-                        <p class="card-text" style="text-align:center;">Placing an order and managing the 
-                        the orders made in the past</p>
-                        
-                    </div>
-                </div>
+                
+                    
+                    <div class="card" style="width: 40rem; height: 24rem;">
+                        <i class="glyphiconcenter glyphicon glyphicon-briefcase" style=""></i>
+                        <div class="card-block">
+                            <h4 class="card-title" style="text-align:center;"><a ui-sref="orders">Orders</a></h4>
+                            <p class="card-text" style="text-align:center;">
+                                Placing an order and managing the
+                                the orders made in the past
+                            </p>
 
-                <div class="card" style="width: 40rem;">
-                    <i class="glyphicon glyphicon-plane"></i>
-                    <div class="card-block">
-                        <h4 class="card-title" style="text-align:center;">Suppliers</h4>
-                        <p class="card-text" style="text-align:center;">Managing who we do business with</p>
-                       
+                        </div>
                     </div>
-                </div>
+                
+                
+                    <div class="card" style="width: 40rem;height: 24rem;">
+                        <i class="glyphiconcenter glyphicon glyphicon-plane"></i>
+                        <div class="card-block">
+                            <h4 class="card-title" style="text-align:center;"><a ui-sref="Supplier">Suppliers</a></h4>
+                            <p class="card-text" style="text-align:center;">Managing who we do business with</p>
 
-                <div class="card" style="width: 40rem;">
-                    <i class="glyphicon glyphicon-gift"></i>
-                    <div class="card-block">
-                        <h4 class="card-title" style="text-align:center;">Vouchers</h4>
-                        <p class="card-text" style="text-align:center;">Allows for management of vouchers</p>
-                        
+                        </div>
                     </div>
-                </div>
+                
+                
+                    <div class="card" style="width: 40rem;height: 24rem;">
+                        <i class="glyphiconcenter glyphicon glyphicon-gift"></i>
+                        <div class="card-block">
+                            <h4 class="card-title" style="text-align:center;"><a ui-sref="Voucher">Vouchers</a></h4>
+                            <p class="card-text" style="text-align:center;">Allows for management of vouchers</p>
+
+                        </div>
+                    </div>
+                
             </div>
         </div>
         <div class="tile-content-wrapper row"></div>

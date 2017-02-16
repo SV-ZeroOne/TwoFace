@@ -311,6 +311,7 @@
     <Content Include="Content\jqueryui-editable\css\jqueryui-editable.css" />
     <Content Include="Content\jqueryui-editable\img\clear.png" />
     <Content Include="Content\jqueryui-editable\img\loading.gif" />
+    <Content Include="Frontend\Assets\JS\date.js" />
     <Content Include="Frontend\Controllers\indexController.js" />
     <Content Include="Frontend\Webpages\creators.html" />
     <Content Include="favicon.ico" />
