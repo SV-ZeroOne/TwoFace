@@ -7,7 +7,7 @@
         return input ? 'Valid' : 'Invalid';
     }
 })
-.controller("voucherController", function ($http, $scope) {
+.controller("voucherController", function ($http, $scope, $mdDialog) {
     var $ictrl = this;
     $ictrl.showMe = false;
     $ictrl.newVoucher = {};
@@ -17,8 +17,9 @@
     $ictrl.searchFlag = false;
     $ictrl.column = '';
     $ictrl.reverse = false;
+    $ictrl.newVoucher.valid = true;
 
-    $http
+    $ictrl.myPromise = $http
         .get('../api/Vouchers/GetPaged?pageNo=1&pageSize='+$ictrl.rowAmount)
         .then(function (response) {
             $ictrl.someVouchers = response.data;
@@ -30,19 +31,36 @@
             $ictrl.context = "Something went wrong with getting vouchers";
         });
 
+    $http
+        .get('../api/Vouchers/GetStats')
+        .then(function (response) {
+            $ictrl.voucherStats = response.data;
+        })
+
+    $ictrl.getStats = function () {
+        $http
+        .get('../api/Vouchers/GetStats')
+        .then(function (response) {
+            $ictrl.voucherStats = response.data;
+        })
+    }
+
     $ictrl.showNewVoucher = function () {
         $ictrl.showMe = !$ictrl.showMe;
     }
 
     $ictrl.placeVoucher = function () {
-        $http
+        $ictrl.myPromise = $http
           .post('../api/Vouchers/PlaceVoucher?amount=' + $ictrl.newVoucher.amount + '&valid=' + $ictrl.newVoucher.valid);
+        setTimeout(function () { $ictrl.restoreAll(); }, 2000);
+        setTimeout(function () { $ictrl.getStats(); }, 2000);
     }
 
     // remove voucher
     $ictrl.removeVoucher = function (index, VoucherID) {
         $ictrl.someVouchers.Data.splice(index, 1);
         $http.delete('../api/Vouchers/' + VoucherID);
+        setTimeout(function () { $ictrl.getStats(); }, 2000);
     };
 
     //update voucher
@@ -54,6 +72,7 @@
         console.log(data.Valid);
         console.log(data);
         $http.put('../api/Vouchers/', data);
+
     };
 
     //$ictrl.searchAll = function () {
@@ -64,13 +83,18 @@
     //}
 
     $ictrl.searchAll = function () {
-        $ictrl.myPromise = $http.get('../api/Stock/GetSearchPaged?searchKey=' + $ictrl.vouchersSearch + '&pageNumber=' + $ictrl.currentPage)
+        $ictrl.myPromise = $http.get('../api/Vouchers/GetSearchPaged?searchKey=' + $ictrl.vouchersSearch + '&pageNumber=' + $ictrl.currentPage)
         .then(function (response) {
             $ictrl.someVouchers = response.data;
             $ictrl.noOfPages = $ictrl.someVouchers.Paging.PageCount;
             $ictrl.totalItems = $ictrl.someVouchers.Paging.TotalRecordCount;
             $ictrl.currentPage = $ictrl.someVouchers.Paging.PageNo;
             $ictrl.searchFlag = true;
+            if (response.data.Data.length == 0) {
+                console.log("No search results")
+                console.log("Data lenght" + response.data.Data.length)
+                $ictrl.showNoSearchResults();
+            }
         });
     };
 
@@ -100,7 +124,7 @@
             $ictrl.searchAll();
             console.log("Paged Search Results")
         } else {
-            $http.get('../api/Vouchers/GetPaged?pageNo=' + $ictrl.currentPage + '&pageSize=' + $ictrl.rowAmount)
+            $ictrl.myPromise = $http.get('../api/Vouchers/GetPaged?pageNo=' + $ictrl.currentPage + '&pageSize=' + $ictrl.rowAmount)
             .then(function (response) {
                 console.log("Getting new paged results.")
                 $ictrl.someVouchers = response.data;
@@ -134,4 +158,20 @@
         $ictrl.reverse = !$ictrl.reverse;
     };
 
+    
+    $ictrl.showNoSearchResults = function (ev) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        // Modal dialogs should fully cover application
+        // to prevent interaction outside of dialog
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('#popupContainer')))
+            .clickOutsideToClose(true)
+            .title('No results found.')
+            .textContent('No results found for you search criteria.')
+            .ariaLabel('No Search Results Dialog')
+            .ok('Ok')
+            .targetEvent(ev)
+        );
+    };
 });
