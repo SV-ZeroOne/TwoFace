@@ -7,10 +7,18 @@ app.controller("indexController", function () {
 })
 app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider
-            .when('', '/stock')
+            .when('', '/home')
             .otherwise('/notfound');
 
     $stateProvider
+        .state('notfound', {
+            url: '/notfound',
+            templateUrl: 'Frontend/Webpages/notfound.html'
+        })
+      .state('home', {
+            url: '/home',
+            templateUrl: 'Frontend/Webpages/home.html'
+      })
      .state('orders',{
         url: '/orders',
         templateUrl: 'Frontend/Webpages/orders.html'

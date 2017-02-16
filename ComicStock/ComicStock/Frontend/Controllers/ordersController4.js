@@ -184,4 +184,9 @@ angular.module("SquareEyesModule")
         $octrl.reverse = !$octrl.reverse;
     };
 
+    $octrl.datePickerConfig = {
+        changeYear: true,
+        changeMonth: true
+    };
+
 });

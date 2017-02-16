@@ -85,6 +85,10 @@
                         <td class="col-md-1" style="text-align:center">
                             {{ order.OrderID || 'empty' }}
                         </td>
+                        <!--<span editable-uidate="user.dob"
+                              e-ui-date="datePickerConfig">
+                            {{ (user.dob | date:"dd/MM/yyyy") || 'empty' }}
+                        </span>-->
                         <td class="col-md-1" style="text-align:center">
                             <span editable-text="order.OrderDate" e-name="OrderDate" e-form="rowform" onbeforesave="checkName($data, order.OrderDate)">
                                 {{ order.OrderDate || 'empty' | date:'medium'}}
