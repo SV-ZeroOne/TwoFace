@@ -120,3 +120,8 @@ ul.nav {
 .navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
     color: #337ab7;
 }
+
+.ui-select-bootstrap>.ui-select-match>.btn {
+    margin-left: 280px;
+
+}
