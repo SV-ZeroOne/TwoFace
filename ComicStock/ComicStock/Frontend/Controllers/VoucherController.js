@@ -35,9 +35,14 @@
     }
 
     $ictrl.placeVoucher = function () {
-        $http
-          .post('../api/Vouchers/PlaceVoucher?amount=' + $ictrl.newVoucher.amount + '&valid=' + $ictrl.newVoucher.valid);
+        $ictrl.myPromise = $http
+          .post('../api/Vouchers/PlaceVoucher?amount=' + $ictrl.newVoucher.amount + '&qty=' + $ictrl.newVoucher.qty + '&valid=' + $ictrl.newVoucher.valid);
+        setTimeout(function () { $ictrl.restoreAll(); }, 2000); 
     }
+    //$ictrl.placeVoucher = function () {
+    //    $http
+    //      .post('../api/Vouchers/PlaceVoucher?amount=' + $ictrl.newVoucher.amount + '&valid=' + $ictrl.newVoucher.valid);
+    //}
 
     // remove voucher
     $ictrl.removeVoucher = function (index, VoucherID) {
@@ -46,11 +51,12 @@
     };
 
     //update voucher
-    $ictrl.saveVoucher = function (data, id, code) {
+    $ictrl.saveVoucher = function (data, id, code, date) {
         console.log(data);
         console.log("Voucher ID: " + id);
         data.VoucherID = id;
         data.Code = code;
+        data.DateIssued = date;
         console.log(data.Valid);
         console.log(data);
         $http.put('../api/Vouchers/', data);
