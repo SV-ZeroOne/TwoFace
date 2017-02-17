@@ -61,6 +61,7 @@
         $ictrl.someVouchers.Data.splice(index, 1);
         $http.delete('../api/Vouchers/' + VoucherID);
         setTimeout(function () { $ictrl.getStats(); }, 2000);
+        $ictrl.showAlert();
     };
 
     $ictrl.checkAmount = function (data, form) {
@@ -83,9 +84,51 @@
         data.DateIssued = date;
         console.log(data.Valid);
         console.log(data);
-        $http.put('../api/Vouchers/', data);
+        $http.put('../api/Vouchers/', data).then($ictrl.showUpdate);
         setTimeout(function () { $ictrl.restoreAll(); }, 2000);
         setTimeout(function () { $ictrl.getStats(); }, 2000);
+    };
+
+    $ictrl.showAlert = function () {
+        // Appending dialog to document.body to cover sidenav in docs app
+        // Modal dialogs should fully cover application
+        // to prevent interaction outside of dialog
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('#popupContainer')))
+            .clickOutsideToClose(true)
+            .title('Removoval of voucher')
+            .textContent('The selected voucher has been deleted')
+            .ariaLabel('Voucher Deletion Dialog')
+            .ok('Ok')
+            .targetEvent()
+        );
+    };
+
+    $ictrl.showUpdate = function () {
+        $mdDialog.show(
+            $mdDialog.alert()
+            .parent(angular.element(document.querySelector('#popupContainer')))
+            .clickOutsideToClose(true)
+            .title('Saving of voucher')
+            .textContent('The voucher has been successfully edited')
+            .ariaLabel('Voucher Editing Dialog')
+            .ok('Ok')
+            .targetEvent()
+            );
+    };
+
+    $ictrl.showAdding = function () {
+        $mdDialog.show(
+            $mdDialog.alert()
+            .parent(angular.element(document.querySelector('#popupContainer')))
+            .clickOutsideToClose(true)
+            .title('Saving of voucher')
+            .textContent('The voucher has been successfully added')
+            .ariaLabel('Voucher Addition Dialog')
+            .ok('Ok')
+            .targetEvent()
+            );
     };
 
     //$ictrl.searchAll = function () {
