@@ -4,7 +4,7 @@
 })
 .filter('valididity', function() {
     return function(input) {
-        return input ? 'Valid' : 'Invalid';
+        return input ? 'Invalid' : 'Valid';
     }
 })
 .controller("voucherController", function ($http, $scope, $mdDialog) {
@@ -51,7 +51,7 @@
 
     $ictrl.placeVoucher = function () {
         $ictrl.myPromise = $http
-          .post('../api/Vouchers/PlaceVoucher?amount=' + $ictrl.newVoucher.amount + '&valid=' + $ictrl.newVoucher.valid);
+          .post('../api/Vouchers/PlaceVoucher?amount=' + $ictrl.newVoucher.amount + '&qty=' + $ictrl.newVoucher.qty + '&valid=' + $ictrl.newVoucher.valid);
         setTimeout(function () { $ictrl.restoreAll(); }, 2000);
         setTimeout(function () { $ictrl.getStats(); }, 2000);
     }
@@ -63,12 +63,24 @@
         setTimeout(function () { $ictrl.getStats(); }, 2000);
     };
 
+    $ictrl.checkAmount = function (data, form) {
+        if (data <= 0 || (data % 10) != 0) {
+            var msg = "You have entered an invalid amount";
+            form.$setError('name', msg);
+            return msg;
+        }
+        else {
+            form.$setError('name', '');
+        }
+    };
+
     //update voucher
-    $ictrl.saveVoucher = function (data, id, code) {
+    $ictrl.saveVoucher = function (data, id, code, date) {
         console.log(data);
         console.log("Voucher ID: " + id);
         data.VoucherID = id;
         data.Code = code;
+        data.DateIssued = date;
         console.log(data.Valid);
         console.log(data);
         $http.put('../api/Vouchers/', data);
@@ -100,9 +112,18 @@
     };
 
     $scope.Valid = [
-    { value: 1, text: 'Valid' },
-    { value: 2, text: 'Invalid' },
+    { value: "true", text: 'Valid' },
+    { value: "false", text: 'Invalid' },
     ];
+
+    $ictrl.CheckIfValid = function (valid) {
+        if (valid == true) {
+            return "Valid";
+        }
+        else if (valid == false) {
+            return "Invalid";
+        }
+    }
 
     $ictrl.paginationChange = function () {
         console.log("Pagination change event")

@@ -112,37 +112,46 @@ namespace ComicStock.WebAPI.Controllers
         //}
 
         [Route("api/Vouchers/PlaceVoucher")]
-        public void PlaceVoucher(decimal amount, bool valid)
+        public void PlaceVoucher(decimal amount, int qty, bool valid)
         {
-            if (amount < 0)
+            if (amount <= 0 || (amount % 10) != 0)
             {
                 HttpResponseMessage message = new HttpResponseMessage(HttpStatusCode.NotImplemented);
                 message.Content = new StringContent("You entered a invalid Voucher Amount");
                 throw new HttpResponseException(message);
             }
+            else if (qty <= 0)
+            {
+                HttpResponseMessage message = new HttpResponseMessage(HttpStatusCode.NotImplemented);
+                message.Content = new StringContent("You entered a invalid Voucher Quantity");
+                throw new HttpResponseException(message);
+            }
             else
             {
-                string codeString = RandomString(10);
-                bool generating = true;
-
-                IEnumerable<VoucherDTO> vouchers = Get();
-                while (generating)
+                for (int i = 0; i < qty; i++)
                 {
-                    foreach (VoucherDTO item in vouchers)
+                    string codeString = RandomString(10);
+                    bool generating = true;
+
+                    IEnumerable<VoucherDTO> vouchers = Get();
+                    while (generating)
                     {
-                        if (item.Code.ToLower() == codeString.ToLower())
+                        foreach (VoucherDTO item in vouchers)
                         {
-                            codeString = RandomString(10);
-                            generating = true;
-                        }
-                        else
-                        {
-                            generating = false;
+                            if (item.Code.ToLower() == codeString.ToLower())
+                            {
+                                codeString = RandomString(10);
+                                generating = true;
+                            }
+                            else
+                            {
+                                generating = false;
+                            }
                         }
                     }
-                }
 
-                voucherService.placeVoucher(amount, codeString, valid);
+                    voucherService.placeVoucher(amount, codeString, valid);
+                }
             }
         }
 

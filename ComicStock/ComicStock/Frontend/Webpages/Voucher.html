@@ -12,17 +12,24 @@
                     <br />
                     <form name="newVoucherForm">
                         <div class="row">
-                            <div class="col-md-6" style="text-align:center">
-                                <label style="margin-left:10px;">Amount:</label>
-                                <input type="number" name="newVoucherAmount" ng-model="$ictrl.newVoucher.amount" required min="0" style="margin-bottom:10px" />
+                            <div class="col-md-4" style="text-align:center">
+                                <label style="margin-left:10px;">Voucher Amount:</label>
+                                <input type="number" name="newVoucherAmount" ng-model="$ictrl.newVoucher.amount" required min="1" style="margin-bottom:10px" />
                                 <div ng-messages="newVoucherForm.newVoucherAmount.$error" role="alert">
                                     <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
                                 </div>
                             </div>
-                            <div class="col-md-6" style="text-align:center">
+                            <div class="col-md-4" style="text-align:center">
+                                <label style="margin-left:10px;">Quantity to be Issued</label>
+                                <input type="number" pattern="[/^\d+$/]" name="newVoucherQTY" ng-model="$ictrl.newVoucher.qty" required min="1" style="margin-bottom:10px" oninvalid="setCustomValidity('Please enter only whole numbers')" onchange="try{setCustomValidity('')}catch(e){}"/>
+                                <div ng-messages="newVoucherForm.newVoucherQTY.$error" role="alert">
+                                    <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red;text-align:center">Required</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4" style="text-align:center">
                                 <label>Validity:</label>
-                                <select name="newValid" ng-model="$ictrl.newVoucher.valid">
-                                    <option value="true" ng-selected="$ictrl.newVoucher.valid">Valid</option>
+                                <select name="newValid" ng-model="$ictrl.newVoucher.valid" required style="margin-bottom:10px">
+                                    <option ng-selected="$ictrl.newVoucher.valid" value="true">Valid</option>
                                     <option value="false">Invalid</option>
                                 </select>  
                                 <div ng-messages="newVoucherForm.newValid.$error" role="alert">
@@ -68,11 +75,11 @@
             <table class="table table-condensed table-hover table-bordered" cg-busy="$ictrl.myPromise">
                 <thead>
                 
-                <th ng-click="$ictrl.orderTableBy('Amount');">Amount: R (Rands)</th>
-                <th>Code</th>
-                <th ng-click="$ictrl.orderTableBy('DateIssued');">Date Issued: YYYY/MM/DD</th>
-                <th ng-click="$ictrl.orderTableBy('Valid');">Validity</th>
-                <th>Edit</th>
+                <th style="text-align:center" ng-click="$ictrl.orderTableBy('Amount');">Amount: R (Rands)</th>
+                <th style="text-align:center">Code</th>
+                <th style="text-align:center" ng-click="$ictrl.orderTableBy('DateIssued');">Date Issued: YYYY/MM/DD</th>
+                <th style="text-align:center" ng-click="$ictrl.orderTableBy('Valid');">Validity</th>
+                <th style="text-align:center">Edit</th>
                 </th>
                 <tbody>
                     <div class="row">
@@ -84,18 +91,16 @@
                                 </span>
                             </td>
                             <td class="col-md-2" style="text-align:center" e-form="rowform" e-name="Code">{{i.Code}}</td>
-                            <td class="col-md-2" style="text-align:center">
-                                <span editable-text="i.DateIssued" e-name="DateIssued" e-form="rowform">
-                                    {{i.DateIssued || 'empty' | date:'yyyy/MM/dd' }}
-                                </span>
+                            <td class="col-md-2" style="text-align:center">{{i.DateIssued || 'empty' | date:'yyyy/MM/dd' }}
+
                             </td>
                             <td class="col-md-2" style="text-align:center">
                                 <span editable-select="i.Valid" e-name="Valid" e-form="rowform"  e-ng-options="v.value as v.text for v in Valid">
-                                    {{i.Valid || 'empty' | valididity}}
+                                    {{$ictrl.CheckIfValid(i.Valid)}}
                                 </span>
                             </td>
                             <td class="col-md-2" style="text-align:center">
-                                <form editable-form name="rowform" onbeforesave="$ictrl.saveVoucher($data, i.VoucherID, i.Code)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == i">
+                                <form editable-form name="rowform" onbeforesave="$ictrl.saveVoucher($data, i.VoucherID, i.Code, i.DateIssued)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == i">
                                     <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
                                         <span class="glyphicon glyphicon-floppy-saved"></span>save
                                     </button>
