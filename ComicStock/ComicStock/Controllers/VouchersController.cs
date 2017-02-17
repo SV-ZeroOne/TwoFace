@@ -224,7 +224,7 @@ namespace ComicStock.WebAPI.Controllers
                 i.Code != null && i.Code.ToLower().Contains(searchString) ||
                 i.DateIssued != null && i.DateIssued.ToString("d").Contains(searchString) ||
                 i.Valid.ToString().Contains(searchString));
-                int pageSize = 20;
+                int pageSize = 50;
                 // Determine the number of records to skip
                 int skip = (pageNumber - 1) * pageSize;
 
