@@ -86,7 +86,7 @@
                         <tr ng-repeat="i in $ictrl.someVouchers.Data | filter: $ictrl.vouchersFilter | orderBy:$ictrl.column:$ictrl.reverse">
                             
                             <td class="col-md-2" style="text-align:center">
-                                <span editable-text="i.Amount" e-name="Amount" e-form="rowform" ng-model="i.Amount">
+                                <span editable-text="i.Amount" e-name="Amount" e-form="rowform" ng-model="i.Amount" onbeforesave="$ictrl.checkAmount($data, rowform)" e-ng-blur="$ictrl.checkAmount($data, rowform)">
                                     {{i.Amount || 'empty' | number:2}}
                                 </span>
                             </td>
