@@ -7,7 +7,7 @@
         return input ? 'Valid' : 'Invalid';
     }
 })
-.controller("voucherController", function ($http, $scope) {
+.controller("voucherController", function ($http, $scope, $mdDialog) {
     var $ictrl = this;
     $ictrl.showMe = false;
     $ictrl.newVoucher = {};
@@ -36,13 +36,14 @@
 
     $ictrl.placeVoucher = function () {
         $http
-          .post('../api/Vouchers/PlaceVoucher?amount=' + $ictrl.newVoucher.amount + '&valid=' + $ictrl.newVoucher.valid);
+          .post('../api/Vouchers/PlaceVoucher?amount=' + $ictrl.newVoucher.amount + '&valid=' + $ictrl.newVoucher.valid).then($ictrl.showAdding());
     }
 
     // remove voucher
     $ictrl.removeVoucher = function (index, VoucherID) {
         $ictrl.someVouchers.Data.splice(index, 1);
         $http.delete('../api/Vouchers/' + VoucherID);
+        $ictrl.showAlert();
     };
 
     //update voucher
@@ -53,7 +54,49 @@
         data.Code = code;
         console.log(data.Valid);
         console.log(data);
-        $http.put('../api/Vouchers/', data);
+        $http.put('../api/Vouchers/', data).then($ictrl.showUpdate);
+    };
+
+    $ictrl.showAlert = function () {
+        // Appending dialog to document.body to cover sidenav in docs app
+        // Modal dialogs should fully cover application
+        // to prevent interaction outside of dialog
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('#popupContainer')))
+            .clickOutsideToClose(true)
+            .title('Removoval of voucher')
+            .textContent('The selected voucher has been deleted')
+            .ariaLabel('Voucher Deletion Dialog')
+            .ok('Ok')
+            .targetEvent()
+        );
+    };
+
+    $ictrl.showUpdate = function () {
+        $mdDialog.show(
+            $mdDialog.alert()
+            .parent(angular.element(document.querySelector('#popupContainer')))
+            .clickOutsideToClose(true)
+            .title('Saving of voucher')
+            .textContent('The voucher has been successfully edited')
+            .ariaLabel('Voucher Editing Dialog')
+            .ok('Ok')
+            .targetEvent()
+            );
+    };
+
+    $ictrl.showAdding = function () {
+        $mdDialog.show(
+            $mdDialog.alert()
+            .parent(angular.element(document.querySelector('#popupContainer')))
+            .clickOutsideToClose(true)
+            .title('Saving of voucher')
+            .textContent('The voucher has been successfully added')
+            .ariaLabel('Voucher Addition Dialog')
+            .ok('Ok')
+            .targetEvent()
+            );
     };
 
     //$ictrl.searchAll = function () {

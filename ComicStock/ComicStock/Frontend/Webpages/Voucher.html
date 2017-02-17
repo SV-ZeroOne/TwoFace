@@ -1,6 +1,6 @@
 ﻿
     <div ng-controller="voucherController as $ictrl">
-        <div class="container">
+        <div class="container" id="popupContainer">
             <div class="row">
                 <h1 class="col-md-4 col-md-offset-5">Vouchers</h1>
             </div>
@@ -12,12 +12,29 @@
                     <br />
                     <form name="newVoucherForm">
                         <div class="row">
-                            <div class="col-md-6" style="text-align:center">
-                                <label style="margin-left:10px;">Amount:</label>
-                                <input type="number" name="newVoucherAmount" ng-model="$ictrl.newVoucher.amount" required min="0" style="margin-bottom:10px" />
-                                <div ng-messages="newVoucherForm.newVoucherAmount.$error" role="alert">
+                            <div class="col-md-6 select-editable" style="text-align:center">
+                                <label style="margin-left:10px;">Amount: R</label>
+                                <!--<input type="number" name="newVoucherAmount" ng-model="$ictrl.newVoucher.amount" required min="0" style="margin-bottom:10px" />-->
+                                
+                                <select name="newVoucherAmount" ng-model="$ictrl.newVoucher.amount">
+                                    <option value="10" selected="selected">10.00</option>
+                                    <option value="20">20.00</option>
+                                    <option value="50">50.00</option>
+                                    <option value="100">100.00</option>
+                                    <option value="200">200.00</option>
+                                    <option value="300">300.00</option>
+                                    <option value="400">400.00</option>
+                                    <option value="500">500.00</option>
+                                    <option value="600">600.00</option>
+                                    <option value="700">700.00</option>
+                                    <option value="800">800.00</option>
+                                    <option value="900">900.00</option>
+                                    <option value="1000">1000.00</option>
+                                </select>
+                                
+                                <!--<div ng-messages="newVoucherForm.newVoucherAmount.$error" role="alert">
                                     <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
-                                </div>
+                                </div>-->
                             </div>
                             <div class="col-md-6" style="text-align:center">
                                 <label>Validity:</label>
