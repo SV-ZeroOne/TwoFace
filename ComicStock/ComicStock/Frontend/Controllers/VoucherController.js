@@ -72,7 +72,8 @@
         console.log(data.Valid);
         console.log(data);
         $http.put('../api/Vouchers/', data);
-
+        setTimeout(function () { $ictrl.restoreAll(); }, 2000);
+        setTimeout(function () { $ictrl.getStats(); }, 2000);
     };
 
     //$ictrl.searchAll = function () {
