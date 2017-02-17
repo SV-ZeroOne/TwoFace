@@ -18,6 +18,7 @@
     $ictrl.column = '';
     $ictrl.reverse = false;
     $ictrl.newVoucher.valid = true;
+    $ictrl.newVoucher.amount = 10;
 
     $ictrl.myPromise = $http
         .get('../api/Vouchers/GetPaged?pageNo=1&pageSize='+$ictrl.rowAmount)
@@ -52,6 +53,7 @@
     $ictrl.placeVoucher = function () {
         $ictrl.myPromise = $http
           .post('../api/Vouchers/PlaceVoucher?amount=' + $ictrl.newVoucher.amount + '&qty=' + $ictrl.newVoucher.qty + '&valid=' + $ictrl.newVoucher.valid);
+        $ictrl.showAdding();
         setTimeout(function () { $ictrl.restoreAll(); }, 2000);
         setTimeout(function () { $ictrl.getStats(); }, 2000);
     }

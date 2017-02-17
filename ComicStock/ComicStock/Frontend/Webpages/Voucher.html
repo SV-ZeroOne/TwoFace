@@ -5,7 +5,7 @@
                 <h1 class="col-md-4 col-md-offset-5">Vouchers</h1>
             </div>
             <div class="row">
-                <button ng-click="$ictrl.showNewVoucher()" class="btn btn-primary col-md-4 col-md-offset-4" style="margin-bottom:10px">Create New Voucher</button>
+                <button ng-click="$ictrl.showNewVoucher()" class="btn btn-primary col-md-4 col-md-offset-4" style="margin-bottom:10px">New Voucher</button>
                 <br />
                 <br/>
                 <div ng-show="$ictrl.showMe" ng-submit="$ictrl.placeVoucher()" style="background-color:#e7e7e7; border-radius:5px;">
@@ -14,8 +14,8 @@
                         <div class="row">
                             <div class="col-md-4" style="text-align:center">
                                 <label style="margin-left:10px;">Voucher Amount: R</label>
-                                <select name="newVoucherAmount" ng-model="$ictrl.newVoucher.amount">
-                                    <option value="10" selected="selected">10.00</option>
+                                <select name="newVoucherAmount" ng-model="$ictrl.newVoucher.amount" required>
+                                    <option ng-selected="$ictrl.newVoucher.amount" value="10">10.00</option>
                                     <option value="20">20.00</option>
                                     <option value="50">50.00</option>
                                     <option value="100">100.00</option>
@@ -82,9 +82,6 @@
                     </select>
                 </div>
             </div>
-
-
-            <br />
             <br /> 
             <table class="table table-condensed table-hover table-bordered" cg-busy="$ictrl.myPromise">
                 <thead>
