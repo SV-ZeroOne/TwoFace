@@ -1,28 +1,49 @@
 ﻿
     <div ng-controller="voucherController as $ictrl">
-        <div class="container">
+        <div class="container" id="popupContainer">
             <div class="row">
                 <h1 class="col-md-4 col-md-offset-5">Vouchers</h1>
             </div>
             <div class="row">
-                <button ng-click="$ictrl.showNewVoucher()" class="btn btn-primary col-md-4 col-md-offset-4" style="margin-bottom:10px">Make New Voucher</button>
+                <button ng-click="$ictrl.showNewVoucher()" class="btn btn-primary col-md-4 col-md-offset-4" style="margin-bottom:10px">New Voucher</button>
                 <br />
                 <br/>
                 <div ng-show="$ictrl.showMe" ng-submit="$ictrl.placeVoucher()" style="background-color:#e7e7e7; border-radius:5px;">
                     <br />
                     <form name="newVoucherForm">
                         <div class="row">
-                            <div class="col-md-6" style="text-align:center">
-                                <label style="margin-left:10px;">Amount:</label>
-                                <input type="number" name="newVoucherAmount" ng-model="$ictrl.newVoucher.amount" required min="0" style="margin-bottom:10px" />
+                            <div class="col-md-4" style="text-align:center">
+                                <label style="margin-left:10px;">Voucher Amount: R</label>
+                                <select name="newVoucherAmount" ng-model="$ictrl.newVoucher.amount" required>
+                                    <option ng-selected="$ictrl.newVoucher.amount" value="10">10.00</option>
+                                    <option value="20">20.00</option>
+                                    <option value="50">50.00</option>
+                                    <option value="100">100.00</option>
+                                    <option value="200">200.00</option>
+                                    <option value="300">300.00</option>
+                                    <option value="400">400.00</option>
+                                    <option value="500">500.00</option>
+                                    <option value="600">600.00</option>
+                                    <option value="700">700.00</option>
+                                    <option value="800">800.00</option>
+                                    <option value="900">900.00</option>
+                                    <option value="1000">1000.00</option>
+                                </select>
                                 <div ng-messages="newVoucherForm.newVoucherAmount.$error" role="alert">
                                     <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red; text-align:center">Required</div>
                                 </div>
                             </div>
-                            <div class="col-md-6" style="text-align:center">
+                            <div class="col-md-4" style="text-align:center">
+                                <label style="margin-left:10px;">Quantity to be Issued</label>
+                                <input type="number" pattern="[/^\d+$/]" name="newVoucherQTY" ng-model="$ictrl.newVoucher.qty" required min="1" style="margin-bottom:10px" oninvalid="setCustomValidity('Please enter only whole numbers')" onchange="try{setCustomValidity('')}catch(e){}"/>
+                                <div ng-messages="newVoucherForm.newVoucherQTY.$error" role="alert">
+                                    <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red;text-align:center">Required</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4" style="text-align:center">
                                 <label>Validity:</label>
-                                <select name="newValid" ng-model="$ictrl.newVoucher.valid">
-                                    <option value="true" selected>Valid</option>
+                                <select name="newValid" ng-model="$ictrl.newVoucher.valid" required style="margin-bottom:10px">
+                                    <option ng-selected="$ictrl.newVoucher.valid" value="true">Valid</option>
                                     <option value="false">Invalid</option>
                                 </select>  
                                 <div ng-messages="newVoucherForm.newValid.$error" role="alert">
@@ -30,60 +51,67 @@
                                 </div>
                             </div> 
                         </div>              
-                        <button class="btn btn-primary col-md-4 col-md-offset-4" type="submit" style="margin-top:5px;">Insert Voucher</button>
+                        <button class="btn btn-primary col-md-4 col-md-offset-4" type="submit" style="margin-top:5px;">Create</button>
                     </form>
                 </div>
             </div>
-            <div class="row" style="float:right">
-                <label>Vouchers Per Page:</label>
-                <select ng-change="$ictrl.changeRows()" ng-init="$ictrl.rowAmount" name="rowAmount" ng-model="$ictrl.rowAmount">
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="50">50</option>
-                </select>
-            </div>
-            <div class="row" style="float:left">
-                <div class="col-md-12">
+            <br />
+            <div class="row">
+
+            <div class="col-md-4" style="float:left">
+                
                     Search: <input type="text" name="vouchersSearch" ng-model="$ictrl.vouchersSearch" />
                     <button class="btn-default" type="button" ng-click="$ictrl.searchAll()">
                         <span class="glyphicon glyphicon-search"></span> Search All
                     </button>
-                    <button class="btn-default" type="button" ng-click="$ictrl.restoreAll()">
-                        Restore All
-                    </button>
+                    
                 </div>
-            </div><br /><br /> 
-            <table class="table table-condensed table-hover table-bordered">
+                <div class="col-md-5">
+                    Current Table Filter: <input type="text" name="vouchersFilter" ng-model="$ictrl.vouchersFilter" />
+                    <button class="btn-default" type="button" ng-click="$ictrl.restoreAll()">
+                        <span class="glyphicon glyphicon-th-list"></span> Restore All
+                    </button> 
+                </div>
+
+                <div class="col-md-3" style="float:right">
+                    <label>Vouchers Per Page:</label>
+                    <select ng-change="$ictrl.changeRows()" name="rowAmount" ng-model="$ictrl.rowAmount">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+            </div>
+            <br /> 
+            <table class="table table-condensed table-hover table-bordered" cg-busy="$ictrl.myPromise">
                 <thead>
-                <th ng-click="$ictrl.orderTableBy('VoucherID');">VoucherID</th>
-                <th ng-click="$ictrl.orderTableBy('Amount');">Amount</th>
-                <th>Code</th>
-                <th>Date Issued</th>
-                <th>Validity</th>
-                <th>Edit</th>
+                
+                <th style="text-align:center" ng-click="$ictrl.orderTableBy('Amount');">Amount: R (Rands)</th>
+                <th style="text-align:center">Code</th>
+                <th style="text-align:center" ng-click="$ictrl.orderTableBy('DateIssued');">Date Issued: YYYY/MM/DD</th>
+                <th style="text-align:center" ng-click="$ictrl.orderTableBy('Valid');">Validity</th>
+                <th style="text-align:center">Edit</th>
                 </th>
                 <tbody>
                     <div class="row">
-                        <tr ng-repeat="i in $ictrl.someVouchers.Data | filter: $ictrl.vouchersSearch | orderBy:$ictrl.column:$ictrl.reverse">
-                            <td class="col-md-2" style="text-align:center">{{i.VoucherID}}</td>
+                        <tr ng-repeat="i in $ictrl.someVouchers.Data | filter: $ictrl.vouchersFilter | orderBy:$ictrl.column:$ictrl.reverse">
+                            
                             <td class="col-md-2" style="text-align:center">
-                                <span editable-text="i.Amount" e-name="Amount" e-form="rowform" ng-model="i.Amount">
-                                    R{{i.Amount || 'empty' | number:2}}
+                                <span editable-text="i.Amount" e-name="Amount" e-form="rowform" ng-model="i.Amount" onbeforesave="$ictrl.checkAmount($data, rowform)" e-ng-blur="$ictrl.checkAmount($data, rowform)">
+                                    {{i.Amount || 'empty' | number:2}}
                                 </span>
                             </td>
                             <td class="col-md-2" style="text-align:center" e-form="rowform" e-name="Code">{{i.Code}}</td>
-                            <td class="col-md-2" style="text-align:center">
-                                <span editable-text="i.DateIssued" e-name="DateIssued" e-form="rowform">
-                                    {{i.DateIssued || 'empty' | date:'MMM d, y' }}
-                                </span>
+                            <td class="col-md-2" style="text-align:center">{{i.DateIssued || 'empty' | date:'yyyy/MM/dd' }}
+
                             </td>
                             <td class="col-md-2" style="text-align:center">
                                 <span editable-select="i.Valid" e-name="Valid" e-form="rowform"  e-ng-options="v.value as v.text for v in Valid">
-                                    {{i.Valid || 'empty' | valididity}}
+                                    {{$ictrl.CheckIfValid(i.Valid)}}
                                 </span>
                             </td>
                             <td class="col-md-2" style="text-align:center">
-                                <form editable-form name="rowform" onbeforesave="$ictrl.saveVoucher($data, i.VoucherID, i.Code)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == i">
+                                <form editable-form name="rowform" onbeforesave="$ictrl.saveVoucher($data, i.VoucherID, i.Code, i.DateIssued)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == i">
                                     <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
                                         <span class="glyphicon glyphicon-floppy-saved"></span>save
                                     </button>
@@ -93,9 +121,9 @@
                                 </form>
                                 <div class="buttons" ng-show="!rowform.$visible">
                                     <button type="button" class="btn btn-primary" ng-click="rowform.$show()">
-                                        <span class="glyphicon glyphicon-edit"></span>Edit</button>
+                                        <span class="glyphicon glyphicon-edit"></span> Edit</button>
                                     <button type="button" class="btn btn-danger" ng-click="$ictrl.removeVoucher($index, i.VoucherID)">
-                                        <span class="glyphicon glyphicon-trash"></span>Delete</button>
+                                        <span class="glyphicon glyphicon-trash"></span> Delete</button>
                                 </div>
                             </td>
                         </tr>
@@ -106,6 +134,27 @@
                 <pagination class="pagination-sm" ng-model="$ictrl.currentPage" boundary-links="true" ng-change="$ictrl.pageChanged()" num-pages="$ictrl.noOfPages" max-size="10" total-items="$ictrl.totalItems" items-per-page="$ictrl.rowAmount"></pagination>
                 <br />
             </div>
+            <br />
+            <div class="row statsRow" style="background-color:#e7e7e7; border-radius:5px;">
+                <div class="col-md-12"><h4>Voucher Stats</h4></div>
+                <div class="col-md-6">
+                    Total Vouchers: {{$ictrl.totalItems}}
+                    <br />
+                    Total used vouchers: {{$ictrl.voucherStats.TotalUsedVouchers}} out of {{$ictrl.totalItems}}
+                    <br />
+                    Total vouchers value: R {{$ictrl.voucherStats.totalValue}}.00
+                    <br/> 
+                    Total value redeemed: R {{$ictrl.voucherStats.valueUsed}}.00
+                </div>
+                <div class="col-md-6">
+                    Total vouchers issued in 2017: {{$ictrl.voucherStats.Vouchers2017}}
+                    <br />
+                    Total vouchers issued in 2016: {{$ictrl.voucherStats.Vouchers2016}}
+                    <br />
+                    Total vouchers issued in 2015: {{$ictrl.voucherStats.Vouchers2015}}
+                    <br />
+                    Total vouchers issued in 2014: {{$ictrl.voucherStats.Vouchers2014}}
+                </div>
         </div>
     </div>
 

@@ -26,7 +26,7 @@
                     </ui-select>
                     <br />
                     <h4 style="text-align:center">Supplier Quote:</h4>
-                    <select style="width: 600px;" class="btn btn-default dropdown-toggle col-md-offset-3" ng-model="$octrl.selectedQuotes" ng-options="x as x.Price + ' - ' + x.Supplier.Name for x in $octrl.quotes">
+                    <select style="width: 600px;" class="btn btn-default dropdown-toggle col-md-offset-3" ng-model="$octrl.selectedQuotes" ng-options="x as x.Price + ' - ' + x.Supplier.Name for x in $octrl.quotes | orderBy: 'Price'">
                         <option value="">Select Quote</option>
                     </select>
                     <br />

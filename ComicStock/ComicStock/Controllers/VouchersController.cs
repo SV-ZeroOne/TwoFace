@@ -48,10 +48,9 @@ namespace ComicStock.WebAPI.Controllers
         {
             string searchString = search.ToLower();
             return Get().Where(i =>
-            i.VoucherID.ToString().Contains(searchString) ||
             i.Amount.ToString().Contains(searchString) ||
-            i.Code != null && i.Code.ToLower().Contains(searchString) ||
-            i.DateIssued != null && i.DateIssued.ToString().Contains(searchString)
+            i.Code != null && i.Code.Contains(search) ||
+            i.DateIssued != null && i.DateIssued.ToString("d").Contains(searchString)
             ).ToList<VoucherDTO>();
         }
 
@@ -68,7 +67,8 @@ namespace ComicStock.WebAPI.Controllers
 
             // Select the customers based on paging parameters
             List<VoucherDTO> vouchers = newVouchers
-                .OrderBy(c => c.VoucherID)
+                .OrderBy(c => c.DateIssued)
+                .Reverse()
                 .Skip(skip)
                 .Take(pageSize)
                 .ToList();
@@ -112,37 +112,46 @@ namespace ComicStock.WebAPI.Controllers
         //}
 
         [Route("api/Vouchers/PlaceVoucher")]
-        public void PlaceVoucher(decimal amount, bool valid)
+        public void PlaceVoucher(decimal amount, int qty, bool valid)
         {
-            if (amount < 0)
+            if (amount <= 0 || (amount % 10) != 0)
             {
                 HttpResponseMessage message = new HttpResponseMessage(HttpStatusCode.NotImplemented);
                 message.Content = new StringContent("You entered a invalid Voucher Amount");
                 throw new HttpResponseException(message);
             }
+            else if (qty <= 0)
+            {
+                HttpResponseMessage message = new HttpResponseMessage(HttpStatusCode.NotImplemented);
+                message.Content = new StringContent("You entered a invalid Voucher Quantity");
+                throw new HttpResponseException(message);
+            }
             else
             {
-                string codeString = RandomString(10);
-                bool generating = true;
-
-                IEnumerable<VoucherDTO> vouchers = Get();
-                while (generating)
+                for (int i = 0; i < qty; i++)
                 {
-                    foreach (VoucherDTO item in vouchers)
+                    string codeString = RandomString(10);
+                    bool generating = true;
+
+                    IEnumerable<VoucherDTO> vouchers = Get();
+                    while (generating)
                     {
-                        if (item.Code.ToLower() == codeString.ToLower())
+                        foreach (VoucherDTO item in vouchers)
                         {
-                            codeString = RandomString(10);
-                            generating = true;
-                        }
-                        else
-                        {
-                            generating = false;
+                            if (item.Code.ToLower() == codeString.ToLower())
+                            {
+                                codeString = RandomString(10);
+                                generating = true;
+                            }
+                            else
+                            {
+                                generating = false;
+                            }
                         }
                     }
+
+                    voucherService.placeVoucher(amount, codeString, valid);
                 }
-                
-                voucherService.placeVoucher(amount, codeString, valid);
             }
         }
 
@@ -204,11 +213,18 @@ namespace ComicStock.WebAPI.Controllers
             if (searchKey != null)
             {
                 string searchString = searchKey.ToLower();
-                IEnumerable<VoucherDTO> someVouch = Get().Where(i => i.VoucherID.ToString().Contains(searchString) ||
+                if (searchKey.Equals("valid"))
+                {
+                    searchString = "True";
+                } else if (searchString.Equals("invalid")) {
+                    searchString = "False";
+                }
+                IEnumerable<VoucherDTO> someVouch = Get().Where(i =>
                 i.Amount.ToString().Contains(searchString) ||
                 i.Code != null && i.Code.ToLower().Contains(searchString) ||
-                i.DateIssued != null && i.DateIssued.ToString().Contains(searchString));
-                int pageSize = 20;
+                i.DateIssued != null && i.DateIssued.ToString("d").Contains(searchString) ||
+                i.Valid.ToString().Contains(searchString));
+                int pageSize = 50;
                 // Determine the number of records to skip
                 int skip = (pageNumber - 1) * pageSize;
 
@@ -218,7 +234,8 @@ namespace ComicStock.WebAPI.Controllers
 
                 // Select the customers based on paging parameters
                 List<VoucherDTO> voucher = someVouch
-                    .OrderBy(c => c.VoucherID)
+                    .OrderBy(c => c.DateIssued)
+                    .Reverse()
                     .Skip(skip)
                     .Take(pageSize)
                     .ToList();
@@ -228,6 +245,70 @@ namespace ComicStock.WebAPI.Controllers
             }
             return null;
         }
+
+        [Route("api/Vouchers/GetStats")]
+        [HttpGet]
+        public Stats GetVoucherStats()
+        {
+            int usedCount = 0;
+            int vouch2017 = 0;
+            int vouch2016 = 0;
+            int vouch2015 = 0;
+            int vouch2014 = 0;
+            decimal totalVal = 0;
+            decimal valUsed = 0;
+            foreach (VoucherDTO v in newVouchers)
+            {
+                totalVal += v.Amount;
+                if (v.Valid == false)
+                {
+                    usedCount++;
+                    valUsed += v.Amount;
+                }
+                if(v.DateIssued.Year == 2017)
+                {
+                    vouch2017++;
+                }
+                else if(v.DateIssued.Year == 2016)
+                {
+                    vouch2016++;
+                }
+                else if (v.DateIssued.Year == 2015)
+                {
+                    vouch2015++;
+                }
+                else if (v.DateIssued.Year == 2014)
+                {
+                    vouch2014++;
+                }
+            }
+            Stats voucherStats = new Stats();
+            voucherStats.TotalUsedVouchers = usedCount;
+            voucherStats.Vouchers2017 = vouch2017;
+            voucherStats.Vouchers2016 = vouch2016;
+            voucherStats.Vouchers2015 = vouch2015;
+            voucherStats.Vouchers2014 = vouch2014;
+            voucherStats.totalValue = totalVal;
+            voucherStats.valueUsed = valUsed;
+            return voucherStats;
+        }
+
+    }
+
+    public class Stats{
+
+        public Stats()
+        {
+
+        }
+
+        public int TotalUsedVouchers { get; set; }
+        public int Vouchers2017 { get; set; }
+        public int Vouchers2016 { get; set; }
+        public int Vouchers2015 { get; set; }
+        public int Vouchers2014 { get; set; }
+        public decimal totalValue { get; set; }
+        public decimal valueUsed { get; set; }
 
     }
 }
