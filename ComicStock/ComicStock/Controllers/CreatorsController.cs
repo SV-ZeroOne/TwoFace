@@ -74,8 +74,6 @@ namespace ComicStock.Controllers
         [HttpPost]
         public CreatorDTO Post(CreatorDTO item)
         {
-
-
             if (item == null)
             {
                 return null;
@@ -95,6 +93,11 @@ namespace ComicStock.Controllers
         public CreatorDTO Put([FromBody] CreatorDTO creator)
         {
             Creator creatorItem = creatorRepo.GetById(creator.CreatorID);
+            if (creatorItem == null)
+            {
+                return null;
+                throw new HttpResponseException(HttpStatusCode.BadRequest);   
+            }
             var creatorItemUpdate = updateCreator(creator, creatorItem);
             creatorRepo.Update(creatorItemUpdate);
             return creator;

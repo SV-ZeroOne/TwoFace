@@ -91,6 +91,11 @@ namespace ComicStock.WebAPI.Controllers
         public StockDTO Put(StockDTO stock)
         {
             Stock stockToGet = stockRepo.GetById(stock.StockReferenceID);
+            if (stockToGet == null)
+            {
+                return null;
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
             var stockToUpdate = updateStock(stock, stockToGet);
             stockRepo.Update(stockToUpdate);
             return stock;
@@ -109,6 +114,10 @@ namespace ComicStock.WebAPI.Controllers
         public void Delete(StockDTO stock)
         {
             var stockToDelete = stockRepo.GetById(stock.StockReferenceID);
+            if (stockToDelete == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
             stockRepo.Delete(stockToDelete);
         }
 

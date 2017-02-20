@@ -134,7 +134,7 @@ namespace ComicStock.WebAPI.Controllers
             }
         }
 
-        // PUT api/vouchers/id ~ Works
+        // PUT api/vouchers/id
         public VoucherDTO PutVoucher(VoucherDTO item)
         {
             Voucher voucherItem = voucherRepo.GetById(item.VoucherID);
@@ -195,7 +195,9 @@ namespace ComicStock.WebAPI.Controllers
                 if (searchKey.Equals("valid"))
                 {
                     searchString = "True";
-                } else if (searchString.Equals("invalid")) {
+                }
+                else if (searchString.Equals("invalid"))
+                {
                     searchString = "False";
                 }
                 IEnumerable<VoucherDTO> someVouch = Get().Where(i =>
@@ -239,11 +241,11 @@ namespace ComicStock.WebAPI.Controllers
                     usedCount++;
                     valUsed += v.Amount;
                 }
-                if(v.DateIssued.Year == 2017)
+                if (v.DateIssued.Year == 2017)
                 {
                     vouch2017++;
                 }
-                else if(v.DateIssued.Year == 2016)
+                else if (v.DateIssued.Year == 2016)
                 {
                     vouch2016++;
                 }
@@ -266,23 +268,6 @@ namespace ComicStock.WebAPI.Controllers
             voucherStats.valueUsed = valUsed;
             return voucherStats;
         }
-
-    }
-
-    public class Stats{
-
-        public Stats()
-        {
-
-        }
-
-        public int TotalUsedVouchers { get; set; }
-        public int Vouchers2017 { get; set; }
-        public int Vouchers2016 { get; set; }
-        public int Vouchers2015 { get; set; }
-        public int Vouchers2014 { get; set; }
-        public decimal totalValue { get; set; }
-        public decimal valueUsed { get; set; }
 
     }
 }

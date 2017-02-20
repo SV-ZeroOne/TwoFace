@@ -249,6 +249,7 @@
     <Compile Include="Controllers\IssuesController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\PagedResult.cs" />
+    <Compile Include="Controllers\Stats.cs" />
     <Compile Include="Controllers\StockController.cs" />
     <Compile Include="Controllers\SupplierQuoteController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />

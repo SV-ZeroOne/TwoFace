@@ -92,7 +92,17 @@ namespace ComicStock.WebAPI.Controllers
         public SupplierDTO Put(SupplierDTO supplier)
         {
             Supplier supplierToGet = supplierRepo.GetById(supplier.SupplierID);
+            if (supplierToGet == null)
+            {
+                return null;
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
             var supplierToUpdate = updateSupplier(supplier, supplierToGet);
+            if (supplierToUpdate == null)
+            {
+                return null;
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
             supplierRepo.Update(supplierToUpdate);
             return supplier;
         }
@@ -136,6 +146,10 @@ namespace ComicStock.WebAPI.Controllers
         public void Delete(SupplierDTO supplier)
         {
             var supplierToDelete = supplierRepo.GetById(supplier.SupplierID);
+            if (supplierToDelete == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
             supplierRepo.Delete(supplierToDelete);
         }
 

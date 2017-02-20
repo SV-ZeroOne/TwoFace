@@ -122,6 +122,10 @@ namespace ComicStock.WebAPI.Controllers
         public void Delete(int orderID)
         {
             var orderToDelete = orderRepo.GetById(orderID);
+            if (orderToDelete == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
             orderRepo.Delete(orderToDelete);
         }
 
