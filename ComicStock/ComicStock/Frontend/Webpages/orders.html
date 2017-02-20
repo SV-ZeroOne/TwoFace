@@ -85,10 +85,6 @@
                         <td class="col-md-1" style="text-align:center">
                             {{ order.OrderID || 'empty' }}
                         </td>
-                        <!--<span editable-uidate="user.dob"
-                              e-ui-date="datePickerConfig">
-                            {{ (user.dob | date:"dd/MM/yyyy") || 'empty' }}
-                        </span>-->
                         <td class="col-md-1" style="text-align:center">
                             <span editable-text="order.OrderDate" e-name="OrderDate" e-form="rowform" onbeforesave="checkName($data, order.OrderDate)">
                                 {{ order.OrderDate || 'empty' | date:'medium'}}
@@ -130,7 +126,6 @@
                             </span>
                         </td>
                         <td style="white-space: nowrap; text-align:center" class="col-md-2">
-                            <!-- form -->
                             <form editable-form name="rowform" onbeforesave="$octrl.saveOrder($data, order.OrderID)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == order">
                                 <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
                                     <span class="glyphicon glyphicon-floppy-saved"></span> Save
@@ -143,11 +138,6 @@
                                 <button type="button" class="btn btn-primary" ng-click="rowform.$show()">
                                     <span class="glyphicon glyphicon-edit"></span> Edit
                                 </button>
-                                <!--
-                                <button type="button" class="btn btn-danger" ng-click="$octrl.removeOrder($index, order.OrderID)">
-                                    <span class="glyphicon glyphicon-trash"></span> Delete
-                                </button>
-                                -->
                             </div>
                         </td>
                     </tr>

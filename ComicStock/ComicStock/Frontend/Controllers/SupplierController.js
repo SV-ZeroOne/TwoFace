@@ -78,18 +78,6 @@
 
         });
     }
-    //$ictrl.showAlert = function () {
-    //    $mdDialog.show(
-    //      $mdDialog.alert()
-    //        .parent(angular.element(document.querySelector('#popupContainer1')))
-    //        .clickOutsideToClose(true)
-    //        .title('New Supplier Confirmation')
-    //        .textContent('New Supplier has been added.')
-    //        .ariaLabel('Supplier Confirmation Dialog')
-    //        .ok('Ok')
-    //        .targetEvent(ev)
-    //    );
-    //};
 
     $ictrl.paginationChange = function () {
         console.log("Pagination change event")

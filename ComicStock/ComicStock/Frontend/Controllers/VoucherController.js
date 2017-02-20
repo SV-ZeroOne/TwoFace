@@ -92,9 +92,6 @@
     };
 
     $ictrl.showAlert = function () {
-        // Appending dialog to document.body to cover sidenav in docs app
-        // Modal dialogs should fully cover application
-        // to prevent interaction outside of dialog
         $mdDialog.show(
           $mdDialog.alert()
             .parent(angular.element(document.querySelector('#popupContainer')))
@@ -133,13 +130,6 @@
             );
     };
 
-    //$ictrl.searchAll = function () {
-    //    $http.get('../api/Vouchers?search=' + $ictrl.vouchersSearch)
-    //    .then(function (response) {
-    //        $ictrl.someVouchers.Data = response.data;
-    //    });
-    //}
-
     $ictrl.searchAll = function () {
         $ictrl.myPromise = $http.get('../api/Vouchers/GetSearchPaged?searchKey=' + $ictrl.vouchersSearch + '&pageNumber=' + $ictrl.currentPage)
         .then(function (response) {
@@ -174,15 +164,6 @@
         console.log("Pagination change event")
         console.log("Page no: " + $ictrl.paginationPage)
     }
-
-    //$ictrl.pageChanged = function () {
-    //    console.log("Page changed function");
-    //    console.log("Current Page: " + $ictrl.currentPage + " Row amount " + $ictrl.rowAmount);
-    //    $http.get('../api/Vouchers/GetPaged?pageNo=' + $ictrl.currentPage + '&pageSize=' + $ictrl.rowAmount)
-    //    .then(function (response) {
-    //        $ictrl.someVouchers = response.data;
-    //    });
-    //};
 
     $ictrl.pageChanged = function () {
         console.log("Page changed function");
@@ -227,9 +208,6 @@
 
     
     $ictrl.showNoSearchResults = function (ev) {
-        // Appending dialog to document.body to cover sidenav in docs app
-        // Modal dialogs should fully cover application
-        // to prevent interaction outside of dialog
         $mdDialog.show(
           $mdDialog.alert()
             .parent(angular.element(document.querySelector('#popupContainer')))

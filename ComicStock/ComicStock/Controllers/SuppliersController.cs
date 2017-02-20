@@ -45,21 +45,16 @@ namespace ComicStock.WebAPI.Controllers
         [HttpGet]
         public IHttpActionResult GetPaged(int pageNo = 1, int pageSize = 10)
         {
-            // Determine the number of records to skip
             int skip = (pageNo - 1) * pageSize;
-
-            // Get total number of records
 
             int total = newSuppliers.Count();
 
-            // Select the customers based on paging parameters
             List<SupplierDTO> suppliers = newSuppliers
                 .OrderBy(c => c.SupplierID)
                 .Skip(skip)
                 .Take(pageSize)
                 .ToList();
 
-            // Return the list of customers
             return Ok(new PagedResult<SupplierDTO>(suppliers, pageNo, pageSize, total));
         }
 
@@ -96,7 +91,6 @@ namespace ComicStock.WebAPI.Controllers
         //PUT api/suppliers
         public SupplierDTO Put(SupplierDTO supplier)
         {
-            //Need to have error handling!
             Supplier supplierToGet = supplierRepo.GetById(supplier.SupplierID);
             var supplierToUpdate = updateSupplier(supplier, supplierToGet);
             supplierRepo.Update(supplierToUpdate);
@@ -135,30 +129,15 @@ namespace ComicStock.WebAPI.Controllers
             supplierToUpdate.City = supplier.City;
             supplierToUpdate.ReferenceNumber = supplier.ReferenceNumber;
             supplierToUpdate.IsDeleted = supplier.IsDeleted;
-            //Might need to map more fields to update.
             return supplierToUpdate;
         }
 
         //DELETE api/issues/id
         public void Delete(SupplierDTO supplier)
         {
-            //Need to have error handling!
             var supplierToDelete = supplierRepo.GetById(supplier.SupplierID);
             supplierRepo.Delete(supplierToDelete);
         }
-
-        //POST api/issues
-        //public Supplier Post(SupplierDTO supplierDto)
-        //{
-        //    if (supplierDto == null)
-        //    {
-        //        return null;
-        //        throw new HttpResponseException(HttpStatusCode.NotAcceptable);
-        //    }
-        //    Supplier newSupplier = convertDTO(supplierDto);
-        //    supplierRepo.Add(newSupplier);
-        //    return newSupplier;
-        //}
 
         private Supplier convertDTO(SupplierDTO supplierDto)
         {
@@ -182,21 +161,16 @@ namespace ComicStock.WebAPI.Controllers
                 i.City != null && i.City.ToLower().Contains(searchString) ||
                 i.ReferenceNumber != null && i.ReferenceNumber.ToLower().Contains(searchString));
                 int pageSize = 20;
-                // Determine the number of records to skip
                 int skip = (pageNumber - 1) * pageSize;
-
-                // Get total number of records
 
                 int total = someStock.Count();
 
-                // Select the customers based on paging parameters
                 List<SupplierDTO> stock = someStock
                     .OrderBy(c => c.SupplierID)
                     .Skip(skip)
                     .Take(pageSize)
                     .ToList();
 
-                // Return the list of customers
                 return Ok(new PagedResult<SupplierDTO>(stock, pageNumber, pageSize, total));
             }
             return null;

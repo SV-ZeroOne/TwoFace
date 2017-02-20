@@ -42,7 +42,6 @@ namespace ComicStock.Controllers
         // GET api/creators/id
         public CreatorDTO GetById(int id)
         {
-            //Have to do some error handling here if id doesnt exist
             Creator someCreator = creatorRepo.GetById(id);
             if (someCreator == null)
             {
@@ -57,21 +56,16 @@ namespace ComicStock.Controllers
         [HttpGet]
         public IHttpActionResult GetPaged(int pageNo = 1, int pageSize = 10)
         {
-            // Determine the number of records to skip
             int skip = (pageNo - 1) * pageSize;
-
-            // Get total number of records
 
             int total = newCreators.Count();
 
-            // Select the customers based on paging parameters
             List<CreatorDTO> creators = newCreators
                 .OrderBy(c => c.CreatorID)
                 .Skip(skip)
                 .Take(pageSize)
                 .ToList();
 
-            // Return the list of customers
             return Ok(new PagedResult<CreatorDTO>(creators, pageNo, pageSize, total));
         }
 
@@ -95,49 +89,16 @@ namespace ComicStock.Controllers
             return item;
         }
 
-
-        // POST api/creators/
-        /*public CreatorDTO PostCreator(Creator item)
-        {
-            CreatorDTO newCreator = new CreatorDTO(item);
-            if (newCreator == null)
-            {
-                throw new HttpResponseException(HttpStatusCode.NotImplemented);
-            }
-            creatorRepo.Add(item);
-            //var response = Request.CreateResponse<newVoucher>(HttpStatusCode.Created, item);
-            return newCreator;
-        }*/
-
         // PUT api/Creators ~ Works
         [Route("api/Creators/")]
         [HttpPut]
         public CreatorDTO Put([FromBody] CreatorDTO creator)
         {
-            //CreatorDTO CreatorDTO = GetById(id);
             Creator creatorItem = creatorRepo.GetById(creator.CreatorID);
             var creatorItemUpdate = updateCreator(creator, creatorItem);
             creatorRepo.Update(creatorItemUpdate);
             return creator;
         }
-
-        // PUT api/vouchers/id ~ Works
-        //public void PutCreator(CreatorDTO item)
-        //{
-        //    //CreatorDTO CreatorDTO = GetById(id);
-        //    Creator creatorItem = creatorRepo.GetById(item.CreatorID);
-
-        //    //newCreators.Find(creator);
-        //    if (creatorItem == null)
-        //    {
-        //        throw new HttpResponseException(HttpStatusCode.NotFound);
-        //    }
-
-        //    var creatorItemUpdate = updateCreator(creatorItem, item);
-
-        //    creatorRepo.Update(creatorItemUpdate);
-
-        //}
 
         // DELETE api/creators/id ~ Works
         public void Delete(int id)
@@ -154,7 +115,6 @@ namespace ComicStock.Controllers
         private Creator convertDtoToObject(CreatorDTO creatorDTO)
         {
             Creator tempCreator = new Creator();
-            //tempCreator.CreatorID = creatorDTO.CreatorID;
             tempCreator.Name = creatorDTO.Name;
             tempCreator.CountryOfResidence = creatorDTO.CountryOfResidence;
             tempCreator.TaxReferenceNumber = creatorDTO.TaxReferenceNumber;
@@ -197,21 +157,17 @@ namespace ComicStock.Controllers
                 i.TaxReferenceNumber.ToString().Contains(searchString) ||
                 i.EmailAddress != null && i.EmailAddress.ToLower().Contains(searchString));
                 int pageSize = 20;
-                // Determine the number of records to skip
-                int skip = (pageNumber - 1) * pageSize;
 
-                // Get total number of records
+                int skip = (pageNumber - 1) * pageSize;
 
                 int total = someStock.Count();
 
-                // Select the customers based on paging parameters
                 List<CreatorDTO> stock = someStock
                     .OrderBy(c => c.CreatorID)
                     .Skip(skip)
                     .Take(pageSize)
                     .ToList();
 
-                // Return the list of customers
                 return Ok(new PagedResult<CreatorDTO>(stock, pageNumber, pageSize, total));
             }
             return null;

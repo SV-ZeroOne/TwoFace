@@ -58,14 +58,10 @@ namespace ComicStock.WebAPI.Controllers
         [HttpGet]
         public IHttpActionResult GetPaged(int pageNo = 1, int pageSize = 10)
         {
-            // Determine the number of records to skip
             int skip = (pageNo - 1) * pageSize;
-
-            // Get total number of records
 
             int total = newVouchers.Count();
 
-            // Select the customers based on paging parameters
             List<VoucherDTO> vouchers = newVouchers
                 .OrderBy(c => c.DateIssued)
                 .Reverse()
@@ -73,7 +69,6 @@ namespace ComicStock.WebAPI.Controllers
                 .Take(pageSize)
                 .ToList();
 
-            // Return the list of customers
             return Ok(new PagedResult<VoucherDTO>(vouchers, pageNo, pageSize, total));
         }
 
@@ -86,7 +81,6 @@ namespace ComicStock.WebAPI.Controllers
         // GET api/vouchers/id
         public VoucherDTO GetById(int id)
         {
-            //Have to do some error handling here if id doesnt exist
             Voucher someVoucher = voucherRepo.GetById(id);
             if (someVoucher == null)
             {
@@ -95,21 +89,6 @@ namespace ComicStock.WebAPI.Controllers
             VoucherDTO someVoucherDTO = new VoucherDTO(someVoucher);
             return someVoucherDTO;
         }
-
-        //// POST api/vouchers/ 
-        //public Voucher Post(VoucherDTO item)
-        //{
-        //    Voucher voucher = convertDtoToObject(item);
-
-        //    if (voucher == null)
-        //    {
-        //        throw new HttpResponseException(HttpStatusCode.NotFound);
-        //    }
-
-        //    voucherRepo.Add(voucher);
-
-        //    return voucher;
-        //}
 
         [Route("api/Vouchers/PlaceVoucher")]
         public void PlaceVoucher(decimal amount, int qty, bool valid)
@@ -225,14 +204,10 @@ namespace ComicStock.WebAPI.Controllers
                 i.DateIssued != null && i.DateIssued.ToString("d").Contains(searchString) ||
                 i.Valid.ToString().Contains(searchString));
                 int pageSize = 20;
-                // Determine the number of records to skip
                 int skip = (pageNumber - 1) * pageSize;
-
-                // Get total number of records
 
                 int total = someVouch.Count();
 
-                // Select the customers based on paging parameters
                 List<VoucherDTO> voucher = someVouch
                     .OrderBy(c => c.DateIssued)
                     .Reverse()
@@ -240,7 +215,6 @@ namespace ComicStock.WebAPI.Controllers
                     .Take(pageSize)
                     .ToList();
 
-                // Return the list of customers
                 return Ok(new PagedResult<VoucherDTO>(voucher, pageNumber, pageSize, total));
             }
             return null;

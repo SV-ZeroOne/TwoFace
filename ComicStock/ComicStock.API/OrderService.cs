@@ -35,7 +35,7 @@ namespace ComicStock.API
             Issue issue = new Issue();
             issue = issueRepo.GetById(issueID);
             var someissueID = issue.IssueID;
-            //Check for supplier quote
+
             SupplierQuote theQuote = supplierQuoteRepo.getSupplierQuote(issueID, supplierID);
             Supplier theSupplier = supplierRepo.GetById(theQuote.SupplierID);
             Order newOrder = new Order();
@@ -44,23 +44,22 @@ namespace ComicStock.API
             newOrder.QtyOrdered = quantity;
             newOrder.Total = quantity * theQuote.Price;
             newOrder.SupplierID = theSupplier.SupplierID;
-            //These next few fields and their info must come from the supplier API
+
             newOrder.ShipmentRef = null;
             newOrder.ShipmentDate = null;
             newOrder.DeliveryStatus = "Pending Payment";
             orderRepo.Add(newOrder);
         }
 
-        //Make a payment to supplier
         public void makePayment(int orderID)
         {
             Order order = orderRepo.GetById(orderID);
             SupplierPayment newPayment = new SupplierPayment();
             newPayment.OrderID = order.OrderID;
-            //might have to pass in partial payment
+
             newPayment.Total = order.Total;
             newPayment.ProcessedDate = DateTime.Now;
-            //might need to change the order status if paid.
+
             supplierPaymentRepo.Add(newPayment);
         }
 

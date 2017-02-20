@@ -21,8 +21,6 @@ namespace ComicStock.WebAPI.Controllers
         public IssuesController(IssueInterface issueRepo)
         {
             this.issueRepo = issueRepo;
-            //issueRepo = new IssuesRepo();
-            //IEnumerable someIssues = issueRepo.GetAll();
             newIssues = new List<IssueDTO>();
             foreach (Issue i in issueRepo.GetAll())
             {
@@ -53,21 +51,16 @@ namespace ComicStock.WebAPI.Controllers
         [HttpGet]
         public IHttpActionResult GetPaged(int pageNo = 1, int pageSize = 10)
         {
-            // Determine the number of records to skip
             int skip = (pageNo - 1) * pageSize;
-
-            // Get total number of records
 
             int total = newIssues.Count();
 
-            // Select the customers based on paging parameters
             List<IssueDTO> issues = newIssues
                 .OrderBy(c => c.IssueID)
                 .Skip(skip)
                 .Take(pageSize)
                 .ToList();
 
-            // Return the list of customers
             return Ok(new PagedResult<IssueDTO>(issues, pageNo, pageSize, total));
         }
 
@@ -86,36 +79,16 @@ namespace ComicStock.WebAPI.Controllers
 
         public IssueDTO Put(IssueDTO issue)
         {
-            //Need to have error handling!
             Issue issueToGet = issueRepo.GetById(issue.IssueID);
+            if (issueToGet == null)
+            {
+                return null;
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
             var issueToUpdate = updateIssue(issue, issueToGet);
             issueRepo.Update(issueToUpdate);
             return issue;
         }
-
-        //public void Put(int id)
-        //{
-        //    //Need to have error handling!
-        //    Issue issueToGet = issueRepo.GetById(id);
-        //    IssueDTO issueDTO = new IssueDTO(issueToGet);
-        //    Issue issueToUpdate = updateIssue(issueDTO);
-        //    issueRepo.Update(issueToUpdate);
-
-        //}
-
-        //private Issue updateIssue(IssueDTO issue)
-        //{
-        //    Issue newIssue = new Issue();
-        //    newIssue.IssueID = issue.IssueID;
-        //    newIssue.Title = issue.Title;
-        //    newIssue.Description = issue.Description;
-        //    newIssue.PublicationDate = issue.PublicationDate;
-        //    newIssue.Publisher = issue.Publisher;
-        //    newIssue.SeriesNumber = issue.SeriesNumber;
-        //    newIssue.IsDeleted = issue.IsDeleted;
-        //    //Might need to map more fields to update.
-        //    return newIssue;
-        //}
 
         private Issue updateIssue(IssueDTO issue, Issue issueToUpdate)
         {
@@ -126,7 +99,6 @@ namespace ComicStock.WebAPI.Controllers
             issueToUpdate.Publisher = issue.Publisher;
             issueToUpdate.SeriesNumber = issue.SeriesNumber;
             issueToUpdate.IsDeleted = issue.IsDeleted;
-            //Might need to map more fields to update.
             return issueToUpdate;
         }
 
@@ -142,13 +114,6 @@ namespace ComicStock.WebAPI.Controllers
             issueRepo.Delete(issueToDelete);
         }
 
-        //public void Delete(IssueDTO issue)
-        //{
-        //    //Need to have error handling!
-        //    var issueToDelete = issueRepo.GetById(issue.IssueID);
-        //    issueRepo.Delete(issueToDelete);
-        //}
-
         private Issue convertDTO(IssueDTO issueDto)
         {
             Issue newIssue = new Issue();
@@ -157,15 +122,8 @@ namespace ComicStock.WebAPI.Controllers
             newIssue.Publisher = issueDto.Publisher;
             newIssue.SeriesNumber = issueDto.SeriesNumber;
             newIssue.Description = issueDto.Description;
-            //newIssue.ComicCreator = issueDto.ComicCreator;
             return newIssue;
         }
-
-        // Lamda Function
-        //public IList<IssueDTO> Get(string search)
-        //{
-        //    return Get().Where(i => i.Title.Contains(search)).ToList<IssueDTO>();
-        //}
 
         public IList<IssueDTO> Get(string search)
         {
@@ -192,21 +150,17 @@ namespace ComicStock.WebAPI.Controllers
                 i.PublicationDate != null && i.PublicationDate.ToString().Contains(searchString) ||
                 i.Publisher != null && i.Publisher.ToLower().Contains(searchString));
                 int pageSize = 20;
-                // Determine the number of records to skip
-                int skip = (pageNumber - 1) * pageSize;
 
-                // Get total number of records
+                int skip = (pageNumber - 1) * pageSize;
 
                 int total = someIssues.Count();
 
-                // Select the customers based on paging parameters
                 List<IssueDTO> issues = someIssues
                     .OrderBy(c => c.IssueID)
                     .Skip(skip)
                     .Take(pageSize)
                     .ToList();
 
-                // Return the list of customers
                 return Ok(new PagedResult<IssueDTO>(issues, pageNumber, pageSize, total));
             }
             return null;

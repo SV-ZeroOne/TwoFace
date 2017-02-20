@@ -50,44 +50,16 @@
         
     };
 
-    //$ctrl.removeCreator = function (index, id) {
-    //    console.log("Deleting Creator No: " + id);
-    //    console.log(index);
-    //    $ctrl.options.splice(index, 1);
-    //    $http.delete('../api/creators/' + id);
-    //};
-
     $ctrl.removeCreator = function (data) {
         data.IsDeleted = true;
         console.log("after: " + data.IsDeleted);
         $http.put('../api/Creators', data);
     };
 
-    //$ctrl.addCreator = function (data, id) {
-    //    console.log(data);
-    //    console.log(data);
-    //    $http.post('../api/creators', data);
-    //}
-
-    //$ctrl.removeIssue = function (index, IssueID) {
-    //    console.log("Deleting Issue ID: " + IssueID);
-    //    $ctrl.options.splice(index, 1);
-    //    $http.delete("../api/issues?issueID=" + IssueID);
-    //};
-
     $ctrl.paginationChange = function () {
         console.log("Pagination change event")
         console.log("Page no: " + $ctrl.paginationPage)
     }
-
-    //$ctrl.pageChanged = function () {
-    //    console.log("Page changed function");
-    //    console.log("Current Page: " + $ctrl.currentPage + " Row amount " + $ctrl.rowAmount);
-    //    $http.get('../api/Creators/GetPaged?pageNo=' + $ctrl.currentPage + '&pageSize=' + $ctrl.rowAmount)
-    //    .then(function (response) {
-    //        $ctrl.someOrders = response.data;
-    //    });
-    //};
 
     $ctrl.pageChanged = function () {
         console.log("Page changed function");

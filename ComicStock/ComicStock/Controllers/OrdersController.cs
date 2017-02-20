@@ -51,7 +51,6 @@ namespace ComicStock.WebAPI.Controllers
         }
 
         // Lamda Search Function
-        // Need to figure out what property they might want to search orders for.
         public IList<OrderDTO> Get(string search)
         {
             string searchString = search.ToLower();
@@ -69,14 +68,12 @@ namespace ComicStock.WebAPI.Controllers
             ).ToList<OrderDTO>();
         }
 
-        //might need to change this to return the order.
         [Route("api/Orders/PlaceOrder")]
         public void PlaceOrder(int issueID, Int16 quantity, int supplierID)
         {
             orderService.placeOrder(issueID, quantity, supplierID);
         }
 
-        //might need to change this to return the payment.
         [Route("api/Orders/MakePayment")]
         public void MakePayment(int orderID)
         {
@@ -97,8 +94,12 @@ namespace ComicStock.WebAPI.Controllers
 
         public OrderDTO Put(OrderDTO order)
         {
-            //Need to have error handling!
             Order orderToGet = orderRepo.GetById(order.OrderID);
+            if (orderToGet == null)
+            {
+                return null;
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
             var orderToUpdate = updateOrder(order, orderToGet);
             orderRepo.Update(orderToUpdate);
             return order;
@@ -115,13 +116,11 @@ namespace ComicStock.WebAPI.Controllers
             orderToUpdate.Total = order.Total;
             orderToUpdate.DeliveryStatus = order.DeliveryStatus;
             orderToUpdate.IsDeleted = order.IsDeleted;
-            //Might need to map more fields to update.
             return orderToUpdate;
         }
 
         public void Delete(int orderID)
         {
-            //Need to have error handling!
             var orderToDelete = orderRepo.GetById(orderID);
             orderRepo.Delete(orderToDelete);
         }
@@ -137,7 +136,6 @@ namespace ComicStock.WebAPI.Controllers
             newOrder.ShipmentRef = orderDto.ShipmentRef;
             newOrder.Total = orderDto.Total;
             newOrder.DeliveryStatus = orderDto.DeliveryStatus;
-            //Might need to map more fields.
             return newOrder;
         }
 
@@ -145,21 +143,16 @@ namespace ComicStock.WebAPI.Controllers
         [HttpGet]
         public IHttpActionResult GetPaged(int pageNo = 1, int pageSize = 10)
         {
-            // Determine the number of records to skip
             int skip = (pageNo - 1) * pageSize;
-
-            // Get total number of records
 
             int total = totalRecords;
 
-            // Select the customers based on paging parameters
             List<OrderDTO> orders = newOrders
                 .OrderBy(c => c.OrderID)
                 .Skip(skip)
                 .Take(pageSize)
                 .ToList();
 
-            // Return the list of customers
             return Ok(new PagedResult<OrderDTO>(orders, pageNo, pageSize, total));
         }
 
@@ -180,21 +173,16 @@ namespace ComicStock.WebAPI.Controllers
             i.Total.ToString().Contains(searchString) ||
             i.QtyOrdered.ToString().Contains(searchString));
                 int pageSize = 20;
-                // Determine the number of records to skip
                 int skip = (pageNumber - 1) * pageSize;
-
-                // Get total number of records
 
                 int total = someOrders.Count();
 
-                // Select the customers based on paging parameters
                 List<OrderDTO> orders = someOrders
                     .OrderBy(c => c.OrderID)
                     .Skip(skip)
                     .Take(pageSize)
                     .ToList();
 
-                // Return the list of customers
                 return Ok(new PagedResult<OrderDTO>(orders, pageNumber, pageSize, total));
             }
             return null;

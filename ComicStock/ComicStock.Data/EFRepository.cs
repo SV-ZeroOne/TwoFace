@@ -19,31 +19,8 @@ namespace ComicStock.Data
 
         public IEnumerable<TEntity> GetAll()
         {
-           // var entities = context.Set<TEntity>().Where(x => x.IsDeleted == false).ToList();
-           //return entities;
-
             return context.Set<TEntity>().Where(x => x.IsDeleted == false).ToList();
-
-            //if (context.Set<TEntity>().Where(x => x.isDeleted == false))
-            //{
-            //    return context.Set<TEntity>().ToList();
-            //}
-            //var entities = context.Set<TEntity>().Where(x => !x.isDeleted);
-
-            //if (entities)
-            //{
-
-            //}
-
-            //return context.Set<TEntity>().ToList();
-
-            return null;
         }
-
-        //public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> expression)
-        //{
-        //    return context.Set<TEntity>().Where(expression).ToList();
-        //}
 
         public void Add(TEntity entity)
         {
@@ -55,9 +32,6 @@ namespace ComicStock.Data
         public void Update(TEntity entity)
         {
             if (entity == null) throw new NullReferenceException(entity.ToString());
-            //context.Set<TEntity>().Attach(entity);
-            //context.Entry(entity).State = System.Data.Entity.EntityState.Modified;
-            //_dbContext.Set<UserEntity>().AddOrUpdate(entityToBeUpdatedWithId);
             context.Set<TEntity>().AddOrUpdate(entity);
             Save();
         }

@@ -1,7 +1,4 @@
-﻿/// <reference path="../Webpages/stock.html" />
-/// <reference path="../Webpages/orders.html" />
-//var app = angular.module("stockModule", ["xeditable", "ui.bootstrap", 'ui.select', 'ngSanitize', 'ngMaterial', 'ngMessages', 'cgBusy']);
-var app = angular.module("SquareEyesModule", ["ui.router", "xeditable", "ui.bootstrap", 'ui.select', 'ngSanitize', 'ngMaterial', 'ngMessages', 'cgBusy']);
+﻿var app = angular.module("SquareEyesModule", ["ui.router", "xeditable", "ui.bootstrap", 'ui.select', 'ngSanitize', 'ngMaterial', 'ngMessages', 'cgBusy']);
 app.controller("indexController", function () {
 
 })

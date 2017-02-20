@@ -22,8 +22,6 @@ namespace ComicStock.Models
 
         public Boolean IsDeleted { get; set; }
 
-        //public ICollection<ComicCreator> ComicCreator { get; set; }
-
         public IssueDTO()
         {
 

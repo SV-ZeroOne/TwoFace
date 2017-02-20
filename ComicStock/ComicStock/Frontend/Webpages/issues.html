@@ -1,7 +1,6 @@
 ﻿
     <div ng-controller="IssuesCtrl as $ctrl">
         <div class="container">
-            <!--<div class="container">-->
             <div class="row">
                 <div class="row">
                     <h1 style="text-align:center">Issues</h1>
@@ -43,28 +42,6 @@
                     </div>
                 </div>
             </div>
-
-            <!--<form class="form-inline">
-            <div class="form-group">
-                <label for="title">Title:</label>
-                <input type="text" class="form-control" ng-model="$ctrl.options.title" id="title">
-            </div>
-            <div class="form-group">
-                <label for="SeriesNo">Series Number:</label>
-                <input type="text" class="form-control" ng-model="$ctrl.options.series" id="series">
-            </div>
-            <div class="form-group">
-                <label for="Publisher">Publisher:</label>
-                <input type="text" class="form-control" ng-model="$ctrl.options.publisher" id="publisher">
-            </div>
-            <div class="form-group">
-                <label for="PublicationDate">Publication Date:</label>
-                <input type="text" class="form-control" ng-model="$ctrl.options.publicationDate" id="publicationDate">
-            </div>
-            <button type="submit" class="btn btn-default" ng-click="$ctrl.addIssue($data, id)">Add</button>
-            <button type="submit" class="btn btn-default" ng-click="$ctrl.addIssue()">Add</button>
-        </form>-->
-
             <div class="row" style="float:left">
                 <div class="col-md-12">
                     Search: <input type="text" name="issueSearch" ng-model="$ctrl.issueSearch" />
@@ -78,9 +55,6 @@
                 <br />
                 <br />
             </div>
-            
-
-            <!--<div class="container-fluid">-->
             <div class="row" style="float:right">
                 <label>Issues Per Page:</label>
                 <select ng-change="$ctrl.changeRows()" ng-init="$ctrl.rowAmount" name="rowAmount" ng-model="$ctrl.rowAmount">
@@ -100,7 +74,6 @@
                 <th>Edit</th>
                 </thead>
                 <tbody>
-                    <!--<tr ng-repeat="i in $ctrl.options | filter : 'Issue'">-->
                     <tr ng-repeat="i in $ctrl.options.Data | filter: $ctrl.issueSearch | orderBy:$ctrl.column:$ctrl.reverse">
                         <td class="col-md-2" style="text-align:center">{{i.IssueID}}</td>
                         <td class="col-md-2" style="text-align:center">
@@ -136,8 +109,6 @@
                             <div class="buttons" ng-show="!rowform.$visible">
                                 <button type="button" class="btn btn-primary" ng-click="rowform.$show()">
                                     <span class="glyphicon glyphicon-edit"></span>Edit</button>
-
-                                <!--<button type="button" class="btn btn-danger" ng-click="$ctrl.removeIssue()">del</button>-->
                                 <button type="button" class="btn btn-danger" ng-click="$ctrl.removeIssue(i)">
                                     <span class="glyphicon glyphicon-trash"></span>Del</button>
                             </div>

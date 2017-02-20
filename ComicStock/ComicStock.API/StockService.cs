@@ -6,16 +6,14 @@ namespace ComicStock.API
 {
     public class StockService : IStockService
     {
-        //gonna need to use the repos and controllers
+
         private StockInterface stockInterface;
-        //private Stock stockObject;
 
         public StockService(StockInterface stockInterface)
         {
             this.stockInterface = stockInterface;
         }
 
-        //public void AddStock(int id, Stock stock)
         public void AddStock(int id, int quantity)
         {
             Stock stock = stockInterface.GetById(id);

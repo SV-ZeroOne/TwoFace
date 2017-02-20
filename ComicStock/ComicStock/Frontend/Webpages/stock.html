@@ -110,7 +110,6 @@
                                 </span>
                             </td>
                             <td style="white-space: nowrap; text-align:center" class="col-md-2">
-                                <!-- form -->
                                 <form editable-form name="rowform" onbeforesave="$sctrl.saveStock($data, stock.StockReferenceID)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == stock">
                                     <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
                                         <span class="glyphicon glyphicon-floppy-saved"></span> Save
@@ -123,11 +122,6 @@
                                     <button type="button" class="btn btn-primary" ng-click="rowform.$show()">
                                         <span class="glyphicon glyphicon-edit"></span> Edit
                                     </button>
-                                    <!--
-                                    <button type="button" class="btn btn-danger" ng-click="$octrl.removeOrder($index, order.OrderID)">
-                                        <span class="glyphicon glyphicon-trash"></span> Delete
-                                    </button>
-                                    -->
                                 </div>
                             </td>
                         </tr>

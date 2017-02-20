@@ -1,7 +1,6 @@
-﻿//var app = angular.module("SquareEyesModule", ["xeditable", "ui.bootstrap", 'ui.select', 'ngSanitize', 'ngMaterial', 'ngMessages', 'cgBusy']);
-angular.module("SquareEyesModule")
+﻿angular.module("SquareEyesModule")
 .run(function (editableOptions) {
-    editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+    editableOptions.theme = 'bs3';
 })
 .controller("stockController", function ($http, $mdDialog) {
     var $sctrl = this;
@@ -51,9 +50,6 @@ angular.module("SquareEyesModule")
         };
 
     $sctrl.saveStock = function (data, id) {
-        //$scope.user not updated yet
-        //angular.extend(data, { id: id });
-        //return $http.post('/saveUser', data);
         console.log(data);
         console.log("Stock ID: " + id);
         data.StockReferenceID = id;
@@ -90,7 +86,6 @@ angular.module("SquareEyesModule")
     }
 
     function switchToPage(searchKey, page) {
-        //if ($octrl.searchCriteria == null) $octrl.searchCriteria = "";
         console.log("searching")
         $sctrl.myPromise = $http.get('../api/Issues/GetSearchPaged?searchKey=' + searchKey + ' &pageNumber=' + page)
         .then(function (response) {

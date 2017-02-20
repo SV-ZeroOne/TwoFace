@@ -81,7 +81,6 @@
                     <th>Edit</th>
                     </th>
                     <tbody>
-                        <!--<tr ng-repeat="i in $ctrl.options | filter : 'Issue'">-->
                         <tr ng-repeat="i in $ctrl.options.Data | filter: $ctrl.creatorSearch | orderBy:$ctrl.column:$ctrl.reverse">
                             <td class="col-md-2" style="text-align:center">{{i.CreatorID}}</td>
                             <td class="col-md-2" style="text-align:center">

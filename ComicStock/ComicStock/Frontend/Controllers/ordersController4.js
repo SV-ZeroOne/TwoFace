@@ -1,7 +1,6 @@
-﻿//var app = angular.module("ordersModule", ["xeditable", "ui.bootstrap", 'ui.select', 'ngSanitize', 'ngMaterial', 'ngMessages', 'cgBusy']);
-angular.module("SquareEyesModule")
+﻿angular.module("SquareEyesModule")
 .run(function (editableOptions) {
-    editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+    editableOptions.theme = 'bs3';
 })
 .controller("ordersController4", function ($http, $mdDialog) {
     var $octrl = this;
@@ -9,7 +8,7 @@ angular.module("SquareEyesModule")
     $octrl.newOrder = {};
     $octrl.currentPage = 1;
     $octrl.rowAmount = 10;
-    //search criteria
+
     $octrl.ordersSearch = '';
     $octrl.selectedIssue;
     $octrl.issueSet = true;
@@ -61,16 +60,10 @@ angular.module("SquareEyesModule")
     $octrl.removeOrder = function (index, orderID) {
         console.log("Deleting Order No" + orderID)
         $octrl.someOrders.Data.splice(index, 1);
-        //Cascade Error, however delete should not be possible for orders because of business logic.
-        //If you want to make it work delete supplier payment based on order id first.
-        //$http.delete('../api/Orders?orderID=' + orderID);
     };
 
     //update order
     $octrl.saveOrder = function (data, id) {
-        //$scope.user not updated yet
-        //angular.extend(data, { id: id });
-        //return $http.post('/saveUser', data);
         console.log(data);
         console.log("Order ID: " + id);
         data.OrderID = id;
@@ -95,7 +88,6 @@ angular.module("SquareEyesModule")
                 $octrl.someOrders = response.data;
         });
         }
-        //$log.log('Page changed to: ' + $octrl.s);
     };
 
     $octrl.searchAll = function () {
@@ -114,7 +106,6 @@ angular.module("SquareEyesModule")
     }
 
     function switchToPage(searchKey, page) {
-        //if ($octrl.searchCriteria == null) $octrl.searchCriteria = "";
         console.log("searching")
         $octrl.myPromise = $http.get('../api/Issues/GetSearchPaged?searchKey=' + searchKey + '&pageNumber=' + page)
         .then(function (response) {
@@ -147,9 +138,6 @@ angular.module("SquareEyesModule")
 
     //Place order dialog popup
     $octrl.showAlert = function (ev) {
-        // Appending dialog to document.body to cover sidenav in docs app
-        // Modal dialogs should fully cover application
-        // to prevent interaction outside of dialog
         $mdDialog.show(
           $mdDialog.alert()
             .parent(angular.element(document.querySelector('#popupContainer')))

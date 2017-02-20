@@ -29,10 +29,5 @@ namespace ComicStock.Domain
         public Boolean IsDeleted { get; set; }
 
         public bool isDeleted => IsDeleted;
-
-        //public virtual SupplierQuote SupplierQuote { get; set; }
-
-        //public virtual Order Order { get; set; }
-
     }
 }

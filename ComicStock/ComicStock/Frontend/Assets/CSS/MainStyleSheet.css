@@ -63,8 +63,6 @@
         }
 
 .card:hover {
-            /*border-color: deepskyblue;*/
-            /*background:#333;*/
             background-color: #82c6ff;
             color: #eee;
             transition: background 200ms, color 200ms;

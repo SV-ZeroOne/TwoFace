@@ -90,7 +90,6 @@ namespace ComicStock.WebAPI.Controllers
         //PUT api/stocks
         public StockDTO Put(StockDTO stock)
         {
-            //Need to have error handling!
             Stock stockToGet = stockRepo.GetById(stock.StockReferenceID);
             var stockToUpdate = updateStock(stock, stockToGet);
             stockRepo.Update(stockToUpdate);
@@ -109,7 +108,6 @@ namespace ComicStock.WebAPI.Controllers
         //DELETE api/stocks/id
         public void Delete(StockDTO stock)
         {
-            //Need to have error handling!
             var stockToDelete = stockRepo.GetById(stock.StockReferenceID);
             stockRepo.Delete(stockToDelete);
         }
@@ -153,21 +151,16 @@ namespace ComicStock.WebAPI.Controllers
         [HttpGet]
         public IHttpActionResult GetPaged(int pageNo = 1, int pageSize = 10)
         {
-            // Determine the number of records to skip
             int skip = (pageNo - 1) * pageSize;
-
-            // Get total number of records
 
             int total = totalRecords;
 
-            // Select the customers based on paging parameters
             List<StockDTO> stock = newStocks
                 .OrderBy(c => c.StockReferenceID)
                 .Skip(skip)
                 .Take(pageSize)
                 .ToList();
 
-            // Return the list of customers
             return Ok(new PagedResult<StockDTO>(stock, pageNo, pageSize, total));
         }
 
@@ -183,21 +176,16 @@ namespace ComicStock.WebAPI.Controllers
                 i.StockReferenceID.ToString().Contains(searchString) ||
                 i.Price.ToString().Contains(searchString));
                 int pageSize = 20;
-                // Determine the number of records to skip
                 int skip = (pageNumber - 1) * pageSize;
-
-                // Get total number of records
 
                 int total = someStock.Count();
 
-                // Select the customers based on paging parameters
                 List<StockDTO> stock = someStock
                     .OrderBy(c => c.StockReferenceID)
                     .Skip(skip)
                     .Take(pageSize)
                     .ToList();
 
-                // Return the list of customers
                 return Ok(new PagedResult<StockDTO>(stock, pageNumber, pageSize, total));
             }
             return null;

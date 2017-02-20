@@ -35,7 +35,6 @@ namespace ComicStock.WebAPI.Models
 
         public OrderDTO(Order someOrder)
         {
-            //might need to add orderID as it returns an ID of 0
             this.OrderID = someOrder.OrderID;
             this.OrderDate = someOrder.OrderDate;
             this.IssueID = someOrder.IssueID;

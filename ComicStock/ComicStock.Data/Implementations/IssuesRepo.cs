@@ -29,7 +29,7 @@ namespace ComicStock.Data.Implementations
                     where
                         (issue.Title != null && issue.Title.Contains(searchstr)) ||
                         (issue.Description != null && issue.Description.Contains(searchstr)) ||
-                        (issue.SeriesNumber != null && issue.SeriesNumber.ToString().Contains(searchstr)) ||
+                        (issue.SeriesNumber.ToString().Contains(searchstr)) ||
                         (issue.Publisher != null && issue.Publisher.Contains(searchstr))
                     select issue;
 
