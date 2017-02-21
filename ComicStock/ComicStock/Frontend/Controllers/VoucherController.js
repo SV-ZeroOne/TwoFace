@@ -12,16 +12,14 @@
     $ictrl.showMe = false;
     $ictrl.newVoucher = {};
     $ictrl.currentPage = 1;
-    $ictrl.rowAmount = 10;
     $ictrl.someVouchers;
     $ictrl.searchFlag = false;
     $ictrl.column = '';
+    $ictrl.rowAmount = 10;
     $ictrl.reverse = false;
-    $ictrl.newVoucher.valid = true;
-    $ictrl.newVoucher.amount = 10;
 
     $ictrl.myPromise = $http
-        .get('../api/Vouchers/GetPaged?pageNo=1&pageSize='+$ictrl.rowAmount)
+        .get('../api/Vouchers/GetVouchers?query=' + $ictrl.vouchersSearch + '&pageSize=' + 10 + '&pageNumber=' + $ictrl.currentPage)
         .then(function (response) {
             $ictrl.someVouchers = response.data;
             $ictrl.noOfPages = $ictrl.someVouchers.Paging.PageCount;
@@ -52,18 +50,22 @@
 
     $ictrl.placeVoucher = function () {
         $ictrl.myPromise = $http
-          .post('../api/Vouchers/PlaceVoucher?amount=' + $ictrl.newVoucher.amount + '&qty=' + $ictrl.newVoucher.qty + '&valid=' + $ictrl.newVoucher.valid);
-        $ictrl.showAdding();
-        setTimeout(function () { $ictrl.restoreAll(); }, 2000);
-        setTimeout(function () { $ictrl.getStats(); }, 2000);
+          .post('../api/Vouchers/PlaceVoucher?amount=' + $ictrl.newVoucher.amount + '&qty=' + $ictrl.newVoucher.qty + '&valid=' + $ictrl.newVoucher.valid)
+          .then(function (response)
+          {
+              $ictrl.showAdding();
+              setTimeout(function () { $ictrl.restoreAll(); }, 2000);
+              setTimeout(function () { $ictrl.getStats(); }, 2000);
+          })
     }
 
-    // remove voucher
     $ictrl.removeVoucher = function (index, VoucherID) {
         $ictrl.someVouchers.Data.splice(index, 1);
         $http.delete('../api/Vouchers/' + VoucherID);
         setTimeout(function () { $ictrl.getStats(); }, 2000);
         $ictrl.showAlert();
+        setTimeout(function () { $ictrl.restoreAll(); }, 2000);
+        setTimeout(function () { $ictrl.getStats(); }, 2000);
     };
 
     $ictrl.checkAmount = function (data, form) {
@@ -77,7 +79,6 @@
         }
     };
 
-    //update voucher
     $ictrl.saveVoucher = function (data, id, code, date) {
         console.log(data);
         console.log("Voucher ID: " + id);
@@ -96,7 +97,7 @@
           $mdDialog.alert()
             .parent(angular.element(document.querySelector('#popupContainer')))
             .clickOutsideToClose(true)
-            .title('Removoval of voucher')
+            .title('Removal of voucher')
             .textContent('The selected voucher has been deleted')
             .ariaLabel('Voucher Deletion Dialog')
             .ok('Ok')
@@ -131,7 +132,7 @@
     };
 
     $ictrl.searchAll = function () {
-        $ictrl.myPromise = $http.get('../api/Vouchers/GetSearchPaged?searchKey=' + $ictrl.vouchersSearch + '&pageNumber=' + $ictrl.currentPage)
+        $ictrl.myPromise = $http.get('../api/Vouchers/GetVouchers?query=' + $ictrl.vouchersSearch + '&pageSize=' + $ictrl.rowAmount + '&pageNumber=' + $ictrl.currentPage)
         .then(function (response) {
             $ictrl.someVouchers = response.data;
             $ictrl.noOfPages = $ictrl.someVouchers.Paging.PageCount;
@@ -172,10 +173,18 @@
             $ictrl.searchAll();
             console.log("Paged Search Results")
         } else {
-            $ictrl.myPromise = $http.get('../api/Vouchers/GetPaged?pageNo=' + $ictrl.currentPage + '&pageSize=' + $ictrl.rowAmount)
+            $ictrl.myPromise = $http.get('../api/Vouchers/GetVouchers?query=' + $ictrl.vouchersSearch + '&pageSize=' + $ictrl.rowAmount + '&pageNumber=' + $ictrl.currentPage)
             .then(function (response) {
-                console.log("Getting new paged results.")
                 $ictrl.someVouchers = response.data;
+                $ictrl.noOfPages = $ictrl.someVouchers.Paging.PageCount;
+                $ictrl.totalItems = $ictrl.someVouchers.Paging.TotalRecordCount;
+                $ictrl.currentPage = $ictrl.someVouchers.Paging.PageNo;
+                $ictrl.searchFlag = true;
+                if (response.data.Data.length == 0) {
+                    console.log("No search results")
+                    console.log("Data lenght" + response.data.Data.length)
+                    $ictrl.showNoSearchResults();
+                }
             });
         }
     };
@@ -186,7 +195,7 @@
 
     $ictrl.restoreAll = function () {
         $ictrl.myPromise = $http
-        .get('../api/Vouchers/GetPaged?pageNo=1&pageSize=' + $ictrl.rowAmount)
+        .get('../api/Vouchers/GetVouchers?query=' + '&pageSize=' + $ictrl.rowAmount + '&pageNumber=' + $ictrl.currentPage)
         .then(function (response) {
             $ictrl.searchFlag = false;
             $ictrl.someVouchers = response.data;

@@ -5,7 +5,7 @@ using System.Data.Entity;
 
 namespace ComicStock.Data
 {
-    internal class SquareEyesContext : DbContext
+    public class SquareEyesContext : DbContext
     {
         public SquareEyesContext()
         

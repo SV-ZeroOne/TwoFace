@@ -24,21 +24,13 @@ namespace ComicStock.WebAPI.Controllers
             this.orderService = orderService;
             this.orderRepo = orderRepo;
             newOrders = new List<OrderDTO>();
-            foreach (Order i in orderRepo.GetAll())
-            {
-                OrderDTO newOrder = new OrderDTO(i);
-                newOrders.Add(newOrder);
-            }
-            totalRecords = newOrders.Count();
         }
 
-        // GET api/orders
         public IEnumerable<OrderDTO> Get()
         {
             return newOrders;
         }
 
-        // GET api/orders/id
         public OrderDTO Get(int id)
         {
             Order someOrder = orderRepo.GetById(id);
@@ -50,7 +42,6 @@ namespace ComicStock.WebAPI.Controllers
             return someOrderDTO;
         }
 
-        // Lamda Search Function
         public IList<OrderDTO> Get(string search)
         {
             string searchString = search.ToLower();
@@ -143,21 +134,38 @@ namespace ComicStock.WebAPI.Controllers
             return newOrder;
         }
 
+        private OrderDTO convertObject(Order order)
+        {
+            OrderDTO newOrder = new OrderDTO();
+            newOrder.OrderID = order.OrderID;
+            newOrder.OrderDate = order.OrderDate;
+            newOrder.IssueID = order.IssueID;
+            newOrder.SupplierID = order.SupplierID;
+            newOrder.QtyOrdered = order.QtyOrdered;
+            newOrder.ShipmentDate = order.ShipmentDate;
+            newOrder.ShipmentRef = order.ShipmentRef;
+            newOrder.Total = order.Total;
+            newOrder.DeliveryStatus = order.DeliveryStatus;
+            return newOrder;
+        }
+
         [Route("api/Orders/GetPaged")]
         [HttpGet]
         public IHttpActionResult GetPaged(int pageNo = 1, int pageSize = 10)
         {
             int skip = (pageNo - 1) * pageSize;
 
-            int total = totalRecords;
+            int total = orderRepo.recordCount();
 
-            List<OrderDTO> orders = newOrders
-                .OrderBy(c => c.OrderID)
-                .Skip(skip)
-                .Take(pageSize)
-                .ToList();
+            IEnumerable<Order> orders = orderRepo.Paging(pageNo, pageSize);
+            IList<OrderDTO> ordersDTO = new List<OrderDTO>();
 
-            return Ok(new PagedResult<OrderDTO>(orders, pageNo, pageSize, total));
+            foreach (var item in orders)
+            {
+                ordersDTO.Add(convertObject(item));
+            }
+
+            return Ok(new PagedResult<OrderDTO>(ordersDTO, pageNo, pageSize, total));
         }
 
         [Route("api/Orders/GetSearchPaged")]

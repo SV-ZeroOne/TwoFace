@@ -10,7 +10,7 @@ namespace ComicStock.Data
 {
     public abstract class EFRepository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, IEntity<TKey>
     {
-        private readonly SquareEyesContext context = new SquareEyesContext();
+        protected readonly SquareEyesContext context = new SquareEyesContext();
 
         public virtual TEntity GetById(TKey id)
         {
@@ -27,6 +27,16 @@ namespace ComicStock.Data
             if (entity == null) throw new NullReferenceException(entity.ToString());
             context.Set<TEntity>().Add(entity);
             Save();
+        }
+
+        public virtual int recordCount(string searchQuery)
+        {
+            return context.Set<TEntity>().Count();
+        }
+
+        public virtual IEnumerable<TEntity> Paging(int page, int pageSize)
+        {
+            return context.Set<TEntity>().Where(x => x.IsDeleted == false).ToList();
         }
 
         public void Update(TEntity entity)
@@ -48,5 +58,14 @@ namespace ComicStock.Data
             context.SaveChanges();
         }
 
+        public virtual IEnumerable<TEntity> Paging(int page, int pageSize, string searchQuery)
+        {
+            return context.Set<TEntity>().Where(x => x.IsDeleted == false).ToList();
+        }
+
+        public virtual int recordCount()
+        {
+            return context.Set<TEntity>().Count();
+        }
     }
 }

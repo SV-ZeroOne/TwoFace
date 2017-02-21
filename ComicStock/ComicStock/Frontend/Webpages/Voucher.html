@@ -15,7 +15,8 @@
                             <div class="col-md-4" style="text-align:center">
                                 <label style="margin-left:10px;">Voucher Amount: R</label>
                                 <select name="newVoucherAmount" ng-model="$ictrl.newVoucher.amount" required>
-                                    <option ng-selected="$ictrl.newVoucher.amount" value="10">10.00</option>
+                                    <option value="">None</option>
+                                    <option value="10">10.00</option>
                                     <option value="20">20.00</option>
                                     <option value="50">50.00</option>
                                     <option value="100">100.00</option>
@@ -35,15 +36,16 @@
                             </div>
                             <div class="col-md-4" style="text-align:center">
                                 <label style="margin-left:10px;">Quantity to be Issued</label>
-                                <input type="number" pattern="[/^\d+$/]" name="newVoucherQTY" ng-model="$ictrl.newVoucher.qty" required min="1" style="margin-bottom:10px" oninvalid="setCustomValidity('Please enter only whole numbers')" onchange="try{setCustomValidity('')}catch(e){}"/>
+                                <input type="number" pattern="[/^\d+$/]" name="newVoucherQTY" ng-model="$ictrl.newVoucher.qty" required min="1" style="margin-bottom:10px" oninvalid="setCustomValidity('Field not accepted')" onchange="try{setCustomValidity('')}catch(e){}"/>
                                 <div ng-messages="newVoucherForm.newVoucherQTY.$error" role="alert">
                                     <div ng-message="required" style="margin-left:10px; margin-bottom:10px;color:red;text-align:center">Required</div>
                                 </div>
                             </div>
                             <div class="col-md-4" style="text-align:center">
                                 <label>Validity:</label>
-                                <select name="newValid" ng-model="$ictrl.newVoucher.valid" required style="margin-bottom:10px">
-                                    <option ng-selected="$ictrl.newVoucher.valid" value="true">Valid</option>
+                                <select name="newValid" ng-model="$ictrl.newVoucher.valid" style="margin-bottom:10px" required>
+                                    <option value="">None</option>
+                                    <option value="true">Valid</option>
                                     <option value="false">Invalid</option>
                                 </select>  
                                 <div ng-messages="newVoucherForm.newValid.$error" role="alert">
@@ -76,7 +78,7 @@
                 <div class="col-md-3" style="float:right">
                     <label>Vouchers Per Page:</label>
                     <select ng-change="$ictrl.changeRows()" name="rowAmount" ng-model="$ictrl.rowAmount">
-                        <option ng-selected="$ictrl.rowAmount" value="10">10</option>
+                        <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="50">50</option>
                     </select>

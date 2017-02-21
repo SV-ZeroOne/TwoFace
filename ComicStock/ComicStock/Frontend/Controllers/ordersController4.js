@@ -28,7 +28,7 @@
             $octrl.currentPage = $octrl.someOrders.Paging.PageNo;
         })
         .catch(function (errorResponse) {
-            $octrl.context = "Something went wrong with getting issues";
+            $octrl.context = "Something went wrong with getting orders";
         });
 
     $http
@@ -89,6 +89,10 @@
         });
         }
     };
+
+    $octrl.changeRows = function () {
+        $octrl.pageChanged();
+    }
 
     $octrl.searchAll = function () {
         $octrl.myPromise = $http.get('../api/Orders/GetSearchPaged?searchKey=' + $octrl.ordersSearch + '&pageNumber=' + $octrl.currentPage)

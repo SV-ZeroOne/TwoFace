@@ -16,5 +16,13 @@ namespace ComicStock.Data
         void Update(TEntity Entity);
 
         void Delete(TEntity Entity);
+
+        IEnumerable<TEntity> Paging(int page, int pageSize);
+
+        IEnumerable<TEntity> Paging(int page, int pageSize, string searchQuery);
+
+        int recordCount(string searchQuery);
+
+        int recordCount();
     }
 }

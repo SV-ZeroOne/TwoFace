@@ -25,5 +25,14 @@ namespace ComicStock.Data.Implementations
             return newContext.Orders.AsExpandable().Where (predicate);
         }
 
+        public override IEnumerable<Order> Paging(int page, int pageSize)
+        {
+            return context.Set<Order>()
+                .OrderBy(x => x.OrderID)
+                .Skip((page-1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
+
     }
 }
