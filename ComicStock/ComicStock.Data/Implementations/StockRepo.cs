@@ -20,5 +20,14 @@ namespace ComicStock.Data.Implementations
                 new SqlParameter("condition", condition)).First<Stock>();
             return theStock;
         }
+
+        public override IEnumerable<Stock> Paging(int page, int pageSize)
+        {
+            return context.Set<Stock>()
+                .OrderBy(x => x.StockReferenceID)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
     }
 }

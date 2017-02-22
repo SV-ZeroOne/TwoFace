@@ -10,6 +10,15 @@ namespace ComicStock.Data.Implementations
 {
     class SupplierRepo : EFRepository<Supplier, int>, SupplierInterface
     {
-        
+
+        public override IEnumerable<Supplier> Paging(int page, int pageSize)
+        {
+            return context.Set<Supplier>()
+                .OrderBy(x => x.SupplierID)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
+
     }
 }

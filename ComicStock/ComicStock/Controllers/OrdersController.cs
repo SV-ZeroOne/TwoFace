@@ -3,11 +3,9 @@ using ComicStock.Data.Interfaces;
 using ComicStock.Domain;
 using ComicStock.WebAPI.Models;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace ComicStock.WebAPI.Controllers
@@ -17,17 +15,21 @@ namespace ComicStock.WebAPI.Controllers
         private readonly OrderInterface orderRepo;
         private List<OrderDTO> newOrders;
         private readonly IOrderService orderService;
-        private int totalRecords = 0;
 
         public OrdersController(OrderInterface orderRepo, IOrderService orderService)
         {
             this.orderService = orderService;
             this.orderRepo = orderRepo;
-            newOrders = new List<OrderDTO>();
+            
         }
 
         public IEnumerable<OrderDTO> Get()
         {
+            newOrders = new List<OrderDTO>();
+            foreach (var order in orderRepo.GetAll())
+            {
+                newOrders.Add(convertObject(order));
+            }
             return newOrders;
         }
 
@@ -151,9 +153,8 @@ namespace ComicStock.WebAPI.Controllers
 
         [Route("api/Orders/GetPaged")]
         [HttpGet]
-        public IHttpActionResult GetPaged(int pageNo = 1, int pageSize = 10)
+        public IHttpActionResult GetPaged(int pageNo, int pageSize)
         {
-            int skip = (pageNo - 1) * pageSize;
 
             int total = orderRepo.recordCount();
 
@@ -170,34 +171,18 @@ namespace ComicStock.WebAPI.Controllers
 
         [Route("api/Orders/GetSearchPaged")]
         [HttpGet]
-        public IHttpActionResult GetSearchPaged(string searchKey, int pageNumber)
+        public IHttpActionResult GetSearchPaged(string searchKey, int pageNumber, int pageSize)
         {
-            if (searchKey != null)
+
+            IEnumerable<Order> orders = orderRepo.Paging(pageNumber, pageSize, searchKey);
+            IList<OrderDTO> ordersDTO = new List<OrderDTO>();
+            int total = orders.Count();
+            foreach (var item in orders)
             {
-                string searchString = searchKey.ToLower();
-                IEnumerable<OrderDTO> someOrders = Get().Where(i => i.DeliveryStatus.ToLower().Contains(searchString) ||
-            i.OrderID.ToString().Contains(searchString) ||
-            i.IssueID.ToString().Contains(searchString) ||
-            i.ShipmentDate != null && i.ShipmentDate.ToString().Contains(searchString) ||
-            i.OrderDate != null && i.OrderDate.ToString().Contains(searchString) ||
-            i.SupplierID.ToString().Contains(searchString) ||
-            i.ShipmentRef != null && i.ShipmentRef.ToLower().Contains(searchString) ||
-            i.Total.ToString().Contains(searchString) ||
-            i.QtyOrdered.ToString().Contains(searchString));
-                int pageSize = 20;
-                int skip = (pageNumber - 1) * pageSize;
-
-                int total = someOrders.Count();
-
-                List<OrderDTO> orders = someOrders
-                    .OrderBy(c => c.OrderID)
-                    .Skip(skip)
-                    .Take(pageSize)
-                    .ToList();
-
-                return Ok(new PagedResult<OrderDTO>(orders, pageNumber, pageSize, total));
+                ordersDTO.Add(convertObject(item));
             }
-            return null;
+
+            return Ok(new PagedResult<OrderDTO>(ordersDTO, pageNumber, pageSize, total));
         }
 
     }

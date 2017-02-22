@@ -2,12 +2,9 @@ using ComicStock.API;
 using ComicStock.Data.Interfaces;
 using ComicStock.Domain;
 using ComicStock.Models;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace ComicStock.WebAPI.Controllers
@@ -17,20 +14,12 @@ namespace ComicStock.WebAPI.Controllers
         private readonly IStockService stock;
         private readonly StockInterface stockRepo;
         private List<StockDTO> newStocks;
-        private int totalRecords = 0;
 
         public StockController(StockInterface stockRepo, IStockService stock)
         {
             this.stock = stock;
             this.stockRepo = stockRepo;
-            IEnumerable someStock = stockRepo.GetAll();
             newStocks = new List<StockDTO>();
-            foreach (Stock i in someStock)
-            {
-                StockDTO newStock = new StockDTO(i);
-                newStocks.Add(newStock);
-            }
-            totalRecords = newStocks.Count();
         }
 
         public StockController()
@@ -156,21 +145,33 @@ namespace ComicStock.WebAPI.Controllers
             return newStock;
         }
 
+        private StockDTO convertObject(Stock stock)
+        {
+            StockDTO newStock = new StockDTO();
+            newStock.StockReferenceID = stock.StockReferenceID;
+            newStock.IssueID = stock.IssueID;
+            newStock.Condition = stock.Condition;
+            newStock.AvailableQuantity = stock.AvailableQty;
+            newStock.Price = stock.Price;
+            return newStock;
+        }
+
         [Route("api/Stock/GetPaged")]
         [HttpGet]
         public IHttpActionResult GetPaged(int pageNo = 1, int pageSize = 10)
         {
             int skip = (pageNo - 1) * pageSize;
 
-            int total = totalRecords;
+            int total = stockRepo.recordCount();
+            IEnumerable<Stock> stock = stockRepo.Paging(pageNo, pageSize);
+            IList<StockDTO> stockDTO = new List<StockDTO>();
 
-            List<StockDTO> stock = newStocks
-                .OrderBy(c => c.StockReferenceID)
-                .Skip(skip)
-                .Take(pageSize)
-                .ToList();
+            foreach (var item in stock)
+            {
+                stockDTO.Add(convertObject(item));
+            }
 
-            return Ok(new PagedResult<StockDTO>(stock, pageNo, pageSize, total));
+            return Ok(new PagedResult<StockDTO>(stockDTO, pageNo, pageSize, total));
         }
 
         [Route("api/Stock/GetSearchPaged")]

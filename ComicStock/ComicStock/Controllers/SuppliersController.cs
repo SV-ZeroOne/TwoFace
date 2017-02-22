@@ -24,14 +24,7 @@ namespace ComicStock.WebAPI.Controllers
         {
             this.supplierRepo = supplierRepo;
             this.supplierService = supplierService;
-            IEnumerable someSupplier = supplierRepo.GetAll();
-            newSuppliers = new List<SupplierDTO>();
-            foreach (Supplier i in someSupplier)
-            {
-                SupplierDTO newSupplier = new SupplierDTO(i);
-                newSuppliers.Add(newSupplier);
-
-            }
+            
         }
 
         public static string RandomString(int length)
@@ -47,20 +40,37 @@ namespace ComicStock.WebAPI.Controllers
         {
             int skip = (pageNo - 1) * pageSize;
 
-            int total = newSuppliers.Count();
+            int total = supplierRepo.recordCount();
 
-            List<SupplierDTO> suppliers = newSuppliers
-                .OrderBy(c => c.SupplierID)
-                .Skip(skip)
-                .Take(pageSize)
-                .ToList();
+            IEnumerable<Supplier> suppliers = supplierRepo.Paging(pageNo, pageSize);
+            IList<SupplierDTO> supplierDTO = new List<SupplierDTO>();
 
-            return Ok(new PagedResult<SupplierDTO>(suppliers, pageNo, pageSize, total));
+            foreach (var item in suppliers)
+            {
+                supplierDTO.Add(convertObject(item));
+            }
+
+            return Ok(new PagedResult<SupplierDTO>(supplierDTO, pageNo, pageSize, total));
+        }
+
+        private SupplierDTO convertObject(Supplier supplier)
+        {
+            SupplierDTO newSupplier = new SupplierDTO();
+            newSupplier.SupplierID = supplier.SupplierID;
+            newSupplier.Name = supplier.Name;
+            newSupplier.City = supplier.City;
+            newSupplier.ReferenceNumber = supplier.ReferenceNumber;
+            return newSupplier;
         }
 
         // GET api/suppliers
         public IEnumerable<SupplierDTO> Get()
         {
+            newSuppliers = new List<SupplierDTO>();
+            foreach (var supplier in supplierRepo.GetAll())
+            {
+                newSuppliers.Add(convertObject(supplier));
+            }
             return newSuppliers;
         }
 
@@ -113,10 +123,10 @@ namespace ComicStock.WebAPI.Controllers
             string codeString = RandomString(15);
             bool generating = true;
 
-            IEnumerable<SupplierDTO> suppliers = Get();
+            IEnumerable<Supplier> suppliers = supplierRepo.GetAll();
             while (generating)
             {
-                foreach (SupplierDTO item in suppliers)
+                foreach (Supplier item in suppliers)
                 {
                     if (item.ReferenceNumber.ToLower() == codeString.ToLower())
                     {

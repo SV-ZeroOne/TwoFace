@@ -95,7 +95,7 @@
     }
 
     $octrl.searchAll = function () {
-        $octrl.myPromise = $http.get('../api/Orders/GetSearchPaged?searchKey=' + $octrl.ordersSearch + '&pageNumber=' + $octrl.currentPage)
+        $octrl.myPromise = $http.get('../api/Orders/GetSearchPaged?searchKey=' + $octrl.ordersSearch + '&pageNumber=' + $octrl.currentPage + '&pageSize=' + $octrl.rowAmount)
         .then(function (response) {
             $octrl.someOrders = response.data;
             $octrl.noOfPages = $octrl.someOrders.Paging.PageCount;
@@ -111,7 +111,7 @@
 
     function switchToPage(searchKey, page) {
         console.log("searching")
-        $octrl.myPromise = $http.get('../api/Issues/GetSearchPaged?searchKey=' + searchKey + '&pageNumber=' + page)
+        $octrl.myPromise = $http.get('../api/Issues/GetSearchPaged?searchKey=' + searchKey + '&pageNumber=' + page + '&pageSize=' + $octrl.rowAmount)
         .then(function (response) {
             $octrl.someIssues = response.data;
         }, function (error) {

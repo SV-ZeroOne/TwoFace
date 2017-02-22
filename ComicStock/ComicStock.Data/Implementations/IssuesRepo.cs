@@ -1,13 +1,8 @@
 ﻿using ComicStock.Data.Interfaces;
 using ComicStock.Domain;
-using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ComicStock.Data.Implementations
 {
@@ -34,6 +29,15 @@ namespace ComicStock.Data.Implementations
                     select issue;
 
                 return query.AsEnumerable();
+        }
+
+        public override IEnumerable<Issue> Paging(int page, int pageSize)
+        {
+            return context.Set<Issue>()
+                .OrderBy(x => x.IssueID)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
         }
     }
 }

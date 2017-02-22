@@ -2,12 +2,10 @@
 using ComicStock.Domain;
 using ComicStock.Models;
 using ComicStock.WebAPI.Controllers;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace ComicStock.Controllers
@@ -20,16 +18,7 @@ namespace ComicStock.Controllers
         public CreatorsController(CreatorInterface creatorRepo)
         {
             this.creatorRepo = creatorRepo;
-
-            IEnumerable someCreator = creatorRepo.GetAll();
-
             newCreators = new List<CreatorDTO>();
-
-            foreach (Creator i in someCreator)
-            {
-                CreatorDTO newCreator = new CreatorDTO(i);
-                newCreators.Add(newCreator);
-            }
 
         }
 
@@ -58,15 +47,27 @@ namespace ComicStock.Controllers
         {
             int skip = (pageNo - 1) * pageSize;
 
-            int total = newCreators.Count();
+            int total = creatorRepo.recordCount();
+            IEnumerable<Creator> creator = creatorRepo.Paging(pageNo, pageSize);
+            IList<CreatorDTO> creatorDTO = new List<CreatorDTO>();
 
-            List<CreatorDTO> creators = newCreators
-                .OrderBy(c => c.CreatorID)
-                .Skip(skip)
-                .Take(pageSize)
-                .ToList();
+            foreach (var item in creator)
+            {
+                creatorDTO.Add(convertObject(item));
+            }
 
-            return Ok(new PagedResult<CreatorDTO>(creators, pageNo, pageSize, total));
+            return Ok(new PagedResult<CreatorDTO>(creatorDTO, pageNo, pageSize, total));
+        }
+
+        private CreatorDTO convertObject(Creator creator)
+        {
+            CreatorDTO newCreator = new CreatorDTO();
+            newCreator.CreatorID = creator.CreatorID;
+            newCreator.Name = creator.Name;
+            newCreator.CountryOfResidence = creator.CountryOfResidence;
+            newCreator.TaxReferenceNumber = creator.TaxReferenceNumber;
+            newCreator.EmailAddress = creator.EmailAddress;
+            return newCreator;
         }
 
         // POST api/creators/ ~ Works

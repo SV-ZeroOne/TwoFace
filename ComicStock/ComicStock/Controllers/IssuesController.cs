@@ -1,15 +1,10 @@
-﻿using ComicStock.Data;
-using ComicStock.Data.Implementations;
-using ComicStock.Data.Interfaces;
+﻿using ComicStock.Data.Interfaces;
 using ComicStock.Domain;
 using ComicStock.Models;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using System;
 
 namespace ComicStock.WebAPI.Controllers
 {
@@ -22,11 +17,6 @@ namespace ComicStock.WebAPI.Controllers
         {
             this.issueRepo = issueRepo;
             newIssues = new List<IssueDTO>();
-            foreach (Issue i in issueRepo.GetAll())
-            {
-                IssueDTO newIssue = new IssueDTO(i);
-                newIssues.Add(newIssue);
-            }
         }
 
         //GET api/issues
@@ -53,18 +43,31 @@ namespace ComicStock.WebAPI.Controllers
         {
             int skip = (pageNo - 1) * pageSize;
 
-            int total = newIssues.Count();
+            int total = issueRepo.recordCount();
+            IEnumerable<Issue> issues = issueRepo.Paging(pageNo, pageSize);
+            IList<IssueDTO> issueDTO = new List<IssueDTO>();
 
-            List<IssueDTO> issues = newIssues
-                .OrderBy(c => c.IssueID)
-                .Skip(skip)
-                .Take(pageSize)
-                .ToList();
+            foreach (var item in issues)
+            {
+                issueDTO.Add(convertObject(item));
+            }
 
-            return Ok(new PagedResult<IssueDTO>(issues, pageNo, pageSize, total));
+            return Ok(new PagedResult<IssueDTO>(issueDTO, pageNo, pageSize, total));
         }
 
-        
+        private IssueDTO convertObject(Issue issue)
+        {
+            IssueDTO newIssue = new IssueDTO();
+            newIssue.Title = issue.Title;
+            newIssue.IssueID = issue.IssueID;
+            newIssue.PublicationDate = issue.PublicationDate;
+            newIssue.Publisher = issue.Publisher;
+            newIssue.SeriesNumber = issue.SeriesNumber;
+            newIssue.Description = issue.Description;
+            return newIssue;
+        }
+
+
         public Issue Post(IssueDTO issueDto)
         {
             if (issueDto == null)
